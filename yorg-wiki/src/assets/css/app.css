@@ -29,6 +29,7 @@ h1 {
 .nav-title {
     background-color: #d4d4d4;
     font-family: cursive;
+    text-align: center;
 }
 
 nav {
@@ -61,7 +62,7 @@ main {
     margin: 20px auto;
     padding: 20px;
     background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 8px rgba(29, 29, 29, 0.4);
 }
 
 article {
