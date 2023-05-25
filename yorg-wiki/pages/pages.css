@@ -1,0 +1,81 @@
+/* CSS styles */
+* {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url("https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/e5520167-bf8f-40b1-b3a8-178aade579a0/d85g7ez-128611d5-0147-4885-be56-33fd1e50569b.jpg/v1/fill/w_1024,h_527,q_75,strp/altomare_secret_garden_by_mechamon_dex_2208_d85g7ez-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NTI3IiwicGF0aCI6IlwvZlwvZTU1MjAxNjctYmY4Zi00MGIxLWIzYTgtMTc4YWFkZTU3OWEwXC9kODVnN2V6LTEyODYxMWQ1LTAxNDctNDg4NS1iZTU2LTMzZmQxZTUwNTY5Yi5qcGciLCJ3aWR0aCI6Ijw9MTAyNCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.NyOeS9vuRxqC5YUIeLzphrxjPGCHZ40pNIvx6oLl-U0");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    margin: 0;
+    font-size: 28px;
+}
+
+nav {
+    background-color: #f2f2f2;
+    padding: 10px;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+nav ul li {
+    display: inline-block;
+    margin: 0 10px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+main {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+article {
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+p {
+    line-height: 1.5;
+    margin-bottom: 10px;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+}
+
+footer p {
+    margin: 0;
+}
