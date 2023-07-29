@@ -29116,396 +29116,543 @@
                     ),
                     t
                 );
-            })(BaseSkill),
-            GameLogic = (function () {
-                function e(t) {
-                    _classCallCheck(this, e),
-                        (this.root = t),
-                        (this.buildingCountCache = {}),
-                        (this.mapSeed = randomInt(1e10, 1e11 - 1)),
-                        this.root.signals.nightEnded.add(this.nightEndCallback, this),
+            })(BaseSkill)
+            class GameLogic {
+                constructor(t) {
+                    (this.root = t),
+                    (this.buildingCountCache = {}),
+                    (this.mapSeed = randomInt(1e10, 1e11 - 1)),
+                    this.root.signals.nightEnded.add(this.nightEndCallback, this),
                         this.root.signals.nightEntered.add(this.nightStartCallback, this),
                         this.root.signals.gameLoadedAndStarted.add(this.onGameStarted, this);
                 }
-                return (
-                    _createClass(e, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "GameLogic";
-                            },
-                        },
-                    ]),
-                    (e.prototype.init = function () {
-                        this.createMapBorders(), this.createMapFog();
-                    }),
-                    (e.prototype.createMapBorders = function () {
-                        var e = Config.numTilesX * Config.tileSize,
-                            t = Config.numTilesY * Config.tileSize,
-                            i = Config.mapBorder * Config.tileSize,
-                            a = [
-                                [0, 0, e, i],
-                                [0, i, i, t - i],
-                                [e - i, i, i, t - i],
-                                [i, t - i, e - 2 * i, i],
-                            ],
-                            o = this.root.phaser.make.graphics();
-                        o.beginFill(15658734),
-                            a.forEach(function (e) {
-                                var t = _slicedToArray(e, 4),
-                                    i = t[0],
-                                    a = t[1],
-                                    n = t[2],
-                                    r = t[3];
-                                o.drawRect(i, a, n, r);
-                            }),
-                            (o.blendMode = _pixi.PIXI.blendModes.MULTIPLY),
-                            o.endFill(),
-                            this.root.groups.mapBordersGroup.add(o);
-                    }),
-                    (e.prototype.createMapFog = function () {
-                        for (var e = this.root.phaser.make.graphics(), t = Config.mapBorder * Config.tileSize, i = 0; i < t; ++i) {
-                            var a = Math.max(0, i - 60) / (t - 60 - 60),
-                                o = Math.pow(1 - a, 1.05);
-                            e.beginFill(2236962, o), e.drawRect(0, i, 1, 1);
+                static get name() {
+                    return "GameLogic"
+                }
+            
+                init() {
+                    this.createMapBorders(), this.createMapFog();
+                }
+            
+                createMapBorders() {
+                    var e = Config.numTilesX * Config.tileSize,
+                        t = Config.numTilesY * Config.tileSize,
+                        i = Config.mapBorder * Config.tileSize,
+                        a = [
+                            [0, 0, e, i],
+                            [0, i, i, t - i],
+                            [e - i, i, i, t - i],
+                            [i, t - i, e - 2 * i, i],
+                        ],
+                        o = this.root.phaser.make.graphics();
+                    o.beginFill(15658734),
+                        a.forEach(function(e) {
+                            var t = _slicedToArray(e, 4),
+                                i = t[0],
+                                a = t[1],
+                                n = t[2],
+                                r = t[3];
+                            o.drawRect(i, a, n, r);
+                        }),
+                        (o.blendMode = _pixi.PIXI.blendModes.MULTIPLY),
+                        o.endFill(),
+                        this.root.groups.mapBordersGroup.add(o);
+                }
+            
+                createMapFog() {
+                    for (var e = this.root.phaser.make.graphics(), t = Config.mapBorder * Config.tileSize, i = 0; i < t; ++i) {
+                        var a = Math.max(0, i - 60) / (t - 60 - 60),
+                            o = Math.pow(1 - a, 1.05);
+                        e.beginFill(2236962, o), e.drawRect(0, i, 1, 1);
+                    }
+                    var n = e.generateTexture(),
+                        r = this.root.phaser.make.image(0, 0, n);
+                    this.root.groups.mapFog.add(r), (r.width = Config.numTilesX * Config.tileSize);
+                    var s = this.root.phaser.make.image(0, 0, n);
+                    this.root.groups.mapFog.add(s), (s.width = Config.numTilesX * Config.tileSize), (s.y = Config.numTilesY * Config.tileSize), (s.scale.y = -1);
+                    var l = this.root.phaser.make.image(0, 0, n);
+                    this.root.groups.mapFog.add(l), (l.width = Config.numTilesX * Config.tileSize), (l.angle = -90), l.anchor.setTo(1, 0);
+                    var u = this.root.phaser.make.image(0, 0, n);
+                    this.root.groups.mapFog.add(u), (u.width = Config.numTilesX * Config.tileSize), (u.angle = 90), (u.x = Config.numTilesX * Config.tileSize);
+                }
+                
+                spawnZombie() {
+                    var e = this.spawnNewEnemy(Zombie, 20),
+                        t = getTileBelowCursor(this.root.phaser);
+                    (e.x = t[0] * Config.tileSize), (e.y = t[1] * Config.tileSize), (e.getComponent(EnemyAIComponent).targetsBaseOnly = !0);
+                }
+
+                spawnWave() {
+                    const numberOfEnemies = 100;
+                    const delayBetweenSpawns = 200; // Adjust the delay (in milliseconds) between spawns as needed
+                
+                    let index = 0;
+                    const spawnNextEnemy = () => {
+                        while (index < numberOfEnemies) {
+                            this.spawnNewEnemy(Zombie, 0);
+                            index++;
                         }
-                        var n = e.generateTexture(),
-                            r = this.root.phaser.make.image(0, 0, n);
-                        this.root.groups.mapFog.add(r), (r.width = Config.numTilesX * Config.tileSize);
-                        var s = this.root.phaser.make.image(0, 0, n);
-                        this.root.groups.mapFog.add(s), (s.width = Config.numTilesX * Config.tileSize), (s.y = Config.numTilesY * Config.tileSize), (s.scale.y = -1);
-                        var l = this.root.phaser.make.image(0, 0, n);
-                        this.root.groups.mapFog.add(l), (l.width = Config.numTilesX * Config.tileSize), (l.angle = -90), l.anchor.setTo(1, 0);
-                        var u = this.root.phaser.make.image(0, 0, n);
-                        this.root.groups.mapFog.add(u), (u.width = Config.numTilesX * Config.tileSize), (u.angle = 90), (u.x = Config.numTilesX * Config.tileSize);
-                    }),
-                    (e.prototype.spawnZombie = function () {
-                        var e = this.spawnNewEnemy(Zombie, 20),
-                            t = getTileBelowCursor(this.root.phaser);
-                        (e.x = t[0] * Config.tileSize), (e.y = t[1] * Config.tileSize), (e.getComponent(EnemyAIComponent).targetsBaseOnly = !0);
-                    }),
-                    (e.prototype.spawnWave = function () {
-                        for (var e = 0; e < 300; ++e) this.spawnNewEnemy(Zombie, 0);
-                    }),
-                    (e.prototype.spawnNewEnemy = function (e) {
-                        for (var t = this.root.map.getRandomBorderTile(0), i = arguments.length, a = Array(i > 1 ? i - 1 : 0), o = 1; o < i; o++) a[o - 1] = arguments[o];
-                        var n = new e(this.root.phaser, t.x, t.y, a);
-                        return this.root.entityMgr.registerEntity(n), this.root.groups.enemiesGroup.add(n), n;
-                    }),
-                    (e.prototype.playerHasPlacedBase = function () {
-                        return null != this.getPlayerBase();
-                    }),
-                    (e.prototype.getPlayerBase = function () {
-                        return this.root.entityMgr.getAllEntitiesWithComponent(PlayerBaseComponent)[0];
-                    }),
-                    (e.prototype.getPlayerBaseLevel = function () {
-                        var e = this.getPlayerBase();
-                        return e ? e.getLevel() : -1;
-                    }),
-                    (e.prototype.countBuildings = function (e) {
-                        if (null != this.buildingCountCache[e.name]) return this.buildingCountCache[e.name];
-                        var t = 0;
-                        return (
-                            this.root.entityMgr.getAllEntitiesWithComponent(BuildingComponent).forEach(function (i) {
-                                i instanceof e && (t += 1);
-                            }),
-                            (this.buildingCountCache[e.name] = t),
-                            t
-                        );
-                    }),
-                    (e.prototype.nightEndCallback = function () {
-                        var e = this.root.daytime.getDay();
-                        e >= Config.getPointsStartDay && (e % GAME_BALANCING.bossInterval == 0 ? (this.root.stats.points += Config.pointsPerBoss) : (this.root.stats.points += Config.pointsPerNight)),
-                            this.root.gamemode && !this.root.gamemode.isSandbox() && this.root.persistent.setMaximumStat("stat_max_day_reached", e),
-                            this.root.stats.storeGemsOverTime(e),
-                            this.root.serializer.updateLastSavegame(),
-                            this.root.settings.autosave && (console.log("[LOGIC] Triggering autosave"), this.root.savegames.saveGame());
-                    }),
-                    (e.prototype.nightStartCallback = function () {
-                        this.root.serializer.updateLastSavegame();
-                    }),
-                    (e.prototype.initCameraSpawn = function () {
-                        var e = { x: Math.floor(Config.numTilesX / 2), y: Math.floor(Config.numTilesY / 2) };
-                        Config.spawnDefaultBuildings && (e = { x: 10, y: 10 });
-                        var t = tileCenterToWorld(e.x, e.y),
-                            i = _slicedToArray(t, 2),
-                            a = i[0],
-                            o = i[1],
-                            n = this.root.phaser.camera,
-                            r = this.root.zoom.currentZoomLevel;
-                        n.setPosition(a / r - n.width / 2, o / r - n.height / 2);
-                    }),
-                    (e.prototype.spawnResources = function () {
-                        var e = this;
-                        if ((initializeMap(this.root, this.mapSeed), Config.spawnDefaultBuildings)) {
-                            Config.ignoreBuildRequirements = !0;
-                            var t = [],
-                                i = BuildingRegistry.getMetaBuildings();
-                            Object.keys(i).forEach(function (e, a) {
-                                for (var o = i[e], n = 1; n <= MAXLEVEL_INDEX + 1; ++n) t.push({ type: o, y: 8 + n, x: 10 + 2 * a, level: n });
+                        if (index < numberOfEnemies) {
+                            requestAnimationFrame(spawnNextEnemy);
+                        }
+                    };                
+                
+                    spawnNextEnemy();
+                }                
+
+                spawnNewEnemy(e) {
+                    for (var t = this.root.map.getRandomBorderTile(0), i = arguments.length, a = Array(i > 1 ? i - 1 : 0), o = 1; o < i; o++) a[o - 1] = arguments[o];
+                    var n = new e(this.root.phaser, t.x, t.y, a);
+                    return this.root.entityMgr.registerEntity(n), this.root.groups.enemiesGroup.add(n), n;
+                }                               
+
+                playerHasPlacedBase() {
+                    return null != this.getPlayerBase();
+                }
+
+                getPlayerBase() {
+                    return this.root.entityMgr.getAllEntitiesWithComponent(PlayerBaseComponent)[0];
+                }
+
+                getPlayerBaseLevel() {
+                    var e = this.getPlayerBase();
+                    return e ? e.getLevel() : -1;
+                }
+
+                countBuildings(e) {
+                    if (null != this.buildingCountCache[e.name]) return this.buildingCountCache[e.name];
+                    var t = 0;
+                    return (
+                        this.root.entityMgr.getAllEntitiesWithComponent(BuildingComponent).forEach(function(i) {
+                            i instanceof e && (t += 1);
+                        }),
+                        (this.buildingCountCache[e.name] = t),
+                        t
+                    );
+                }
+
+                nightEndCallback() {
+                    var e = this.root.daytime.getDay();
+                    e >= Config.getPointsStartDay && (e % GAME_BALANCING.bossInterval == 0 ? (this.root.stats.points += Config.pointsPerBoss) : (this.root.stats.points += Config.pointsPerNight)),
+                        this.root.gamemode && !this.root.gamemode.isSandbox() && this.root.persistent.setMaximumStat("stat_max_day_reached", e),
+                        this.root.stats.storeGemsOverTime(e),
+                        this.root.serializer.updateLastSavegame(),
+                        this.root.settings.autosave && (console.log("[LOGIC] Triggering autosave"), this.root.savegames.saveGame());
+                }
+
+                nightStartCallback() {
+                    this.root.serializer.updateLastSavegame();
+                }
+
+                initCameraSpawn() {
+                    var e = {
+                        x: Math.floor(Config.numTilesX / 2),
+                        y: Math.floor(Config.numTilesY / 2)
+                    };
+                    Config.spawnDefaultBuildings && (e = {
+                        x: 10,
+                        y: 10
+                    });
+                    var t = tileCenterToWorld(e.x, e.y),
+                        i = _slicedToArray(t, 2),
+                        a = i[0],
+                        o = i[1],
+                        n = this.root.phaser.camera,
+                        r = this.root.zoom.currentZoomLevel;
+                    n.setPosition(a / r - n.width / 2, o / r - n.height / 2);
+                }
+
+                spawnResources() {
+                    var e = this;
+                    if ((initializeMap(this.root, this.mapSeed), Config.spawnDefaultBuildings)) {
+                        Config.ignoreBuildRequirements = !0;
+                        var t = [],
+                            i = BuildingRegistry.getMetaBuildings();
+                        Object.keys(i).forEach(function(e, a) {
+                            for (var o = i[e], n = 1; n <= MAXLEVEL_INDEX + 1; ++n) t.push({
+                                type: o,
+                                y: 8 + n,
+                                x: 10 + 2 * a,
+                                level: n
                             });
-                            for (var a = BuildingRegistry.getMetaclassByClassHandle(WallMeta), o = 1; o <= MAXLEVEL_INDEX + 1; ++o) for (var n = 0; n < 10; ++n) t.push({ type: a, y: 8 + 2 * o, x: 44 + n, level: o });
-                            t.forEach(function (t) {
-                                var i = t.type,
-                                    a = t.x,
-                                    o = t.y,
-                                    n = t.level;
-                                e.tryPlaceBuilding({ building: i, position: { tileX: a, tileY: o } });
-                                var r = e.root.map.getTileContent(a, o);
-                                if (r) for (var s = 1; s < n; ++s) e.upgradeBuilding(r);
-                                else console.error("failed to place building!");
+                        });
+                        for (var a = BuildingRegistry.getMetaclassByClassHandle(WallMeta), o = 1; o <= MAXLEVEL_INDEX + 1; ++o)
+                            for (var n = 0; n < 10; ++n) t.push({
+                                type: a,
+                                y: 8 + 2 * o,
+                                x: 44 + n,
+                                level: o
                             });
-                        }
-                    }),
-                    (e.prototype.tryPlaceBuilding = function (e) {
-                        var t = e.building,
-                            i = e.position;
-                        if (!this.checkBuildingRequirements({ building: t, position: i }).result) return !1;
-                        if (this.root.entityMgr.getAllEntitiesWithComponent(EnemyAIComponent).length > 0 && Config.gameTimeSpeedUpFactor < 1) return !1;
-                        Config.ignoreBuildRequirements || this.root.stats.spend(t.getUpgradeCost(0));
-                        var a = this.doPlaceBuilding(t, i.tileX, i.tileY);
-                        return (
-                            a.getComponent(PlayerBaseComponent) && (this.root.map.recomputeFlowGrid(), this.root.signals.playerBasePlaced.dispatch(a), this.root.serializer && this.root.serializer.updateLastSavegame()),
-                            this.root.signals.buildingPlaced.dispatch(a),
-                            window.gtag && window.gtag("event", "building_placed", { event_category: "ingame", event_label: t.buildingId }),
-                            sendTrackingRequest(trackingSeverity.info, "Building placed", { id: t.buildingId }),
-                            !0
-                        );
-                    }),
-                    (e.prototype.resetBuildingCountCache = function () {
-                        this.buildingCountCache = {};
-                    }),
-                    (e.prototype.doPlaceBuilding = function (e, t, i) {
-                        var a = e.makeInstance(this.root.phaser, t, i);
-                        return this.root.groups.buildingsGroup.add(a), this.root.map.setTileContent(t, i, a), this.root.entityMgr.registerEntity(a), this.resetBuildingCountCache(), a;
-                    }),
-                    (e.prototype.sellBuilding = function (e) {
-                        if (!(e instanceof BuildingInstance)) throw new Error("Trying to sell non-building");
-                        return e.meta.isSellable()
-                            ? (this.root.stats.grant({ gems: this.getSellPrice(e) }), this.root.signals.buildingSold.dispatch(e), this.resetBuildingCountCache(), this.root.entityMgr.destroyEntity(e), !0)
-                            : (console.warn("Trying to sell non sellable building"), !1);
-                    }),
-                    (e.prototype.sellAllBuildings = function (e) {
-                        var t = this,
-                            i = !1;
-                        return (
-                            this.root.entityMgr.getAllEntitiesWithComponent(BuildingComponent).forEach(function (a) {
-                                a.constructor.name === e.constructor.name && t.sellBuilding(a) && (i = !0);
-                            }),
-                            i
-                        );
-                    }),
-                    (e.prototype.getSellPrice = function (e) {
-                        for (var t = 0, i = 0, a = e.getLevel(); i <= a; ++i) t += e.meta.getUpgradeCost(i).gems;
-                        return roundDownToNext(t * GAME_BALANCING.refundOnSell, 5);
-                    }),
-                    (e.prototype.getSellPriceForAll = function (e) {
-                        var t = this,
-                            i = 0;
-                        return (
-                            this.root.entityMgr.getAllEntitiesWithComponent(BuildingComponent).forEach(function (a) {
-                                a.constructor.name === e.constructor.name && (i += t.getSellPrice(a));
-                            }),
-                            i
-                        );
-                    }),
-                    (e.prototype.checkBuildingDependencies = function (e) {
-                        if (Config.ignoreBuildRequirements) return { result: !0 };
-                        for (var t = 0; t < e.dependsOnBuildings.length; ++t) {
-                            var i = e.dependsOnBuildings[t],
-                                a = BuildingRegistry.getMetaclassByClassHandle(i),
-                                o = a.getInstanceClass();
-                            if (0 === this.countBuildings(o)) return { result: !1, reason: tr("place_dependent_building_first", a.getDisplayName()) };
-                        }
-                        return { result: !0 };
-                    }),
-                    (e.prototype.checkBuildingIsBelowBaseRequirement = function (e) {
-                        var t = this.getPlayerBaseLevel();
-                        return !(e.getLevel() >= t && !e.hasComponent(PlayerBaseComponent));
-                    }),
-                    (e.prototype.checkCanUpgradeBuilding = function (e) {
-                        var t = e.meta;
-                        if (!this.checkBuildingIsBelowBaseRequirement(e) && !Config.ignoreBuildRequirements) return { result: !1, reason: tr("upgrade_base_first") };
-                        var i = this.checkSpecialUpgradeRequirements(e);
-                        if (!i.result) return i;
-                        var a = t.getUpgradeCost(e.getLevel() + 1);
-                        return this.root.stats.canAfford(a) || Config.ignoreBuildRequirements ? { result: !0 } : { result: !1, reason: tr("can_not_afford_upgrade") };
-                    }),
-                    (e.prototype.checkSpecialUpgradeRequirements = function (e) {
-                        var t = e.meta;
-                        if (this.root.gamemode && this.root.gamemode.isSandbox() && e instanceof PlayerBaseBuilding) {
-                            var i = this.root.persistent.getNumber("stat_max_base_level", 0);
-                            if (e.getLevel() >= i) return { result: !1, reason: tr("play_other_modes_to_unlock_higher_base") };
-                        }
-                        return e.getLevel() >= t.getMaxLevel() ? { result: !1, reason: tr("no_further_upgrades") } : { result: !0, reason: "" };
-                    }),
-                    (e.prototype.upgradeBuilding = function (e) {
-                        var t = arguments.length > 1 && void 0 !== arguments[1] && arguments[1];
-                        if (arguments.length > 2 && void 0 !== arguments[2] && arguments[2]) {
-                            var i = this.getPlayerBaseLevel();
-                            if (((e instanceof PlayerBaseBuilding || Config.ignoreBuildRequirements) && (i = MAXLEVEL_INDEX), t)) {
-                                for (var a = this.root.entityMgr.getAllEntitiesWithComponent(BuildingComponent), o = !1, n = 0; n <= i; ++n)
-                                    for (var r = 0, s = a.length; r < s; ++r) {
-                                        var l = a[r];
-                                        l.getLevel() === n && l.constructor.name === e.constructor.name && (o = this.upgradeBuildingSingle(l) || o);
-                                    }
-                                return o;
-                            }
-                            for (var u = !1, c = e.getLevel(); c <= i; ++c) u = this.upgradeBuildingSingle(e) || u;
-                            return u;
-                        }
-                        if (t) {
-                            var d = e.getLevel();
-                            if (!this.upgradeBuildingSingle(e)) return !1;
-                            for (var h = this.root.entityMgr.getAllEntitiesWithComponent(BuildingComponent), p = 0; p < h.length; ++p) {
-                                var g = h[p];
-                                g.constructor.name === e.constructor.name && g.getLevel() === d && this.upgradeBuildingSingle(g);
-                            }
-                            return !0;
-                        }
-                        return this.upgradeBuildingSingle(e);
-                    }),
-                    (e.prototype.upgradeBuildingSingle = function (e) {
-                        if (this.checkCanUpgradeBuilding(e).result) {
-                            var t = e.meta.getUpgradeCost(e.getLevel() + 1);
-                            return (
-                                Config.ignoreBuildRequirements || this.root.stats.spend(t),
-                                e.meta.upgradeInstance(this.root.phaser, e),
-                                e instanceof PlayerBaseBuilding && this.root.gamemode && !this.root.gamemode.isSandbox() && this.root.persistent.setMaximumStat("stat_max_base_level", e.getLevel()),
-                                this.root.signals.buildingUpgraded.dispatch(e),
-                                !0
-                            );
-                        }
-                        return !1;
-                    }),
-                    (e.prototype.checkBuildingRequirements = function (e) {
-                        var t = e.building,
-                            i = e.position,
-                            a = void 0 === i ? null : i;
-                        if (null == t) throw new Error("building is null");
-                        var o = this.checkBuildingDependencies(t);
-                        if (!o.result) return o;
-                        if (null != a && !this.root.map.isValidCoordinate(a.tileX, a.tileY, Config.mapBorder)) return { result: !1, reason: tr("not_in_map_bounds") };
-                        if (!Config.ignoreBuildRequirements) {
-                            if (this.root.stats.isSkillUnlocked("transporterFeatureGlobal") && "transporter" === t.buildingId) return { result: !1, reason: tr("transporter_no_use") };
-                            for (var n = t.getRequirements(), r = 0; r < n.length; ++r) {
-                                var s = n[r];
-                                if ((null != a || !s.dependsOnPosition()) && !s.check(this.root, a)) return { result: !1, reason: s.getErrorText(this.root) };
-                            }
-                            if (!this.root.stats.canAfford(t.getUpgradeCost(0))) return { result: !1, reason: tr("can_not_afford") };
-                        }
-                        if (null != a) {
-                            if (this.root.map.isTileUsed(a.tileX, a.tileY)) return { result: !1, reason: tr("space_already_occupied") };
-                            if (this.root.map.tileIsOccupiedByDynamicEntities(a.tileX, a.tileY)) return { result: !1, reason: tr("tile_occupied_by_enemies") };
-                        }
-                        return { result: !0 };
-                    }),
-                    (e.prototype.canUnlockSkill = function (e) {
-                        var t = SKILL_TREE[e];
-                        if (this.root.stats.isSkillUnlocked(e)) return !1;
-                        if (Config.ignoreSkillRequirements) return !0;
-                        if (this.root.stats.points < t.cost) return !1;
-                        for (var i = t.dependsOn, a = 0; a < i.length; ++a) {
-                            var o = i[a];
-                            if (!this.root.stats.isSkillUnlocked(o)) return !1;
-                        }
-                        return !0;
-                    }),
-                    (e.prototype.unlockSkill = function (e) {
-                        if (!this.canUnlockSkill(e)) return !1;
-                        var t = SKILL_TREE[e];
-                        return (
-                            (this.root.stats.points -= t.cost),
-                            this.root.stats.unlockSkill(e),
-                            this.root.signals.skillLeveledUp.dispatch(e),
-                            this.refreshBuildingInstances(),
-                            window.gtag && window.gtag("event", "skill_unlocked", { event_category: "ingame", event_label: e }),
-                            sendTrackingRequest(trackingSeverity.info, "Skill unlocked", { id: e }),
-                            !0
-                        );
-                    }),
-                    (e.prototype.clearGame = function () {
-                        this.root.entityMgr.destroyAll(), this.resetBuildingCountCache(), this.root.animations.cancelAllNonUIAnimations(), this.root.particles.clearAll(), this.root.signals.gameReset.dispatch();
-                    }),
-                    (e.prototype.onSavegameLoaded = function () {
-                        this.resetBuildingCountCache(), this.root.signals.gameReload.dispatch(), this.root.signals.skillLeveledUp.dispatch(), this.refreshBuildingInstances(), this.updateSandboxOverlay();
-                    }),
-                    (e.prototype.updateSandboxOverlay = function () {
-                        var e = document.getElementById("sandbox_overlay");
-                        e && this.root.gamemode && (this.root.gamemode.isAlwaysNight() ? (e.style.display = "block") : (e.style.display = "none"));
-                    }),
-                    (e.prototype.onGameStarted = function () {
-                        var e = this;
-                        if ((this.updateSandboxOverlay(), this.root.gamemode.isAlwaysNight() && this.root.signals.nightEntered.dispatch(1), this.root.gamemode.isSandbox())) {
-                            var t = this.root.persistent.getNumber("stat_max_day_reached", 1),
-                                i = Math.max(t - 5, 0);
-                            (i += Math.floor(t / 10)),
-                                (this.root.stats.points = i),
-                                (window.spawnSandboxWave = function () {
-                                    e.spawnSandboxWave();
-                                }),
-                                (window.sandboxHeal = function () {
-                                    e.sandboxHeal();
-                                }),
-                                (window.sandboxFill = function () {
-                                    e.sandboxFill();
-                                });
-                            var a = document.getElementById("sandbox_waves");
-                            if (a) {
-                                a.innerHTML = "";
-                                [1, 5, 10, 15, 20, 25, 30, 35, 50, 55, 70, 75, 100, 125, 150, 155, 200, 205, 300, 305, 400, 405, 500, 505, 700, 705, 1e3, 1005].forEach(function (e) {
-                                    if (t >= e) {
-                                        var i = document.createElement("option");
-                                        (i.value = e), (i.innerText = tr("sandbox_wave_n", e)), a.appendChild(i);
-                                    }
-                                });
-                            }
-                        }
-                    }),
-                    (e.prototype.sandboxHeal = function () {
-                        this.root.entityMgr.getAllEntitiesWithComponent(BuildingComponent).forEach(function (e) {
-                            var t = e.getComponent(HealthComponent);
-                            t && t.healAll();
-                        });
-                    }),
-                    (e.prototype.sandboxFill = function () {
-                        this.root.entityMgr.getAllEntitiesWithComponent(BuildingComponent).forEach(function (e) {
-                            var t = e.getComponent(StorageComponent);
-                            t && t.fillAll();
-                        });
-                    }),
-                    (e.prototype.spawnSandboxWave = function () {
-                        if (this.root.gamemode && this.root.gamemode.isSandbox())
-                            if (this.playerHasPlacedBase()) {
-                                this.root.signals.uiActionPerformed.dispatch();
-                                var e = document.getElementById("sandbox_waves");
-                                if (e) {
-                                    var t = e.options[e.selectedIndex].value,
-                                        i = null;
-                                    try {
-                                        i = parseInt(t, 10);
-                                    } catch (e) {
-                                        return;
-                                    }
-                                    console.log("[SANDBOX] Spawn wave", i), this.root.waveMgr.spawnWave(i);
+                        t.forEach(function(t) {
+                            var i = t.type,
+                                a = t.x,
+                                o = t.y,
+                                n = t.level;
+                            e.tryPlaceBuilding({
+                                building: i,
+                                position: {
+                                    tileX: a,
+                                    tileY: o
                                 }
-                            } else this.root.gui.uiNotifications.showError(tr("place_base_before_wave"));
-                    }),
-                    (e.prototype.refreshBuildingInstances = function () {
-                        for (var e = this, t = this.root.entityMgr.getAllEntitiesWithComponent(BuildingComponent), i = 0; i < t.length; ++i) {
-                            var a = t[i];
-                            a.meta.refreshInstance(a);
-                        }
-                        for (var o = this.root.entityMgr.getAllEntitiesWithComponent(ResourceComponent), n = 0; n < o.length; ++n) {
-                            o[n].refreshInstance();
-                        }
-                        META_BUILDINGS.forEach(function (t) {
-                            t.refreshSelf(e.root);
+                            });
+                            var r = e.root.map.getTileContent(a, o);
+                            if (r)
+                                for (var s = 1; s < n; ++s) e.upgradeBuilding(r);
+                            else console.error("failed to place building!");
                         });
-                    }),
-                    e
-                );
-            })()
+                    }
+                }
+
+                tryPlaceBuilding(e) {
+                    var t = e.building,
+                        i = e.position;
+                    if (!this.checkBuildingRequirements({
+                            building: t,
+                            position: i
+                        }).result) return !1;
+                    if (this.root.entityMgr.getAllEntitiesWithComponent(EnemyAIComponent).length > 0 && Config.gameTimeSpeedUpFactor < 1) return !1;
+                    Config.ignoreBuildRequirements || this.root.stats.spend(t.getUpgradeCost(0));
+                    var a = this.doPlaceBuilding(t, i.tileX, i.tileY);
+                    return (
+                        a.getComponent(PlayerBaseComponent) && (this.root.map.recomputeFlowGrid(), this.root.signals.playerBasePlaced.dispatch(a), this.root.serializer && this.root.serializer.updateLastSavegame()),
+                        this.root.signals.buildingPlaced.dispatch(a),
+                        !0
+                    );
+                }
+
+                resetBuildingCountCache() {
+                    this.buildingCountCache = {};
+                }
+
+                doPlaceBuilding(e, t, i) {
+                    var a = e.makeInstance(this.root.phaser, t, i);
+                    return this.root.groups.buildingsGroup.add(a), this.root.map.setTileContent(t, i, a), this.root.entityMgr.registerEntity(a), this.resetBuildingCountCache(), a;
+                }
+
+                sellBuilding(e) {
+                    if (!(e instanceof BuildingInstance)) throw new Error("Trying to sell non-building");
+                    return e.meta.isSellable() ?
+                        (this.root.stats.grant({
+                            gems: this.getSellPrice(e)
+                        }), this.root.signals.buildingSold.dispatch(e), this.resetBuildingCountCache(), this.root.entityMgr.destroyEntity(e), !0) :
+                        (console.warn("Trying to sell non sellable building"), !1);
+                }
+                
+                sellAllBuildings(e) {
+                    var t = this,
+                        i = !1;
+                    return (
+                        this.root.entityMgr.getAllEntitiesWithComponent(BuildingComponent).forEach(function(a) {
+                            a.constructor.name === e.constructor.name && t.sellBuilding(a) && (i = !0);
+                        }),
+                        i
+                    );
+                }
+
+                getSellPrice(e) {
+                    for (var t = 0, i = 0, a = e.getLevel(); i <= a; ++i) t += e.meta.getUpgradeCost(i).gems;
+                    return roundDownToNext(t * GAME_BALANCING.refundOnSell, 5);
+                }
+
+                getSellPriceForAll(e) {
+                    var t = this,
+                        i = 0;
+                    return (
+                        this.root.entityMgr.getAllEntitiesWithComponent(BuildingComponent).forEach(function(a) {
+                            a.constructor.name === e.constructor.name && (i += t.getSellPrice(a));
+                        }),
+                        i
+                    );
+                }
+
+                checkBuildingDependencies(e) {
+                    if (Config.ignoreBuildRequirements) return {
+                        result: !0
+                    };
+                    for (var t = 0; t < e.dependsOnBuildings.length; ++t) {
+                        var i = e.dependsOnBuildings[t],
+                            a = BuildingRegistry.getMetaclassByClassHandle(i),
+                            o = a.getInstanceClass();
+                        if (0 === this.countBuildings(o)) return {
+                            result: !1,
+                            reason: tr("place_dependent_building_first", a.getDisplayName())
+                        };
+                    }
+                    return {
+                        result: !0
+                    };
+                }
+
+                checkBuildingIsBelowBaseRequirement(e) {
+                    var t = this.getPlayerBaseLevel();
+                    return !(e.getLevel() >= t && !e.hasComponent(PlayerBaseComponent));
+                }
+
+                checkCanUpgradeBuilding(e) {
+                    var t = e.meta;
+                    if (!this.checkBuildingIsBelowBaseRequirement(e) && !Config.ignoreBuildRequirements) return {
+                        result: !1,
+                        reason: tr("upgrade_base_first")
+                    };
+                    var i = this.checkSpecialUpgradeRequirements(e);
+                    if (!i.result) return i;
+                    var a = t.getUpgradeCost(e.getLevel() + 1);
+                    return this.root.stats.canAfford(a) || Config.ignoreBuildRequirements ? {
+                        result: !0
+                    } : {
+                        result: !1,
+                        reason: tr("can_not_afford_upgrade")
+                    };
+                }
+
+                checkSpecialUpgradeRequirements(e) {
+                    var t = e.meta;
+                    return e.getLevel() >= t.getMaxLevel() ? {
+                        result: !1,
+                        reason: tr("no_further_upgrades")
+                    } : {
+                        result: !0,
+                        reason: ""
+                    };
+                }
+                
+                upgradeBuilding(building, upgradeAll = false, fromUpgradeAll = false) {
+                    if (fromUpgradeAll) {
+                        if (upgradeAll && (building instanceof PlayerBaseBuilding || Config.ignoreBuildRequirements)) {
+                            const maxLevel = upgradeAll ? MAXLEVEL_INDEX : this.getPlayerBaseLevel();
+                            const buildings = this.root.entityMgr.getAllEntitiesWithComponent(BuildingComponent);
+                            let isUpgraded = false;
+                            for (let level = 0; level <= maxLevel; ++level) {
+                                for (const b of buildings) {
+                                    if (b.getLevel() === level && b.constructor.name === building.constructor.name) {
+                                        isUpgraded = this.upgradeBuildingSingle(b) || isUpgraded;
+                                    }
+                                }
+                            }
+                            return isUpgraded;
+                        }
+                        let isUpgraded = false;
+                        const level = building.getLevel();
+                        if (!this.upgradeBuildingSingle(building)) return false;
+                        const buildings = this.root.entityMgr.getAllEntitiesWithComponent(BuildingComponent);
+                        for (const b of buildings) {
+                            if (b.constructor.name === building.constructor.name && b.getLevel() === level) {
+                                this.upgradeBuildingSingle(b);
+                            }
+                        }
+                        return true;
+                    } else {
+                        if (upgradeAll) {
+                            const maxLevel = this.getPlayerBaseLevel();
+                            let isUpgraded = false;
+                            for (let level = building.getLevel(); level <= maxLevel; ++level) {
+                                isUpgraded = this.upgradeBuildingSingle(building) || isUpgraded;
+                            }
+                            return isUpgraded;
+                        }
+                        return this.upgradeBuildingSingle(building);
+                    }
+                }
+                
+                upgradeBuildingSingle(building) {
+                    const canUpgrade = this.checkCanUpgradeBuilding(building).result;
+                    if (canUpgrade) {
+                        const upgradeCost = building.meta.getUpgradeCost(building.getLevel() + 1);
+                        Config.ignoreBuildRequirements || this.root.stats.spend(upgradeCost);
+                        building.meta.upgradeInstance(this.root.phaser, building);
+                        if (building instanceof PlayerBaseBuilding && this.root.gamemode && !this.root.gamemode.isSandbox()) {
+                            this.root.persistent.setMaximumStat("stat_max_base_level", building.getLevel());
+                        }
+                        this.root.signals.buildingUpgraded.dispatch(building);
+                        return true;
+                    }
+                    return false;
+                }
+
+                checkBuildingRequirements(e) {
+                    var t = e.building,
+                        i = e.position,
+                        a = void 0 === i ? null : i;
+                    if (null == t) throw new Error("building is null");
+                    var o = this.checkBuildingDependencies(t);
+                    if (!o.result) return o;
+                    if (null != a && !this.root.map.isValidCoordinate(a.tileX, a.tileY, Config.mapBorder)) return {
+                        result: !1,
+                        reason: tr("not_in_map_bounds")
+                    };
+                    if (!Config.ignoreBuildRequirements) {
+                        if (this.root.stats.isSkillUnlocked("transporterFeatureGlobal") && "transporter" === t.buildingId) return {
+                            result: !1,
+                            reason: tr("transporter_no_use")
+                        };
+                        for (var n = t.getRequirements(), r = 0; r < n.length; ++r) {
+                            var s = n[r];
+                            if ((null != a || !s.dependsOnPosition()) && !s.check(this.root, a)) return {
+                                result: !1,
+                                reason: s.getErrorText(this.root)
+                            };
+                        }
+                        if (!this.root.stats.canAfford(t.getUpgradeCost(0))) return {
+                            result: !1,
+                            reason: tr("can_not_afford")
+                        };
+                    }
+                    if (null != a) {
+                        if (this.root.map.isTileUsed(a.tileX, a.tileY)) return {
+                            result: !1,
+                            reason: tr("space_already_occupied")
+                        };
+                        if (this.root.map.tileIsOccupiedByDynamicEntities(a.tileX, a.tileY)) return {
+                            result: !1,
+                            reason: tr("tile_occupied_by_enemies")
+                        };
+                    }
+                    return {
+                        result: !0
+                    };
+                }
+
+                canUnlockSkill(e) {
+                    var t = SKILL_TREE[e];
+                    if (this.root.stats.isSkillUnlocked(e)) return !1;
+                    if (Config.ignoreSkillRequirements) return !0;
+                    if (this.root.stats.points < t.cost) return !1;
+                    for (var i = t.dependsOn, a = 0; a < i.length; ++a) {
+                        var o = i[a];
+                        if (!this.root.stats.isSkillUnlocked(o)) return !1;
+                    }
+                    return !0;
+                }
+
+                unlockSkill(e) {
+                    if (!this.canUnlockSkill(e)) return !1;
+                    var t = SKILL_TREE[e];
+                    return (
+                        (this.root.stats.points -= t.cost),
+                        this.root.stats.unlockSkill(e),
+                        this.root.signals.skillLeveledUp.dispatch(e),
+                        this.refreshBuildingInstances(),
+                        window.gtag && window.gtag("event", "skill_unlocked", {
+                            event_category: "ingame",
+                            event_label: e
+                        }),
+                        sendTrackingRequest(trackingSeverity.info, "Skill unlocked", {
+                            id: e
+                        }),
+                        !0
+                    );
+                }
+                
+                clearGame() {
+                    this.root.entityMgr.destroyAll();
+                    this.resetBuildingCountCache();
+                    this.root.animations.cancelAllNonUIAnimations();
+                    this.root.particles.clearAll();
+                    this.root.signals.gameReset.dispatch();
+                }
+            
+                onSavegameLoaded() {
+                    this.resetBuildingCountCache();
+                    this.root.signals.gameReload.dispatch();
+                    this.root.signals.skillLeveledUp.dispatch();
+                    this.refreshBuildingInstances();
+                    this.updateSandboxOverlay();
+                }
+
+                updateSandboxOverlay() {
+                    var e = document.getElementById("sandbox_overlay");
+                    e && this.root.gamemode && (this.root.gamemode.isAlwaysNight() ? (e.style.display = "block") : (e.style.display = "none"));
+                }
+            
+                onGameStarted() {
+                    this.updateSandboxOverlay();
+                
+                    if (this.root.gamemode.isAlwaysNight()) {
+                        this.root.signals.nightEntered.dispatch(1);
+                    }
+                
+                    if (this.root.gamemode.isSandbox()) {
+                
+                        window.spawnSandboxWave = () => this.spawnSandboxWave();
+                        window.sandboxHeal = () => this.sandboxHeal();
+                        window.sandboxFill = () => this.sandboxFill();
+                
+                        const sandboxWavesInput = document.getElementById("sandbox_waves");
+            
+                        if (sandboxWavesInput) {
+                            sandboxWavesInput.value = "";
+                        
+                            // Let's see someone spawn wave 69666 lol
+                            const maxDayReached = Infinity
+                        
+                            // Add a change event listener to the input field
+                            sandboxWavesInput.addEventListener("change", function() {
+                                const enteredValue = parseInt(sandboxWavesInput.value, 10);
+                        
+                                if (!isNaN(enteredValue) && enteredValue >= 1 && enteredValue <= maxDayReached) {
+                                    // Valid wave number entered, do something with the value (e.g., spawn wave)
+                                    console.log("Spawning wave number:", enteredValue);
+                                } else {
+                                    // Invalid input, reset the input field
+                                    sandboxWavesInput.value = "";
+                                }
+                            });
+                        }
+                    }            
+                }
+            
+                sandboxHeal() {
+                    this.root.entityMgr.getAllEntitiesWithComponent(BuildingComponent).forEach(function(e) {
+                        var t = e.getComponent(HealthComponent);
+                        t && t.healAll();
+                    });
+                }
+            
+                sandboxFill() {
+                    this.root.entityMgr.getAllEntitiesWithComponent(BuildingComponent).forEach(function(e) {
+                        var t = e.getComponent(StorageComponent);
+                        t && t.fillAll();
+                    });
+                }
+            
+                spawnSandboxWave() {
+                    if (this.root.gamemode && this.root.gamemode.isSandbox()) {
+                        if (this.playerHasPlacedBase()) {
+                            this.root.signals.uiActionPerformed.dispatch();
+                            var e = document.getElementById("sandbox_waves");
+                            if (e) {
+                                var t = e.value;
+                                var i = null;
+                                try {
+                                    i = parseInt(t, 10);
+                                } catch (err) {
+                                    return;
+                                }
+                                if (!isNaN(i) && i >= 1) {
+                                    console.log("[SANDBOX] Spawn wave", i);
+                                    this.root.waveMgr.spawnWave(i);
+                                }
+                            }
+                        } else {
+                            this.root.gui.uiNotifications.showError(tr("place_base_before_wave"));
+                        }
+                    }
+                }
+
+                refreshBuildingInstances() {
+                    for (var e = this, t = this.root.entityMgr.getAllEntitiesWithComponent(BuildingComponent), i = 0; i < t.length; ++i) {
+                        var a = t[i];
+                        a.meta.refreshInstance(a);
+                    }
+                    for (var o = this.root.entityMgr.getAllEntitiesWithComponent(ResourceComponent), n = 0; n < o.length; ++n) {
+                        o[n].refreshInstance();
+                    }
+                    META_BUILDINGS.forEach(function(t) {
+                        t.refreshSelf(e.root);
+                    });
+                }
+            }
+
             class GameMode {
                 getId() {
                     throw new Error("abstract");
@@ -29736,6 +29883,7 @@
                     return "SandboxMode";
                 }
             }
+
             const GameSerializer = (function () {
                 function e(t) {
                     _classCallCheck(this, e), (this.root = t), (this.lastSavegame = "None available");
@@ -38308,223 +38456,193 @@
                     ]),
                     t
                 );
-            })(EntityRenderObject),
-            SavegameManager = (function () {
-                function e(t) {
-                    var i = this;
-                    _classCallCheck(this, e),
-                        (this.root = t),
-                        (this.savegames = []),
-                        (this.activeSavegameId = null),
-                        this.loadSavegames(),
-                        (window.deleteSavegame = function (e) {
-                            return i.deleteSavegame(e);
-                        }),
-                        (window.exportSavegame = function (e) {
-                            return i.exportSavegame(e);
-                        }),
-                        (window.restoreSavegame = function (e) {
-                            return i.restoreSavegame(e);
-                        }),
-                        (window.importSavegame = function (e) {
-                            return i.importSavegame(e);
-                        }),
-                        this.initDropFallback();
-                }
-                return (
-                    _createClass(e, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "SavegameManager";
-                            },
-                        },
-                    ]),
-                    (e.prototype.initDropFallback = function () {
-                        (document.body.ondrop = function (e) {
-                            e.preventDefault();
-                        }),
-                            (document.body.ondragover = function (e) {
-                                e.preventDefault();
-                            });
-                    }),
-                    (e.prototype.deleteSavegame = function (e) {
-                        console.log("Deleting:", e);
-                        for (var t = null, i = 0; i < this.savegames.length; ++i)
-                            if (this.savegames[i].id === e) {
-                                t = i;
-                                break;
+            })(EntityRenderObject)
+        class SavegameManager {
+            constructor(t) {
+                const i = this;
+                this.root = t;
+                this.savegames = [];
+                this.activeSavegameId = null;
+                this.loadSavegames();
+                window.deleteSavegame = e => {
+                    return i.deleteSavegame(e);
+                }, window.exportSavegame = e => {
+                    return i.exportSavegame(e);
+                }, window.restoreSavegame = e => {
+                    return i.restoreSavegame(e);
+                }, window.importSavegame = e => {
+                    return i.importSavegame(e);
+                }, this.initDropFallback();
+            }
+
+            static get name() {
+                return "SavegameManager";
+            }
+            initDropFallback() {
+                document.body.ondrop = e => {
+                    e.preventDefault();
+                }, document.body.ondragover = e => {
+                    e.preventDefault();
+                };
+            }
+            deleteSavegame(e) {
+                console.log("Deleting:", e);
+                for (var t = null, i = 0; i < this.savegames.length; ++i)
+                    if (this.savegames[i].id === e) {
+                        t = i;
+                        break;
+                    } null !== t ? (this.savegames.splice(t, 1), this.root.persistent.remove("savegame_blob_" + e), this.root.persistent.remove("savegame_preview_" + e), this.updateMetadata(), document.getElementById("savegame_div_" + e).classList.add("removed"), e === this.activeSavegameId && (this.activeSavegameId = null), this.root.signals.uiActionPerformed.dispatch()) : console.error("[SAVEGAME] Game with id", e, "not found!");
+            }
+            exportSavegame(e) {
+                download("yorgio-savegame.bin", this.getBlob(e));
+            }
+            restoreSavegame(e) {
+                const t = this.getBlob(e);
+                t ? (this.root.serializer.load(t), this.activeSavegameId = e, console.log("[SAVEGAME] Restored", this.activeSavegameId), window.closeDialog("savegame_bg")) : console.error("[SAVEGAME] Blob not found!");
+            }
+            importSavegame(e) {
+                window.closeDialog("savegame_bg");
+                window.showDialog("load_game_dialog_bg");
+
+                const dropArea = document.getElementById("load_game_dragdrop_area");
+                dropArea.classList.remove("acceptDrag");
+
+                dropArea.ondrop = (event) => {
+                    window.closeDialog("load_game_dialog_bg");
+                    event.preventDefault();
+
+                    const fileList = event.dataTransfer.items || event.dataTransfer.files;
+                    const file = Array.from(fileList).find((item) => item.kind === "file")?.getAsFile();
+
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = () => {
+                            if (e) {
+                                window.startGame(true);
+                                console.warn("[SAVEGAME] Starting SAVEGAME!");
+                                console.warn("[ALERT] Custom WARN Message by BlueLatios!")
                             }
-                        null !== t
-                            ? (this.savegames.splice(t, 1),
-                              this.root.persistent.remove("savegame_blob_" + e),
-                              this.root.persistent.remove("savegame_preview_" + e),
-                              this.updateMetadata(),
-                              document.getElementById("savegame_div_" + e).classList.add("removed"),
-                              e === this.activeSavegameId && (this.activeSavegameId = null),
-                              this.root.signals.uiActionPerformed.dispatch())
-                            : console.error("[SAVEGAME] Game with id", e, "not found!");
-                    }),
-                    (e.prototype.exportSavegame = function (e) {
-                        download("yorgio-savegame.bin", this.getBlob(e));
-                    }),
-                    (e.prototype.restoreSavegame = function (e) {
-                        var t = this.getBlob(e);
-                        t ? (this.root.serializer.load(t), (this.activeSavegameId = e), console.log("[SAVEGAME] Restored", this.activeSavegameId), window.closeDialog("savegame_bg")) : console.error("[SAVEGAME] Blob not found!");
-                    }),
-                    (e.prototype.importSavegame = function (e) {
-                        var t = this;
-                        window.closeDialog("savegame_bg"), window.showDialog("load_game_dialog_bg");
-                        var i = document.getElementById("load_game_dragdrop_area");
-                        i.classList.remove("acceptDrag"),
-                            (i.ondrop = function (i) {
-                                window.closeDialog("load_game_dialog_bg"), i.preventDefault();
-                                var a = null;
-                                if (i.dataTransfer.items) {
-                                    for (var o = 0; o < i.dataTransfer.items.length; o++)
-                                        if ("file" === i.dataTransfer.items[o].kind) {
-                                            a = i.dataTransfer.items[o].getAsFile();
-                                            break;
-                                        }
-                                } else
-                                    for (o = 0; o < i.dataTransfer.files.length; o++) {
-                                        a = i.dataTransfer.files[o];
-                                        break;
-                                    }
-                                if (a) {
-                                    var n = new FileReader();
-                                    (n.onload = function () {
-                                        e && window.startGame(!0), t.root.serializer.load(n.result) && ((t.activeSavegameId = null), t.saveGame());
-                                    }),
-                                        n.readAsText(a);
-                                }
-                            }),
-                            (i.ondragenter = function (e) {
-                                i.classList.add("acceptDrag");
-                            }),
-                            (i.ondragleave = function (e) {
-                                i.classList.remove("acceptDrag");
-                            }),
-                            (i.ondragover = function (e) {
-                                e.preventDefault();
-                            });
-                    }),
-                    (e.prototype.getMetadataById = function (e) {
-                        for (var t = 0; t < this.savegames.length; ++t) if (this.savegames[t].id === e) return this.savegames[t];
-                        return null;
-                    }),
-                    (e.prototype.showDialog = function () {
-                        var e = this,
-                            t = "";
-                        this.savegames.forEach(function (i) {
-                            i.id === e.activeSavegameId && (t += e.generateSavegameHTML(i, !0));
-                        }),
-                            this.savegames.forEach(function (i) {
-                                i.id !== e.activeSavegameId && (t += e.generateSavegameHTML(i));
-                            }),
-                            0 === this.savegames.length && (t += tr("no_savegames_yet")),
-                            (document.getElementById("savegames_list").innerHTML = t),
-                            window.showDialog("savegame_bg");
-                    }),
-                    (e.prototype.generateSavegameHTML = function (e) {
-                        var t = arguments.length > 1 && void 0 !== arguments[1] && arguments[1],
-                            i = !(arguments.length > 2 && void 0 !== arguments[2]) || arguments[2],
-                            a = e.id,
-                            o = e.time,
-                            n = e.day,
-                            r = e.gamemode,
-                            s = secondsToDuration((new Date().getTime() - o) / 1e3),
-                            l = "savegame_img_id_" + a,
-                            u = this.getImageData(a),
-                            c = '&nbsp; <button class="dialog_button restore_savegame" onclick="window.' + (i ? "restoreSavegame" : "requestRestoreSavegameOutgame") + "('" + a + "')\"></button>";
-                        return (
-                            t && (c = "<br /><span class='active_savegame_text'>Active Savegame</span>"),
-                            '<div class="savegame ' +
-                                (t ? "active" : "") +
-                                '" id="savegame_div_' +
-                                a +
-                                '">\n                <img class="savegame_preview" id=\'' +
-                                l +
-                                "' src=\"" +
-                                u +
-                                '">\n                <div class="savegame_stats">\n                <strong class="sv_stat sv_day"><i>Day</i>' +
-                                n +
-                                '</strong>\n                <strong class="sv_stat sv_base"><i>Saved</i>' +
-                                s +
-                                '</strong>\n                    <strong class="sv_stat sv_gamemode"><i>Mode</i>' +
-                                tr("gamemode_" + r) +
-                                '</strong>\n                </div>\n                <div class="delete_savegame_confirm" id="sv_confirm_delete_' +
-                                a +
-                                '">\n                    ' +
-                                tr("delete_savegame_warning") +
-                                '<br />\n                    <button class="dialog_button cancel" onclick="window.deleteSavegame(\'' +
-                                a +
-                                "')\">" +
-                                tr("delete_savegame") +
-                                '</button>\n                    <button class="dialog_button" onclick="document.getElementById(\'sv_confirm_delete_' +
-                                a +
-                                "').classList.remove('visible')\">" +
-                                tr("keep_savegame") +
-                                '</button>\n                </div>\n                <div class="savegame_actions">\n                    <span class="delete_savegame" onclick="document.getElementById(\'sv_confirm_delete_' +
-                                a +
-                                "').classList.add('visible')\"></span>\n                    " +
-                                (i ? '<span class="export_savegame" onclick="window.exportSavegame(\'' + a + "')\"></span>" : "") +
-                                c +
-                                "\n                </div>\n            </div>\n        "
-                        );
-                    }),
-                    (e.prototype.getImageData = function (e) {
-                        var t = this.root.persistent.getString("savegame_preview_" + e, "");
-                        return t.length > 0 ? t : this.rebuildImageData(e);
-                    }),
-                    (e.prototype.rebuildImageData = function (e) {
-                        console.log("[SAVEGAMES] Generating preview for", e);
-                        var t = this.root.serializer.generatePreview(this.getBlob(e));
-                        return t ? (this.root.persistent.setString("savegame_preview_" + e, t), t) : (console.warn("Preview was null. Unable to set preview"), __webpack_require__(449));
-                    }),
-                    (e.prototype.saveGame = function () {
-                        var e = this.root.serializer.getLastSavegame();
-                        if (this.activeSavegameId) {
-                            console.log("[SAVEGAMES] Updating savegame:", this.activeSavegameId);
-                            var t = this.getMetadataById(this.activeSavegameId);
-                            (t.time = new Date().getTime()), (t.day = this.root.daytime.getDay()), this.root.gui.uiNotifications.showLongSuccess(tr("existing_savegame_updated"));
-                        } else {
-                            var i = this.generateSavegameId();
-                            console.log("[SAVEGAMES] Creating new savegame:", i);
-                            var a = { id: i, time: new Date().getTime(), day: this.root.daytime.getDay(), gamemode: this.root.gamemode.getId() };
-                            this.savegames.unshift(a), (this.activeSavegameId = i), this.root.gui.uiNotifications.showLongSuccess(tr("new_savegame_created"));
-                        }
-                        this.storeBlob(this.activeSavegameId, e), this.updateMetadata(), this.rebuildImageData(this.activeSavegameId);
-                    }),
-                    (e.prototype.generateSavegameId = function () {
-                        return _jsBase.Base64.encode(new Date().getTime() + "-" + randomInt(1e5, 1e6 - 1))
-                            .replace("=", "A")
-                            .replace("=", "B");
-                    }),
-                    (e.prototype.storeBlob = function (e, t) {
-                        this.root.persistent.setString("savegame_blob_" + e, t);
-                    }),
-                    (e.prototype.getBlob = function (e) {
-                        return this.root.persistent.getString("savegame_blob_" + e, "");
-                    }),
-                    (e.prototype.updateMetadata = function () {
-                        var e = JSON.stringify(this.savegames);
-                        this.root.persistent.setString("savegame_metadata", e);
-                    }),
-                    (e.prototype.loadSavegames = function () {
-                        var e = this.root.persistent.getString("savegame_metadata", "");
-                        if (e.length < 1) return console.log("[SAVEGAMES] No stored savegames found"), void this.updateMetadata();
-                        var t = {};
-                        try {
-                            t = JSON.parse(e);
-                        } catch (e) {
-                            return void console.error("[SAVEGAMES] Failed to parse JSON:", e);
-                        }
-                        console.log("[SAVEGAMES] Found", t.length, "stored savegames"), (this.savegames = t);
-                    }),
-                    e
-                );
-            })()
+                            if (this.root.serializer.load(reader.result)) {
+                                this.activeSavegameId = null;
+                                this.saveGame();
+                            }
+                        };
+                        reader.readAsText(file);
+                    }
+                };
+
+                dropArea.ondragenter = () => {
+                    dropArea.classList.add("acceptDrag");
+                };
+
+                dropArea.ondragleave = () => {
+                    dropArea.classList.remove("acceptDrag");
+                };
+
+                dropArea.ondragover = (event) => {
+                    event.preventDefault();
+                };
+            }
+            getMetadataById(e) {
+                for (let t = 0; t < this.savegames.length; ++t)
+                    if (this.savegames[t].id === e)
+                        return this.savegames[t];
+                return null;
+            }
+            showDialog() {
+                const e = this;
+                let t = "";
+                this.savegames.forEach(i => {
+                    i.id === e.activeSavegameId && (t += e.generateSavegameHTML(i, true));
+                }), this.savegames.forEach(i => {
+                    i.id !== e.activeSavegameId && (t += e.generateSavegameHTML(i));
+                }), 0 === this.savegames.length && (t += tr("no_savegames_yet")), document.getElementById("savegames_list").innerHTML = t, window.showDialog("savegame_bg");
+            }
+            generateSavegameHTML({
+                id,
+                time,
+                day,
+                gamemode
+            }, t = false, i = true) {
+                const s = secondsToDuration((new Date().getTime() - time) / 1000);
+                const l = `savegame_img_id_${id}`;
+                const u = this.getImageData(id);
+                const c = `&nbsp; <button class="dialog_button restore_savegame" onclick="window.${i ? "restoreSavegame" : "requestRestoreSavegameOutgame"}('${id}')"></button>`;
+            
+                return `<div class="savegame ${t ? "active" : ""}" id="savegame_div_${id}">
+                        <img class="savegame_preview" id="${l}" src="${u}">
+                        <div class="savegame_stats">
+                          <strong class="sv_stat sv_day"><i>Day</i>${day}</strong>
+                          <strong class="sv_stat sv_base"><i>Saved</i>${s}</strong>
+                          <strong class="sv_stat sv_gamemode"><i>Mode</i>${tr("gamemode_" + gamemode)}</strong>
+                        </div>
+                        <div class="delete_savegame_confirm" id="sv_confirm_delete_${id}">
+                          ${tr("delete_savegame_warning")}<br />
+                          <button class="dialog_button cancel" onclick="window.deleteSavegame('${id}')">${tr("delete_savegame")}</button>
+                          <button class="dialog_button" onclick="document.getElementById('sv_confirm_delete_${id}').classList.remove('visible')">${tr("keep_savegame")}</button>
+                        </div>
+                        <div class="savegame_actions">
+                          <span class="delete_savegame" onclick="document.getElementById('sv_confirm_delete_${id}').classList.add('visible')"></span>
+                          ${i ? `<span class="export_savegame" onclick="window.exportSavegame('${id}')"></span>` : ""}
+                          ${c}
+                        </div>
+                      </div>`;
+            }
+
+            getImageData(e) {
+                const t = this.root.persistent.getString("savegame_preview_" + e, "");
+                return t.length > 0 ? t : this.rebuildImageData(e);
+            }
+            rebuildImageData(e) {
+                console.log("[SAVEGAMES] Generating preview for", e);
+                const t = this.root.serializer.generatePreview(this.getBlob(e));
+                return t ? (this.root.persistent.setString("savegame_preview_" + e, t), t) : (console.warn("Preview was null. Unable to set preview"), i(449));
+            }
+            saveGame() {
+                const e = this.root.serializer.getLastSavegame();
+                if (this.activeSavegameId) {
+                    console.log("[SAVEGAMES] Updating savegame:", this.activeSavegameId);
+                    const t = this.getMetadataById(this.activeSavegameId);
+                    t.time = (new Date).getTime(), t.day = this.root.daytime.getDay(), this.root.gui.uiNotifications.showLongSuccess(tr("existing_savegame_updated"));
+                } else {
+                    const i = this.generateSavegameId();
+                    console.log("[SAVEGAMES] Creating new savegame:", i);
+                    const a = {
+                        id: i,
+                        time: (new Date).getTime(),
+                        day: this.root.daytime.getDay(),
+                        gamemode: this.root.gamemode.getId()
+                    };
+                    this.savegames.unshift(a), this.activeSavegameId = i, this.root.gui.uiNotifications.showLongSuccess(tr("new_savegame_created"));
+                }
+                this.storeBlob(this.activeSavegameId, e), this.updateMetadata(), this.rebuildImageData(this.activeSavegameId);
+            }
+            generateSavegameId() {
+                return c.Base64.encode((new Date).getTime() + "-" + Hs(1e5, 1e6 - 1)).replace("=", "A").replace("=", "B");
+            }
+            storeBlob(e, t) {
+                this.root.persistent.setString("savegame_blob_" + e, t);
+            }
+            getBlob(e) {
+                return this.root.persistent.getString("savegame_blob_" + e, "");
+            }
+            updateMetadata() {
+                const e = JSON.stringify(this.savegames);
+                this.root.persistent.setString("savegame_metadata", e);
+            }
+            loadSavegames() {
+                const e = this.root.persistent.getString("savegame_metadata", "");
+                if (e.length < 1)
+                    return console.log("[SAVEGAMES] No stored savegames found"), void this.updateMetadata();
+                let t = {};
+                try {
+                    t = JSON.parse(e);
+                } catch (e) {
+                    return void console.error("[SAVEGAMES] Failed to parse JSON:", e);
+                }
+                console.log("[SAVEGAMES] Found", t.length, "stored savegames"), this.savegames = t;
+            }
+        }
         const ccFixBaseGameState = _phaserCe.Phaser.State
         class GameState extends ccFixBaseGameState {
             constructor() {
@@ -38609,7 +38727,6 @@
             }
 
             initGroups() {
-                var e = this;
                 [
                     ["mapBordersGroup", null],
                     ["pathfindingVisGroup", null],
@@ -38630,12 +38747,12 @@
                     ["processorUsageViewGroup", null],
                     ["zombieHeatmapGroup", null],
                     ["mapFog", null],
-                ].forEach(function (t) {
-                    var i = _slicedToArray(t, 2),
-                        a = i[0],
-                        o = i[1],
-                        n = e.game.add.fastGroup(e.root.groups.gameRootGroup, a);
-                    (e.root.groups[a] = n), o && (n.cullingRadius = o);
+                ].forEach(([name, radius]) => {
+                    const group = this.game.add.fastGroup(this.root.groups.gameRootGroup, radius);
+                    this.root.groups[name] = group;
+                    if (radius) {
+                        group.cullingRadius = radius;
+                    }
                 });
             }
 
