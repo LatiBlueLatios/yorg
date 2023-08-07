@@ -28,6 +28,9 @@
         i((i.s = 138));
 })([
     function (e, t, i) {
+        /*
+         * Module 1
+        */
         "use strict";
         var a = i(2),
             o = i(19),
@@ -52,6 +55,9 @@
         (a.core = o), (l.F = 1), (l.G = 2), (l.S = 4), (l.P = 8), (l.B = 16), (l.W = 32), (l.U = 64), (l.R = 128), (e.exports = l);
     },
     function (e, t, i) {
+        /*
+         * Module 2
+        */
         "use strict";
         var a = i(4);
         e.exports = function (e) {
@@ -60,11 +66,17 @@
         };
     },
     function (e, t, i) {
+        /*
+         * Module 3
+        */
         "use strict";
         var a = (e.exports = "undefined" != typeof window && window.Math == Math ? window : "undefined" != typeof self && self.Math == Math ? self : Function("return this")());
         "number" == typeof __g && (__g = a);
     },
     function (e, t, i) {
+        /*
+         * Module 4
+        */
         "use strict";
         e.exports = function (e) {
             try {
@@ -75,6 +87,9 @@
         };
     },
     function (e, t, i) {
+        /*
+         * Module 5
+        */
         "use strict";
         var a =
             "function" == typeof Symbol && "symbol" == typeof Symbol.iterator
@@ -89,6 +104,9 @@
         };
     },
     function (e, t, i) {
+        /*
+         * Module 6
+        */
         "use strict";
         var a = i(53)("wks"),
             o = i(34),
@@ -99,6 +117,9 @@
         }).store = a;
     },
     function (e, t, i) {
+        /*
+         * Module 7
+        */
         "use strict";
         e.exports = !i(3)(function () {
             return (
@@ -112,6 +133,9 @@
         });
     },
     function (e, t, i) {
+        /*
+         * Module 8
+        */
         "use strict";
         var a = i(1),
             o = i(101),
@@ -129,6 +153,9 @@
             };
     },
     function (e, t, i) {
+        /*
+         * Module 9
+        */
         "use strict";
         var a = i(25),
             o = Math.min;
@@ -137,6 +164,9 @@
         };
     },
     function (e, t, i) {
+        /*
+         * Module 10
+        */
         "use strict";
         var a = i(24);
         e.exports = function (e) {
@@ -144,6 +174,9 @@
         };
     },
     function (e, t, i) {
+        /*
+         * Module 10
+        */
         "use strict";
         e.exports = function (e) {
             if ("function" != typeof e) throw TypeError(e + " is not a function!");
@@ -151,6 +184,9 @@
         };
     },
     function (e, t, i) {
+        /*
+         * Module 11
+        */
         "use strict";
         var a = i(7),
             o = i(33);
@@ -163,6 +199,9 @@
             };
     },
     function (e, t, i) {
+        /*
+         * Module 12
+        */
         "use strict";
         var a = i(2),
             o = i(11),
@@ -181,6 +220,9 @@
             });
     },
     function (e, t, i) {
+        /*
+         * Module 13
+        */
         "use strict";
         var a = i(0),
             o = i(3),
@@ -207,10 +249,16 @@
         };
     },
     function (e, t, i) {
+        /*
+         * Module 14
+        */
         "use strict";
         e.exports = { Always: 1, Never: 2, IfAtMostOneObstacle: 3, OnlyWhenNoObstacles: 4 };
     },
     function (e, t, i) {
+        /*
+         * Module 15
+        */
         "use strict";
         var a = {}.hasOwnProperty;
         e.exports = function (e, t) {
@@ -218,6 +266,9 @@
         };
     },
     function (e, t, i) {
+        /*
+         * Module 16
+        */
         "use strict";
         var a = i(49),
             o = i(24);
@@ -26790,76 +26841,89 @@
                     }),
                     t
                 );
-            })(Component),
-            BasicDefensiveTower = (function (e) {
-                function t(i, a, o, n, r) {
-                    _classCallCheck(this, t);
-                    var s = _possibleConstructorReturn(this, e.call(this, i, a, o, n));
-                    return s.init(r), s;
+            })(Component);
+            class BasicDefensiveTower extends BuildingInstance {
+                constructor(i, a, o, n, r) {
+                    super(i, a, o, n);
+                    this.init(r);
                 }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "BasicDefensiveTower";
-                            },
-                        },
-                    ]),
-                    (t.prototype.init = function (e) {
-                        var t = e.producerMetaClass,
-                            i = e.projectileResource,
-                            a = e.projectileClass,
-                            o = e.additionalProjectileParams,
-                            n = void 0 === o ? null : o,
-                            r = e.radiusMultiplierKey,
-                            s = void 0 === r ? null : r,
-                            l = e.damageMultiplierKey,
-                            u = void 0 === l ? null : l,
-                            c = e.shootsPerSecondMultiplierKey,
-                            d = void 0 === c ? null : c,
-                            h = e.canCriticalStrike,
-                            p = void 0 !== h && h;
-                        checkParamsSet(t, i, a),
-                            this.addVisualizeConnections([t]),
-                            this.addComponent(new StorageVisualizerComponent(i)),
-                            this.addComponent(new VisualizeMissingResourcesComponent({})),
-                            this.addComponent(new StorageComponent({})),
-                            this.addComponent(new ConsumerComponent([i])),
-                            this.addComponent(new ProjectileShooterComponent({ projectileClass: a, consumeResource: i, projectileParams: n || {}, canCriticalStrike: p })),
-                            (this.projectileResourceId = i.name),
-                            (this.radiusMultiplierKey = s),
-                            (this.damageMultiplierKey = u),
-                            (this.shootsPerSecondMultiplierKey = d);
-                    }),
-                    (t.prototype.updateComponentsToStats = function (t) {
-                        if ((e.prototype.updateComponentsToStats.call(this, t), !t.consumeAmount)) throw new Error("Missing key 'consumeAmount' for defensive tower");
-                        if (!t.radius) throw new Error("Missing key 'radius' for defensive tower");
-                        if (!t.shootsPerSecond) throw new Error("Missing key 'shootsPerSecond' for defensive tower");
-                        if (!t.damage) throw new Error("Missing key 'damage' for defensive tower");
-                        var i = this.phaser.rootRecursiveRef,
-                            a = t.consumeAmount,
-                            o = t.radius,
-                            n = t.damage,
-                            r = t.shootsPerSecond;
-                        this.radiusMultiplierKey && (o *= i.stats.getSkillGainMultiplier(this.radiusMultiplierKey)),
-                            this.damageMultiplierKey && (n *= i.stats.getSkillGainMultiplier(this.damageMultiplierKey)),
-                            (n *= i.stats.getSkillGainMultiplier("damage")),
-                            this.shootsPerSecondMultiplierKey && (r *= i.stats.getSkillGainMultiplier(this.shootsPerSecondMultiplierKey));
-                        var s = t.storage;
-                        (s *= i.stats.getSkillGainMultiplier("buildingStorage")), i.stats.isSkillUnlocked("buildingStorageDouble") && (s *= 2);
-                        var l = {};
-                        (l[this.projectileResourceId] = Math.round(s)), (this.getComponent(StorageComponent).limits = l), (this.getComponent(StorageVisualizerComponent).divisor = a);
-                        var u = this.getComponent(ProjectileShooterComponent);
-                        (u.projectileParams.damage = n), (u.consumeAmount = a), (u.radius = o), u.setShootsPerSecond(r);
-                        var c = {};
-                        (c[this.projectileResourceId] = a), (this.getComponent(VisualizeMissingResourcesComponent).resourceIdsAndAmount = c);
-                    }),
-                    t
-                );
-            })(BuildingInstance),
-            ArrowTowerMeta = (function (e) {
+            
+                static get name() {
+                    return "BasicDefensiveTower";
+                }
+            
+                init(e) {
+                    const t = e.producerMetaClass;
+                    const i = e.projectileResource;
+                    const a = e.projectileClass;
+                    const o = e.additionalProjectileParams || null;
+                    const n = e.radiusMultiplierKey || null;
+                    const r = e.damageMultiplierKey || null;
+                    const s = e.shootsPerSecondMultiplierKey || null;
+                    const l = e.canCriticalStrike !== undefined ? e.canCriticalStrike : false;
+            
+                    checkParamsSet(t, i, a);
+            
+                    this.addVisualizeConnections([t]);
+                    this.addComponent(new StorageVisualizerComponent(i));
+                    this.addComponent(new VisualizeMissingResourcesComponent({}));
+                    this.addComponent(new StorageComponent({}));
+                    this.addComponent(new ConsumerComponent([i]));
+                    this.addComponent(
+                        new ProjectileShooterComponent({
+                            projectileClass: a,
+                            consumeResource: i,
+                            projectileParams: n || {},
+                            canCriticalStrike: l,
+                        })
+                    );
+            
+                    this.projectileResourceId = i.name;
+                    this.radiusMultiplierKey = n;
+                    this.damageMultiplierKey = r;
+                    this.shootsPerSecondMultiplierKey = s;
+                }
+            
+                updateComponentsToStats(t) {
+                    super.updateComponentsToStats(t);
+            
+                    if (!t.consumeAmount) throw new Error("Missing key 'consumeAmount' for defensive tower");
+                    if (!t.radius) throw new Error("Missing key 'radius' for defensive tower");
+                    if (!t.shootsPerSecond) throw new Error("Missing key 'shootsPerSecond' for defensive tower");
+                    if (!t.damage) throw new Error("Missing key 'damage' for defensive tower");
+            
+                    const i = this.phaser.rootRecursiveRef;
+                    let a = t.consumeAmount;
+                    let o = t.radius;
+                    let n = t.damage;
+                    let r = t.shootsPerSecond;
+            
+                    if (this.radiusMultiplierKey) o *= i.stats.getSkillGainMultiplier(this.radiusMultiplierKey);
+                    if (this.damageMultiplierKey) n *= i.stats.getSkillGainMultiplier(this.damageMultiplierKey);
+                    n *= i.stats.getSkillGainMultiplier("damage");
+                    if (this.shootsPerSecondMultiplierKey) r *= i.stats.getSkillGainMultiplier(this.shootsPerSecondMultiplierKey);
+            
+                    let s = t.storage;
+                    s *= i.stats.getSkillGainMultiplier("buildingStorage");
+                    if (i.stats.isSkillUnlocked("buildingStorageDouble")) s *= 2;
+            
+                    const l = {};
+                    l[this.projectileResourceId] = Math.round(s);
+                    this.getComponent(StorageComponent).limits = l;
+                    this.getComponent(StorageVisualizerComponent).divisor = a;
+            
+                    const u = this.getComponent(ProjectileShooterComponent);
+                    u.projectileParams.damage = n;
+                    u.consumeAmount = a;
+                    u.radius = o;
+                    u.setShootsPerSecond(r);
+            
+                    const c = {};
+                    c[this.projectileResourceId] = a;
+                    this.getComponent(VisualizeMissingResourcesComponent).resourceIdsAndAmount = c;
+                }
+            }
+            const ArrowTowerMeta = (function (e) {
                 function t() {
                     _classCallCheck(this, t);
                     var i = _possibleConstructorReturn(this, e.call(this, "arrowTower"));
@@ -26889,44 +26953,40 @@
                     }),
                     t
                 );
-            })(MetaBuilding),
-            ArrowTowerBuilding = (function (e) {
-                function t(i, a, o, n) {
-                    _classCallCheck(this, t);
-                    var r = _possibleConstructorReturn(
-                        this,
-                        e.call(this, i, a, o, n, {
-                            producerMetaClass: ArrowFactoryMeta,
-                            projectileResource: BasicArrow,
-                            projectileClass: MetaArrowProjectile,
-                            additionalProjectileParams: { speedTilesPerSecond: 17 },
-                            radiusMultiplierKey: "arrowRadius",
-                            damageMultiplierKey: "arrowDamage",
-                            shootsPerSecondMultiplierKey: "arrowFireRate",
-                            canCriticalStrike: true,
-                        })
-                    );
-                    return r.addComponent(new ArrowTowerComponent()), r;
-                }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "ArrowTowerBuilding";
-                            },
+            })(MetaBuilding);
+            class ArrowTowerBuilding extends BasicDefensiveTower {
+                constructor(i, a, o, n) {
+                    super(i, a, o, n, {
+                        producerMetaClass: ArrowFactoryMeta,
+                        projectileResource: BasicArrow,
+                        projectileClass: MetaArrowProjectile,
+                        additionalProjectileParams: {
+                            speedTilesPerSecond: 17
                         },
-                    ]),
-                    (t.prototype.updateComponentsToStats = function (t) {
-                        e.prototype.updateComponentsToStats.call(this, t),
-                            this.phaser.rootRecursiveRef.stats.isSkillUnlocked("arrowFeatureDoubleDamage") &&
-                            ((this.getComponent(ProjectileShooterComponent).projectileParams.damage *= 2), (this.getComponent(ProjectileShooterComponent).consumeAmount *= 3));
-                    }),
-                    t
-                );
-            })(BasicDefensiveTower),
-            MultiplacePlacementHelper = (function () {
+                        radiusMultiplierKey: "arrowRadius",
+                        damageMultiplierKey: "arrowDamage",
+                        shootsPerSecondMultiplierKey: "arrowFireRate",
+                        canCriticalStrike: true,
+                    });
+            
+                    this.addComponent(new ArrowTowerComponent());
+                }
+            
+                static get name() {
+                    return "ArrowTowerBuilding";
+                }
+            
+                updateComponentsToStats(t) {
+                    super.updateComponentsToStats(t);
+            
+                    if (this.phaser.rootRecursiveRef.stats.isSkillUnlocked("arrowFeatureDoubleDamage")) {
+                        const projectileShooterComponent = this.getComponent(ProjectileShooterComponent);
+                        projectileShooterComponent.projectileParams.damage *= 2;
+                        projectileShooterComponent.consumeAmount *= 3;
+                    }
+                }
+            }
+            const MultiplacePlacementHelper = (function () {
                 function e(t) {
                     var i = t.multiplace,
                         a = void 0 !== i && i,
@@ -29816,142 +29876,186 @@
             }
         }
 
-        const GameSerializer = (function () {
-            function e(t) {
-                _classCallCheck(this, e), (this.root = t), (this.lastSavegame = "None available");
+        class GameSerializer {
+            constructor(root) {
+                this.root = root;
+                this.lastSavegame = "None available";
             }
-            return (
-                _createClass(e, null, [
-                    {
-                        key: "name",
-                        get: function () {
-                            return "GameSerializer";
-                        },
+        
+            static get name() {
+                return "GameSerializer";
+            }
+        
+            updateLastSavegame() {
+                this.lastSavegame = this.serialize();
+            }
+        
+            getLastSavegame() {
+                return this.root.daytime.isDay() && this.updateLastSavegame(), this.lastSavegame;
+            }
+        
+            serialize() {
+                const camera = this.root.phaser.camera;
+                const t = {
+                    random: randomInt(1e3, 1e13),
+                    version: SAVEGAME_VERSION,
+                    beta: IS_BETA,
+                    day: this.root.daytime.getDay(),
+                    daySeconds: this.root.daytime.secondsOfCurrentDay(),
+                    stats: this.root.stats.serialize(),
+                    mapSeed: this.root.logic.mapSeed,
+                    gamemode: this.root.gamemode.getId(),
+                    view: {
+                        zoom: this.root.zoom.currentZoomLevel,
+                        x: camera.view.x,
+                        y: camera.view.y
                     },
-                ]),
-                (e.prototype.updateLastSavegame = function () {
-                    this.lastSavegame = this.serialize();
-                }),
-                (e.prototype.getLastSavegame = function () {
-                    return this.root.daytime.isDay() && this.updateLastSavegame(), this.lastSavegame;
-                }),
-                (e.prototype.serialize = function () {
-                    var e = this.root.phaser.camera,
-                        t = {
-                            random: randomInt(1e3, 1e13),
-                            version: SAVEGAME_VERSION,
-                            beta: IS_BETA,
-                            day: this.root.daytime.getDay(),
-                            daySeconds: this.root.daytime.secondsOfCurrentDay(),
-                            stats: this.root.stats.serialize(),
-                            mapSeed: this.root.logic.mapSeed,
-                            gamemode: this.root.gamemode.getId(),
-                            view: { zoom: this.root.zoom.currentZoomLevel, x: e.view.x, y: e.view.y },
-                            sync: this.root.syncer.serialize(),
-                        },
-                        i = [];
-                    return (
-                        this.root.entityMgr.getAllEntitiesWithComponent(BuildingComponent).forEach(function (e) {
-                            var t = {};
-                            e.hasComponent(StorageComponent) && (t = e.getComponent(StorageComponent).resources), i.push({ className: e.meta.constructor.name, level: e.level, tileX: e.getTileX(), tileY: e.getTileY(), storage: t });
-                        }),
-                        (t.buildings = i),
-                        this.dataToString(t)
-                    );
-                }),
-                (e.prototype.generatePreview = function (e) {
-                    var t = this.stringToData(e, false);
-                    if (!t) return console.log("[SERIALIZER] Failed to decompress savegame for preview"), null;
-                    var i = document.createElement("canvas");
-                    (i.width = Config.numTilesX), (i.height = Config.numTilesY);
-                    var a = i.getContext("2d");
-                    return (
-                        (a.fillStyle = "#111111"),
-                        a.fillRect(0, 0, i.width, i.height),
-                        t.buildings.forEach(function (e) {
-                            var t = e.className,
-                                i = e.tileX,
-                                o = e.tileY,
-                                n = BuildingRegistry.getMetaclassByName(t);
-                            if (n) {
-                                var r = n.getBackgroundColor();
-                                (a.fillStyle = "#" + r.toString(16).padStart(6, "0")), a.fillRect(i - 0.5, o - 0.5, 2, 2);
-                            }
-                        }),
-                        i.toDataURL()
-                    );
-                }),
-                (e.prototype.load = function (e) {
-                    var t = this,
-                        i = !(arguments.length > 1 && void 0 !== arguments[1]) || arguments[1],
-                        a = this.stringToData(e, i);
-                    if (!a) return false;
-                    if (a.version > SAVEGAME_VERSION) return i && this.root.gui.uiNotifications.showLongError(tr("savegame_too_new")), false;
-                    if (a.version < LAST_COMPATIBLE_VERSION) return i && this.root.gui.uiNotifications.showLongError(tr("savegame_too_old")), false;
-                    a.version < SAVEGAME_VERSION && i && this.root.gui.uiNotifications.showLongHint(tr("savegame_old_version"));
-                    var o = IS_BETA;
-                    if (a.beta && !o) return i && this.root.gui.uiNotifications.showLongError(tr("savegame_from_beta")), false;
-                    var n = a.gamemode || "impossible",
-                        r = createGameModeFromId(n);
-                    if (!r) return i && this.root.gui.uiNotifications.showLongError(tr("gamemode_no_longer_exists", n)), false;
-                    (this.root.gamemode = r),
-                        this.root.gamemode.initialize(),
-                        this.root.logic.clearGame(),
-                        this.root.stats.load(a.stats),
-                        (this.root.logic.mapSeed = a.mapSeed),
-                        this.root.logic.spawnResources(),
-                        a.buildings.forEach(function (e) {
-                            var i = e.className,
-                                a = e.level,
-                                o = e.tileX,
-                                n = e.tileY,
-                                r = e.storage,
-                                s = BuildingRegistry.getMetaclassByName(i);
-                            if (s && !t.root.map.isTileUsed(o, n)) {
-                                for (var l = t.root.logic.doPlaceBuilding(s, o, n), u = 0; u < a; ++u) s.upgradeInstance(t.root.phaser, l);
-                                var c = l.getComponent(StorageComponent);
-                                c && (c.resources = r);
-                            }
-                        }),
-                        this.root.logic.onSavegameLoaded();
-                    var s = a.daySeconds || 0;
-                    return (
-                        this.root.daytime.loadDay(a.day, s),
-                        this.root.phaser.camera.view.setTo(a.view.x, a.view.y),
-                        this.root.zoom.setZoomLevel(a.view.zoom, true),
-                        this.root.syncer.load(a.sync),
-                        this.root.gui.uiGameTimeButtons.requestPause(),
-                        this.root.gui.uiNotifications.showLongSuccess(tr("game_successfully_loaded")),
-                        (this.lastSavegame = e),
-                        true
-                    );
-                }),
-                (e.prototype.dataToString = function (e) {
-                    var t = JSON_STRINGIFY(e, null, 2);
-                    return _lzString2.default.compressToEncodedURIComponent(t);
-                }),
-                (e.prototype.stringToData = function (e) {
-                    var t = !(arguments.length > 1 && void 0 !== arguments[1]) || arguments[1],
-                        i = (0, _trim2.default)(e),
-                        a = "";
-                    try {
-                        a = _lzString2.default.decompressFromEncodedURIComponent(i);
-                    } catch (e) {
-                        return t && this.root.gui.uiNotifications.showLongError(tr("invalid_or_corrupt_savegame")), null;
+                    sync: this.root.syncer.serialize(),
+                };
+                const buildings = [];
+                this.root.entityMgr.getAllEntitiesWithComponent(BuildingComponent).forEach((e) => {
+                    let t = {};
+                    if (e.hasComponent(StorageComponent)) {
+                        t = e.getComponent(StorageComponent).resources;
                     }
-                    if (null == a) return t && this.root.gui.uiNotifications.showLongError(tr("invalid_or_corrupt_savegame")), null;
-                    var o = {};
-                    try {
-                        o = JSON_PARSE(a);
-                    } catch (e) {
-                        return t && this.root.gui.uiNotifications.showLongError(tr("invalid_or_corrupt_savegame")), null;
+                    buildings.push({
+                        className: e.meta.constructor.name,
+                        level: e.level,
+                        tileX: e.getTileX(),
+                        tileY: e.getTileY(),
+                        storage: t,
+                    });
+                });
+                t.buildings = buildings;
+                return this.dataToString(t);
+            }
+        
+            generatePreview(e) {
+                const t = this.stringToData(e, false);
+                if (!t) {
+                    console.log("[SERIALIZER] Failed to decompress savegame for preview");
+                    return null;
+                }
+                const canvas = document.createElement("canvas");
+                canvas.width = Config.numTilesX;
+                canvas.height = Config.numTilesY;
+                const ctx = canvas.getContext("2d");
+                ctx.fillStyle = "#111111";
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                t.buildings.forEach((e) => {
+                    const className = e.className;
+                    const tileX = e.tileX;
+                    const tileY = e.tileY;
+                    const buildingClass = BuildingRegistry.getMetaclassByName(className);
+                    if (buildingClass) {
+                        const color = buildingClass.getBackgroundColor();
+                        ctx.fillStyle = "#" + color.toString(16).padStart(6, "0");
+                        ctx.fillRect(tileX - 0.5, tileY - 0.5, 2, 2);
                     }
-                    return null == o ? (t && this.root.gui.uiNotifications.showLongError(tr("invalid_or_corrupt_savegame")), null) : o;
-                }),
-                e
-            );
-        })(),
-            GameSettings = (function () {
+                });
+                return canvas.toDataURL();
+            }
+        
+            load(e, forceCompatibility = true) {
+                const data = this.stringToData(e, forceCompatibility);
+                if (!data) return false;
+                if (data.version > SAVEGAME_VERSION) {
+                    if (forceCompatibility) this.root.gui.uiNotifications.showLongError(tr("savegame_too_new"));
+                    return false;
+                }
+                if (data.version < LAST_COMPATIBLE_VERSION) {
+                    if (forceCompatibility) this.root.gui.uiNotifications.showLongError(tr("savegame_too_old"));
+                    return false;
+                }
+                if (data.version < SAVEGAME_VERSION && forceCompatibility) {
+                    this.root.gui.uiNotifications.showLongHint(tr("savegame_old_version"));
+                }
+        
+                const isBeta = IS_BETA;
+                if (data.beta && !isBeta) {
+                    if (forceCompatibility) this.root.gui.uiNotifications.showLongError(tr("savegame_from_beta"));
+                    return false;
+                }
+        
+                const gamemodeId = data.gamemode || "impossible";
+                const gameMode = createGameModeFromId(gamemodeId);
+                if (!gameMode) {
+                    if (forceCompatibility) this.root.gui.uiNotifications.showLongError(tr("gamemode_no_longer_exists", gamemodeId));
+                    return false;
+                }
+        
+                this.root.gamemode = gameMode;
+                this.root.gamemode.initialize();
+                this.root.logic.clearGame();
+                this.root.stats.load(data.stats);
+                this.root.logic.mapSeed = data.mapSeed;
+                this.root.logic.spawnResources();
+        
+                data.buildings.forEach((e) => {
+                    const className = e.className;
+                    const level = e.level;
+                    const tileX = e.tileX;
+                    const tileY = e.tileY;
+                    const storage = e.storage;
+                    const buildingClass = BuildingRegistry.getMetaclassByName(className);
+                    if (buildingClass && !this.root.map.isTileUsed(tileX, tileY)) {
+                        const buildingInstance = this.root.logic.doPlaceBuilding(buildingClass, tileX, tileY);
+                        for (let i = 0; i < level; ++i) {
+                            buildingClass.upgradeInstance(this.root.phaser, buildingInstance);
+                        }
+                        const storageComponent = buildingInstance.getComponent(StorageComponent);
+                        if (storageComponent) {
+                            storageComponent.resources = storage;
+                        }
+                    }
+                });
+        
+                this.root.logic.onSavegameLoaded();
+                const daySeconds = data.daySeconds || 0;
+                this.root.daytime.loadDay(data.day, daySeconds);
+                this.root.phaser.camera.view.setTo(data.view.x, data.view.y);
+                this.root.zoom.setZoomLevel(data.view.zoom, true);
+                this.root.syncer.load(data.sync);
+                this.root.gui.uiGameTimeButtons.requestPause();
+                this.root.gui.uiNotifications.showLongSuccess(tr("game_successfully_loaded"));
+                this.lastSavegame = e;
+                return true;
+            }
+        
+            dataToString(e) {
+                const str = JSON.stringify(e, null, 2);
+                return _lzString2.default.compressToEncodedURIComponent(str);
+            }
+        
+            stringToData(e) {
+                const forceCompatibility = !(arguments.length > 1 && void 0 !== arguments[1]) || arguments[1];
+                const trimmed = e.trim();
+                let decompressed = "";
+                try {
+                    decompressed = _lzString2.default.decompressFromEncodedURIComponent(trimmed);
+                } catch (err) {
+                    if (forceCompatibility) this.root.gui.uiNotifications.showLongError(tr("invalid_or_corrupt_savegame"));
+                    return null;
+                }
+                if (decompressed === null) {
+                    if (forceCompatibility) this.root.gui.uiNotifications.showLongError(tr("invalid_or_corrupt_savegame"));
+                    return null;
+                }
+                let data = {};
+                try {
+                    data = JSON.parse(decompressed);
+                } catch (err) {
+                    if (forceCompatibility) this.root.gui.uiNotifications.showLongError(tr("invalid_or_corrupt_savegame"));
+                    return null;
+                }
+                if (data === null) {
+                    if (forceCompatibility) this.root.gui.uiNotifications.showLongError(tr("invalid_or_corrupt_savegame"));
+                    return null;
+                }
+                return data;
+            }
+        }
+            const GameSettings = (function () {
                 function e(t) {
                     _classCallCheck(this, e), (this.root = t), this.loadSettings();
                 }
@@ -38660,7 +38764,7 @@
                 this.storeBlob(this.activeSavegameId, e), this.updateMetadata(), this.rebuildImageData(this.activeSavegameId);
             }
             generateSavegameId() {
-                return c.Base64.encode((new Date).getTime() + "-" + Hs(1e5, 1e6 - 1)).replace("=", "A").replace("=", "B");
+                return _jsBase.Base64.encode((new Date).getTime() + "-" + randomInt(1e5, 1e6 - 1)).replace("=", "A").replace("=", "B");
             }
             storeBlob(e, t) {
                 this.root.persistent.setString("savegame_blob_" + e, t);
@@ -38714,7 +38818,7 @@
                 this.game.scale.fullScreenTarget = document.documentElement;
 
                 window.addEventListener("resize", function () {
-                    e.onResized();
+                    this.onResized();
                 })
 
                 makePhaserFast();
@@ -39074,166 +39178,230 @@
                 return "GameState"
             }
         }
-        const GameOverUI = (function () {
-            function e(t, i, a) {
-                _classCallCheck(this, e), (this.phaser = t), (this.uiGroup = i), (this.stats = a), this.init();
+        class GameOverUI {
+            constructor(t, i, a) {
+                this.phaser = t;
+                this.uiGroup = i;
+                this.stats = a;
+                this.init();
+        
                 try {
                     document.getElementById("day_night_overlay").className = "";
-                } catch (e) { }
+                } catch (e) {}
+        
                 window.onbeforeunload = void 0;
             }
-            return (
-                _createClass(e, null, [
-                    {
-                        key: "name",
-                        get: function () {
-                            return "GameOverUI";
-                        },
-                    },
-                ]),
-                (e.prototype.genTok = function (e, t, i) {
-                    for (var a = IS_BETA ? String.fromCodePoint(1001) : String.fromCodePoint(1e3), o = i.toLowerCase().padEnd(16, "="), n = a, r = 0; r < 8; ++r) {
-                        var s = o[2 * r],
-                            l = o[2 * r + 1],
-                            u = CHARMAP.indexOf(s),
-                            c = CHARMAP.indexOf(l);
-                        u < 0 || c < 0 ? (n += String.fromCodePoint(0)) : (n += String.fromCodePoint(100 * u + c));
+        
+            static get name() {
+                return "GameOverUI";
+            }
+        
+            /**
+             * Generate a compressed token using the given parameters.
+             * @param {number} e - Some numeric value.
+             * @param {number} t - Another numeric value.
+             * @param {string} i - A string used to construct the token.
+             * @returns {string} - The compressed token.
+             */
+            genTok(gamemode, day, name) {
+                // Determine the base value depending on whether it's beta or not
+                const baseValue = IS_BETA ? String.fromCodePoint(1001) : String.fromCodePoint(1000);
+
+                // Pad the input string with '=' characters to a length of 16 characters
+                const paddedInput = name.toLowerCase().padEnd(16, "=");
+
+                // Initialize the result with the base value
+                let result = baseValue;
+
+                // Loop through the input string in pairs of characters
+                for (let r = 0; r < 8; ++r) {
+                    const firstChar = paddedInput[2 * r];
+                    const secondChar = paddedInput[2 * r + 1];
+                    const firstCharIndex = CHARMAP.indexOf(firstChar);
+                    const secondCharIndex = CHARMAP.indexOf(secondChar);
+
+                    // If either character is not found in CHARMAP, add 0 to the result
+                    if (firstCharIndex < 0 || secondCharIndex < 0) {
+                        result += String.fromCodePoint(0);
+                    } else {
+                        // Otherwise, calculate the combined index and add the result to the result string
+                        const combinedIndex = 100 * firstCharIndex + secondCharIndex;
+                        result += String.fromCodePoint(combinedIndex);
                     }
-                    return (n += String.fromCodePoint(e.getUniqueIndex())), (n += String.fromCodePoint(t)), _lzString2.default.compressToEncodedURIComponent(n);
-                }),
-                (e.prototype.init = function () {
-                    var e = this.phaser;
-                    (this.overlay = makePanelBackground(e, 1, 1, 2228241, 0.77)),
-                        this.uiGroup.add(this.overlay),
-                        (this.group = e.make.group()),
-                        this.uiGroup.add(this.group),
-                        (this.bg = makeRoundedPanelBackground(e, 560, 380, 2236962, 0)),
-                        this.group.add(this.bg),
-                        (this.logo = e.make.image(0, 30, "atlas", "small-logo.png")),
-                        (this.logo.x = 30),
-                        (this.logo.y = this.bg.height - this.logo.height - 30),
-                        this.group.add(this.logo),
-                        (this.gameOverText = e.make.text(0, 30, tr("game_over").toUpperCase(), { font: "60px Roboto", fill: "#FF5555", boundsAlignH: "center", align: "center", fontWeight: 400 })),
-                        this.gameOverText.setTextBounds(0, 0, this.bg.width, 20),
-                        this.group.add(this.gameOverText);
-                    var t = "",
-                        i = this.stats.day;
-                    (t += tr("gameover_surived_text", i) + " - "),
-                        (t += this.rateDay(i) + "\n\n"),
-                        (t += tr("gameover_stats_text", formatBigNumber(this.stats.gems), formatBigNumber(this.stats.score))),
-                        (this.statsText = e.make.text(0, 120, t, { font: "14px Roboto", fill: "#CCC", boundsAlignH: "center", align: "center" })),
-                        (this.statsText.lineSpacing = -12),
-                        this.statsText.setTextBounds(0, 0, this.bg.width, 20),
-                        this.group.add(this.statsText),
-                        (this.gemsHeader = e.make.text(30, 200, tr("gameover_gems_over_time").toUpperCase(), { font: "13px Roboto", fill: "#f77", fontWeight: 700 })),
-                        this.group.add(this.gemsHeader),
-                        (this.gemsGraphics = e.make.graphics(30, 275)),
-                        this.gemsGraphics.lineStyle(1, 16742263),
-                        this.gemsGraphics.moveTo(0, 0);
-                    for (var a = [], o = 1; o <= this.stats.day; ++o) this.stats.gemsOverTime[o] && a.push(this.stats.gemsOverTime[o]);
-                    for (
-                        var n = a.map(function (e) {
-                            return Math.log(Math.max(1, e));
-                        }),
-                        r = Math.max.apply(Math, _toConsumableArray(n)),
-                        s = 498 / Math.max(1, a.length - 1),
-                        l = 0;
-                        l < a.length;
-                        ++l
-                    ) {
-                        var u = n[l] / r;
-                        this.gemsGraphics.lineTo(1 + s * l, -49 * u - 1);
-                    }
-                    this.gemsGraphics.lineStyle(1, 6710886), this.gemsGraphics.moveTo(0, 0), this.gemsGraphics.lineTo(0, -50), this.gemsGraphics.moveTo(0, 0), this.gemsGraphics.lineTo(500, 0), this.group.add(this.gemsGraphics);
-                    var c = this.genTok(this.stats.gamemode, this.stats.day, this.stats.name),
-                        d = document.createElement("div");
-                    (d.id = ["va", "li", "da", "ti", "on", "To", "ke", "n"].join("")), (d.innerText = c);
-                    var h = document.createElement("span");
-                    (h.className = "channelHint"),
-                        (h.innerText = tr("validation_token_desc2")),
-                        d.appendChild(h),
-                        document.body.appendChild(d),
-                        (this.retryButton = makeButton({
-                            phaser: e,
-                            width: 190,
-                            text: tr("gameover_try_again"),
-                            fill: 16733525,
-                            clickHandler: function () {
-                                window.location.reload(true);
-                            },
-                            keybinding: _phaserCe.Phaser.Keyboard.F5,
-                        })),
-                        (this.retryButton.x = Math.floor(this.bg.width - this.retryButton.width - 30)),
-                        (this.retryButton.y = this.bg.height - this.retryButton.height - 30),
-                        this.group.add(this.retryButton),
-                        e.add.tween(this.retryButton).to({ alpha: 0.8 }, 200, _phaserCe.Phaser.Easing.Linear.None, true, 0, false, true);
-                }),
-                (e.prototype.rateDay = function (e) {
-                    for (var t = [0, 5, 10, 20, 30, 50, 100, 150, 200], i = t.length - 1; i >= 0; i -= 1) {
-                        var a = t[i];
-                        if (e >= a) return tr("gameover_score_" + a);
-                    }
-                    return "Something went wrong ...";
-                }),
-                (e.prototype.update = function () {
-                    var e = window.innerWidth,
-                        t = window.innerHeight;
-                    (this.group.x = Math.floor((e - this.bg.width) / 2)), (this.group.y = 110), this.overlay.scale.setTo(e, t);
-                }),
-                e
-            );
-        })(),
-            ccFixBaseGameOverState = _phaserCe.Phaser.State,
-            GameOverState = (function (e) {
-                function t() {
-                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.apply(this, arguments));
                 }
-                return (
-                    _inherits(t, e),
-                    (t.prototype.init = function (e) {
-                        (this.stage.backgroundColor = "#333"),
-                            (this.group = this.add.group(null, "game-over")),
-                            (this.group.fixedToCamera = true),
-                            (this.background = e.background),
-                            (this.backgroundSprite = this.make.image(0, 0, this.background)),
-                            this.backgroundSprite.anchor.setTo(0.5, 0.5),
-                            this.group.add(this.backgroundSprite),
-                            (this.ui = new GameOverUI(this, this.group, e)),
-                            document.body.classList.add("gameOver"),
-                            (window.onVideoAdCompleted = function () {
-                                console.log("Gameover ad completed");
-                            }),
-                            window.adsSupported && (showAdditionalBannerAd(), showAdditionalBannerAdWide(), this.showVideoAd());
-                    }),
-                    (t.prototype.addAd = function () { }),
-                    (t.prototype.showVideoAd = function () {
-                        try {
-                            (document.getElementById("adVideoBg").style.display = "block"),
-                                aiptag.cmd.player.push(function () {
-                                    adplayer.startPreRoll();
-                                });
-                        } catch (e) {
-                            return (
-                                console.error("[ADS] Gameover video ad failed. Container not present. Aborting, exception:", e),
-                                void sendTrackingRequest("error", "Failed to prepare gameover ad", { error: e && e.message, rawError: JSON.parse(JSON.stringify(e, Object.getOwnPropertyNames(e))) })
-                            );
-                        }
-                    }),
-                    (t.prototype.update = function () {
-                        this.ui.update(), this.backgroundSprite.position.setTo(this.game.width / 2, this.game.height / 2), (this.backgroundSprite.width = this.game.width), (this.backgroundSprite.height = this.game.height);
-                    }),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "GameOverState";
-                            },
-                        },
-                    ]),
-                    t
-                );
-            })(ccFixBaseGameOverState),
-            MouseTracker = (function () {
+
+                // Add the unique index and the 't' value to the result
+                result += String.fromCodePoint(gamemode.getUniqueIndex()); //1 = Easy
+                result += String.fromCodePoint(day);
+
+                // Compress the result using _lzString2.default.compressToEncodedURIComponent()
+                return _lzString2.default.compressToEncodedURIComponent(result);
+            }
+
+        
+            init() {
+                const e = this.phaser;
+                this.overlay = makePanelBackground(e, 1, 1, 2228241, 0.77);
+                this.uiGroup.add(this.overlay);
+        
+                this.group = e.make.group();
+                this.uiGroup.add(this.group);
+        
+                this.bg = makeRoundedPanelBackground(e, 560, 380, 2236962, 0);
+                this.group.add(this.bg);
+        
+                this.logo = e.make.image(0, 30, "atlas", "small-logo.png");
+                this.logo.x = 30;
+                this.logo.y = this.bg.height - this.logo.height - 30;
+                this.group.add(this.logo);
+        
+                this.gameOverText = e.make.text(0, 30, tr("game_over").toUpperCase(), {
+                    font: "60px Roboto",
+                    fill: "#FF5555",
+                    boundsAlignH: "center",
+                    align: "center",
+                    fontWeight: 400,
+                });
+                this.gameOverText.setTextBounds(0, 0, this.bg.width, 20);
+                this.group.add(this.gameOverText);
+        
+                let t = "";
+                let i = this.stats.day;
+                t += tr("gameover_surived_text", i) + " - ";
+                t += this.rateDay(i) + "\n\n";
+                t += tr("gameover_stats_text", formatBigNumber(this.stats.gems), formatBigNumber(this.stats.score));
+        
+                this.statsText = e.make.text(0, 120, t, {
+                    font: "14px Roboto",
+                    fill: "#CCC",
+                    boundsAlignH: "center",
+                    align: "center",
+                });
+                this.statsText.lineSpacing = -12;
+                this.statsText.setTextBounds(0, 0, this.bg.width, 20);
+                this.group.add(this.statsText);
+        
+                this.gemsHeader = e.make.text(30, 200, tr("gameover_gems_over_time").toUpperCase(), {
+                    font: "13px Roboto",
+                    fill: "#f77",
+                    fontWeight: 700,
+                });
+                this.group.add(this.gemsHeader);
+        
+                this.gemsGraphics = e.make.graphics(30, 275);
+                this.gemsGraphics.lineStyle(1, 16742263);
+                this.gemsGraphics.moveTo(0, 0);
+        
+                let a = [];
+                for (let o = 1; o <= this.stats.day; ++o) {
+                    if (this.stats.gemsOverTime[o]) {
+                        a.push(this.stats.gemsOverTime[o]);
+                    }
+                }
+        
+                let n = a.map((e) => Math.log(Math.max(1, e)));
+                let r = Math.max.apply(Math, n);
+                let s = 498 / Math.max(1, a.length - 1);
+        
+                for (let l = 0; l < a.length; ++l) {
+                    let u = n[l] / r;
+                    this.gemsGraphics.lineTo(1 + s * l, -49 * u - 1);
+                }
+        
+                this.gemsGraphics.lineStyle(1, 6710886);
+                this.gemsGraphics.moveTo(0, 0);
+                this.gemsGraphics.lineTo(0, -50);
+                this.gemsGraphics.moveTo(0, 0);
+                this.gemsGraphics.lineTo(500, 0);
+                this.group.add(this.gemsGraphics);
+        
+                let c = this.genTok(this.stats.gamemode, this.stats.day, this.stats.name);
+                let d = document.createElement("div");
+                d.id = ["va", "li", "da", "ti", "on", "To", "ke", "n"].join("");
+                d.innerText = c;
+        
+                let h = document.createElement("span");
+                h.className = "channelHint";
+                h.innerText = tr("validation_token_desc2");
+                d.appendChild(h);
+        
+                document.body.appendChild(d);
+        
+                this.retryButton = makeButton({
+                    phaser: e,
+                    width: 190,
+                    text: tr("gameover_try_again"),
+                    fill: 16733525,
+                    clickHandler: () => {
+                        window.location.reload(true);
+                    },
+                    keybinding: _phaserCe.Phaser.Keyboard.F5,
+                });
+                this.retryButton.x = Math.floor(this.bg.width - this.retryButton.width - 30);
+                this.retryButton.y = this.bg.height - this.retryButton.height - 30;
+                this.group.add(this.retryButton);
+                e.add.tween(this.retryButton).to({
+                    alpha: 0.8
+                }, 200, _phaserCe.Phaser.Easing.Linear.None, true, 0, false, true);
+            }
+        
+            rateDay(e) {
+                const t = [0, 5, 10, 20, 30, 50, 100, 150, 200];
+        
+                for (let i = t.length - 1; i >= 0; i -= 1) {
+                    let a = t[i];
+                    if (e >= a) {
+                        return tr("gameover_score_" + a);
+                    }
+                }
+        
+                return "Something went wrong ...";
+            }
+        
+            update() {
+                const e = window.innerWidth;
+                const t = window.innerHeight;
+                this.group.x = Math.floor((e - this.bg.width) / 2);
+                this.group.y = 110;
+                this.overlay.scale.setTo(e, t);
+            }
+        }
+        class GameOverState extends _phaserCe.Phaser.State {
+            constructor() {
+                super();
+            }
+
+            init(e) {
+                this.stage.backgroundColor = "#333";
+                this.group = this.add.group(null, "game-over");
+                this.group.fixedToCamera = true;
+                this.background = e.background;
+                this.backgroundSprite = this.make.image(0, 0, this.background);
+                this.backgroundSprite.anchor.setTo(0.5, 0.5);
+                this.group.add(this.backgroundSprite);
+
+                this.ui = new GameOverUI(this, this.group, e);
+
+                document.body.classList.add("gameOver");
+            }
+
+            addAd() { }
+
+            showVideoAd() {
+            }
+
+            update() {
+                this.ui.update();
+                this.backgroundSprite.position.setTo(this.game.width / 2, this.game.height / 2);
+                this.backgroundSprite.width = this.game.width;
+                this.backgroundSprite.height = this.game.height;
+            }
+
+            static get name() {
+                return "GameOverState";
+            }
+        }
+            const MouseTracker = (function () {
                 function e(t) {
                     var i = this;
                     _classCallCheck(this, e), (this.leftButtonDown = false), (this.rightButtonDown = false), (this.enabled = false);
