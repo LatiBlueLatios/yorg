@@ -13335,7 +13335,7 @@
                                 return null;
                             },
                             fileError: function (e, t, i) {
-                                var a = "error loading asset from URL " + (e.requestUrl || this.transformUrl(e.url, e));
+                                var a = "error loading yorg/asset from URL " + (e.requestUrl || this.transformUrl(e.url, e));
                                 !i && t && (i = t.status), i && (a = a + " (" + i + ")"), this.asyncComplete(e, a);
                             },
                             fileComplete: function (e, t) {
@@ -23016,7 +23016,7 @@
                                     t = i + 1;
                                     break;
                                 }
-                            return tr("upgrade_base_to_level_first", t);
+                            return translate("upgrade_base_to_level_first", t);
                         }
                         return this.errorText;
                     }),
@@ -23045,7 +23045,7 @@
             MetaBuilding = (function () {
                 function e(t) {
                     _classCallCheck(this, e),
-                        (this.name = tr("building_" + t)),
+                        (this.name = translate("building_" + t)),
                         (this.buildingId = t),
                         (this.levelStats = GAME_BALANCING.buildings[t]),
                         (this.requirements = []),
@@ -23065,7 +23065,7 @@
                         },
                     ]),
                     (e.prototype.getDescription = function () {
-                        return tr("building_" + this.buildingId + "_desc");
+                        return translate("building_" + this.buildingId + "_desc");
                     }),
                     (e.prototype.useTransporters = function () {
                         this.transporterEnabled = true;
@@ -23130,7 +23130,7 @@
                         this.addPlacementHelper(new NearbyBuildingPlacementHelper({ entityClass: t, condition: o, radius: i }));
                     }),
                     (e.prototype.addMaximumAmountRequirement = function (e) {
-                        this.addRequirement(new PlayerLevelDependentMaxCountRequirement({ errorText: tr("reached_maximum_limit"), buildingType: this.getInstanceClass(), amounts: e }));
+                        this.addRequirement(new PlayerLevelDependentMaxCountRequirement({ errorText: translate("reached_maximum_limit"), buildingType: this.getInstanceClass(), amounts: e }));
                     }),
                     (e.prototype.addDependency = function (e) {
                         this.dependsOnBuildings.push(e);
@@ -24835,38 +24835,34 @@
                     }),
                     t
                 );
-            })(BuildingRequirement),
-            EnemyAIComponent = (function (e) {
-                function t(i) {
-                    var a = i.speedTilesPerSecond,
-                        o = void 0 === a ? 1 : a,
-                        n = i.farSpeedBoost,
-                        r = void 0 === n ? 15 : n,
-                        s = i.nearDistanceTiles,
-                        l = void 0 === s ? 6 : s,
-                        u = i.farDistanceTiles,
-                        c = void 0 === u ? 20 : u;
-                    _classCallCheck(this, t);
-                    var d = _possibleConstructorReturn(this, e.call(this));
-                    return checkParamsSet(o, r, l, c), (d.speedTilesPerSecond = o), (d.farSpeedBoost = r), (d.farDistanceTiles = c), (d.nearDistanceTiles = l), (d.targetsBaseOnly = false), (d.currentAttackTargetTile = null), d;
+            })(BuildingRequirement);
+            class EnemyAIComponent extends Component {
+                constructor({
+                    speedTilesPerSecond = 1,
+                    farSpeedBoost = 10,
+                    nearDistanceTiles = 6,
+                    farDistanceTiles = 20,
+                }) {
+                    super();
+            
+                    this.speedTilesPerSecond = speedTilesPerSecond;
+                    this.farSpeedBoost = farSpeedBoost;
+                    this.farDistanceTiles = farDistanceTiles;
+                    this.nearDistanceTiles = nearDistanceTiles;
+                    this.targetsBaseOnly = false;
+                    this.currentAttackTargetTile = null;
                 }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "EnemyAIComponent";
-                            },
-                        },
-                    ]),
-                    (t.prototype.debugStr = function () {
-                        return "speed: " + this.speedTilesPerSecond + " tiles/s (boost x" + this.farSpeedBoost + "), ";
-                    }),
-                    t
-                );
-            })(Component),
-            DamageOnHitComponent = (function (e) {
+            
+                static get name() {
+                    return "EnemyAIComponent";
+                }
+            
+                debugStr() {
+                    return `speed: ${this.speedTilesPerSecond} tiles/s (boost x${this.farSpeedBoost}), `;
+                }
+            }
+            
+            const DamageOnHitComponent = (function (e) {
                 function t(i) {
                     var a = i.targetClass,
                         o = i.damage,
@@ -26320,7 +26316,7 @@
                     _classCallCheck(this, t);
                     var i = _possibleConstructorReturn(this, e.call(this, "goldMine"));
                     return (
-                        i.addNearbyRequirement({ resourceType: GoldOre, radius: Config.radius.goldOre, errorText: tr("error_place_next_to_crystal") }),
+                        i.addNearbyRequirement({ resourceType: GoldOre, radius: Config.radius.goldOre, errorText: translate("error_place_next_to_crystal") }),
                         i.addCompatibleResourcesPlacementHelper(GoldOre),
                         i.addDependency(PlayerBaseMeta),
                         i.useTransporters(),
@@ -26386,8 +26382,8 @@
                     _classCallCheck(this, t);
                     var i = _possibleConstructorReturn(this, e.call(this, "playerBase"));
                     return (
-                        i.addRequirement(new UniqueRequirement({ errorText: tr("error_only_one_base"), buildingType: PlayerBaseBuilding })),
-                        i.addRequirement(new ReachableRequirement({ errorText: tr("error_base_unreachable") })),
+                        i.addRequirement(new UniqueRequirement({ errorText: translate("error_only_one_base"), buildingType: PlayerBaseBuilding })),
+                        i.addRequirement(new ReachableRequirement({ errorText: translate("error_base_unreachable") })),
                         i.addRadiusPlacementHelper(Config.radius.playerBase),
                         i.useTransporters(),
                         i
@@ -26483,7 +26479,7 @@
                     _classCallCheck(this, t);
                     var i = _possibleConstructorReturn(this, e.call(this, "harvester"));
                     return (
-                        i.addNearbyRequirement({ resourceType: Tree, radius: Config.radius.tree, errorText: tr("error_place_next_to_tree") }),
+                        i.addNearbyRequirement({ resourceType: Tree, radius: Config.radius.tree, errorText: translate("error_place_next_to_tree") }),
                         i.addCompatibleResourcesPlacementHelper(Tree),
                         i.addDependency(PlayerBaseMeta),
                         i.useTransporters(),
@@ -26649,7 +26645,7 @@
                     _classCallCheck(this, t);
                     var i = _possibleConstructorReturn(this, e.call(this, "ironMine"));
                     return (
-                        i.addNearbyRequirement({ resourceType: IronOre, radius: Config.radius.ironOre, errorText: tr("error_place_next_to_iron_ore") }),
+                        i.addNearbyRequirement({ resourceType: IronOre, radius: Config.radius.ironOre, errorText: translate("error_place_next_to_iron_ore") }),
                         i.addCompatibleResourcesPlacementHelper(IronOre),
                         i.addDependency(PlayerBaseMeta),
                         i.useTransporters(),
@@ -26842,87 +26838,74 @@
                     t
                 );
             })(Component);
-            class BasicDefensiveTower extends BuildingInstance {
-                constructor(i, a, o, n, r) {
-                    super(i, a, o, n);
-                    this.init(r);
+            const BasicDefensiveTower = (function (e) {
+                function t(i, a, o, n, r) {
+                    _classCallCheck(this, t);
+                    var s = _possibleConstructorReturn(this, e.call(this, i, a, o, n));
+                    return s.init(r), s;
                 }
-            
-                static get name() {
-                    return "BasicDefensiveTower";
-                }
-            
-                init(e) {
-                    const t = e.producerMetaClass;
-                    const i = e.projectileResource;
-                    const a = e.projectileClass;
-                    const o = e.additionalProjectileParams || null;
-                    const n = e.radiusMultiplierKey || null;
-                    const r = e.damageMultiplierKey || null;
-                    const s = e.shootsPerSecondMultiplierKey || null;
-                    const l = e.canCriticalStrike !== undefined ? e.canCriticalStrike : false;
-            
-                    checkParamsSet(t, i, a);
-            
-                    this.addVisualizeConnections([t]);
-                    this.addComponent(new StorageVisualizerComponent(i));
-                    this.addComponent(new VisualizeMissingResourcesComponent({}));
-                    this.addComponent(new StorageComponent({}));
-                    this.addComponent(new ConsumerComponent([i]));
-                    this.addComponent(
-                        new ProjectileShooterComponent({
-                            projectileClass: a,
-                            consumeResource: i,
-                            projectileParams: n || {},
-                            canCriticalStrike: l,
-                        })
-                    );
-            
-                    this.projectileResourceId = i.name;
-                    this.radiusMultiplierKey = n;
-                    this.damageMultiplierKey = r;
-                    this.shootsPerSecondMultiplierKey = s;
-                }
-            
-                updateComponentsToStats(t) {
-                    super.updateComponentsToStats(t);
-            
-                    if (!t.consumeAmount) throw new Error("Missing key 'consumeAmount' for defensive tower");
-                    if (!t.radius) throw new Error("Missing key 'radius' for defensive tower");
-                    if (!t.shootsPerSecond) throw new Error("Missing key 'shootsPerSecond' for defensive tower");
-                    if (!t.damage) throw new Error("Missing key 'damage' for defensive tower");
-            
-                    const i = this.phaser.rootRecursiveRef;
-                    let a = t.consumeAmount;
-                    let o = t.radius;
-                    let n = t.damage;
-                    let r = t.shootsPerSecond;
-            
-                    if (this.radiusMultiplierKey) o *= i.stats.getSkillGainMultiplier(this.radiusMultiplierKey);
-                    if (this.damageMultiplierKey) n *= i.stats.getSkillGainMultiplier(this.damageMultiplierKey);
-                    n *= i.stats.getSkillGainMultiplier("damage");
-                    if (this.shootsPerSecondMultiplierKey) r *= i.stats.getSkillGainMultiplier(this.shootsPerSecondMultiplierKey);
-            
-                    let s = t.storage;
-                    s *= i.stats.getSkillGainMultiplier("buildingStorage");
-                    if (i.stats.isSkillUnlocked("buildingStorageDouble")) s *= 2;
-            
-                    const l = {};
-                    l[this.projectileResourceId] = Math.round(s);
-                    this.getComponent(StorageComponent).limits = l;
-                    this.getComponent(StorageVisualizerComponent).divisor = a;
-            
-                    const u = this.getComponent(ProjectileShooterComponent);
-                    u.projectileParams.damage = n;
-                    u.consumeAmount = a;
-                    u.radius = o;
-                    u.setShootsPerSecond(r);
-            
-                    const c = {};
-                    c[this.projectileResourceId] = a;
-                    this.getComponent(VisualizeMissingResourcesComponent).resourceIdsAndAmount = c;
-                }
-            }
+                return (
+                    _inherits(t, e),
+                    _createClass(t, null, [
+                        {
+                            key: "name",
+                            get: function () {
+                                return "BasicDefensiveTower";
+                            },
+                        },
+                    ]),
+                    (t.prototype.init = function (e) {
+                        var t = e.producerMetaClass,
+                            i = e.projectileResource,
+                            a = e.projectileClass,
+                            o = e.additionalProjectileParams,
+                            n = void 0 === o ? null : o,
+                            r = e.radiusMultiplierKey,
+                            s = void 0 === r ? null : r,
+                            l = e.damageMultiplierKey,
+                            u = void 0 === l ? null : l,
+                            c = e.shootsPerSecondMultiplierKey,
+                            d = void 0 === c ? null : c,
+                            h = e.canCriticalStrike,
+                            p = void 0 !== h && h;
+                        checkParamsSet(t, i, a),
+                            this.addVisualizeConnections([t]),
+                            this.addComponent(new StorageVisualizerComponent(i)),
+                            this.addComponent(new VisualizeMissingResourcesComponent({})),
+                            this.addComponent(new StorageComponent({})),
+                            this.addComponent(new ConsumerComponent([i])),
+                            this.addComponent(new ProjectileShooterComponent({ projectileClass: a, consumeResource: i, projectileParams: n || {}, canCriticalStrike: p })),
+                            (this.projectileResourceId = i.name),
+                            (this.radiusMultiplierKey = s),
+                            (this.damageMultiplierKey = u),
+                            (this.shootsPerSecondMultiplierKey = d);
+                    }),
+                    (t.prototype.updateComponentsToStats = function (t) {
+                        if ((e.prototype.updateComponentsToStats.call(this, t), !t.consumeAmount)) throw new Error("Missing key 'consumeAmount' for defensive tower");
+                        if (!t.radius) throw new Error("Missing key 'radius' for defensive tower");
+                        if (!t.shootsPerSecond) throw new Error("Missing key 'shootsPerSecond' for defensive tower");
+                        if (!t.damage) throw new Error("Missing key 'damage' for defensive tower");
+                        var i = this.phaser.rootRecursiveRef,
+                            a = t.consumeAmount,
+                            o = t.radius,
+                            n = t.damage,
+                            r = t.shootsPerSecond;
+                        this.radiusMultiplierKey && (o *= i.stats.getSkillGainMultiplier(this.radiusMultiplierKey)),
+                            this.damageMultiplierKey && (n *= i.stats.getSkillGainMultiplier(this.damageMultiplierKey)),
+                            (n *= i.stats.getSkillGainMultiplier("damage")),
+                            this.shootsPerSecondMultiplierKey && (r *= i.stats.getSkillGainMultiplier(this.shootsPerSecondMultiplierKey));
+                        var s = t.storage;
+                        (s *= i.stats.getSkillGainMultiplier("buildingStorage")), i.stats.isSkillUnlocked("buildingStorageDouble") && (s *= 2);
+                        var l = {};
+                        (l[this.projectileResourceId] = Math.round(s)), (this.getComponent(StorageComponent).limits = l), (this.getComponent(StorageVisualizerComponent).divisor = a);
+                        var u = this.getComponent(ProjectileShooterComponent);
+                        (u.projectileParams.damage = n), (u.consumeAmount = a), (u.radius = o), u.setShootsPerSecond(r);
+                        var c = {};
+                        (c[this.projectileResourceId] = a), (this.getComponent(VisualizeMissingResourcesComponent).resourceIdsAndAmount = c);
+                    }),
+                    t
+                );
+            })(BuildingInstance)
             const ArrowTowerMeta = (function (e) {
                 function t() {
                     _classCallCheck(this, t);
@@ -27007,116 +26990,116 @@
                     ]),
                     e
                 );
-            })(),
-            WallMeta = (function (e) {
-                function t() {
-                    _classCallCheck(this, t);
-                    var i = _possibleConstructorReturn(this, e.call(this, "wall"));
-                    return (
-                        i.addNearbyPlacementHelper({ entityClass: WallBuilding, radius: oneTileDiagonalDistance }),
-                        i.addNearbyPlacementHelper({ entityClass: Resource, radius: oneTileDiagonalDistance }),
-                        i.addPlacementHelper(new MultiplacePlacementHelper({ multiplace: true, smartPlace: true, smartPlaceRadius: oneTileDiagonalDistance })),
-                        i.addDependency(PlayerBaseMeta),
-                        i
-                    );
+            })();
+
+            class WallMeta extends MetaBuilding {
+                constructor() {
+                    super("wall");
+                    this.addNearbyPlacementHelper({ entityClass: WallBuilding, radius: oneTileDiagonalDistance });
+                    this.addNearbyPlacementHelper({ entityClass: Resource, radius: oneTileDiagonalDistance });
+                    this.addPlacementHelper(new MultiplacePlacementHelper({ multiplace: true, smartPlace: true, smartPlaceRadius: oneTileDiagonalDistance }));
+                    this.addDependency(PlayerBaseMeta);
                 }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "WallMeta";
-                            },
-                        },
-                    ]),
-                    (t.prototype.getInstanceClass = function () {
-                        return WallBuilding;
-                    }),
-                    (t.prototype.makeSprite = function (e, t) {
-                        var i = e.make.group(),
-                            a = 2 * Config.ui.wallRadius + 1.3 * t,
-                            o = e.make.graphics(0, 0);
-                        o.beginFill(16777215, 1e-4), o.drawRect(-l, -l, 2 * l, 2 * l), o.beginFill(2236962, 0.35), o.drawCircle(0.4, 4.5, a + 8);
-                        var n = mixColorPerChannel(Config.colors.levels[t], 0.32, 0);
-                        o.beginFill(n), o.lineStyle(3, n);
-                        for (var r = 0; r < 3; ++r) o.drawCircle(0.2 * r, 1 + r, a);
-                        i.add(o);
-                        var s = e.make.graphics(0, 0),
-                            l = Config.tileSize / 2 + 10;
-                        s.beginFill(16777215, 1e-4),
-                            s.drawRect(-l, -l, 2 * l, 2 * l),
-                            s.lineStyle(3, Config.colors.levels[t]),
-                            s.beginFill(3355443),
-                            s.beginFill(mixColorPerChannel(Config.colors.levels[t], 0.4, 51)),
-                            s.drawCircle(0, 0, a),
-                            s.endFill(),
-                            i.addChild(s);
-                        var u = i.generateTexture();
-                        return i.destroy(), u;
-                    }),
-                    t
-                );
-            })(MetaBuilding),
-            WallBuilding = (function (e) {
-                function t(i, a, o, n) {
-                    _classCallCheck(this, t);
-                    var r = _possibleConstructorReturn(this, e.call(this, i, a, o, n));
-                    return (
-                        r.addComponent(
-                            new VisualizeConnectionsComponent({
-                                connectToClasses: {
-                                    WallBuilding: { color: Config.colors.wall, lineSize: 4, alpha: 1, radius: oneTileDiagonalDistance },
-                                    Resource: { color: Config.colors.wall, lineSize: 4, alpha: 1, radius: oneTileDiagonalDistance },
-                                    HealingTowerBuilding: { color: Config.colors.healing, lineSize: 1, alpha: 0.2, radius: Config.radius.healingTower },
-                                    TransporterBuilding: { color: Config.colors.healing, lineSize: 1, alpha: 0.2, radius: Config.radius.healingTower },
-                                },
-                                group: i.rootRecursiveRef.groups.wallBordersGroup,
-                            })
-                        ),
-                        r.addComponent(new DodgeComponent(0)),
-                        r.addComponent(new ConsumerComponent([Healing])),
-                        r.addComponent(new StorageComponent({ limits: { Healing: 10 } })),
-                        r.addComponent(new StorageVisualizerComponent(Healing)),
-                        (r.getComponent(StorageVisualizerComponent).inverse = true),
-                        (r.getComponent(HealthBarComponent).style = "regular_custom_radius"),
-                        r
-                    );
+            
+                static get name() {
+                    return "WallMeta";
                 }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "WallBuilding";
+            
+                getInstanceClass() {
+                    return WallBuilding;
+                }
+            
+                makeSprite(Phaser, level) {
+                    const spriteGroup = Phaser.make.group();
+                    const wallDiameter = 2 * Config.ui.wallRadius + 1.3 * level;
+                    const graphicsOuter = Phaser.make.graphics(0, 0);
+
+                    graphicsOuter.beginFill(16777215, 1e-4);
+                    graphicsOuter.drawRect(-wallDiameter / 2, -wallDiameter / 2, wallDiameter, wallDiameter);
+                    graphicsOuter.beginFill(2236962, 0.35);
+                    graphicsOuter.drawCircle(0.4, 4.5, wallDiameter + 8);
+                    const wallColor = mixColorPerChannel(Config.colors.levels[level], 0.32, 0);
+                    graphicsOuter.beginFill(wallColor);
+                    graphicsOuter.lineStyle(3, wallColor);
+                    for (let i = 0; i < 3; ++i) {
+                        graphicsOuter.drawCircle(0.2 * i, 1 + i, wallDiameter);
+                    }
+                    spriteGroup.add(graphicsOuter);
+                    
+                    const graphicsInner = Phaser.make.graphics(0, 0);
+                    const innerDiameter = Config.tileSize / 2 + 10;
+                    graphicsInner.beginFill(16777215, 1e-4);
+                    graphicsInner.drawRect(-innerDiameter / 2, -innerDiameter / 2, innerDiameter, innerDiameter);
+                    graphicsInner.lineStyle(3, Config.colors.levels[level]);
+                    graphicsInner.beginFill(3355443);
+                    graphicsInner.beginFill(mixColorPerChannel(Config.colors.levels[level], 0.4, 51));
+                    graphicsInner.drawCircle(0, 0, wallDiameter);
+                    graphicsInner.endFill();
+                    spriteGroup.addChild(graphicsInner);
+                    
+                    const texture = spriteGroup.generateTexture();
+                    spriteGroup.destroy();
+                    return texture;
+                }
+            }            
+
+            class WallBuilding extends BuildingInstance {
+                constructor(i, a, o, n) {
+                    super(i, a, o, n);
+            
+                    this.addComponent(
+                        new VisualizeConnectionsComponent({
+                            connectToClasses: {
+                                WallBuilding: { color: Config.colors.wall, lineSize: 4, alpha: 1, radius: oneTileDiagonalDistance },
+                                Resource: { color: Config.colors.wall, lineSize: 4, alpha: 1, radius: oneTileDiagonalDistance },
+                                HealingTowerBuilding: { color: Config.colors.healing, lineSize: 1, alpha: 0.2, radius: Config.radius.healingTower },
+                                TransporterBuilding: { color: Config.colors.healing, lineSize: 1, alpha: 0.2, radius: Config.radius.healingTower },
                             },
-                        },
-                    ]),
-                    (t.prototype.getMinimapScale = function () {
-                        return 0.75;
-                    }),
-                    (t.prototype.updateComponentsToStats = function (t) {
-                        e.prototype.updateComponentsToStats.call(this, t);
-                        var i = this.phaser.rootRecursiveRef.stats.getSkillGainMultiplier("wallHealth"),
-                            a = this.getComponent(HealthComponent).maxHealth * i;
-                        this.getComponent(HealthComponent).changeMaxHealth(a);
-                        var o = this.getComponent(VisualizeConnectionsComponent).connectToClasses;
-                        (o.WallBuilding.color = mixColorPerChannel(Config.colors.levels[this.level], 0.3, 51)),
-                            (o.WallBuilding.lineSize = Math.floor(4 + 0.4 * this.level)),
-                            (o.Resource.color = o.WallBuilding.color),
-                            (o.Resource.lineSize = o.WallBuilding.lineSize),
-                            (this.getComponent(VisualizeConnectionsComponent).needsRedraw = true);
-                        var n = (2 + Config.ui.wallRadius + 1.3 * this.level) / 2;
-                        (this.getComponent(HealthBarComponent).radius = n),
-                            (this.getComponent(StorageVisualizerComponent).radius = n + 7),
-                            (this.getComponent(StorageComponent).limits[Healing.name] = t.shieldStorage),
-                            this.phaser.rootRecursiveRef.stats.isSkillUnlocked("wallHealthFeatureMiss") ? (this.getComponent(DodgeComponent).chance = 0.2) : (this.getComponent(DodgeComponent).chance = 0);
-                    }),
-                    t
-                );
-            })(BuildingInstance),
-            CannonballProducerMeta = (function (e) {
+                            group: i.rootRecursiveRef.groups.wallBordersGroup,
+                        })
+                    );
+            
+                    this.addComponent(new DodgeComponent(0));
+                    this.addComponent(new ConsumerComponent([Healing]));
+                    this.addComponent(new StorageComponent({ limits: { Healing: 10 } }));
+                    this.addComponent(new StorageVisualizerComponent(Healing));
+                    this.getComponent(StorageVisualizerComponent).inverse = true;
+                    this.getComponent(HealthBarComponent).style = "regular_custom_radius";
+                }
+            
+                static get name() {
+                    return "WallBuilding";
+                }
+            
+                getMinimapScale() {
+                    return 0.75;
+                }
+            
+                updateComponentsToStats(t) {
+                    super.updateComponentsToStats(t);
+            
+                    const i = this.phaser.rootRecursiveRef.stats.getSkillGainMultiplier("wallHealth");
+                    const a = this.getComponent(HealthComponent).maxHealth * i;
+                    this.getComponent(HealthComponent).changeMaxHealth(a);
+            
+                    const o = this.getComponent(VisualizeConnectionsComponent).connectToClasses;
+                    o.WallBuilding.color = mixColorPerChannel(Config.colors.levels[this.level], 0.3, 51);
+                    o.WallBuilding.lineSize = Math.floor(4 + 0.4 * this.level);
+                    o.Resource.color = o.WallBuilding.color;
+                    o.Resource.lineSize = o.WallBuilding.lineSize;
+                    this.getComponent(VisualizeConnectionsComponent).needsRedraw = true;
+            
+                    const n = (2 + Config.ui.wallRadius + 1.3 * this.level) / 2;
+                    this.getComponent(HealthBarComponent).radius = n;
+                    this.getComponent(StorageVisualizerComponent).radius = n + 7;
+                    this.getComponent(StorageComponent).limits[Healing.name] = t.shieldStorage;
+                    this.phaser.rootRecursiveRef.stats.isSkillUnlocked("wallHealthFeatureMiss")
+                        ? (this.getComponent(DodgeComponent).chance = 0.2)
+                        : (this.getComponent(DodgeComponent).chance = 0);
+                }
+            }
+            
+            const CannonballProducerMeta = (function (e) {
                 function t() {
                     _classCallCheck(this, t);
                     var i = _possibleConstructorReturn(this, e.call(this, "cannonballProducer"));
@@ -27208,44 +27191,43 @@
                     }),
                     t
                 );
-            })(MetaBuilding),
-            CannonBuilding = (function (e) {
-                function t(i, a, o, n) {
-                    _classCallCheck(this, t);
-                    var r = _possibleConstructorReturn(
-                        this,
-                        e.call(this, i, a, o, n, {
-                            producerMetaClass: CannonballProducerMeta,
-                            projectileClass: MetaCannonProjectile,
-                            projectileResource: Cannonball,
-                            additionalProjectileParams: { speedTilesPerSecond: 8, aoeRadiusTiles: oneTileDistance, explosionClass: MetaCannonExplosionParticle },
-                            damageMultiplierKey: "cannonDamage",
-                            canCriticalStrike: true,
-                        })
-                    );
-                    return r.addComponent(new CannonTowerComponent()), r;
-                }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "CannonBuilding";
-                            },
+            })(MetaBuilding);
+            class CannonBuilding extends BasicDefensiveTower {
+                constructor(i, a, o, n) {
+                    super(i, a, o, n, {
+                        producerMetaClass: CannonballProducerMeta,
+                        projectileClass: MetaCannonProjectile,
+                        projectileResource: Cannonball,
+                        additionalProjectileParams: {
+                            speedTilesPerSecond: 8,
+                            aoeRadiusTiles: oneTileDistance,
+                            explosionClass: MetaCannonExplosionParticle,
                         },
-                    ]),
-                    (t.prototype.updateComponentsToStats = function (t) {
-                        e.prototype.updateComponentsToStats.call(this, t);
-                        var i = 8 * this.phaser.rootRecursiveRef.stats.getSkillGainMultiplier("cannonProjectileSpeed");
-                        (this.getComponent(ProjectileShooterComponent).projectileParams.speedTilesPerSecond = i),
-                            this.phaser.rootRecursiveRef.stats.isSkillUnlocked("cannon_feature_double_dmg") &&
-                            ((this.getComponent(ProjectileShooterComponent).projectileParams.damage *= 2), (this.getComponent(ProjectileShooterComponent).consumeAmount *= 3));
-                    }),
-                    t
-                );
-            })(BasicDefensiveTower),
-            TransporterComponent = (function (e) {
+                        damageMultiplierKey: "cannonDamage",
+                        canCriticalStrike: true,
+                    });
+            
+                    this.addComponent(new CannonTowerComponent());
+                }
+            
+                static get name() {
+                    return "CannonBuilding";
+                }
+            
+                updateComponentsToStats(t) {
+                    super.updateComponentsToStats(t);
+            
+                    const i = 8 * this.phaser.rootRecursiveRef.stats.getSkillGainMultiplier("cannonProjectileSpeed");
+                    this.getComponent(ProjectileShooterComponent).projectileParams.speedTilesPerSecond = i;
+            
+                    if (this.phaser.rootRecursiveRef.stats.isSkillUnlocked("cannon_feature_double_dmg")) {
+                        this.getComponent(ProjectileShooterComponent).projectileParams.damage *= 2;
+                        this.getComponent(ProjectileShooterComponent).consumeAmount *= 3;
+                    }
+                }
+            }
+            
+            const TransporterComponent = (function (e) {
                 function t(i) {
                     _classCallCheck(this, t);
                     var a = _possibleConstructorReturn(this, e.call(this));
@@ -27391,7 +27373,7 @@
                     _classCallCheck(this, t);
                     var i = _possibleConstructorReturn(this, e.call(this, "uraniumMine"));
                     return (
-                        i.addNearbyRequirement({ resourceType: UraniumOre, radius: Config.radius.uraniumOre, errorText: tr("error_place_next_to_uranium_ore") }),
+                        i.addNearbyRequirement({ resourceType: UraniumOre, radius: Config.radius.uraniumOre, errorText: translate("error_place_next_to_uranium_ore") }),
                         i.addCompatibleResourcesPlacementHelper(UraniumOre),
                         i.addDependency(PlayerBaseMeta),
                         i.useTransporters(),
@@ -28552,9 +28534,7 @@
                                 l !== this.cached.isNight &&
                                 (this.isNight()
                                     ? this.root.signals.nightEntered.dispatch(this.getDay())
-                                    : (this.root.signals.nightEnded.dispatch(this.getDay()),
-                                        window.gtag && window.gtag("event", "night_survived", { event_category: "ingame", value: this.getDay(), non_interaction: true }),
-                                        sendTrackingRequest(trackingSeverity.info, "Night survived", { day: this.getDay() })));
+                                    : (this.root.signals.nightEnded.dispatch(this.getDay())))
                         }
                     }),
                     e
@@ -29385,7 +29365,7 @@
                         o = a.getInstanceClass();
                     if (0 === this.countBuildings(o)) return {
                         result: false,
-                        reason: tr("place_dependent_building_first", a.getDisplayName())
+                        reason: translate("place_dependent_building_first", a.getDisplayName())
                     };
                 }
                 return {
@@ -29402,7 +29382,7 @@
                 var t = e.meta;
                 if (!this.checkBuildingIsBelowBaseRequirement(e) && !Config.ignoreBuildRequirements) return {
                     result: false,
-                    reason: tr("upgrade_base_first")
+                    reason: translate("upgrade_base_first")
                 };
                 var i = this.checkSpecialUpgradeRequirements(e);
                 if (!i.result) return i;
@@ -29411,7 +29391,7 @@
                     result: true
                 } : {
                     result: false,
-                    reason: tr("can_not_afford_upgrade")
+                    reason: translate("can_not_afford_upgrade")
                 };
             }
 
@@ -29419,7 +29399,7 @@
                 var t = e.meta;
                 return e.getLevel() >= t.getMaxLevel() ? {
                     result: false,
-                    reason: tr("no_further_upgrades")
+                    reason: translate("no_further_upgrades")
                 } : {
                     result: true,
                     reason: ""
@@ -29477,12 +29457,12 @@
                 if (!o.result) return o;
                 if (null != a && !this.root.map.isValidCoordinate(a.tileX, a.tileY, Config.mapBorder)) return {
                     result: false,
-                    reason: tr("not_in_map_bounds")
+                    reason: translate("not_in_map_bounds")
                 };
                 if (!Config.ignoreBuildRequirements) {
                     if (this.root.stats.isSkillUnlocked("transporterFeatureGlobal") && "transporter" === t.buildingId) return {
                         result: false,
-                        reason: tr("transporter_no_use")
+                        reason: translate("transporter_no_use")
                     };
                     for (var n = t.getRequirements(), r = 0; r < n.length; ++r) {
                         var s = n[r];
@@ -29493,17 +29473,17 @@
                     }
                     if (!this.root.stats.canAfford(t.getUpgradeCost(0))) return {
                         result: false,
-                        reason: tr("can_not_afford")
+                        reason: translate("can_not_afford")
                     };
                 }
                 if (null != a) {
                     if (this.root.map.isTileUsed(a.tileX, a.tileY)) return {
                         result: false,
-                        reason: tr("space_already_occupied")
+                        reason: translate("space_already_occupied")
                     };
                     if (this.root.map.tileIsOccupiedByDynamicEntities(a.tileX, a.tileY)) return {
                         result: false,
-                        reason: tr("tile_occupied_by_enemies")
+                        reason: translate("tile_occupied_by_enemies")
                     };
                 }
                 return {
@@ -29626,7 +29606,7 @@
                             }
                         }
                     } else {
-                        this.root.gui.uiNotifications.showError(tr("place_base_before_wave"));
+                        this.root.gui.uiNotifications.showError(translate("place_base_before_wave"));
                     }
                 }
             }
@@ -29683,7 +29663,7 @@
                 return "easy";
             }
             getTitle() {
-                return tr("gamemode_easy");
+                return translate("gamemode_easy");
             }
             getColor() {
                 return 2544453;
@@ -29709,7 +29689,7 @@
                 return "regular";
             }
             getTitle() {
-                return tr("gamemode_regular");
+                return translate("gamemode_regular");
             }
             getColor() {
                 return 11184810;
@@ -29735,7 +29715,7 @@
                 return "hard";
             }
             getTitle() {
-                return tr("gamemode_hard");
+                return translate("gamemode_hard");
             }
             getColor() {
                 return 16035906;
@@ -29761,7 +29741,7 @@
                 return "impossible";
             }
             getTitle() {
-                return tr("gamemode_impossible");
+                return translate("gamemode_impossible");
             }
             getColor() {
                 return 16720767;
@@ -29813,7 +29793,7 @@
                 return "challenge_boss_only";
             }
             getTitle() {
-                return tr("gamemode_challenge_boss_only");
+                return translate("gamemode_challenge_boss_only");
             }
             getColor() {
                 return 16742263;
@@ -29848,7 +29828,7 @@
                 return 3381759;
             }
             getTitle() {
-                return tr("gamemode_sandbox");
+                return translate("gamemode_sandbox");
             }
             getUniqueIndex() {
                 return 2000;
@@ -29960,27 +29940,27 @@
                 const data = this.stringToData(e, forceCompatibility);
                 if (!data) return false;
                 if (data.version > SAVEGAME_VERSION) {
-                    if (forceCompatibility) this.root.gui.uiNotifications.showLongError(tr("savegame_too_new"));
+                    if (forceCompatibility) this.root.gui.uiNotifications.showLongError(translate("savegame_too_new"));
                     return false;
                 }
                 if (data.version < LAST_COMPATIBLE_VERSION) {
-                    if (forceCompatibility) this.root.gui.uiNotifications.showLongError(tr("savegame_too_old"));
+                    if (forceCompatibility) this.root.gui.uiNotifications.showLongError(translate("savegame_too_old"));
                     return false;
                 }
                 if (data.version < SAVEGAME_VERSION && forceCompatibility) {
-                    this.root.gui.uiNotifications.showLongHint(tr("savegame_old_version"));
+                    this.root.gui.uiNotifications.showLongHint(translate("savegame_old_version"));
                 }
         
                 const isBeta = IS_BETA;
                 if (data.beta && !isBeta) {
-                    if (forceCompatibility) this.root.gui.uiNotifications.showLongError(tr("savegame_from_beta"));
+                    if (forceCompatibility) this.root.gui.uiNotifications.showLongError(translate("savegame_from_beta"));
                     return false;
                 }
         
                 const gamemodeId = data.gamemode || "impossible";
                 const gameMode = createGameModeFromId(gamemodeId);
                 if (!gameMode) {
-                    if (forceCompatibility) this.root.gui.uiNotifications.showLongError(tr("gamemode_no_longer_exists", gamemodeId));
+                    if (forceCompatibility) this.root.gui.uiNotifications.showLongError(translate("gamemode_no_longer_exists", gamemodeId));
                     return false;
                 }
         
@@ -30017,7 +29997,7 @@
                 this.root.zoom.setZoomLevel(data.view.zoom, true);
                 this.root.syncer.load(data.sync);
                 this.root.gui.uiGameTimeButtons.requestPause();
-                this.root.gui.uiNotifications.showLongSuccess(tr("game_successfully_loaded"));
+                this.root.gui.uiNotifications.showLongSuccess(translate("game_successfully_loaded"));
                 this.lastSavegame = e;
                 return true;
             }
@@ -30034,22 +30014,22 @@
                 try {
                     decompressed = _lzString2.default.decompressFromEncodedURIComponent(trimmed);
                 } catch (err) {
-                    if (forceCompatibility) this.root.gui.uiNotifications.showLongError(tr("invalid_or_corrupt_savegame"));
+                    if (forceCompatibility) this.root.gui.uiNotifications.showLongError(translate("invalid_or_corrupt_savegame"));
                     return null;
                 }
                 if (decompressed === null) {
-                    if (forceCompatibility) this.root.gui.uiNotifications.showLongError(tr("invalid_or_corrupt_savegame"));
+                    if (forceCompatibility) this.root.gui.uiNotifications.showLongError(translate("invalid_or_corrupt_savegame"));
                     return null;
                 }
                 let data = {};
                 try {
                     data = JSON.parse(decompressed);
                 } catch (err) {
-                    if (forceCompatibility) this.root.gui.uiNotifications.showLongError(tr("invalid_or_corrupt_savegame"));
+                    if (forceCompatibility) this.root.gui.uiNotifications.showLongError(translate("invalid_or_corrupt_savegame"));
                     return null;
                 }
                 if (data === null) {
-                    if (forceCompatibility) this.root.gui.uiNotifications.showLongError(tr("invalid_or_corrupt_savegame"));
+                    if (forceCompatibility) this.root.gui.uiNotifications.showLongError(translate("invalid_or_corrupt_savegame"));
                     return null;
                 }
                 return data;
@@ -30073,9 +30053,7 @@
                             a = "setting_" + e;
                         this.root.persistent.setBool(a, i),
                             (this[e] = i),
-                            console.log("[SETTINGS] Changed", e, "to", i),
-                            window.gtag && window.gtag("event", "setting_changed", { event_category: "ingame", event_label: e, value: t ? 1 : 0 }),
-                            sendTrackingRequest(trackingSeverity.info, "Setting changed", { id: e, value: t });
+                            console.log("[SETTINGS] Changed", e, "to", i)
                     }),
                     (e.prototype.loadSettings = function () {
                         var e = this;
@@ -30342,51 +30320,66 @@
                     }),
                     t
                 );
-            })(GameSystem),
-            EnemyAISystem = (function (e) {
-                function t(i) {
-                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.call(this, i, { necessaryComponents: [EnemyAIComponent] }));
+            })(GameSystem);
+
+            class EnemyAISystem extends GameSystem {
+                constructor(root) {
+                    super(root, { necessaryComponents: [EnemyAIComponent] });
                 }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "EnemyAISystem";
-                            },
-                        },
-                    ]),
-                    (t.prototype.getMovementSpeed = function (e, t) {
-                        var i,
-                            a = t.speedTilesPerSecond,
-                            o = (i = this.root.map).getPathLengthToBase.apply(i, _toConsumableArray(e.getTile()));
-                        if (o > t.nearDistanceTiles) {
-                            var n = o - t.nearDistanceTiles;
-                            (n /= t.farDistanceTiles - t.nearDistanceTiles), (a *= 1 - (n = Math.min(1, n)) + n * t.farSpeedBoost);
-                        }
-                        return a;
-                    }),
-                    (t.prototype.processEntity = function (e, t) {
-                        var i,
-                            a = t.EnemyAIComponent,
-                            o = t.PhysicsComponent,
-                            n = (i = this.root.map).findNextTileOnPathToBaseWorldSpace.apply(i, _toConsumableArray(e.worldSpaceTileCenter()));
-                        if (n) {
-                            var r = n[0] * Config.tileSize - e.x,
-                                s = n[1] * Config.tileSize - e.y,
-                                l = this.getMovementSpeed(e, a),
-                                u = vectorClamp([r, s]);
-                            (o.desiredVelocityX = u[0] * l), (o.desiredVelocityY = u[1] * l), (a.currentAttackTargetTile = n);
-                        } else (o.desiredVelocityX = 0), (o.desiredVelocityY = 0), (a.currentAttackTargetTile = null);
-                    }),
-                    (t.prototype.update = function () {
-                        Config.gameTimeSpeedUpFactor < 1 || e.prototype.update.call(this);
-                    }),
-                    t
-                );
-            })(GameSystem),
-            HealthBarSystem = (function (e) {
+            
+                static get name() {
+                    return "EnemyAISystem";
+                }
+            
+                getMovementSpeed(entity, aiComponent) {
+                    const base = this.root.map;
+                    const tile = entity.getTile();
+                    const pathLengthToBase = base.getPathLengthToBase(...tile);
+            
+                    if (pathLengthToBase > aiComponent.nearDistanceTiles) {
+                        let normalizedDistance = (pathLengthToBase - aiComponent.nearDistanceTiles) /
+                            (aiComponent.farDistanceTiles - aiComponent.nearDistanceTiles);
+                        normalizedDistance = Math.min(1, normalizedDistance);
+            
+                        return aiComponent.speedTilesPerSecond * (1 - normalizedDistance + normalizedDistance * aiComponent.farSpeedBoost);
+                    }
+            
+                    return aiComponent.speedTilesPerSecond;
+                }
+            
+                processEntity(entity, components) {
+                    const aiComponent = components.EnemyAIComponent;
+                    const physicsComponent = components.PhysicsComponent;
+                    const map = this.root.map;
+                    const worldSpaceTileCenter = entity.worldSpaceTileCenter();
+                    const nextTileOnPath = map.findNextTileOnPathToBaseWorldSpace(...worldSpaceTileCenter);
+            
+                    if (nextTileOnPath) {
+                        const [targetX, targetY] = nextTileOnPath.map(tile => tile * Config.tileSize);
+                        const deltaX = targetX - entity.x;
+                        const deltaY = targetY - entity.y;
+                        const movementSpeed = this.getMovementSpeed(entity, aiComponent);
+            
+                        const [desiredVelocityX, desiredVelocityY] = vectorClamp([deltaX, deltaY]);
+            
+                        physicsComponent.desiredVelocityX = desiredVelocityX * movementSpeed;
+                        physicsComponent.desiredVelocityY = desiredVelocityY * movementSpeed;
+                        aiComponent.currentAttackTargetTile = nextTileOnPath;
+                    } else {
+                        physicsComponent.desiredVelocityX = 0;
+                        physicsComponent.desiredVelocityY = 0;
+                        aiComponent.currentAttackTargetTile = null;
+                    }
+                }
+            
+                update() {
+                    if (Config.gameTimeSpeedUpFactor >= 1) {
+                        super.update();
+                    }
+                }
+            }
+            
+            const HealthBarSystem = (function (e) {
                 function t(i) {
                     return _classCallCheck(this, t), _possibleConstructorReturn(this, e.call(this, i, { necessaryComponents: [HealthBarComponent], updateOutOfScreen: false }));
                 }
@@ -32267,7 +32260,7 @@
                                     return e instanceof UniqueRequirement;
                                 });
                                 s && ((o.amountText.visible = true), (r = s.check(e.root) ? 1 : 0)),
-                                    r < 0 ? (o.amountText.visible = false) : ((o.amountText.visible = true), r > 500 ? o.amountText.setText(tr("no_limit"), true) : o.amountText.setText(r, true));
+                                    r < 0 ? (o.amountText.visible = false) : ((o.amountText.visible = true), r > 500 ? o.amountText.setText(translate("no_limit"), true) : o.amountText.setText(r, true));
                                 var l = pastellizeColor(t.getBackgroundColor()),
                                     u = 1,
                                     c = 1;
@@ -32325,10 +32318,10 @@
                                 (this.tooltipDesc.text = e.getDescription());
                             var a = e.getUpgradeCost(0),
                                 o = formatBigNumber(a.gems);
-                            0 === a.gems && (o = tr("no_cost")),
+                            0 === a.gems && (o = translate("no_cost")),
                                 (this.tooltipPriceTextGems.text = o),
                                 this.root.stats.canAfford(a) ? (this.tooltipPriceTextGems.tint = 16777215) : (this.tooltipPriceTextGems.tint = 16742263),
-                                (this.tooltipHotkey.text = (0, _trim2.default)(tr("prefix_hotkey")) + " " + keyToString(e.getKeybinding()));
+                                (this.tooltipHotkey.text = (0, _trim2.default)(translate("prefix_hotkey")) + " " + keyToString(e.getKeybinding()));
                             var n = this.root.logic.checkBuildingRequirements({ building: e });
                             n.result ? (this.tooltipDependency.visible = false) : ((this.tooltipDependency.text = n.reason), (this.tooltipDependency.visible = true));
                         }
@@ -32491,7 +32484,7 @@
                                 (this.cancelGroup.fixedToCamera = true),
                                 (this.cancelButton = makeButton({
                                     phaser: this.root.phaser,
-                                    text: tr("kb_cancel_placement"),
+                                    text: translate("kb_cancel_placement"),
                                     width: 140,
                                     fill: Config.colors.ui.sellBuilding,
                                     clickHandler: function () {
@@ -32640,7 +32633,7 @@
                             n ? ((this.radiusIndicator.visible = true), this.radiusIndicator.scale.setTo((n.radius * Config.tileSize) / 100)) : (this.radiusIndicator.visible = false);
                             var r = this.root.logic.checkBuildingRequirements(i),
                                 s = Config.colors.ui.placementGood;
-                            this.root.entityMgr.getAllEntitiesWithComponent(EnemyAIComponent).length > 0 && Config.gameTimeSpeedUpFactor < 1 && (r = { result: false, reason: tr("placement_not_possible_during_night_paused") }),
+                            this.root.entityMgr.getAllEntitiesWithComponent(EnemyAIComponent).length > 0 && Config.gameTimeSpeedUpFactor < 1 && (r = { result: false, reason: translate("placement_not_possible_during_night_paused") }),
                                 r.result
                                     ? ((this.reasonText.visible = false), (this.reasonBackground.visible = false))
                                     : ((s = Config.colors.ui.placementBad),
@@ -32882,7 +32875,7 @@
                                     this.tooltipSellButton.visible = true;
                                     var i = 0,
                                         a = "";
-                                    this.getBatchUpgradeMode() == UPGRADE_ONE_BUILDING ? ((i = this.root.logic.getSellPrice(e)), (a = tr("sell_for"))) : ((a = tr("sell_all_for")), (i = this.root.logic.getSellPriceForAll(e))),
+                                    this.getBatchUpgradeMode() == UPGRADE_ONE_BUILDING ? ((i = this.root.logic.getSellPrice(e)), (a = translate("sell_for"))) : ((a = translate("sell_all_for")), (i = this.root.logic.getSellPriceForAll(e))),
                                         this.tooltipSellButton.textHandle.setText(a.toUpperCase(), true),
                                         this.sellGemsText.setText(formatBigNumber(i), true),
                                         (this.sellGemsText.visible = true),
@@ -32893,7 +32886,7 @@
                                         (this.sellGemsText.visible = false),
                                         (this.sellGemsIcon.visible = false),
                                         (this.tooltipSellTextGroup.visible = true),
-                                        this.tooltipSellText.setText(tr("can_not_sell_building"), true);
+                                        this.tooltipSellText.setText(translate("can_not_sell_building"), true);
                                 this.tooltipUpgradeButton.getChildAt(0).tint = Config.colors.ui.upgradeBuilding;
                                 var o = this.root.logic.checkSpecialUpgradeRequirements(e);
                                 if (o.result)
@@ -32909,10 +32902,10 @@
                                         this.getLevelUpgradeMode() === UPGRADE_ONE_LEVEL
                                             ? (r = this.getBatchUpgradeMode() === UPGRADE_ONE_BUILDING ? "upgrade" : "upgrade_all")
                                             : ((s = true), (r = this.getBatchUpgradeMode() === UPGRADE_ONE_BUILDING ? "max_out" : "max_out_all")),
-                                            this.tooltipUpgradeButton.textHandle.setText(tr(r).toUpperCase(), true),
+                                            this.tooltipUpgradeButton.textHandle.setText(translate(r).toUpperCase(), true),
                                             (this.tooltipUpgradeButton.getChildAt(0).tint = s ? Config.colors.ui.maxOutBuilding : Config.colors.ui.upgradeBuilding),
                                             this.root.logic.checkCanUpgradeBuilding(e).result || setButtonEnabled(this.tooltipUpgradeButton, false);
-                                    } else (this.tooltipUpgradeTextGroup.visible = true), this.tooltipUpgradeText.setText(tr("upgrade_base_to_upgrade_building"), true), (this.tooltipUpgradeButton.visible = false);
+                                    } else (this.tooltipUpgradeTextGroup.visible = true), this.tooltipUpgradeText.setText(translate("upgrade_base_to_upgrade_building"), true), (this.tooltipUpgradeButton.visible = false);
                                 else (this.tooltipUpgradeTextGroup.visible = true), this.tooltipUpgradeText.setText(o.reason, true), (this.tooltipUpgradeButton.visible = false);
                             } else console.warn("Current entity has no meta");
                         }
@@ -32976,7 +32969,7 @@
                         (this.buttonsGroup = t.make.group()), a.add(this.buttonsGroup);
                         var p = this.makeTooltipButton(
                             i / 2 - 5,
-                            tr("upgrade"),
+                            translate("upgrade"),
                             16777214,
                             function () {
                                 return e.tryUpgrade();
@@ -32993,7 +32986,7 @@
                         (this.upgradeGemsIcon = b), (this.upgradeGemsText = A);
                         var y = this.makeTooltipButton(
                             i / 2 - 5,
-                            tr("sell_for"),
+                            translate("sell_for"),
                             Config.colors.ui.sellBuilding,
                             function () {
                                 return e.trySell();
@@ -33037,7 +33030,7 @@
                         if (this.currentEntity && this.currentEntity.meta.isSellable()) {
                             if (this.getBatchUpgradeMode() === UPGRADE_ALL_BUILDINGS) {
                                 var e = this.currentEntity.meta;
-                                return (document.getElementById("sell_all_confirm_content").innerText = tr("sell_confirmation_text", e.getDisplayName())), void window.showDialog("sell_all_confirmation_bg");
+                                return (document.getElementById("sell_all_confirm_content").innerText = translate("sell_confirmation_text", e.getDisplayName())), void window.showDialog("sell_all_confirmation_bg");
                             }
                             this.root.logic.sellBuilding(this.currentEntity) && ((this.currentEntity = null), this.hideTooltip());
                         }
@@ -33071,7 +33064,7 @@
                         if (null == i) throw new Error("Entity has no meta handle");
                         (this.currentRadiusParams = [0, 0]), this.initializeRadiusHelper(), this.tooltipTitle.setText(i.getDisplayName(), true), this.tooltipDesc.setText(i.getDescription(), true);
                         var a = Config.colors.levels[e.getLevel()];
-                        this.tooltipLevelText.setText(tr("level").toUpperCase() + " " + (e.getLevel() + 1), true), (this.tooltipLevelText.tint = a), (this.tooltipLevelIcon.tint = a);
+                        this.tooltipLevelText.setText(translate("level").toUpperCase() + " " + (e.getLevel() + 1), true), (this.tooltipLevelText.tint = a), (this.tooltipLevelIcon.tint = a);
                         var o = i.getLevelKeyStats(e.getLevel()),
                             n = i.getLevelKeyStats(e.getLevel() + 1),
                             r = 0;
@@ -33084,7 +33077,7 @@
                                     l = a[1];
                                 if (o[s]) {
                                     var u = t.tooltipStatLines[r],
-                                        c = tr("stat_" + s);
+                                        c = translate("stat_" + s);
                                     u.icon.loadTexture("atlas", "icon-" + s + ".png");
                                     var d = formatBigNumber(o[s], true);
                                     if ((u.currentValueText.setText(d, true), l)) {
@@ -33430,7 +33423,7 @@
                             t.anchor.setTo(0.5, 0.5),
                             this.group.add(t),
                             (this.arrowSprite = t),
-                            (this.text = e.make.text(0, 0, tr("base_arrow_hint").toUpperCase(), { font: "22px Roboto", fill: "#FFF" })),
+                            (this.text = e.make.text(0, 0, translate("base_arrow_hint").toUpperCase(), { font: "22px Roboto", fill: "#FFF" })),
                             this.text.anchor.setTo(0.5, 0.5),
                             (this.text.y = 30),
                             this.group.add(this.text);
@@ -33608,9 +33601,9 @@
                         e.prototype.init.call(this);
                         var i = this.root.phaser,
                             a = [
-                                { label: tr("cannon"), id: "cannonballs", color: Config.colors.cannonball },
-                                { label: tr("arrow"), id: "arrows", color: Config.colors.basicArrow },
-                                { label: tr("lightning"), id: "power", color: Config.colors.power },
+                                { label: translate("cannon"), id: "cannonballs", color: Config.colors.cannonball },
+                                { label: translate("arrow"), id: "arrows", color: Config.colors.basicArrow },
+                                { label: translate("lightning"), id: "power", color: Config.colors.power },
                             ];
                         this.barHandles = {};
                         var o = 10,
@@ -33650,7 +33643,7 @@
             GoldIncomeVisualizerUI = (function (e) {
                 function t(i, a, o) {
                     _classCallCheck(this, t);
-                    var n = _possibleConstructorReturn(this, e.call(this, i, a, o, { height: 33, label: tr("crystals_per_sec").toUpperCase(), updateInterval: 500 }));
+                    var n = _possibleConstructorReturn(this, e.call(this, i, a, o, { height: 33, label: translate("crystals_per_sec").toUpperCase(), updateInterval: 500 }));
                     return (n.lastGemCount = n.root.stats.gems), (n.gainAverage = 0), n.root.signals.gameLoadedAndStarted.add(n.doUpdate, n), n;
                 }
                 return (
@@ -33829,8 +33822,8 @@
                         if ((this.label.setText(e.toUpperCase(), true), t >= 60)) {
                             var i = Math.floor(t / 60),
                                 a = t % 60;
-                            this.text.setText(i + tr("minute_suffix") + " " + a.toString().padStart(2, "0") + tr("seconds_suffix"), true);
-                        } else this.text.setText(t + tr("seconds_suffix"), true);
+                            this.text.setText(i + translate("minute_suffix") + " " + a.toString().padStart(2, "0") + translate("seconds_suffix"), true);
+                        } else this.text.setText(t + translate("seconds_suffix"), true);
                         if (t <= 15) {
                             (this.root.time.now / 1e3) % 0.4 > 0.2 ? (this.text.tint = 16742263) : (this.text.tint = 16777214);
                         }
@@ -33842,12 +33835,12 @@
                                 var t = this.root.time.now - e.placedBaseAtTime,
                                     i = Config.initialDayDurationAdditional + Config.dayDurationTotalSeconds - Config.nightDurationSeconds - t / 1e3,
                                     a = Math.floor(i);
-                                a > 0 && ((this.panelGroup.visible = true), this.setDisplayParameters(tr("first_zombie_wave_in"), a));
+                                a > 0 && ((this.panelGroup.visible = true), this.setDisplayParameters(translate("first_zombie_wave_in"), a));
                             }
                             if (e.placedBaseAtTime && e.getDay() % GAME_BALANCING.bossInterval == 0 && !e.isNight() && e.getDay() > 1) {
                                 this.panelGroup.visible = true;
                                 var o = Math.floor(e.secondsUntilNight());
-                                this.setDisplayParameters(tr("zombie_boss_in"), o);
+                                this.setDisplayParameters(translate("zombie_boss_in"), o);
                             }
                         }
                     }),
@@ -34015,8 +34008,6 @@
                     }),
                     (t.prototype.handleClick = function () {
                         this.root.signals.uiActionPerformed.dispatch(this),
-                            window.gtag && window.gtag("event", "memu_button_clicked", { event_category: "ingame", event_label: this.spriteKey }),
-                            sendTrackingRequest(trackingSeverity.info, "Menu Button Clicked", { id: this.spriteKey }),
                             this.toggleable ? (this.setToggleState(!this.isToggled), this.toggled.dispatch(this.isToggled)) : this.clicked.dispatch();
                     }),
                     (t.prototype.setToggleState = function (e) {
@@ -34161,7 +34152,7 @@
                     _classCallCheck(this, t);
                     var n = _possibleConstructorReturn(
                         this,
-                        e.call(this, { root: i, uiGroup: a, index: o, spriteKey: "view-defense.png", title: tr("defense_view"), description: tr("defense_view_desc"), keybinding: Config.keys.viewDefense })
+                        e.call(this, { root: i, uiGroup: a, index: o, spriteKey: "view-defense.png", title: translate("defense_view"), description: translate("defense_view_desc"), keybinding: Config.keys.viewDefense })
                     );
                     return (
                         (n.group = n.root.groups.defensiveViewGroup),
@@ -34212,7 +34203,7 @@
                     _classCallCheck(this, t);
                     var n = _possibleConstructorReturn(
                         this,
-                        e.call(this, { root: i, uiGroup: a, index: o, spriteKey: "view-transport.png", title: tr("transport_view"), description: tr("transport_view_desc"), keybinding: Config.keys.viewTransport })
+                        e.call(this, { root: i, uiGroup: a, index: o, spriteKey: "view-transport.png", title: translate("transport_view"), description: translate("transport_view_desc"), keybinding: Config.keys.viewTransport })
                     );
                     return (
                         (n.group = n.root.groups.transportViewGroup),
@@ -34362,7 +34353,7 @@
                     for (var t = arguments.length, i = Array(t), a = 0; a < t; a++) i[a] = arguments[a];
                     this.text = i
                         .map(function (e) {
-                            return tr(e);
+                            return translate(e);
                         })
                         .join("<br /><br />");
                 }
@@ -35396,7 +35387,7 @@
                         var e = this.getCurrentStepInstance();
                         e
                             ? ((document.getElementById("tutorial_next_text").innerHTML = e.text),
-                                this.currentStepIndex === TUTORIAL_STEPS.length - 1 && (document.getElementById("next_tutorial_btn").innerText = tr("tutorial_finish")),
+                                this.currentStepIndex === TUTORIAL_STEPS.length - 1 && (document.getElementById("next_tutorial_btn").innerText = translate("tutorial_finish")),
                                 this.updateArrowPosition(),
                                 e.requiresArrowAction() ? document.getElementById("tutorial_arrow").classList.add("clickable") : document.getElementById("tutorial_arrow").classList.remove("clickable"),
                                 e.hasNextButton() ? (document.getElementById("next_tutorial_btn").style.display = "inline-block") : (document.getElementById("next_tutorial_btn").style.display = "none"),
@@ -35416,7 +35407,7 @@
                     (e.prototype.resetTutorialButtons = function () {
                         this.abortRequested = false;
                         try {
-                            document.getElementById("abort_tutorial_btn").innerText = tr("tutorial_abort");
+                            document.getElementById("abort_tutorial_btn").innerText = translate("tutorial_abort");
                         } catch (e) { }
                     }),
                     (e.prototype.init = function () {
@@ -35430,7 +35421,7 @@
                                 e.abortRequested
                                     ? (e.finishTutorial(), (e.root.stats.gems = 100))
                                     : ((e.abortRequested = true),
-                                        (document.getElementById("abort_tutorial_btn").innerText = tr("tutorial_confirm_abort")),
+                                        (document.getElementById("abort_tutorial_btn").innerText = translate("tutorial_confirm_abort")),
                                         setTimeout(function () {
                                             return e.resetTutorialButtons();
                                         }, 2e3)),
@@ -35471,7 +35462,7 @@
                     _classCallCheck(this, t);
                     var n = _possibleConstructorReturn(
                         this,
-                        e.call(this, { root: i, uiGroup: a, index: o, spriteKey: "view-processor_usage.png", title: tr("processor_usage_view"), description: tr("processor_usage_view_desc"), keybinding: Config.keys.viewProcessorUsage })
+                        e.call(this, { root: i, uiGroup: a, index: o, spriteKey: "view-processor_usage.png", title: translate("processor_usage_view"), description: translate("processor_usage_view_desc"), keybinding: Config.keys.viewProcessorUsage })
                     );
                     return (
                         (n.group = n.root.groups.processorUsageViewGroup),
@@ -35674,7 +35665,7 @@
                             !Config.tutorialActive &&
                             (this.isBasePlaced()
                                 ? ((Config.gameTimeSpeedUpFactor = 1e-12), this.setTimeIndicator("icon-pause.png", 700), this.clearActiveState(), this.buttonSpeedPause.activate(), true)
-                                : (this.showNotAvailableHint(tr("pause_not_possible_before_base")), false))
+                                : (this.showNotAvailableHint(translate("pause_not_possible_before_base")), false))
                         );
                     }),
                     (e.prototype.requestRegularSpeed = function () {
@@ -35684,10 +35675,10 @@
                         return (
                             !Config.tutorialActive &&
                             (this.isBossAlive() && this.root.settings.disableFastForwardDuringBoss
-                                ? (this.showNotAvailableHint(tr("fastforward_disabled_while_boss")), this.requestRegularSpeed(), false)
+                                ? (this.showNotAvailableHint(translate("fastforward_disabled_while_boss")), this.requestRegularSpeed(), false)
                                 : this.isBasePlaced()
                                     ? ((Config.gameTimeSpeedUpFactor = Config.fastForwardSpeed), this.setTimeIndicator("icon-fast-forward.png", 150), this.clearActiveState(), this.buttonSpeedFast.activate(), true)
-                                    : (this.showNotAvailableHint(tr("fastforward_not_possible_before_base")), this.requestRegularSpeed(), false))
+                                    : (this.showNotAvailableHint(translate("fastforward_not_possible_before_base")), this.requestRegularSpeed(), false))
                         );
                     }),
                     (e.prototype.setTimeIndicator = function (e) {
@@ -35708,7 +35699,7 @@
                             i = Config.mobileDevice ? 30 : 40,
                             a = makeRoundedPanelBackground(this.root.phaser, 3 * t, i, Config.colors.ui.panelBackground, Config.colors.ui.panelAlpha);
                         this.buttonGroup.add(a),
-                            (this.buttonSpeedPause = new GameTimeButton({ root: this.root, parentGroup: this.buttonGroup, spriteKey: "icon-pause-button.png", title: tr("pause_game"), description: tr("pause_game_desc") })),
+                            (this.buttonSpeedPause = new GameTimeButton({ root: this.root, parentGroup: this.buttonGroup, spriteKey: "icon-pause-button.png", title: translate("pause_game"), description: translate("pause_game_desc") })),
                             this.buttonSpeedPause.clicked.add(function () {
                                 e.requestPause() ? e.root.signals.uiActionPerformed.dispatch(e) : e.root.signals.uiActionPerformedAndFailed.dispatch(e);
                             }, this),
@@ -35716,8 +35707,8 @@
                                 root: this.root,
                                 parentGroup: this.buttonGroup,
                                 spriteKey: "icon-regular-speed-button.png",
-                                title: tr("regular_speed"),
-                                description: tr("regular_speed_desc"),
+                                title: translate("regular_speed"),
+                                description: translate("regular_speed_desc"),
                                 spriteXOffs: 1,
                             })),
                             (this.buttonSpeedRegular.handle().position.x = t),
@@ -35728,8 +35719,8 @@
                                 root: this.root,
                                 parentGroup: this.buttonGroup,
                                 spriteKey: "icon-fast-forward-button.png",
-                                title: tr("fast_forward"),
-                                description: tr("fast_forward_desc"),
+                                title: translate("fast_forward"),
+                                description: translate("fast_forward_desc"),
                                 spriteXOffs: 1,
                             })),
                             (this.buttonSpeedFast.handle().position.x = 2 * t),
@@ -35856,8 +35847,8 @@
                         (this.button = new MenuButton({
                             root: this.root,
                             spriteKey: "icon-global-upgrades.png",
-                            title: tr("global_upgrades"),
-                            description: tr("global_upgrades_desc"),
+                            title: translate("global_upgrades"),
+                            description: translate("global_upgrades_desc"),
                             keybinding: Config.keys.globalUpgrades,
                             toggleable: true,
                             haveBadge: true,
@@ -35872,11 +35863,9 @@
                             e && (this.rerenderSkillTree(), this.contentGroup.position.setTo(Math.floor(this.root.phaser.width / 2), Math.floor(this.root.phaser.height / 2)), this.clampViewToBounds()),
                             this.hideTooltip(),
                             this.endDrag(),
-                            window.gtag && window.gtag("event", "dialog_shown", { event_category: "general", event_label: "global_upgrades" }),
-                            sendTrackingRequest(trackingSeverity.info, "Global upgrades dialog shown", {}),
                             this.isDialogOpen()
-                                ? (document.body.classList.add("globalUpgradesDialogOpen"), window.restartGame && showAdditionalBannerAd())
-                                : (document.body.classList.remove("globalUpgradesDialogOpen"), window.restartGame && hideAdditionalBannerAd());
+                                ? (document.body.classList.add("globalUpgradesDialogOpen"), window.restartGame)
+                                : (document.body.classList.remove("globalUpgradesDialogOpen"), window.restartGame);
                     }),
                     (e.prototype.isDialogOpen = function () {
                         return this.dialogGroup.visible;
@@ -35924,7 +35913,7 @@
                         this.descriptionGroup.add(a);
                         var o = t.make.group();
                         o.position.setTo(PADDING), this.descriptionGroup.add(o);
-                        var n = t.make.text(0, 2, tr("global_upgrades").toUpperCase(), { font: "18px Roboto", fill: "#fff" });
+                        var n = t.make.text(0, 2, translate("global_upgrades").toUpperCase(), { font: "18px Roboto", fill: "#fff" });
                         o.add(n);
                         (this.pointsLeftBadge = makeBorderedRoundedPanelBackground({ phaser: t, w: 120, h: 30, fill: 3355448, lineFill: 2414703, lineWidth: 2, alpha: 1, borderRadius: 4 })),
                             this.dialogGroup.add(this.pointsLeftBadge),
@@ -35935,13 +35924,13 @@
                             (this.pointsLeftText = t.make.text(0, 8, "0 Points", { fill: "#" + (2414703).toString(16).padStart(6, "0"), font: "12px Roboto", fontWeight: 700, align: "center", boundsAlignH: "center" })),
                             this.pointsLeftText.setTextBounds(0, 0, 120, 20),
                             this.pointsLeftBadge.addChild(this.pointsLeftText),
-                            (this.noPointsText = t.make.text(0, 0, tr("no_points"), { fill: "#f77", font: "14px Roboto", fontWeight: 700, align: "right", boundsAlignH: "right" })),
+                            (this.noPointsText = t.make.text(0, 0, translate("no_points"), { fill: "#f77", font: "14px Roboto", fontWeight: 700, align: "right", boundsAlignH: "right" })),
                             this.noPointsText.setTextBounds(0, 7, 250, 20),
                             this.dialogGroup.add(this.noPointsText),
                             (this.closeButton = makeButton({
                                 phaser: t,
                                 width: 130,
-                                text: tr("close_dialog"),
+                                text: translate("close_dialog"),
                                 fill: 16742263,
                                 clickHandler: function () {
                                     return e.toggleDialog(false);
@@ -35949,7 +35938,7 @@
                                 keybinding: _phaserCe.Phaser.Keyboard.ESC,
                             })),
                             this.dialogGroup.add(this.closeButton);
-                        var r = t.make.text(0, 32, tr("global_upgrades_explain"), { font: "13px Roboto", fill: "#999", wordWrap: true, wordWrapWidth: DESCRIPTION_WIDTH - 2 * PADDING });
+                        var r = t.make.text(0, 32, translate("global_upgrades_explain"), { font: "13px Roboto", fill: "#999", wordWrap: true, wordWrapWidth: DESCRIPTION_WIDTH - 2 * PADDING });
                         o.add(r);
                         var s = new SingleSpriteButton(t, "icon-close.png");
                         o.add(s),
@@ -35961,7 +35950,7 @@
                             (this.toggleStatsButton = makeButton({
                                 phaser: t,
                                 width: 160,
-                                text: tr("toggle_skill_summary"),
+                                text: translate("toggle_skill_summary"),
                                 fill: 7829503,
                                 clickHandler: function () {
                                     return e.toggleSummary();
@@ -36012,7 +36001,7 @@
                                 l = n * NODE_SCALE,
                                 u = -r * NODE_SCALE,
                                 c = mixColorPerChannel(s.color, 0.2, 34),
-                                d = t.make.text(l, u, tr("skill_group_" + o).toUpperCase(), { font: "14px Roboto", fill: "#" + c.toString(16).padStart(6, "0"), align: "center", fontWeight: 700, boundsAlignH: "center" });
+                                d = t.make.text(l, u, translate("skill_group_" + o).toUpperCase(), { font: "14px Roboto", fill: "#" + c.toString(16).padStart(6, "0"), align: "center", fontWeight: 700, boundsAlignH: "center" });
                             d.setTextBounds(-100, 0, 200, 30), e.labelsGroup.add(d);
                         });
                     }),
@@ -36042,7 +36031,7 @@
                                     }),
                                     u.events.onInputDown.add(function () {
                                         e.root.stats.isSkillUnlocked(o) && e.root.signals.uiActionPerformedAndFailed.dispatch(),
-                                            e.tryUnlock(o) ? e.root.signals.uiSkillMarkedForLevelUp.dispatch() : e.root.gui.uiNotifications.showError(tr("can_not_unlock_skill"));
+                                            e.tryUnlock(o) ? e.root.signals.uiSkillMarkedForLevelUp.dispatch() : e.root.gui.uiNotifications.showError(translate("can_not_unlock_skill"));
                                     });
                                 var c = t.make.graphics();
                                 s.add(c);
@@ -36103,14 +36092,14 @@
                                         a = n[l],
                                         o = a.text,
                                         r = a.value;
-                                    (o.tint = i.color), o.setText(tr("gain_" + e), true), r.setText("+" + t.gains[e] + "%", true), (o.visible = true), (r.visible = true), (l += 1);
+                                    (o.tint = i.color), o.setText(translate("gain_" + e), true), r.setText("+" + t.gains[e] + "%", true), (o.visible = true), (r.visible = true), (l += 1);
                                 }
                             }),
                                 (a = 20 * l + 15);
                         }
                         (s.y = a + 2),
                             (a += 25),
-                            1 === t.cost ? s.setText(tr("points_cost_single", t.cost), true) : s.setText(tr("points_cost", t.cost), true),
+                            1 === t.cost ? s.setText(translate("points_cost_single", t.cost), true) : s.setText(translate("points_cost", t.cost), true),
                             t.cost > this.root.stats.points ? (s.tint = 16751001) : (s.tint = 10066431),
                             Config.showSkillIds && (s.setText(t.cost + " // " + e, true), (s.tint = 3381759)),
                             this.tooltipGroup.position.setTo(i[0] - TOOLTIP_W / 2, i[1] - a - Math.floor(14 * t.getScale()) - 15);
@@ -36185,7 +36174,7 @@
                                         o = GAIN_MAPPINGS[t];
                                     if (a !== o.default) {
                                         var n = Math.floor(a - o.default) + " %";
-                                        0 !== o.default && (n = "+ " + n), i.push({ color: o.color, text: tr("gain_" + t), value: n });
+                                        0 !== o.default && (n = "+ " + n), i.push({ color: o.color, text: translate("gain_" + t), value: n });
                                     }
                                 }),
                                 i.length < 1 ? ((this.summaryGroup.renderable = false), (this.toggleStatsButton.visible = false)) : ((this.summaryGroup.renderable = true), (this.toggleStatsButton.visible = true));
@@ -36216,8 +36205,8 @@
                     (e.prototype.rerenderBadge = function () {
                         if (this.root.stats.points > 0) {
                             (this.pointsLeftBadge.visible = true), (this.noPointsText.visible = false);
-                            var e = tr("points_cost", this.root.stats.points);
-                            1 === this.root.stats.points && (e = tr("points_cost_single", this.root.stats.points)), this.pointsLeftText.setText(e.toUpperCase(), true);
+                            var e = translate("points_cost", this.root.stats.points);
+                            1 === this.root.stats.points && (e = translate("points_cost_single", this.root.stats.points)), this.pointsLeftText.setText(e.toUpperCase(), true);
                         } else (this.noPointsText.visible = true), (this.pointsLeftBadge.visible = false);
                     }),
                     (e.prototype.update = function (e) {
@@ -36246,28 +36235,28 @@
                                 e += '<b class="keybinding_section_header">' + t + "</b>";
                             },
                             a = _phaserCe.Phaser.Keyboard;
-                        i(tr("kb_section_building")),
-                            t(tr("kb_place_multiple"), a.SHIFT),
-                            t(tr("kb_place_maxlevel"), a.ALT),
-                            t(tr("kb_cancel_placement"), a.ESC),
-                            t(tr("kb_sell_building"), Config.keys.sellBuilding),
-                            t(tr("kb_sell_all_building"), [a.SHIFT, "+", Config.keys.sellBuilding]),
-                            i(tr("kb_section_upgrading")),
-                            t(tr("upgrade"), Config.keys.upgradeBuilding),
-                            t(tr("upgrade_all"), [a.SHIFT, "+", Config.keys.upgradeBuilding]),
-                            t(tr("max_out"), [a.ALT, "+", Config.keys.upgradeBuilding]),
-                            t(tr("max_out_all"), [a.ALT, "+", a.SHIFT, "+", Config.keys.upgradeBuilding]),
-                            i(tr("kb_section_movement")),
-                            t(tr("kb_move"), [Config.keys.moveUp, Config.keys.moveLeft, Config.keys.moveDown, Config.keys.moveRight]),
-                            t(tr("kb_move_alternate"), [a.UP, a.LEFT, a.DOWN, a.RIGHT]),
-                            (e += "<span class='mouse_hint'>" + tr("kb_mouse_hint") + "</span><br>"),
-                            i(tr("kb_section_misc")),
-                            t(tr("fast_forward"), Config.keys.fastForward),
-                            t(tr("pause_game"), Config.keys.pause),
-                            t(tr("restart_game"), a.F5),
-                            t(tr("toggle_gui"), Config.keys.toggleGui),
-                            t(tr("toggle_minimap"), Config.keys.toggleMapView),
-                            t(tr("zoom"), [tr("mouse_wheel")]),
+                        i(translate("kb_section_building")),
+                            t(translate("kb_place_multiple"), a.SHIFT),
+                            t(translate("kb_place_maxlevel"), a.ALT),
+                            t(translate("kb_cancel_placement"), a.ESC),
+                            t(translate("kb_sell_building"), Config.keys.sellBuilding),
+                            t(translate("kb_sell_all_building"), [a.SHIFT, "+", Config.keys.sellBuilding]),
+                            i(translate("kb_section_upgrading")),
+                            t(translate("upgrade"), Config.keys.upgradeBuilding),
+                            t(translate("upgrade_all"), [a.SHIFT, "+", Config.keys.upgradeBuilding]),
+                            t(translate("max_out"), [a.ALT, "+", Config.keys.upgradeBuilding]),
+                            t(translate("max_out_all"), [a.ALT, "+", a.SHIFT, "+", Config.keys.upgradeBuilding]),
+                            i(translate("kb_section_movement")),
+                            t(translate("kb_move"), [Config.keys.moveUp, Config.keys.moveLeft, Config.keys.moveDown, Config.keys.moveRight]),
+                            t(translate("kb_move_alternate"), [a.UP, a.LEFT, a.DOWN, a.RIGHT]),
+                            (e += "<span class='mouse_hint'>" + translate("kb_mouse_hint") + "</span><br>"),
+                            i(translate("kb_section_misc")),
+                            t(translate("fast_forward"), Config.keys.fastForward),
+                            t(translate("pause_game"), Config.keys.pause),
+                            t(translate("restart_game"), a.F5),
+                            t(translate("toggle_gui"), Config.keys.toggleGui),
+                            t(translate("toggle_minimap"), Config.keys.toggleMapView),
+                            t(translate("zoom"), [translate("mouse_wheel")]),
                             (document.getElementById("keybindings_content").innerHTML = e),
                             window.showDialog("keybindings_dialog_bg");
                     }),
@@ -36314,8 +36303,8 @@
                                         (t += "<input onchange='window.updateGameSetting(\"" + a + "\", this)'  type='checkbox'"),
                                         (t += o ? " checked" : ""),
                                         (t += ">"),
-                                        (t += tr("setting_" + a)),
-                                        (t += "<span>" + tr("setting_" + a + "_desc") + "</span>"),
+                                        (t += translate("setting_" + a)),
+                                        (t += "<span>" + translate("setting_" + a + "_desc") + "</span>"),
                                         (t += "</label>");
                                 });
                         }),
@@ -36368,30 +36357,30 @@
                             (this.group.fixedToCamera = true),
                             this.uiGroup.add(this.group),
                             this.group.cameraOffset.setTo(Config.ui.screenBorder, Config.ui.screenBorderTop + (Config.mobileDevice ? 75 : 95)),
-                            (this.settingsButton = new MenuButton({ root: this.root, title: tr("settings"), description: tr("settings_desc"), spriteKey: "menu-settings.png", tooltipPosition: "right" })),
+                            (this.settingsButton = new MenuButton({ root: this.root, title: translate("settings"), description: translate("settings_desc"), spriteKey: "menu-settings.png", tooltipPosition: "right" })),
                             this.settingsButton.clicked.add(this.showSettingsDialog, this),
                             this.addButton(this.settingsButton),
                             Config.mobileDevice ||
-                            ((this.keybindingsButton = new MenuButton({ root: this.root, title: tr("keyboard_shortcuts"), description: tr("keyboard_shortcuts_desc"), spriteKey: "menu-keyboard.png", tooltipPosition: "right" })),
+                            ((this.keybindingsButton = new MenuButton({ root: this.root, title: translate("keyboard_shortcuts"), description: translate("keyboard_shortcuts_desc"), spriteKey: "menu-keyboard.png", tooltipPosition: "right" })),
                                 this.keybindingsButton.clicked.add(this.showKeybindingsDialog, this),
                                 this.addButton(this.keybindingsButton)),
-                            (this.restartButton = new MenuButton({ root: this.root, title: tr("back_to_menu"), description: tr("back_to_menu_desc"), spriteKey: "menu-restart.png", tooltipPosition: "right" })),
+                            (this.restartButton = new MenuButton({ root: this.root, title: translate("back_to_menu"), description: translate("back_to_menu_desc"), spriteKey: "menu-restart.png", tooltipPosition: "right" })),
                             this.restartButton.clicked.add(this.showRestartDialog, this),
                             this.addButton(this.restartButton),
                             Config.mobileDevice ||
-                            ((this.fullscreenButton = new MenuButton({ root: this.root, title: tr("toggle_fullscreen"), description: tr("toggle_fullscreen_desc"), spriteKey: "menu-fullscreen-on.png", tooltipPosition: "right" })),
+                            ((this.fullscreenButton = new MenuButton({ root: this.root, title: translate("toggle_fullscreen"), description: translate("toggle_fullscreen_desc"), spriteKey: "menu-fullscreen-on.png", tooltipPosition: "right" })),
                                 this.fullscreenButton.clicked.add(this.toggleFullscreen, this),
                                 this.addButton(this.fullscreenButton)),
-                            (this.soundToggleButton = new MenuButton({ root: this.root, title: tr("toggle_sound"), description: tr("toggle_sound_desc"), spriteKey: "menu-sound-on.png", tooltipPosition: "right" })),
+                            (this.soundToggleButton = new MenuButton({ root: this.root, title: translate("toggle_sound"), description: translate("toggle_sound_desc"), spriteKey: "menu-sound-on.png", tooltipPosition: "right" })),
                             this.soundToggleButton.clicked.add(this.toggleSounds, this),
                             this.addButton(this.soundToggleButton),
-                            (this.musicToggleButton = new MenuButton({ root: this.root, title: tr("toggle_music"), description: tr("toggle_music_desc"), spriteKey: "menu-music-on.png", tooltipPosition: "right" })),
+                            (this.musicToggleButton = new MenuButton({ root: this.root, title: translate("toggle_music"), description: translate("toggle_music_desc"), spriteKey: "menu-music-on.png", tooltipPosition: "right" })),
                             this.musicToggleButton.clicked.add(this.toggleMusic, this),
                             this.addButton(this.musicToggleButton),
-                            (this.saveButton = new MenuButton({ root: this.root, title: tr("save_game"), description: tr("save_game_desc"), spriteKey: "menu-save.png", tooltipPosition: "right" })),
+                            (this.saveButton = new MenuButton({ root: this.root, title: translate("save_game"), description: translate("save_game_desc"), spriteKey: "menu-save.png", tooltipPosition: "right" })),
                             this.saveButton.clicked.add(this.saveGame, this),
                             this.addButton(this.saveButton),
-                            (this.loadButton = new MenuButton({ root: this.root, title: tr("load_game"), description: tr("load_game_desc"), spriteKey: "menu-load.png", tooltipPosition: "right" })),
+                            (this.loadButton = new MenuButton({ root: this.root, title: translate("load_game"), description: translate("load_game_desc"), spriteKey: "menu-load.png", tooltipPosition: "right" })),
                             this.loadButton.clicked.add(this.loadGame, this),
                             this.addButton(this.loadButton),
                             this.buttons.reverse().forEach(function (t) {
@@ -36401,7 +36390,7 @@
                             this.updateFullscreenButton();
                     }),
                     (e.prototype.saveGame = function () {
-                        this.root.logic.playerHasPlacedBase() ? this.root.savegames.saveGame() : this.root.gui.uiNotifications.showError(tr("error_save_not_possible_before_base"));
+                        this.root.logic.playerHasPlacedBase() ? this.root.savegames.saveGame() : this.root.gui.uiNotifications.showError(translate("error_save_not_possible_before_base"));
                     }),
                     (e.prototype.loadGame = function () {
                         this.root.savegames.showDialog();
@@ -36451,10 +36440,10 @@
             BaseUnlockTip = (function () {
                 function e(t, i, a) {
                     _classCallCheck(this, e),
-                        (this.title = tr(t)),
+                        (this.title = translate(t)),
                         (this.description = i
                             .map(function (e) {
-                                return tr(e);
+                                return translate(e);
                             })
                             .join("<br />")),
                         (this.shown = false),
@@ -36658,7 +36647,7 @@
                         return false;
                     }),
                     (t.prototype.getLinkAction = function () {
-                        return window.inThirdpartyIframe ? null : { text: tr("unlock_vote_visit_iogames_space"), url: "http://iogames.space/yorg-io" };
+                        return window.inThirdpartyIframe ? null : { text: translate("unlock_vote_visit_iogames_space"), url: "http://iogames.space/yorg-io" };
                     }),
                     t
                 );
@@ -36681,7 +36670,7 @@
                         return false;
                     }),
                     (t.prototype.getLinkAction = function () {
-                        return { text: tr("unlock_standalone_btn"), url: "http://steam.yorg.io" };
+                        return { text: translate("unlock_standalone_btn"), url: "http://steam.yorg.io" };
                     }),
                     t
                 );
@@ -36704,7 +36693,7 @@
                         return false;
                     }),
                     (t.prototype.getLinkAction = function () {
-                        return { text: tr("unlock_standalone_btn"), url: "http://steam.yorg.io" };
+                        return { text: translate("unlock_standalone_btn"), url: "http://steam.yorg.io" };
                     }),
                     t
                 );
@@ -36727,7 +36716,7 @@
                         return false;
                     }),
                     (t.prototype.getLinkAction = function () {
-                        return { text: tr("unlock_standalone_btn"), url: "http://steam.yorg.io" };
+                        return { text: translate("unlock_standalone_btn"), url: "http://steam.yorg.io" };
                     }),
                     t
                 );
@@ -36750,7 +36739,7 @@
                         return false;
                     }),
                     (t.prototype.getLinkAction = function () {
-                        return { text: tr("unlock_follow_twitter_visit_twitter"), url: "https://twitter.com/yorg_io" };
+                        return { text: translate("unlock_follow_twitter_visit_twitter"), url: "https://twitter.com/yorg_io" };
                     }),
                     t
                 );
@@ -36797,14 +36786,8 @@
                     (e.prototype.showTip = function (e) {
                         e.shown = true;
                         var t = e.description;
-                        window.gtag && window.gtag("event", "show_unlock_tip", { event_category: "general", event_label: e.constructor.name }),
-                            sendTrackingRequest(trackingSeverity.info, "Show unlock tip", { id: e.constructor.name }),
-                            (window.trackUnlockLinkClick = function () {
-                                window.gtag && window.gtag("event", "click_unlock_tip_link", { event_category: "general", event_label: e.constructor.name }),
-                                    sendTrackingRequest(trackingSeverity.info, "Click unlock tip link", { id: e.constructor.name });
-                            });
                         var i = e.getLinkAction();
-                        null !== i && (t += "<br/><button class='' onclick='window.open(\"" + i.url + '", "blank"); window.trackUnlockLinkClick()\'>' + i.text + "</button>"),
+                        null !== i && (t += "<br/><button class='' onclick='window.open(\"" + i.url + '", "blank"); \'>' + i.text + "</button>"),
                             (document.getElementById("unlock_tips_header").innerHTML = e.title),
                             (document.getElementById("unlock_tips_dynamic_content").innerHTML = t);
                         var a = document.getElementById("unlock_tips_image");
@@ -36866,13 +36849,13 @@
                         (this.group = e.make.group()),
                             (this.group.fixedToCamera = true),
                             this.uiGroup.add(this.group),
-                            (this.upgradeModeHint = this.makeHint(tr("upgrade_mode_active"), Config.colors.ui.upgradeBuilding)),
+                            (this.upgradeModeHint = this.makeHint(translate("upgrade_mode_active"), Config.colors.ui.upgradeBuilding)),
                             this.group.add(this.upgradeModeHint),
-                            (this.sellModeHint = this.makeHint(tr("sell_mode_active"), Config.colors.ui.sellBuilding)),
+                            (this.sellModeHint = this.makeHint(translate("sell_mode_active"), Config.colors.ui.sellBuilding)),
                             this.group.add(this.sellModeHint),
-                            (this.placeMaxedOutHint = this.makeHint(tr("place_maxed_out_active"), Config.colors.ui.maxOutBuilding)),
+                            (this.placeMaxedOutHint = this.makeHint(translate("place_maxed_out_active"), Config.colors.ui.maxOutBuilding)),
                             this.group.add(this.placeMaxedOutHint),
-                            (this.maxOutHint = this.makeHint(tr("max_out_mode_active"), Config.colors.ui.maxOutBuilding)),
+                            (this.maxOutHint = this.makeHint(translate("max_out_mode_active"), Config.colors.ui.maxOutBuilding)),
                             this.group.add(this.maxOutHint);
                     }),
                     (e.prototype.makeHint = function (e, t) {
@@ -36965,7 +36948,7 @@
                         var t = this.root.phaser;
                         (this.graphics = t.make.graphics(10, 22)),
                             this.group.add(this.graphics),
-                            (this.text = t.make.text(29, 10, tr("updating_routes").toUpperCase(), { font: "12px Roboto", fontWeight: 400, fill: "#eee" })),
+                            (this.text = t.make.text(29, 10, translate("updating_routes").toUpperCase(), { font: "12px Roboto", fontWeight: 400, fill: "#eee" })),
                             (this.textAmount = t.make.text(10, 27, "", { font: "11px Roboto", fontWeight: 700, fill: "#aaa" })),
                             this.group.add(this.textAmount),
                             this.group.add(this.text);
@@ -36976,7 +36959,7 @@
                             o.precomputeConsumers && o.precomputedConsumersDirty && (e += 1);
                         }
                         if (e > 5) {
-                            (this.group.visible = true), this.textAmount.setText(tr("routes_remaining", e).toUpperCase(), true);
+                            (this.group.visible = true), this.textAmount.setText(translate("routes_remaining", e).toUpperCase(), true);
                             var n = 7864183;
                             e >= 50 && (n = 16777079), e >= 100 && (n = 16742263), (this.text.tint = n), this.graphics.clear();
                             var r = 0.01 * new Date().getTime();
@@ -37011,10 +36994,10 @@
                         (this.group = e.make.group()),
                             (this.group.fixedToCamera = true),
                             this.uiGroup.add(this.group),
-                            (this.zoomInButton = new MenuButton({ root: this.root, spriteKey: "icon-zoom-in.png", title: tr("zoom_in"), description: tr("zoom_in_desc"), small: true, tooltipPosition: "top" })),
+                            (this.zoomInButton = new MenuButton({ root: this.root, spriteKey: "icon-zoom-in.png", title: translate("zoom_in"), description: translate("zoom_in_desc"), small: true, tooltipPosition: "top" })),
                             this.group.add(this.zoomInButton),
                             this.zoomInButton.clicked.add(this.zoomIn, this),
-                            (this.zoomOutButton = new MenuButton({ root: this.root, spriteKey: "icon-zoom-out.png", title: tr("zoom_out"), description: tr("zoom_out_desc"), small: true, tooltipPosition: "top" })),
+                            (this.zoomOutButton = new MenuButton({ root: this.root, spriteKey: "icon-zoom-out.png", title: translate("zoom_out"), description: translate("zoom_out_desc"), small: true, tooltipPosition: "top" })),
                             this.group.add(this.zoomOutButton),
                             this.zoomOutButton.clicked.add(this.zoomOut, this),
                             (this.zoomOutButton.x = 24);
@@ -37059,8 +37042,8 @@
                         (this.button = new MenuButton({
                             root: this.root,
                             spriteKey: "menu-chat.png",
-                            title: tr("chat"),
-                            description: tr("chat_desc"),
+                            title: translate("chat"),
+                            description: translate("chat_desc"),
                             keybinding: null,
                             toggleable: true,
                             haveBadge: true,
@@ -37172,7 +37155,7 @@
                     (e.prototype.initToggling = function () {
                         var e = this,
                             t = this.root.phaser.add.group(),
-                            i = this.root.phaser.make.text(Config.ui.screenBorder, Config.ui.screenBorder, keyToString(Config.keys.toggleGui) + ": " + tr("toggle_gui"), { font: "12px Roboto", fill: "#eee" });
+                            i = this.root.phaser.make.text(Config.ui.screenBorder, Config.ui.screenBorder, keyToString(Config.keys.toggleGui) + ": " + translate("toggle_gui"), { font: "12px Roboto", fill: "#eee" });
                         (t.fixedToCamera = true),
                             t.add(i),
                             (this.toggleHint = t),
@@ -37989,7 +37972,7 @@
                     return;
                 }
 
-                let entriesHtml = tr("score_no_entries");
+                let entriesHtml = translate("score_no_entries");
                 if (this.permanentData && this.permanentData.Entries) {
                     const modeSelector = document.getElementById("leaderboardGamemodeSelector");
                     const rangeSelector = document.getElementById("leaderboardRangeSelector");
@@ -38002,11 +37985,11 @@
 
                     if (entries && entries.length > 0) {
                         entriesHtml = `<table>${entries.map(({ PlayerName, Day, Gems }, index) => `
-                              <tr class='lbRank${index}'>
+                              <translate class='lbRank${index}'>
                                 <td class='lbPlayerName'>${PlayerName}</td>
                                 <td class='lbPlayerGems'>${formatBigNumber(Gems)}</td>
                                 <td class='lbDay'>${Day}</td>
-                              </tr>
+                              </translate>
                             `).join("")}</table>`;
                     }
                 }
@@ -38023,7 +38006,7 @@
                 console.error("Failed to get permanent leaderboard!");
                 try {
                     const dynamicInner = document.getElementById("permanentLeaderboardDynamicInner");
-                    if (dynamicInner) dynamicInner.innerHTML = tr("failed_to_fetch_leaderboard");
+                    if (dynamicInner) dynamicInner.innerHTML = translate("failed_to_fetch_leaderboard");
                 } catch (error) {
                     console.error(error);
                 }
@@ -38033,7 +38016,7 @@
                 const rowClass = isCurrentPlayer ? `currentPlayer${topDivider ? " topDivider" : ""}` : "";
                 const dayId = isCurrentPlayer ? "id='curentPlayerDay'" : "";
 
-                return `<tr class='${rowClass}'><td class='td_rank'>${rank}</td><td class='td_player'>${playerName}</td><td class='td_day' ${dayId}>${day}</td></tr>`;
+                return `<translate class='${rowClass}'><td class='td_rank'>${rank}</td><td class='td_player'>${playerName}</td><td class='td_day' ${dayId}>${day}</td></translate>`;
             }
 
             fetchNewData() {
@@ -38065,7 +38048,7 @@
             redrawLeaderboard() {
                 let leaderboardHtml = "<table border='0' cellspacing='0'>";
                 ["rank", "name", "day"].forEach((header) => {
-                    leaderboardHtml += `<th>${tr("leaderboard_" + header)}</th>`;
+                    leaderboardHtml += `<th>${translate("leaderboard_" + header)}</th>`;
                 });
 
                 let isTopPlayer = this.currentData.PlayerRank > 0 && this.currentData.PlayerRank < 5;
@@ -38188,7 +38171,7 @@
         
             handleWheelEvent(e) {
                 if (this.root.dialogs.modalDialogIsOpen()) {
-                    if (true === e.ctrlKey) e.preventDefault();
+                    //if (true === e.ctrlKey) e.preventDefault();
                 } else {
                     this.root.gameStarted && e.preventDefault();
                     let t = e.deltaX || 0;
@@ -38702,7 +38685,7 @@
                     i.id === e.activeSavegameId && (t += e.generateSavegameHTML(i, true));
                 }), this.savegames.forEach(i => {
                     i.id !== e.activeSavegameId && (t += e.generateSavegameHTML(i));
-                }), 0 === this.savegames.length && (t += tr("no_savegames_yet")), document.getElementById("savegames_list").innerHTML = t, window.showDialog("savegame_bg");
+                }), 0 === this.savegames.length && (t += translate("no_savegames_yet")), document.getElementById("savegames_list").innerHTML = t, window.showDialog("savegame_bg");
             }
             generateSavegameHTML({
                 id,
@@ -38720,12 +38703,12 @@
                         <div class="savegame_stats">
                           <strong class="sv_stat sv_day"><i>Day</i>${day}</strong>
                           <strong class="sv_stat sv_base"><i>Saved</i>${s}</strong>
-                          <strong class="sv_stat sv_gamemode"><i>Mode</i>${tr("gamemode_" + gamemode)}</strong>
+                          <strong class="sv_stat sv_gamemode"><i>Mode</i>${translate("gamemode_" + gamemode)}</strong>
                         </div>
                         <div class="delete_savegame_confirm" id="sv_confirm_delete_${id}">
-                          ${tr("delete_savegame_warning")}<br />
-                          <button class="dialog_button cancel" onclick="window.deleteSavegame('${id}')">${tr("delete_savegame")}</button>
-                          <button class="dialog_button" onclick="document.getElementById('sv_confirm_delete_${id}').classList.remove('visible')">${tr("keep_savegame")}</button>
+                          ${translate("delete_savegame_warning")}<br />
+                          <button class="dialog_button cancel" onclick="window.deleteSavegame('${id}')">${translate("delete_savegame")}</button>
+                          <button class="dialog_button" onclick="document.getElementById('sv_confirm_delete_${id}').classList.remove('visible')">${translate("keep_savegame")}</button>
                         </div>
                         <div class="savegame_actions">
                           <span class="delete_savegame" onclick="document.getElementById('sv_confirm_delete_${id}').classList.add('visible')"></span>
@@ -38749,7 +38732,7 @@
                 if (this.activeSavegameId) {
                     console.log("[SAVEGAMES] Updating savegame:", this.activeSavegameId);
                     const t = this.getMetadataById(this.activeSavegameId);
-                    t.time = (new Date).getTime(), t.day = this.root.daytime.getDay(), this.root.gui.uiNotifications.showLongSuccess(tr("existing_savegame_updated"));
+                    t.time = (new Date).getTime(), t.day = this.root.daytime.getDay(), this.root.gui.uiNotifications.showLongSuccess(translate("existing_savegame_updated"));
                 } else {
                     const i = this.generateSavegameId();
                     console.log("[SAVEGAMES] Creating new savegame:", i);
@@ -38759,7 +38742,7 @@
                         day: this.root.daytime.getDay(),
                         gamemode: this.root.gamemode.getId()
                     };
-                    this.savegames.unshift(a), this.activeSavegameId = i, this.root.gui.uiNotifications.showLongSuccess(tr("new_savegame_created"));
+                    this.savegames.unshift(a), this.activeSavegameId = i, this.root.gui.uiNotifications.showLongSuccess(translate("new_savegame_created"));
                 }
                 this.storeBlob(this.activeSavegameId, e), this.updateMetadata(), this.rebuildImageData(this.activeSavegameId);
             }
@@ -38817,13 +38800,12 @@
                 this.game.scale.fullScreenScaleMode = _phaserCe.Phaser.ScaleManager.EXACT_FIT;
                 this.game.scale.fullScreenTarget = document.documentElement;
 
-                window.addEventListener("resize", function () {
+                window.addEventListener("resize", () => {
                     this.onResized();
                 })
 
                 makePhaserFast();
 
-                // Ensure canvas elements are opaque for performance.
                 this.game.canvas.mozOpaque = true;
                 this.game.canvas.webkitOpaque = true;
                 this.game.canvas.opaque = true;
@@ -39255,7 +39237,7 @@
                 this.logo.y = this.bg.height - this.logo.height - 30;
                 this.group.add(this.logo);
         
-                this.gameOverText = e.make.text(0, 30, tr("game_over").toUpperCase(), {
+                this.gameOverText = e.make.text(0, 30, translate("game_over").toUpperCase(), {
                     font: "60px Roboto",
                     fill: "#FF5555",
                     boundsAlignH: "center",
@@ -39267,9 +39249,9 @@
         
                 let t = "";
                 let i = this.stats.day;
-                t += tr("gameover_surived_text", i) + " - ";
+                t += translate("gameover_surived_text", i) + " - ";
                 t += this.rateDay(i) + "\n\n";
-                t += tr("gameover_stats_text", formatBigNumber(this.stats.gems), formatBigNumber(this.stats.score));
+                t += translate("gameover_stats_text", formatBigNumber(this.stats.gems), formatBigNumber(this.stats.score));
         
                 this.statsText = e.make.text(0, 120, t, {
                     font: "14px Roboto",
@@ -39281,7 +39263,7 @@
                 this.statsText.setTextBounds(0, 0, this.bg.width, 20);
                 this.group.add(this.statsText);
         
-                this.gemsHeader = e.make.text(30, 200, tr("gameover_gems_over_time").toUpperCase(), {
+                this.gemsHeader = e.make.text(30, 200, translate("gameover_gems_over_time").toUpperCase(), {
                     font: "13px Roboto",
                     fill: "#f77",
                     fontWeight: 700,
@@ -39322,7 +39304,7 @@
         
                 let h = document.createElement("span");
                 h.className = "channelHint";
-                h.innerText = tr("validation_token_desc2");
+                h.innerText = translate("validation_token_desc2");
                 d.appendChild(h);
         
                 document.body.appendChild(d);
@@ -39330,7 +39312,7 @@
                 this.retryButton = makeButton({
                     phaser: e,
                     width: 190,
-                    text: tr("gameover_try_again"),
+                    text: translate("gameover_try_again"),
                     fill: 16733525,
                     clickHandler: () => {
                         window.location.reload(true);
@@ -39351,7 +39333,7 @@
                 for (let i = t.length - 1; i >= 0; i -= 1) {
                     let a = t[i];
                     if (e >= a) {
-                        return tr("gameover_score_" + a);
+                        return translate("gameover_score_" + a);
                     }
                 }
         
@@ -39597,74 +39579,7 @@
                 );
             })(Visualizer),
             trackingSeverity = { info: "info", error: "error", warn: "warn" };
-        function sendTrackingRequest(e, t, i) {
-            var a = "not-jsonable";
-            try {
-                a = JSON.stringify({ data: i, stack: new Error().stack });
-            } catch (e) {
-                console.warn("Failed to jsonify payload:", { error: e });
-            }
-            a || console.warn("Failed to jsonify payload (empty):", { payload: i });
-            var o = JSON.stringify({ context: "", eventGroups: [[{ severity: e, eventType: "yorg-io-log", message: _lzString2.default.compressToEncodedURIComponent(t), payload: _lzString2.default.compressToEncodedURIComponent(a) }]] });
-            _superagent2.default
-                .post("https://tracking.yorg.app/v1/track")
-                .set("Content-Type", "application/json")
-                .set("X-Api-Key", "baf2a50f0cc7dfdec5a0e71c88a1169a4b34bc4f")
-                .send(o)
-                .end(function (e, t) { });
-        }
-        function refreshAd(e, t, i) {
-            if (window.adsSupported) {
-                var a = document.getElementById(e);
-                if (!a) return sendTrackingRequest("error", "Additional ad dismished", {}), console.error("[ADS] Additional ad container dismished!"), false;
-                if (!i) {
-                    var o = parseInt(a.getAttribute("data-lastUpdate"), 10);
-                    if (new Date().getTime() - o < 3e4) return void console.warn("[ADS] not refreshing additional ad due to timeout");
-                }
-                console.warn("[ADS] Refreshing ingame banner ad", e), a.setAttribute("data-lastUpdate", new Date().getTime());
-                try {
-                    aipDisplayTag.refresh(t);
-                } catch (i) {
-                    console.error("Failed to play additional ad:", i),
-                        window.gtag && window.gtag("event", "dialog_banner_ad_fail", { event_category: "ads", event_label: e, non_interaction: true }),
-                        sendTrackingRequest("error", "Failed to refresh additional banner ad", { adId: t, error: i && i.message, rawError: JSON.parse(JSON.stringify(i, Object.getOwnPropertyNames(i))) });
-                }
-            }
-        }
-        function refreshAdditionalBannerAd() {
-            refreshAd("additional_ad", "yorg-io_300x250_3", arguments.length > 0 && void 0 !== arguments[0] && arguments[0]);
-        }
-        function refreshAdditionalBannerAdWide() {
-            refreshAd("additional_ad_wide", "yorg-io_970x90", arguments.length > 0 && void 0 !== arguments[0] && arguments[0]);
-        }
-        function showAd(e, t) {
-            if (window.adsSupported) {
-                var i = document.getElementById(e);
-                if (!i) return sendTrackingRequest("error", "Additional ad dismished", {}), console.error("[ADS] Additional ad container dismished!"), false;
-                i.classList.add("visible"), window.gtag && window.gtag("event", "dialog_banner_ad_show", { event_category: "ads", event_label: e, non_interaction: true }), console.warn("[ADS] Showing additional ad", e);
-                var a = parseInt(i.getAttribute("data-lastUpdate"), 10);
-                new Date().getTime() - a > 6e4 && refreshAd(e, t);
-            }
-        }
-        function showAdditionalBannerAd() {
-            showAd("additional_ad", "yorg-io_300x250_3");
-        }
-        function showAdditionalBannerAdWide() {
-            showAd("additional_ad_wide", "yorg-io_970x90");
-        }
-        function hideAd(e, t) {
-            if (window.adsSupported) {
-                var i = document.getElementById(e);
-                if (!i) return sendTrackingRequest("error", "Additional ad dismished", {}), console.error("[ADS] Additional ad container dismished!"), false;
-                i.classList.remove("visible"), console.warn("[ADS] hiding additional ad", t), refreshAd(e, t, true);
-            }
-        }
-        function hideAdditionalBannerAd() {
-            hideAd("additional_ad", "yorg-io_300x250_3");
-        }
-        function hideAdditionalBannerAdWide() {
-            hideAd("additional_ad_wide", "yorg-io_970x90");
-        }
+
         var YORGIO_VERSION = "dev-unkown",
             IS_BETA = "beta.yorg.io" === window.location.host,
             YORGIO_ENVIRONMENT = "unkown",
@@ -39686,13 +39601,12 @@
         var tileDistance = 1.01,
             defaultTransportDistance = 3.5 * tileDistance,
             cameFromThirdparty = window.location.search.indexOf("came_from_thirdparty") >= 0,
-            isMobile = (0, _isMobile2.default)(),
-            RUNS_ON_TITOTU = false,
+            isMobile = false,
             Config = {
                 roundPixels: true,
-                mobileDevice: isMobile,
+                mobileDevice: false,
                 videoAdIntervalMinutes: 11,
-                textResolution: isMobile ? 2 : 1,
+                textResolution: 1,
                 tileSize: 64,
                 numTilesX: 200,
                 numTilesY: 200,
@@ -39729,7 +39643,7 @@
                 spawnDefaultBuildings: false,
                 testHealthBars: false,
                 visualizeNodeNet: false,
-                displayBalancing: false,
+                displayBalancing: true,
                 displayWaves: true,
                 noDamage: false,
                 zombiesEnabled: true,
@@ -39930,32 +39844,10 @@
                 e.__dev_testGameover && (console.log("[DEV] Instant Gameover enabled"), (Config.testGameOver = true)),
                 e.__dev_allowOldSavegames && (Config.allowOldSavegames = true);
         }
-        Config.mobileDevice && console.log("Mobile device detected");
         var LANGUAGES = {
             en: _en2.default,
-            ru: _ru2.default,
             "zh-tw": _zhTW2.default,
-            "zh-cn": _zhCN2.default,
-            tr: _tr2.default,
-            "es-419": _es2.default,
-            de: _de2.default,
-            ar: _ar2.default,
-            "pt-br": _ptBR2.default,
-            cs: _cs2.default,
-            it: _it2.default,
-            fr: _fr2.default,
-            hr: _hr2.default,
-            ro: _ro2.default,
-            "mt-mt": _mtMT2.default,
-            hu: _hu2.default,
-            da: _da2.default,
-            et: _et2.default,
-            "pt-pt": _ptPT2.default,
-            ko: _ko2.default,
-            nl: _nl2.default,
-            pl: _pl2.default,
-            lt: _lt2.default,
-            el: _el2.default,
+            "zh-cn": _zhCN2.default
         };
         function browserLocale() {
             return navigator.languages && navigator.languages.length ? navigator.languages[0] : navigator.userLanguage ? navigator.userLanguage : navigator.language;
@@ -40001,7 +39893,7 @@
         function parseTranslation(e) {
             return e.replace(/\[\[([^\]]*)\]\]/g, "<i>$1</i>").replace(/\[([^\]]*)\]/g, "<b>$1</b>");
         }
-        function tr(e) {
+        function translate(e) {
             if (Config.testTranslations) return "[" + e + "]";
             var t = CURRENT_LANG_DICT[e];
             if (!t) {
@@ -40020,7 +39912,7 @@
             if ((console.log("[LANG] Translating document ..."), document.querySelectorAll)) {
                 Array.from(document.querySelectorAll("[data-translate]")).forEach(function (e) {
                     var t = e.getAttribute("data-translate");
-                    e.innerHTML = tr(t);
+                    e.innerHTML = translate(t);
                 });
                 var e = document.getElementById("languageChooserParent");
                 e && e.classList.add("loaded");
@@ -40204,11 +40096,11 @@
             return t;
         }
         var NUMBER_ENTRIES = [
-            [1e15, tr("quadrillion_suffix"), 1e15],
-            [1e12, tr("trillions_suffix"), 1e12],
-            [1e9, tr("billions_suffix"), 1e9],
-            [1e6, tr("millions_suffix"), 1e6],
-            [1e3, tr("thousands_suffix"), 1e4],
+            [1e15, translate("quadrillion_suffix"), 1e15],
+            [1e12, translate("trillions_suffix"), 1e12],
+            [1e9, translate("billions_suffix"), 1e9],
+            [1e6, translate("millions_suffix"), 1e6],
+            [1e3, translate("thousands_suffix"), 1e4],
         ];
         function formatBigNumber(e) {
             var t = arguments.length > 1 && void 0 !== arguments[1] && arguments[1];
@@ -40234,13 +40126,13 @@
         }
         function keyToString(e) {
             return e === _phaserCe.Phaser.Keyboard.ESC
-                ? tr("key_esc")
+                ? translate("key_esc")
                 : e >= _phaserCe.Phaser.Keyboard.F1 && e <= _phaserCe.Phaser.Keyboard.F15
                     ? "F" + (e - _phaserCe.Phaser.Keyboard.F1 + 1)
                     : e === _phaserCe.Phaser.Keyboard.SHIFT
-                        ? tr("key_shift")
+                        ? translate("key_shift")
                         : e === _phaserCe.Phaser.Keyboard.ALT
-                            ? tr("key_alt")
+                            ? translate("key_alt")
                             : e === _phaserCe.Phaser.Keyboard.UP
                                 ? "&#8593;"
                                 : e === _phaserCe.Phaser.Keyboard.DOWN
@@ -40250,9 +40142,9 @@
                                         : e === _phaserCe.Phaser.Keyboard.RIGHT
                                             ? "&#8594;"
                                             : e === _phaserCe.Phaser.Keyboard.SPACEBAR
-                                                ? tr("key_space")
+                                                ? translate("key_space")
                                                 : e === _phaserCe.Phaser.Keyboard.ENTER
-                                                    ? tr("key_enter")
+                                                    ? translate("key_enter")
                                                     : String.fromCharCode(e);
         }
         function roundDecimals(e, t) {
@@ -40307,19 +40199,19 @@
                 o = Math.floor(a / 24);
             return t <= 60
                 ? t <= 1
-                    ? tr("second_before")
-                    : tr("seconds_before", t)
+                    ? translate("second_before")
+                    : translate("seconds_before", t)
                 : i <= 60
                     ? i <= 1
-                        ? tr("minute_before")
-                        : tr("minutes_before", i)
+                        ? translate("minute_before")
+                        : translate("minutes_before", i)
                     : a <= 60
                         ? a <= 1
-                            ? tr("hour_before")
-                            : tr("hours_before", a)
+                            ? translate("hour_before")
+                            : translate("hours_before", a)
                         : o <= 1
-                            ? tr("day_before")
-                            : tr("days_before", o);
+                            ? translate("day_before")
+                            : translate("days_before", o);
         }
         window.fn = formatBigNumber;
         var EASING = {
@@ -40368,690 +40260,6 @@
             easeBlink: function (e) {
                 return 0.5 * Math.sin(300 * e) + 0.5;
             },
-        },
-            BAD_WORDS = [
-                "yorg",
-                "yorg.io",
-                "admin",
-                "developer",
-                "y0rg",
-                "yorgio",
-                "y0rgio",
-                "*dyke",
-                "*fuck*",
-                "*shit*",
-                "5h1t",
-                "5hit",
-                "a_s_s",
-                "ahole",
-                "anal",
-                "anus",
-                "ash0le",
-                "ash0les",
-                "asholes",
-                "ass monkey",
-                "ass-fucker",
-                "asses",
-                "assface",
-                "assfucker",
-                "assfukka",
-                "assh0le",
-                "assh0lez",
-                "asshole",
-                "assholes",
-                "assholz",
-                "assrammer",
-                "asswhole",
-                "asswipe",
-                "azzhole",
-                "b!+ch",
-                "b!tch",
-                "b00b*",
-                "b00bs",
-                "b17ch",
-                "b1tch",
-                "ballbag",
-                "ballsack",
-                "bassterds",
-                "bastard",
-                "bastards",
-                "bastardz",
-                "basterds",
-                "basterdz",
-                "beastial",
-                "beastiality",
-                "bellend",
-                "bestial",
-                "bestiality",
-                "bi+ch",
-                "bi7ch",
-                "biatch",
-                "bitch",
-                "bitch*",
-                "bitcher",
-                "bitchers",
-                "bitches",
-                "bitchin",
-                "bitching",
-                "bloody",
-                "blow job",
-                "blowjob",
-                "blowjobs",
-                "boffing",
-                "boiolas",
-                "bollock",
-                "bollock*",
-                "bollok",
-                "boner",
-                "boobs",
-                "booobs",
-                "boooobs",
-                "booooobs",
-                "booooooobs",
-                "breasts",
-                "bunny fucker",
-                "butt-pirate",
-                "butthole",
-                "buttmuch",
-                "buttplug",
-                "buttwipe",
-                "c0ck",
-                "c0cks",
-                "c0cksucker",
-                "cabron",
-                "carpet muncher",
-                "cawk",
-                "cawks",
-                "chink",
-                "cipa",
-                "cl1t",
-                "clit",
-                "clitoris",
-                "clits",
-                "cnts",
-                "cntz",
-                "cnut",
-                "cock",
-                "cock*",
-                "cock-head",
-                "cock-sucker",
-                "cockface",
-                "cockhead",
-                "cockmunch",
-                "cockmuncher",
-                "cocks",
-                "cocksuck",
-                "cocksucked",
-                "cocksucker",
-                "cocksucking",
-                "cocksucks",
-                "cocksuka",
-                "cocksukka",
-                "cokmuncher",
-                "coksucka",
-                "coon",
-                "cummer",
-                "cumming",
-                "cums",
-                "cumshot",
-                "cunilingus",
-                "cunillingus",
-                "cunnilingus",
-                "cunt",
-                "cunt*",
-                "cuntlick",
-                "cuntlicker",
-                "cuntlicking",
-                "cunts",
-                "cuntz",
-                "cyberfuc",
-                "cyberfuck",
-                "cyberfucked",
-                "cyberfucker",
-                "cyberfuckers",
-                "cyberfucking",
-                "d1ck",
-                "d4mn",
-                "damn",
-                "daygo",
-                "dego",
-                "dick",
-                "dick*",
-                "dickhead",
-                "dike*",
-                "dild0",
-                "dild0s",
-                "dildo",
-                "dildos",
-                "dilld0",
-                "dilld0s",
-                "dlck",
-                "dog-fucker",
-                "doggin",
-                "dogging",
-                "donkeyribber",
-                "doosh",
-                "duche",
-                "dyke",
-                "dziwka",
-                "ejackulate",
-                "ejaculate",
-                "ejaculated",
-                "ejaculates",
-                "ejaculating",
-                "ejaculatings",
-                "ejaculation",
-                "ejakulate",
-                "enculer",
-                "f4nny",
-                "f u c k",
-                "f u c k e r",
-                "f_u_c_k",
-                "fag*",
-                "fag1t",
-                "faget",
-                "fagg1t",
-                "fagging",
-                "faggit",
-                "faggitt",
-                "faggot",
-                "faggs",
-                "fagit",
-                "fagot",
-                "fagots",
-                "fags",
-                "fagz",
-                "faig",
-                "faigs",
-                "fanculo",
-                "fanny",
-                "fannyflaps",
-                "fannyfucker",
-                "fanyy",
-                "fatass",
-                "fcuk",
-                "fcuker",
-                "fcuking",
-                "feces",
-                "feck",
-                "fecker",
-                "felcher",
-                "felching",
-                "fellate",
-                "fellatio",
-                "ficken",
-                "fingerfuck",
-                "fingerfucked",
-                "fingerfucker",
-                "fingerfuckers",
-                "fingerfucking",
-                "fingerfucks",
-                "fistfuck",
-                "fistfucked",
-                "fistfucker",
-                "fistfuckers",
-                "fistfucking",
-                "fistfuckings",
-                "fistfucks",
-                "flange",
-                "flikker",
-                "flipping the bird",
-                "fook",
-                "fooker",
-                "foreskin",
-                "fotze",
-                "fu(*",
-                "fuck",
-                "fucka",
-                "fucked",
-                "fucker",
-                "fuckers",
-                "fuckhead",
-                "fuckheads",
-                "fuckin",
-                "fucking",
-                "fuckings",
-                "fuckingshitmotherfucker",
-                "fuckme",
-                "fucks",
-                "fuckwhit",
-                "fuckwit",
-                "fudge packer",
-                "fudgepacker",
-                "fuk*",
-                "fukah",
-                "fuken",
-                "fuker",
-                "fukin",
-                "fukk",
-                "fukkah",
-                "fukken",
-                "fukker",
-                "fukkin",
-                "fuks",
-                "fukwhit",
-                "fukwit",
-                "futkretzn",
-                "fux0r",
-                "g00k",
-                "gangbang",
-                "gangbanged",
-                "gangbangs",
-                "gayboy",
-                "gaygirl",
-                "gaylord",
-                "gays",
-                "gaysex",
-                "gayz",
-                "goatse",
-                "god-dam",
-                "god-damned",
-                "goddamn",
-                "goddamned",
-                "gook",
-                "guiena",
-                "h00r",
-                "h0ar",
-                "h0re",
-                "hardcoresex",
-                "heshe",
-                "hitler",
-                "hoar",
-                "hoare",
-                "hoer",
-                "hoer*",
-                "homo",
-                "honkey",
-                "hoor",
-                "hoore",
-                "hore",
-                "horniest",
-                "horny",
-                "hotsex",
-                "huevon",
-                "injun",
-                "jack-off",
-                "jackoff",
-                "japs",
-                "jerk-off",
-                "jisim",
-                "jism",
-                "jiss",
-                "jizm",
-                "jizz",
-                "kanker*",
-                "kawk",
-                "kike",
-                "klootzak",
-                "knobead",
-                "knobed",
-                "knobend",
-                "knobhead",
-                "knobjocky",
-                "knobjokey",
-                "knobs",
-                "knobz",
-                "knulle",
-                "kock",
-                "kondum",
-                "kondums",
-                "kraut",
-                "kuksuger",
-                "kummer",
-                "kumming",
-                "kums",
-                "kunilingus",
-                "kunt",
-                "kunts",
-                "kuntz",
-                "kurac",
-                "kurwa",
-                "kusi*",
-                "kyrpa*",
-                "l3i+ch",
-                "l3itch",
-                "labia",
-                "lesbo",
-                "lezzian",
-                "lipshits",
-                "lipshitz",
-                "lust",
-                "lusting",
-                "m0f0",
-                "m0fo",
-                "m45terbate",
-                "ma5terb8",
-                "ma5terbate",
-                "mamhoon",
-                "masochist",
-                "masokist",
-                "massterbait",
-                "masstrbait",
-                "masstrbate",
-                "master-bate",
-                "masterb8",
-                "masterbaiter",
-                "masterbat*",
-                "masterbat3",
-                "masterbate",
-                "masterbates",
-                "masterbation",
-                "masterbations",
-                "masturbat*",
-                "masturbate",
-                "merd*",
-                "mibun",
-                "mo-fo",
-                "mof0",
-                "mofo",
-                "motha fucker",
-                "motha fuker",
-                "motha fukkah",
-                "motha fukker",
-                "mothafuck",
-                "mothafucka",
-                "mothafuckas",
-                "mothafuckaz",
-                "mothafucked",
-                "mothafucker",
-                "mothafuckers",
-                "mothafuckin",
-                "mothafucking",
-                "mothafuckings",
-                "mothafucks",
-                "mother fucker",
-                "mother fukah",
-                "mother fuker",
-                "mother fukkah",
-                "mother fukker",
-                "mother-fucker",
-                "motherfuck",
-                "motherfucked",
-                "motherfucker",
-                "motherfuckers",
-                "motherfuckin",
-                "motherfucking",
-                "motherfuckings",
-                "motherfuckka",
-                "motherfucks",
-                "mouliewop",
-                "muff",
-                "muie",
-                "mulkku",
-                "muschi",
-                "mutha",
-                "mutha fucker",
-                "mutha fukah",
-                "mutha fuker",
-                "mutha fukkah",
-                "mutha fukker",
-                "muthafecker",
-                "muthafuckker",
-                "muther",
-                "mutherfucker",
-                "n1gga",
-                "n1gger",
-                "n1gr",
-                "nastt",
-                "nazi",
-                "nazis",
-                "nepesaurio",
-                "nigg3r",
-                "nigg4h",
-                "nigga",
-                "niggah",
-                "niggas",
-                "niggaz",
-                "nigger",
-                "nigger*",
-                "nigger;",
-                "niggers",
-                "nigur;",
-                "niiger;",
-                "niigr;",
-                "nob jokey",
-                "nobjocky",
-                "nobjokey",
-                "numbnuts",
-                "nutsack",
-                "orafis",
-                "orgasim",
-                "orgasim;",
-                "orgasims",
-                "orgasm",
-                "orgasms",
-                "orgasum",
-                "oriface",
-                "orifice",
-                "orifiss",
-                "orospu",
-                "p0rn",
-                "packi",
-                "packie",
-                "packy",
-                "paki",
-                "pakie",
-                "paky",
-                "paska*",
-                "pecker",
-                "peeenus",
-                "peeenusss",
-                "peenus",
-                "peinus",
-                "pen1s",
-                "penas",
-                "penis",
-                "penis-breath",
-                "penisfucker",
-                "penus",
-                "penuus",
-                "phonesex",
-                "phuc",
-                "phuck",
-                "phuk",
-                "phuked",
-                "phuker",
-                "phuking",
-                "phukked",
-                "phukker",
-                "phukking",
-                "phuks",
-                "phuq",
-                "picka",
-                "pierdol*",
-                "pigfucker",
-                "pillu*",
-                "pimmel",
-                "pimpis",
-                "piss",
-                "piss*",
-                "pissed",
-                "pisser",
-                "pissers",
-                "pisses",
-                "pissflaps",
-                "pissin",
-                "pissing",
-                "pissoff",
-                "pizda",
-                "polac",
-                "polack",
-                "polak",
-                "poonani",
-                "poontsee",
-                "porn",
-                "porno",
-                "pornography",
-                "pornos",
-                "pr1c",
-                "pr1ck",
-                "pr1k",
-                "preteen",
-                "prick",
-                "pricks",
-                "pube",
-                "pula",
-                "pule",
-                "pusse",
-                "pussee",
-                "pussi",
-                "pussies",
-                "pussy",
-                "pussys",
-                "puta",
-                "puto",
-                "puuke",
-                "puuker",
-                "qahbeh",
-                "queef*",
-                "queers",
-                "queerz",
-                "qweers",
-                "qweerz",
-                "qweir",
-                "rautenberg",
-                "recktum",
-                "rectum",
-                "retard",
-                "rimjaw",
-                "rimming",
-                "s hit",
-                "s.o.b.",
-                "s_h_i_t",
-                "sadist",
-                "scank",
-                "schaffer",
-                "scheiss*",
-                "schlampe",
-                "schlong",
-                "schmuck",
-                "screw",
-                "screwing",
-                "scroat",
-                "scrote",
-                "scrotum",
-                "semen",
-                "sh!+",
-                "sh!t",
-                "sh!t*",
-                "sh1t",
-                "sh1ter",
-                "sh1ts",
-                "sh1tter",
-                "sh1tz",
-                "shag",
-                "shagger",
-                "shaggin",
-                "shagging",
-                "sharmuta",
-                "sharmute",
-                "shemale",
-                "shi+",
-                "shipal",
-                "shit",
-                "shitdick",
-                "shite",
-                "shited",
-                "shitey",
-                "shitfuck",
-                "shitfull",
-                "shithead",
-                "shiting",
-                "shitings",
-                "shits",
-                "shitted",
-                "shitter",
-                "shitters",
-                "shitting",
-                "shittings",
-                "shitty",
-                "shity",
-                "shitz",
-                "shiz",
-                "shyt",
-                "shyte",
-                "shytty",
-                "shyty",
-                "skanck",
-                "skank",
-                "skankee",
-                "skankey",
-                "skanks",
-                "skanky",
-                "skribz",
-                "skurwysyn",
-                "slag",
-                "slut",
-                "sluts",
-                "slutty",
-                "slutz",
-                "smegma",
-                "smut",
-                "snatch",
-                "son-of-a-bitch",
-                "spac",
-                "sphencter",
-                "spic",
-                "spierdalaj",
-                "splooge",
-                "spunk",
-                "suka",
-                "t1tt1e5",
-                "t1tties",
-                "teets",
-                "teez",
-                "testical",
-                "testicle",
-                "testicle*",
-                "titfuck",
-                "tits",
-                "titt*",
-                "tittie5",
-                "tittiefucker",
-                "titties",
-                "tittyfuck",
-                "tittywank",
-                "titwank",
-                "tosser",
-                "turd",
-                "tw4t",
-                "twat",
-                "twathead",
-                "twatty",
-                "twunt",
-                "twunter",
-                "v14gra",
-                "v1gra",
-                "va1jina",
-                "vag1na",
-                "vagiina",
-                "vagina",
-                "vaj1na",
-                "vajina",
-                "viagra",
-                "vittu",
-                "vullva",
-                "vulva",
-                "w00se",
-                "wang",
-                "wank",
-                "wank*",
-                "wanker",
-                "wanky",
-                "wetback*",
-                "wh00r",
-                "wh0re",
-                "whoar",
-                "whore",
-                "wichser",
-                "willies",
-                "willy",
-                "xrated",
-                "zabourah",
-            ];
-        function nameContainsBadWords(e) {
-            for (var t = e.toLowerCase(), i = 0; i < BAD_WORDS.length; ++i) if ((BAD_WORDS[i].length <= 3 && console.log(BAD_WORDS[i]), t.indexOf(BAD_WORDS[i]) >= 0)) return console.log(BAD_WORDS[i]), true;
-            return false;
         }
         var GAME_BALANCING = {},
             MAXLEVEL_INDEX = 29;
@@ -41110,11 +40318,11 @@
                             return r * (40 + 60 * Math.pow(e, 2.5));
                         },
                         hitsPerSecond: function (e) {
-                            return 1 + 0.1 * e;
+                            return Math.min(1 + 0.1 * e);
                         },
                         percentageAttackingBase: 0.7,
                         speed: function (e) {
-                            return 0.6 + 0.1 * Math.min(e, 15) + 0.7 * Math.random();
+                            return 0.6 + 0.1 * Math.min(e, 10) + 0.7 * Math.random();
                         },
                     },
                     creeper: {
@@ -41131,7 +40339,7 @@
                             return 1.5 + 0.05 * e;
                         },
                         speed: function (e) {
-                            return 2 + 0.2 * Math.min(e, 15) + Math.random();
+                            return 2 + 0.2 * Math.min(e, 10) + Math.random();
                         },
                         percentageAttackingBase: 0.8,
                     },
@@ -41565,7 +40773,8 @@
             ADD_BASE = 68234,
             ATTRIBUTE_NAMES = ["\0"],
             CULLING_BORDER_SIZE = 10;
-        function displayBalancing() {
+
+        window.displayBalancing - function() {
             for (var e = 1; e <= MAXLEVEL_INDEX; ++e) {
                 var t = GAME_BALANCING.buildings.goldMine[e - 1],
                     i = GAME_BALANCING.buildings.goldMine[e],
@@ -41667,14 +40876,12 @@
             )
                 m(_);
         }
+
         (window.showDialog = function (e) {
             console.log("[UI] Showing dialog", e),
                 document.getElementById(e).classList.add("visible_dialog"),
                 document.getElementById("renderer").classList.add("blurred"),
                 window.gtag && window.gtag("event", "dialog_shown", { event_category: "general", event_label: e }),
-                sendTrackingRequest(trackingSeverity.info, "Showing ui dialog", { id: e }),
-                showAdditionalBannerAd(),
-                showAdditionalBannerAdWide(),
                 document.body.classList.add("dialogOpened");
         }),
             (window.closeDialog = function (e) {
@@ -41683,14 +40890,12 @@
                     document.getElementById(e).classList.remove("visible_dialog"),
                     document.body.classList.remove("dialogOpened"),
                     document.getElementById("renderer").classList.remove("blurred"),
-                    hideAdditionalBannerAd(),
-                    hideAdditionalBannerAdWide(),
                     true
                 );
             }),
             (window.showBugReporter = function () {
                 if (window.showDialog) {
-                    if ((window.gtag && window.gtag("event", "bug_reporter_opened", { event_category: "ingame" }), sendTrackingRequest(trackingSeverity.info, "Bug reporter opened", {}), !window.Stomt)) {
+                    if ((window.gtag && window.gtag("event", "bug_reporter_opened", { event_category: "ingame" }), !window.Stomt)) {
                         console.log("Initializing stomt ..."), (window.Stomt = []);
                         var e = document.createElement("script"),
                             t = document.getElementsByTagName("script")[0];
@@ -41854,7 +41059,7 @@
                 crit_4: new skill3(CRITICAL, [1, 0], { critical: 2 }, ["crit_n_damage"]),
                 crit_5: new skill3(CRITICAL, [0, 1], { critical: 2 }, ["crit_4"]),
                 crit_n_damage_1: new skill3(DAMAGE, [1, -1], { damage: 2, critical: 2 }, ["damage_4", "crit_5"]),
-                double_crit_feature: new feature(DAMAGE, [1, 0], tr("feature_criticalHitsx3"), ["crit_n_damage_1"]),
+                double_crit_feature: new feature(DAMAGE, [1, 0], translate("feature_criticalHitsx3"), ["crit_n_damage_1"]),
                 health_0: new skill(HEALTH, [-1, 1], { health: 3 }, ["base"]),
                 health_1: new skill(HEALTH, [-1, 0], { health: 3 }, ["health_0"]),
                 health_2: new skill(HEALTH, [-1, 1], { health: 3 }, ["health_1"]),
@@ -41868,7 +41073,7 @@
                 health_circle_center: new big(HEALTH, [1.125, 0], { health: 10 }, ["health_circle_l", "health_circle_l"]),
                 health_5: new skill3(HEALTH, [-1, 0], { health: 3 }, ["health_circle_l"]),
                 health_6: new skill3(HEALTH, [-1, -1], { health: 3 }, ["health_5"]),
-                health_regen_feature: new feature(HEALTH, [0, -1], tr("feature_buildingHealthReg"), ["health_6"]),
+                health_regen_feature: new feature(HEALTH, [0, -1], translate("feature_buildingHealthReg"), ["health_6"]),
                 cannonDamage_0: new skill(CANNON, [1, -1], { cannonDamage: 4 }, ["base"]),
                 cannonDamage_1: new skill(CANNON, [0, -1], { cannonProjectileSpeed: 10 }, ["cannonDamage_0"]),
                 cannonDamage_2: new skill2(CANNON, [1, -1], { cannonDamage: 4 }, ["cannonDamage_1"]),
@@ -41878,7 +41083,7 @@
                 cannonDamage_6: new big(CANNON, [0, -1], { cannonDamage: 15, cannonProjectileSpeed: 10 }, ["cannonDamage_5"]),
                 cannonDamage_7: new skill3(CANNON, [1, -1], { cannonDamage: 4 }, ["cannonDamage_6"]),
                 cannonDamage_8: new skill3(CANNON, [1, 0], { cannonDamage: 4 }, ["cannonDamage_7"]),
-                cannon_feature_double_dmg: new feature(CANNON, [1, 0], tr("feature_cannonDoubleDmg"), ["cannonDamage_8"]),
+                cannon_feature_double_dmg: new feature(CANNON, [1, 0], translate("feature_cannonDoubleDmg"), ["cannonDamage_8"]),
                 arrowDamage_0: new skill(ARROW, [0, -1.5], { arrowDamage: 4 }, ["base"]),
                 arrowDamage_1: new skill(ARROW, [0, -1], { arrowDamage: 4 }, ["arrowDamage_0"]),
                 arrowFireRate_0: new skill2(ARROW, [0, -1], { arrowFireRate: 5 }, ["arrowDamage_1"]),
@@ -41889,7 +41094,7 @@
                 arrowRadius_1: new skill2(ARROW, [0, -1], { arrowRadius: 15 }, ["arrowRadius_0"]),
                 arrowRadius_2: new big(ARROW, [1, -1], { arrowRadius: 35, arrowDamage: 10 }, ["arrowRadius_1", "arrowDamage_3"]),
                 arrowRadius_3: new skill3(ARROW, [0, -1], { arrowRadius: 15 }, ["arrowRadius_2"]),
-                arrowFeatureDoubleDamage: new feature(ARROW, [0, -1], tr("feature_arrowDoubleDmg"), ["arrowRadius_3"]),
+                arrowFeatureDoubleDamage: new feature(ARROW, [0, -1], translate("feature_arrowDoubleDmg"), ["arrowRadius_3"]),
                 lightningDamage_0: new skill(LIGHTNING, [-1, -1], { lightningDamage: 4 }, ["base"]),
                 lightningRadius_0: new skill(LIGHTNING, [0, -1], { lightningRadius: 5 }, ["lightningDamage_0"]),
                 lightningDamage_1: new skill2(LIGHTNING, [-1, -1], { lightningDamage: 4 }, ["lightningRadius_0"]),
@@ -41899,7 +41104,7 @@
                 lightningDamage_3: new skill3(LIGHTNING, [0, -1], { lightningDamage: 4 }, ["lightningDamageRadius_0"]),
                 lightningRadius_2: new skill3(LIGHTNING, [-1, -1], { lightningRadius: 5 }, ["lightningDamage_3"]),
                 lightningRadius_3: new skill3(LIGHTNING, [0, -1], { lightningRadius: 5 }, ["lightningRadius_2"]),
-                lightningFeatureCrit: new feature(LIGHTNING, [0, -1], tr("feature_lightningCritV2"), ["lightningRadius_3"]),
+                lightningFeatureCrit: new feature(LIGHTNING, [0, -1], translate("feature_lightningCritV2"), ["lightningRadius_3"]),
                 wallHealth_0: new skill(WALL, [-1.5, 0], { wallHealth: 4 }, ["base"]),
                 wallHealth_1: new skill(WALL, [-1, -1], { wallHealth: 4 }, ["wallHealth_0"]),
                 wallHealth_2: new skill(WALL, [-1, 0], { wallHealth: 4 }, ["wallHealth_1"]),
@@ -41910,7 +41115,7 @@
                 wallHealth_5: new skill2(WALL, [-1, -1], { wallHealth: 4 }, ["wallHealth_4"]),
                 wallHealth_6: new skill2(WALL, [0, -1], { wallHealth: 4 }, ["wallHealth_5"]),
                 wallHealth_7: new skill3(WALL, [1, -1], { wallHealth: 4 }, ["wallHealth_6", "wallHealthSub_2"]),
-                wallHealthFeatureMiss: new feature(WALL, [0, -1], tr("feature_wallMiss"), ["wallHealth_7"]),
+                wallHealthFeatureMiss: new feature(WALL, [0, -1], translate("feature_wallMiss"), ["wallHealth_7"]),
                 minersSpeed_0: new skill(MINERS, [0, 1.5], { minersSpeed: 4, transporterSpeed: 5 }, ["base"]),
                 minersSpeed_1: new skill(MINERS, [-1, 1], { minersSpeed: 4 }, ["minersSpeed_0"]),
                 minersSpeed_2: new big(MINERS, [-1, 0], { minersSpeed: 12 }, ["minersSpeed_1"]),
@@ -41923,16 +41128,16 @@
                 minersSpeed_4_inner: new big(MINERS, [0, -1.125], { minersSpeed: 12 }, ["minersSpeed_4_top"]),
                 minersSpeed_5: new skill3(MINERS, [0, 1], { minersSpeed: 4 }, ["minersSpeed_4_top"]),
                 minersSpeed_6: new skill3(MINERS, [-1, 1], { minersSpeed: 4 }, ["minersSpeed_5"]),
-                minersRadius_feature1: new feature(MINERS, [-1, 1], tr("feature_minerRadius1"), ["minersSpeed_6"], 25),
+                minersRadius_feature1: new feature(MINERS, [-1, 1], translate("feature_minerRadius1"), ["minersSpeed_6"], 25),
                 minersSpeed_7: new skill3(MINERS, [-1, 0], { minersSpeed: 4 }, ["minersRadius_feature1"]),
                 minersSpeed_8: new skill3(MINERS, [-1, 0], { minersSpeed: 4 }, ["minersSpeed_7"]),
-                minersRadius_feature2: new feature(MINERS, [-1, 1], tr("feature_minerRadius2"), ["minersSpeed_8"], 50),
+                minersRadius_feature2: new feature(MINERS, [-1, 1], translate("feature_minerRadius2"), ["minersSpeed_8"], 50),
                 buildingStorage_0: new skill2(BUILDINGS, [-1, 1], { buildingStorage: 15 }, ["minersSpeed_4_tl"]),
                 buildingStorage_1: new skill2(BUILDINGS, [-1, 0], { buildingStorage: 15 }, ["buildingStorage_0"]),
                 buildingStorage_2: new big(BUILDINGS, [-1, 0], { buildingStorage: 40 }, ["buildingStorage_1"]),
                 buildingStorage_3: new skill3(BUILDINGS, [-1, 0], { buildingStorage: 15 }, ["buildingStorage_2"]),
                 buildingStorage_4: new skill3(BUILDINGS, [-1, -1], { buildingStorage: 15 }, ["buildingStorage_3"]),
-                buildingStorageDouble: new feature(DAMAGE, [-1, 0], tr("feature_doubleStorage"), ["buildingStorage_4"]),
+                buildingStorageDouble: new feature(DAMAGE, [-1, 0], translate("feature_doubleStorage"), ["buildingStorage_4"]),
                 factorySpeed_0: new skill(FACTORIES, [1, 1], { factorySpeed: 10 }, ["base"]),
                 factorySpeed_1: new skill(FACTORIES, [0, 1], { factorySpeed: 10 }, ["factorySpeed_0"]),
                 factorySpeed_2: new skill(FACTORIES, [1, 1], { factorySpeed: 10 }, ["factorySpeed_1"]),
@@ -41942,8 +41147,8 @@
                 factorySpeed_3_rl: new skill2(FACTORIES, [1, 1], { factorySpeed: 10 }, ["factorySpeed_3_u"]),
                 factorySpeed_3_t: new big(FACTORIES, [0, 1], { factorySpeed: 30 }, ["factorySpeed_3_ru", "factorySpeed_3_rl"]),
                 factorySpeed_4: new skill3(FACTORIES, [1, 0], { factorySpeed: 10 }, ["factorySpeed_3_t"]),
-                factoryFeatureSpeed: new feature(FACTORIES, [1, 1], tr("feature_factoriesSpeed"), ["factorySpeed_4"]),
-                transporterFeatureInvisible: new feature(TRANSPORTERS, [0, 1.5], tr("feature_transporterInvisible"), ["minersSpeed_0"], 5),
+                factoryFeatureSpeed: new feature(FACTORIES, [1, 1], translate("feature_factoriesSpeed"), ["factorySpeed_4"]),
+                transporterFeatureInvisible: new feature(TRANSPORTERS, [0, 1.5], translate("feature_transporterInvisible"), ["minersSpeed_0"], 5),
                 transporterSpeed_0: new skill2(TRANSPORTERS, [0, 1], { transporterSpeed: 10 }, ["transporterFeatureInvisible"]),
                 transporterSpeed_1: new skill2(TRANSPORTERS, [1, 1], { transporterSpeed: 10 }, ["transporterSpeed_0"]),
                 transporterSpeed_2: new skill2(TRANSPORTERS, [0, 1], { transporterSpeed: 10 }, ["transporterSpeed_1"]),
@@ -41953,7 +41158,7 @@
                 transporterSpeed_3_rm: new skill3(TRANSPORTERS, [0, 0.75], { transporterSpeed: 10 }, ["transporterSpeed_3_r"]),
                 transporterSpeed_3_t: new skill3(TRANSPORTERS, [1, 0.75], { transporterSpeed: 10 }, ["transporterSpeed_3_lm", "transporterSpeed_3_rm"]),
                 transporterSpeed_3_c: new big(TRANSPORTERS, [0, 1.125], { transporterSpeed: 40 }, ["transporterSpeed_3_t"]),
-                transporterFeatureGlobal: new feature(TRANSPORTERS, [0, 1.125], tr("feature_transporterGlobal"), ["transporterSpeed_3_c"], 25),
+                transporterFeatureGlobal: new feature(TRANSPORTERS, [0, 1.125], translate("feature_transporterGlobal"), ["transporterSpeed_3_c"], 25),
             };
         if (Config.showTotalSkillPoints) {
             var points = 0;
@@ -41975,7 +41180,7 @@
             JSON_STRINGIFY = JSON.stringify,
             META_GAME_SETTINGS = [
                 {
-                    title: tr("performance_settings"),
+                    title: translate("performance_settings"),
                     settings: [
                         { id: "enableParticles", defaultValue: true },
                         { id: "enableFancyZombies", defaultValue: true },
@@ -41983,7 +41188,7 @@
                     ],
                 },
                 {
-                    title: tr("misc_settings"),
+                    title: translate("misc_settings"),
                     settings: [
                         { id: "autosave", defaultValue: true },
                         { id: "disableFastForwardAtNight", defaultValue: true },
@@ -41991,7 +41196,7 @@
                     ],
                 },
                 {
-                    title: tr("ui_settings"),
+                    title: translate("ui_settings"),
                     settings: [
                         { id: "enableAdvancedUi", defaultValue: true },
                         { id: "showFps", defaultValue: false },
@@ -42161,12 +41366,12 @@
             },
             BUILD_TOOLTIP_W = 305,
             BUILD_TOOLTIP_H = 165,
-            BUILDING_BAR_ENTRY_SIZE = Config.mobileDevice ? 40 : 50,
-            BUILDING_BAR_ENTRY_SPACING = Config.mobileDevice ? 3 : 5,
+            BUILDING_BAR_ENTRY_SIZE = 50,
+            BUILDING_BAR_ENTRY_SPACING = 5,
             MAX_ITEMS_PER_ROW = 7,
-            LINE_THICKNESS = Config.mobileDevice ? 4 : 5,
+            LINE_THICKNESS = 5,
             HALF_LINE_THICKNESS = Math.floor(LINE_THICKNESS / 2),
-            RADIUS = Config.mobileDevice ? 20 : 30,
+            RADIUS = 30,
             GRADIENT_SIZE = 3,
             TOOLTIP_WIDTH = 300,
             MAX_STATS = 7,
@@ -42245,14 +41450,14 @@
             ],
             DRAG_THRESHOLD_PIXELS = Config.tileSize / 2,
             DISPLAY_RESOURCES = [
-                { title: tr("iron"), resourceClass: UnprocessedIron, color: Config.colors.unprocessedIron },
-                { title: tr("wood"), resourceClass: UnprocessedWood, color: Config.colors.unprocessedWood },
-                { title: tr("uranium"), resourceClass: MinedUranium, color: Config.colors.uranium },
-                { title: tr("steel"), resourceClass: Steel, color: Config.colors.steel },
-                { title: tr("trunks"), resourceClass: ProcessedWood, color: Config.colors.processedWood },
-                { title: tr("power"), resourceClass: Power, color: Config.colors.power },
+                { title: translate("iron"), resourceClass: UnprocessedIron, color: Config.colors.unprocessedIron },
+                { title: translate("wood"), resourceClass: UnprocessedWood, color: Config.colors.unprocessedWood },
+                { title: translate("uranium"), resourceClass: MinedUranium, color: Config.colors.uranium },
+                { title: translate("steel"), resourceClass: Steel, color: Config.colors.steel },
+                { title: translate("trunks"), resourceClass: ProcessedWood, color: Config.colors.processedWood },
+                { title: translate("power"), resourceClass: Power, color: Config.colors.power },
             ],
-            buildingTooltipYOffset = Config.mobileDevice ? -100 : -200,
+            buildingTooltipYOffset = -200,
             goldMineXOffset = -2 * Config.tileSize,
             TUTORIAL_STEPS = [
                 new TutorialStepInitial(),
@@ -42289,9 +41494,9 @@
                 new TutorialStepPerformUpgradeOnAllGoldMines(),
                 new TutorialStepFinished(),
             ],
-            DESCRIPTION_WIDTH = Config.mobileDevice ? 290 : 320,
-            DESCRIPTION_HEIGHT = Config.mobileDevice ? 130 : 150,
-            PADDING = Config.mobileDevice ? 10 : 20,
+            DESCRIPTION_WIDTH = 320,
+            DESCRIPTION_HEIGHT = 150,
+            PADDING = 20,
             NODE_SCALE = 40,
             TOOLTIP_W = 195,
             MAXBOUNDS = 8 * NODE_SCALE,
@@ -42465,7 +41670,7 @@
         }
         var nameRegexp = /^\w{4,15}$/;
         function isValidName(name) {
-            return (name || "").match(nameRegexp) && !nameContainsBadWords(name);
+            return (name || "").match(nameRegexp);
         }
 
         function generateInitialPlayerName() {
@@ -42498,7 +41703,7 @@
                 const option = document.createElement("option");
                 let modeTitle = e.getTitle().toUpperCase();
                 if (e.isChallenge()) {
-                    modeTitle = "[" + tr("challenge") + "] " + modeTitle;
+                    modeTitle = "[" + translate("challenge") + "] " + modeTitle;
                 }
                 option.value = e.getId();
                 option.innerText = modeTitle;
@@ -42585,7 +41790,7 @@
             MAX_ZOOM_LEVEL = 3,
             ZOOM_STRENGTH = 0.3,
             SMOOTH_ZOOM = true,
-            ZOOM_TAKE = Config.mobileDevice ? 0.6 : 0.3,
+            ZOOM_TAKE = 0.3,
             PINCH_STRENGTH = 3.5,
             MAX_SOUNDS_PER_FRAME = 1,
             USE_DEV_API = false,
@@ -44290,7 +43495,7 @@
                 (/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows (ce|phone)|xda|xiino/i.test(
                     e
                 ) ||
-                    /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(
+                    /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|Config(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(
                         e.substr(0, 4)
                     ))
             );
@@ -45701,7 +44906,7 @@
                             "gn",
                             "gp",
                             "gq",
-                            "gr",
+                            "Config",
                             "gs",
                             "gt",
                             "gu",
@@ -45838,7 +45043,7 @@
                             "tn",
                             "to",
                             "tp",
-                            "tr",
+                            "translate",
                             "tt",
                             "tv",
                             "tw",
@@ -52414,7 +51619,7 @@
                         "tl",
                         "tn",
                         "to",
-                        "tr",
+                        "translate",
                         "ts",
                         "tt",
                         "tw",
@@ -52910,8 +52115,8 @@
                         "ti-ER",
                         "ti-ET",
                         "to-TO",
-                        "tr-CY",
-                        "tr-TR",
+                        "translate-CY",
+                        "translate-TR",
                         "ug-Arab",
                         "ug-Arab-CN",
                         "uk-UA",
