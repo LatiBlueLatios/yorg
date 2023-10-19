@@ -3,18 +3,12 @@
 
 <head>
     <meta charset=UTF-8>
-    <title>YORG.io Game - Tower Defense, Upgrades and Zombies!</title>
+    <title>YORG.io CE Edition | Custom Build by BlueLatios</title>
     <link href=https://yorg.io rel=alternate hreflang=en>
-    <meta content='width=device-width,height=device-height,initial-scale=1,minimum-scale=1,user-scalable=no,maximum-scale=1,minimal-ui' name=viewport>
-    <meta content=True name=HandheldFriendly>
-    <meta content=utf-8 name=charset>
-    <meta content=500 name=MobileOptimized>
-    <meta content=on http-equiv=cleartype>
-    <meta content='telephone=no' name=format-detection>
-    <meta content='text/html;charset=UTF-8' http-equiv=content-type>
+    <meta content='text/html;charset=UTF-8' http-equiv=content-type>    
     <link href=favicon.ico rel='shortcut icon' type=image/x-icon>
     <link rel="stylesheet" href="fonts.css" media="all">
-    <link rel="stylesheet" type="text/css" href="yorg/asset/css/app.css">
+    <link rel="stylesheet" type="text/css" href="asset/css/app.css">
     <link href=/oembed.json rel=alternate type=application/json+oembed title=YORG.io>
 </head>
 
@@ -28,7 +22,7 @@
                 <br>
                 <h1 class=mainTitle>YORG.io</h1>
                 <div id=welcomeLogoPreload>
-                    <img alt='yorg.io logo' src='yorg/asset/images/welcomeLogo.png' id=welcomeLogo>
+                    <img alt='yorg.io logo' src='asset/images/welcomeLogo.png' id=welcomeLogo>
                     <br>
                 </div>
                 <br>
@@ -53,7 +47,7 @@
                             <form action=# id=gameStartForm name=startGameForm onsubmit='return window.startGame&&window.startGame(),!1'>
                                 <div id=gameLoadingIndicator>
                                     <span data-translate='loading_game'>Loading Game</span>
-                                    <img alt='loading indicator' src='yorg/asset/images/loadingGif.gif' id=loadingGif>
+                                    <img alt='loading indicator' src='asset/images/loadingGif.gif' id=loadingGif>
                                 </div>
                                 <div id=gameStarterInputs class=gameStarterCol>
                                     <input autocapitalize=off autocomplete=off autocorrect=off autofocus disabled id=playerName maxlength=15 name=playerName onkeyup=welcomeSetName(this) placeholder='Nickname' spellcheck=false>
@@ -70,7 +64,7 @@
                         </div>
                         <div id=socialMedia class=noselect>
                             <a href=https://discord.gg/UdXda9Q target=_blank title='Discord Server'>
-                                <img alt='Discord Server' src='yorg/asset/images/discordlogo.png' height=32 width=32>
+                                <img alt='Discord Server' src='asset/images/discordlogo.png' height=32 width=32>
                             </a>
                             <select id=languageChooserInner onchange='window.location.href="?lang="+this.options[this.selectedIndex].value'>
                                 <option value=en class=language data-language=en>English
@@ -728,7 +722,7 @@
             <span data-translate='sandbox_desc'>This is the sandbox mode. Try out new base layouts here, you can upgrade your base up to the maximum achieved level in other gamemodes.</span>
             <br>
             <br>
-            <input type="text" id="sandbox_waves" placeholder="Enter wave number..." width="50px">
+            <div id="sandbox_waves" style="width: 100px; height: 30px; border: 1px solid #ccc; text-align: center; cursor: pointer; line-height: 30px;">Click Spawn...</div>
             <button onclick=window.spawnSandboxWave&&window.spawnSandboxWave() data-translate='sandbox_spawn'>Spawn</button>
             <br>
             <br>
@@ -771,4 +765,4 @@
         </strong>
     </div>
 
-    <script src=yorg/standalone.js async defer></script>
+    <script src=standalone.js async defer></script>

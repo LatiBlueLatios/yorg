@@ -13335,7 +13335,7 @@
                                 return null;
                             },
                             fileError: function (e, t, i) {
-                                var a = "error loading yorg/asset from URL " + (e.requestUrl || this.transformUrl(e.url, e));
+                                var a = "error loading asset from URL " + (e.requestUrl || this.transformUrl(e.url, e));
                                 !i && t && (i = t.status), i && (a = a + " (" + i + ")"), this.asyncComplete(e, a);
                             },
                             fileComplete: function (e, t) {
@@ -22511,52 +22511,8 @@
             _lzString2 = _interopRequireDefault(_lzString),
             _en = __webpack_require__(379),
             _en2 = _interopRequireDefault(_en),
-            _cs = __webpack_require__(380),
-            _cs2 = _interopRequireDefault(_cs),
-            _de = __webpack_require__(381),
-            _de2 = _interopRequireDefault(_de),
-            _es = __webpack_require__(382),
-            _es2 = _interopRequireDefault(_es),
-            _mtMT = __webpack_require__(383),
-            _mtMT2 = _interopRequireDefault(_mtMT),
-            _ru = __webpack_require__(384),
-            _ru2 = _interopRequireDefault(_ru),
-            _tr = __webpack_require__(385),
-            _tr2 = _interopRequireDefault(_tr),
-            _ar = __webpack_require__(386),
-            _ar2 = _interopRequireDefault(_ar),
-            _fr = __webpack_require__(387),
-            _fr2 = _interopRequireDefault(_fr),
-            _hr = __webpack_require__(388),
-            _hr2 = _interopRequireDefault(_hr),
-            _it = __webpack_require__(389),
-            _it2 = _interopRequireDefault(_it),
-            _ptBR = __webpack_require__(390),
-            _ptBR2 = _interopRequireDefault(_ptBR),
-            _zhTW = __webpack_require__(391),
-            _zhTW2 = _interopRequireDefault(_zhTW),
             _zhCN = __webpack_require__(392),
-            _zhCN2 = _interopRequireDefault(_zhCN),
-            _ro = __webpack_require__(393),
-            _ro2 = _interopRequireDefault(_ro),
-            _hu = __webpack_require__(394),
-            _hu2 = _interopRequireDefault(_hu),
-            _da = __webpack_require__(395),
-            _da2 = _interopRequireDefault(_da),
-            _et = __webpack_require__(396),
-            _et2 = _interopRequireDefault(_et),
-            _ptPT = __webpack_require__(397),
-            _ptPT2 = _interopRequireDefault(_ptPT),
-            _nl = __webpack_require__(398),
-            _nl2 = _interopRequireDefault(_nl),
-            _ko = __webpack_require__(399),
-            _ko2 = _interopRequireDefault(_ko),
-            _pl = __webpack_require__(400),
-            _pl2 = _interopRequireDefault(_pl),
-            _lt = __webpack_require__(401),
-            _lt2 = _interopRequireDefault(_lt),
-            _el = __webpack_require__(402),
-            _el2 = _interopRequireDefault(_el);
+            _zhCN2 = _interopRequireDefault(_zhCN);
         function _interopRequireDefault(e) {
             return e && e.__esModule ? e : { default: e };
         }
@@ -22578,30 +22534,8 @@
         function _classCallCheck(e, t) {
             if (!(e instanceof t)) throw new TypeError("Cannot call a class as a function");
         }
-        __webpack_require__(403),
-            __webpack_require__(404),
-            __webpack_require__(405),
-            __webpack_require__(406),
-            __webpack_require__(407),
-            __webpack_require__(408),
-            __webpack_require__(409),
-            __webpack_require__(410),
-            __webpack_require__(411),
-            __webpack_require__(412),
-            __webpack_require__(413),
-            __webpack_require__(414),
-            __webpack_require__(415),
-            __webpack_require__(416),
-            __webpack_require__(417),
-            __webpack_require__(418),
-            __webpack_require__(419),
-            __webpack_require__(420),
-            __webpack_require__(421),
-            __webpack_require__(422),
-            __webpack_require__(423),
-            __webpack_require__(424),
-            __webpack_require__(425),
-            __webpack_require__(426);
+
+        const Phaser = _phaserCe.Phaser;
         var Animation = (function () {
             function e(t, i) {
                 _classCallCheck(this, e),
@@ -23016,7 +22950,7 @@
                                     t = i + 1;
                                     break;
                                 }
-                            return translate("upgrade_base_to_level_first", t);
+                            return tr("upgrade_base_to_level_first", t);
                         }
                         return this.errorText;
                     }),
@@ -23045,7 +22979,7 @@
             MetaBuilding = (function () {
                 function e(t) {
                     _classCallCheck(this, e),
-                        (this.name = translate("building_" + t)),
+                        (this.name = tr("building_" + t)),
                         (this.buildingId = t),
                         (this.levelStats = GAME_BALANCING.buildings[t]),
                         (this.requirements = []),
@@ -23065,7 +22999,7 @@
                         },
                     ]),
                     (e.prototype.getDescription = function () {
-                        return translate("building_" + this.buildingId + "_desc");
+                        return tr("building_" + this.buildingId + "_desc");
                     }),
                     (e.prototype.useTransporters = function () {
                         this.transporterEnabled = true;
@@ -23130,7 +23064,7 @@
                         this.addPlacementHelper(new NearbyBuildingPlacementHelper({ entityClass: t, condition: o, radius: i }));
                     }),
                     (e.prototype.addMaximumAmountRequirement = function (e) {
-                        this.addRequirement(new PlayerLevelDependentMaxCountRequirement({ errorText: translate("reached_maximum_limit"), buildingType: this.getInstanceClass(), amounts: e }));
+                        this.addRequirement(new PlayerLevelDependentMaxCountRequirement({ errorText: tr("reached_maximum_limit"), buildingType: this.getInstanceClass(), amounts: e }));
                     }),
                     (e.prototype.addDependency = function (e) {
                         this.dependsOnBuildings.push(e);
@@ -23201,8 +23135,9 @@
                     ]),
                     e
                 );
-            })(),
-            HealthComponent = (function (e) {
+            })();
+
+            const HealthComponent = (function (e) {
                 function t(i) {
                     var a = i.maxHealth;
                     _classCallCheck(this, t);
@@ -23243,31 +23178,23 @@
                     }),
                     t
                 );
-            })(Component),
-            RegenHealthOnDayComponent = (function (e) {
-                function t(i) {
-                    var a = i.regenPercentPerSecond;
-                    _classCallCheck(this, t);
-                    var o = _possibleConstructorReturn(this, e.call(this));
-                    return checkParamsSet(a), (o.regenPercentPerSecond = a), Config.testHealthBars && (o.regenPercentPerSecond = 0), o;
+            })(Component);
+            
+            class RegenHealthOnDayComponent extends Component {
+                constructor(regenPercentPerSecond = 0) {
+                    super();
+                    this.regenPercentPerSecond = regenPercentPerSecond;
+                    if (Config.testHealthBars) {
+                        this.regenPercentPerSecond = 0;
+                    }
                 }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "RegenHealthOnDayComponent";
-                            },
-                        },
-                    ]),
-                    (t.prototype.debugStr = function () {
-                        return "Regenerate " + this.regenPercentPerSecond + " % of health per second, during daytime";
-                    }),
-                    t
-                );
-            })(Component),
-            HealthBarComponent = (function (e) {
+            
+                static get name() {
+                    return "RegenHealthOnDayComponent";
+                }
+            }
+            
+            const HealthBarComponent = (function (e) {
                 function t(i) {
                     var a = i.style,
                         o = void 0 === a ? "regular" : a;
@@ -23290,217 +23217,215 @@
                     }),
                     t
                 );
-            })(Component),
-            VisualizeConnectionsComponent = (function (e) {
-                function t(i) {
-                    var a = i.connectToClasses,
-                        o = i.group,
-                        n = void 0 === o ? null : o;
-                    _classCallCheck(this, t);
-                    var r = _possibleConstructorReturn(this, e.call(this));
-                    for (var s in (checkParamsSet(a), (r.group = n), (r.connectToClasses = a), r.connectToClasses)) {
-                        var l = r.connectToClasses[s];
-                        l.color || console.error("Data has no color:", l, "for class", s), l.radius || (console.error("Data has no radius:", l, "for class", s), (l.radius = 1));
+            })(Component);
+            
+            class VisualizeConnectionsComponent extends Component {
+                constructor({ connectToClasses, group = null }) {
+                    super();
+                    this.group = group;
+                    this.connectToClasses = connectToClasses;
+                    this.cachedImage = null;
+                    this.needsRedraw = true;
+                    this.needsRedrawCheck = false;
+                    this.connectionCount = -1;
+                    this.drawDashed = false;
+                    for (const s in this.connectToClasses) {
+                        const l = this.connectToClasses[s];
+                        if (!l.color) {
+                            console.error("Data has no color:", l, "for class", s);
+                        }
+                        if (!l.radius) {
+                            console.error("Data has no radius:", l, "for class", s);
+                            l.radius = 1;
+                        }
                     }
-                    return (r.cachedImage = null), (r.needsRedraw = true), (r.needsRedrawCheck = false), (r.connectionCount = -1), (r.drawDashed = false), r;
                 }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "VisualizeConnectionsComponent";
-                            },
-                        },
-                    ]),
-                    (t.prototype.destroy = function () {
-                        this.cachedImage && this.cachedImage.destroy(true, true);
-                    }),
-                    (t.prototype.debugStr = function () {
-                        var e = "draw connections: ";
-                        for (var t in this.connectToClasses) e += t + " [" + JSON.stringify(this.connectToClasses[t]) + "] ";
-                        return e;
-                    }),
-                    t
-                );
-            })(Component),
-            BuildingComponent = (function (e) {
-                function t() {
-                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.apply(this, arguments));
+            
+                static get name() {
+                    return "VisualizeConnectionsComponent";
                 }
-                return (
-                    _inherits(t, e),
-                    (t.prototype.debugStr = function () {
-                        return "This is a building";
-                    }),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "BuildingComponent";
-                            },
-                        },
-                    ]),
-                    t
-                );
-            })(Component),
-            SpawnGraveOnDeathComponent = (function (e) {
-                function t(i) {
-                    var a = i.particleClass,
-                        o = void 0 === a ? null : a,
-                        n = i.fadeDuration,
-                        r = void 0 === n ? 5 : n,
-                        s = i.randomFactor,
-                        l = void 0 === s ? 0 : s,
-                        u = i.startAlpha,
-                        c = void 0 === u ? 0.3 : u,
-                        d = i.destinationAlpha,
-                        h = void 0 === d ? 0 : d,
-                        p = i.sprite,
-                        g = void 0 === p ? null : p,
-                        m = i.showOnMinimap,
-                        _ = void 0 !== m && m;
-                    _classCallCheck(this, t);
-                    var f = _possibleConstructorReturn(this, e.call(this));
-                    return (f.particleClass = o), (f.fadeDuration = r), (f.randomFactor = l), (f.destinationAlpha = h), (f.startAlpha = c), (f.sprite = g), (f.showOnMinimap = _), f;
+            
+                destroy() {
+                    if (this.cachedImage) {
+                        this.cachedImage.destroy(true, true);
+                    }
                 }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "SpawnGraveOnDeathComponent";
-                            },
-                        },
-                    ]),
-                    (t.prototype.debugStr = function () {
-                        var e = "sprite " + this.sprite;
-                        return (
-                            this.particleClass && (e = "particle " + this.particleClass.name),
-                            "Spawns (" + e + ") on death for " + this.fadeDuration + " ms, from alpha " + this.startAlpha + " to " + this.destinationAlpha + ", random " + this.randomFactor + " showOnMinimap " + this.showOnMinimap
-                        );
-                    }),
-                    t
-                );
-            })(Component),
-            StorageComponent = (function (e) {
-                function t(i) {
-                    var a = i.limits,
-                        o = i.initialResources;
-                    _classCallCheck(this, t);
-                    var n = _possibleConstructorReturn(this, e.call(this));
-                    return (n.limits = a || {}), (n.resources = o || {}), (n.pending = newEmptyMap()), n;
+            }
+            
+            class BuildingComponent extends Component {
+                static get name() {
+                    return "BuildingComponent";
                 }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "StorageComponent";
-                            },
-                        },
-                    ]),
-                    (t.prototype.getResources = function () {
-                        return this.resources;
-                    }),
-                    (t.prototype.removeResource = function (e) {
-                        delete this.limits[e], delete this.resources[e], delete this.pending[e];
-                    }),
-                    (t.prototype.getPendingResources = function () {
-                        return this.pending;
-                    }),
-                    (t.prototype.getFirstLimit = function () {
-                        for (var e in this.limits) return this.limits[e];
-                        return 0;
-                    }),
-                    (t.prototype.debugStr = function () {
-                        var e = "";
-                        for (var t in this.resources) {
-                            var i = ", " + (this.pending[t] || 0) + " pending";
-                            (e += t + "(" + this.resources[t]), (e += " of " + (this.limits[t] + i) + ") ");
+            }
+            
+            class SpawnGraveOnDeathComponent extends Component {
+                constructor({
+                    particleClass = null,
+                    fadeDuration = 5,
+                    randomFactor = 0,
+                    startAlpha = 0.3,
+                    destinationAlpha = 0,
+                    sprite = null,
+                    showOnMinimap = false
+                } = {}) {
+                    super();
+                    this.particleClass = particleClass;
+                    this.fadeDuration = fadeDuration;
+                    this.randomFactor = randomFactor;
+                    this.destinationAlpha = destinationAlpha;
+                    this.startAlpha = startAlpha;
+                    this.sprite = sprite;
+                    this.showOnMinimap = showOnMinimap;
+                }
+            
+                static get name() {
+                    return "SpawnGraveOnDeathComponent";
+                }
+            }
+            
+            class StorageComponent extends Component {
+                constructor({ limits, initialResources } = {}) {
+                    super();
+                    this.limits = limits || {};
+                    this.resources = initialResources || {};
+                    this.pending = newEmptyMap();
+                }
+            
+                static get name() {
+                    return "StorageComponent";
+                }
+            
+                getResources() {
+                    return this.resources;
+                }
+            
+                removeResource(resource) {
+                    delete this.limits[resource];
+                    delete this.resources[resource];
+                    delete this.pending[resource];
+                }
+            
+                getPendingResources() {
+                    return this.pending;
+                }
+            
+                getFirstLimit() {
+                    for (const resource in this.limits) {
+                        return this.limits[resource];
+                    }
+                    return 0;
+                }
+            
+                fillAll() {
+                    for (const resource in this.limits) {
+                        const pending = this.pending[resource] || 0;
+                        this.resources[resource] = this.limits[resource] - pending;
+                    }
+                }
+            
+                isAnyFull(considerPending = false) {
+                    let anyFull = false;
+                    for (const resource in this.limits) {
+                        if (!this.hasSpaceLeft(resource, 1, considerPending)) {
+                            anyFull = true;
                         }
-                        for (var a in this.limits)
-                            if (void 0 === this.resources[a]) {
-                                var o = ", " + (this.pending[a] || 0) + " pending";
-                                e += a + "(0 of " + this.limits[a] + o + ") ";
-                            }
-                        return e;
-                    }),
-                    (t.prototype.fillAll = function () {
-                        for (var e in this.limits) {
-                            var t = this.pending[e] || 0;
-                            this.resources[e] = this.limits[e] - t;
+                    }
+                    return anyFull;
+                }
+            
+                takeResource(resource, amount = 1) {
+                    if (this.resources[resource] != null && this.resources[resource] >= amount) {
+                        this.resources[resource] -= amount;
+                        return true;
+                    }
+                    return false;
+                }
+            
+                addResource(resource, amount = 1) {
+                    if (this.resources[resource] == null) {
+                        this.resources[resource] = 0;
+                    }
+                    this.resources[resource] += amount;
+                }
+            
+                getResourceCount(resource) {
+                    return this.resources[resource] || 0;
+                }
+            
+                haveResourceAmount(resource, amount = 1) {
+                    return this.getResourceCount(resource) >= amount;
+                }
+            
+                getResourceLimit(resource) {
+                    return this.limits[resource] || 0;
+                }
+            
+                addPendingResources(resource, amount = 1) {
+                    if (this.pending[resource] == null) {
+                        this.pending[resource] = 0;
+                    }
+                    if (this.resources[resource] == null) {
+                        this.resources[resource] = 0;
+                    }
+                    this.pending[resource] += amount;
+                }
+            
+                takeRecipe(recipe, amount = 1) {
+                    if (recipe == null || countObjectKeysUnsafe(recipe) < 1) {
+                        throw new Error("invalid recipe");
+                    }
+                    let success = true;
+                    for (const resource in recipe) {
+                        success = success && this.takeResource(resource, recipe[resource] * amount);
+                    }
+                    return success;
+                }
+            
+                resolvePendingResources(resource, amount = 1) {
+                    if (this.pending[resource] == null) {
+                        throw new Error("resolve: pending resource is null");
+                    }
+                    if (this.pending[resource] < amount) {
+                        this.pending[resource] = 0;
+                    } else {
+                        this.pending[resource] -= amount;
+                        this.resources[resource] += amount;
+                        if (this.resources[resource] > this.limits[resource]) {
+                            this.resources[resource] = this.limits[resource];
                         }
-                    }),
-                    (t.prototype.isAnyFull = function () {
-                        var e = arguments.length > 0 && void 0 !== arguments[0] && arguments[0],
-                            t = false;
-                        for (var i in this.limits) this.hasSpaceLeft(i, 1, e) || (t = true);
-                        return t;
-                    }),
-                    (t.prototype.takeResource = function (e) {
-                        var t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : 1;
-                        return null != this.resources[e] && this.resources[e] >= t && ((this.resources[e] -= t), true);
-                    }),
-                    (t.prototype.addResource = function (e) {
-                        var t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : 1;
-                        null == this.resources[e] && (this.resources[e] = 0), (this.resources[e] += t);
-                    }),
-                    (t.prototype.getResourceCount = function (e) {
-                        return this.resources[e] || 0;
-                    }),
-                    (t.prototype.haveResourceAmount = function (e) {
-                        var t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : 1;
-                        return this.getResourceCount(e) >= t;
-                    }),
-                    (t.prototype.getResourceLimit = function (e) {
-                        return this.limits[e] || 0;
-                    }),
-                    (t.prototype.addPendingResources = function (e) {
-                        var t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : 1;
-                        null == this.pending[e] && (this.pending[e] = 0), null == this.resources[e] && (this.resources[e] = 0), (this.pending[e] += t);
-                    }),
-                    (t.prototype.takeRecipe = function (e) {
-                        var t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : 1;
-                        if (null == e || countObjectKeysUnsafe(e) < 1) throw new Error("invalid recipe");
-                        var i = true;
-                        for (var a in e) i = i && this.takeResource(a, e[a] * t);
-                        return i;
-                    }),
-                    (t.prototype.resolvePendingResources = function (e) {
-                        var t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : 1;
-                        if (null == this.pending[e]) throw new Error("resolve: pending resource is null");
-                        this.pending[e] < t ? (this.pending[e] = 0) : ((this.pending[e] -= t), (this.resources[e] += t), this.resources[e] > this.limits[e] && (this.resources[e] = this.limits[e]));
-                    }),
-                    (t.prototype.hasSpaceLeft = function (e) {
-                        var t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : 1,
-                            i = arguments.length > 2 && void 0 !== arguments[2] && arguments[2],
-                            a = this.getResourceCount(e) + t;
-                        return i || (a += this.pending[e] || 0), a <= this.getResourceLimit(e);
-                    }),
-                    (t.prototype.canBuildRecipe = function (e) {
-                        var t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : 1;
-                        return 0 == this.getMissingResourcesForRecipe(e, t).length;
-                    }),
-                    (t.prototype.getMissingResourcesForRecipe = function (e) {
-                        var t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : 1;
-                        if (null == e || countObjectKeysUnsafe(e) < 1) throw new Error("invalid recipe");
-                        var i = [];
-                        for (var a in e) {
-                            var o = e[a] * t;
-                            this.haveResourceAmount(a, o) || i.push(a);
+                    }
+                }
+            
+                hasSpaceLeft(resource, amount = 1, considerPending) {
+                    let available = this.getResourceCount(resource) + amount;
+                    if (!considerPending) {
+                        available += this.pending[resource] || 0;
+                    }
+                    return available <= this.getResourceLimit(resource);
+                }
+            
+                canBuildRecipe(recipe, amount = 1) {
+                    return this.getMissingResourcesForRecipe(recipe, amount).length === 0;
+                }
+            
+                getMissingResourcesForRecipe(recipe, amount = 1) {
+                    if (recipe == null || countObjectKeysUnsafe(recipe) < 1) {
+                        throw new Error("invalid recipe");
+                    }
+                    const missingResources = [];
+                    for (const resource in recipe) {
+                        const requiredAmount = recipe[resource] * amount;
+                        if (!this.haveResourceAmount(resource, requiredAmount)) {
+                            missingResources.push(resource);
                         }
-                        return i;
-                    }),
-                    t
-                );
-            })(Component),
-            FastParticleSprite = (function () {
+                    }
+                    return missingResources;
+                }
+            }
+            
+            const FastParticleSprite = (function () {
                 function e(t) {
-                    _classCallCheck(this, e), (this._texture = t.baseTexture), (this.alive = true), (this.exists = true), (this.position = new _phaserCe.Phaser.Point(0, 0)), (this.alpha = 1);
+                    _classCallCheck(this, e), (this._texture = t.baseTexture), (this.alive = true), (this.exists = true), (this.position = new Phaser.Point(0, 0)), (this.alpha = 1);
                 }
                 return (
                     _createClass(e, null, [
@@ -23626,10 +23551,10 @@
                         (this.phaser = t),
                         (this.name = i),
                         (this.children = []),
-                        (this.position = new _phaserCe.Phaser.Point(0, 0)),
+                        (this.position = new Phaser.Point(0, 0)),
                         (a = a || this.phaser.world).addChild ? a.addChild(this) : (console.error("Parent has no addChild method:", a), a.add(this)),
                         (this.z = this.parent.children.length),
-                        (this.worldTransform = new _phaserCe.Phaser.Matrix()),
+                        (this.worldTransform = new Phaser.Matrix()),
                         (this.visible = true),
                         (this.renderable = true),
                         (this.alive = true),
@@ -23651,7 +23576,7 @@
                     ]),
                     (e.prototype.destroy = function () {
                         if (this.destroyPhase) throw new Error("destroyed while in destroy phase");
-                        (this.destroyPhase = true), this.parent && (this.parent instanceof _phaserCe.Phaser.Group ? this.parent.remove(this) : this.parent.removeChild(this));
+                        (this.destroyPhase = true), this.parent && (this.parent instanceof Phaser.Group ? this.parent.remove(this) : this.parent.removeChild(this));
                         for (var e = 0; e < this.children.length; ++e) {
                             var t = this.children[e];
                             t.destroy(), (t.parent = void 0);
@@ -24661,9 +24586,9 @@
                         l = s[0],
                         u = s[1];
                     return (
-                        (n.position = new _phaserCe.Phaser.Point(l, u)),
+                        (n.position = new Phaser.Point(l, u)),
                         (n.parent = void 0),
-                        (n.worldTransform = new _phaserCe.Phaser.Matrix()),
+                        (n.worldTransform = new Phaser.Matrix()),
                         (n.visible = true),
                         (n.renderable = true),
                         (n.alive = true),
@@ -24694,7 +24619,7 @@
                     }),
                     (t.prototype.destroy = function () {
                         if ((e.prototype.destroy.call(this), this.destroyPhase)) throw new Error("destroyed while in destroy phase");
-                        (this.destroyPhase = true), this.parent && (this.parent instanceof _phaserCe.Phaser.Group ? this.parent.remove(this) : this.parent.removeChild(this));
+                        (this.destroyPhase = true), this.parent && (this.parent instanceof Phaser.Group ? this.parent.remove(this) : this.parent.removeChild(this));
                         for (var t = 0; t < this.children.length; ++t) this.children[t].destroy();
                         (this.children = []), (this.parent = void 0), (this.alive = false), (this.exists = false), (this.visible = false), (this.renderable = false), (this.worldTransform = null), (this.destroyPhase = false);
                     }),
@@ -24835,34 +24760,38 @@
                     }),
                     t
                 );
-            })(BuildingRequirement);
-            class EnemyAIComponent extends Component {
-                constructor({
-                    speedTilesPerSecond = 1,
-                    farSpeedBoost = 10,
-                    nearDistanceTiles = 6,
-                    farDistanceTiles = 20,
-                }) {
-                    super();
-            
-                    this.speedTilesPerSecond = speedTilesPerSecond;
-                    this.farSpeedBoost = farSpeedBoost;
-                    this.farDistanceTiles = farDistanceTiles;
-                    this.nearDistanceTiles = nearDistanceTiles;
-                    this.targetsBaseOnly = false;
-                    this.currentAttackTargetTile = null;
+            })(BuildingRequirement),
+            EnemyAIComponent = (function (e) {
+                function t(i) {
+                    var a = i.speedTilesPerSecond,
+                        o = void 0 === a ? 1 : a,
+                        n = i.farSpeedBoost,
+                        r = void 0 === n ? 15 : n,
+                        s = i.nearDistanceTiles,
+                        l = void 0 === s ? 6 : s,
+                        u = i.farDistanceTiles,
+                        c = void 0 === u ? 20 : u;
+                    _classCallCheck(this, t);
+                    var d = _possibleConstructorReturn(this, e.call(this));
+                    return checkParamsSet(o, r, l, c), (d.speedTilesPerSecond = o), (d.farSpeedBoost = r), (d.farDistanceTiles = c), (d.nearDistanceTiles = l), (d.targetsBaseOnly = false), (d.currentAttackTargetTile = null), d;
                 }
-            
-                static get name() {
-                    return "EnemyAIComponent";
-                }
-            
-                debugStr() {
-                    return `speed: ${this.speedTilesPerSecond} tiles/s (boost x${this.farSpeedBoost}), `;
-                }
-            }
-            
-            const DamageOnHitComponent = (function (e) {
+                return (
+                    _inherits(t, e),
+                    _createClass(t, null, [
+                        {
+                            key: "name",
+                            get: function () {
+                                return "EnemyAIComponent";
+                            },
+                        },
+                    ]),
+                    (t.prototype.debugStr = function () {
+                        return "speed: " + this.speedTilesPerSecond + " tiles/s (boost x" + this.farSpeedBoost + "), ";
+                    }),
+                    t
+                );
+            })(Component),
+            DamageOnHitComponent = (function (e) {
                 function t(i) {
                     var a = i.targetClass,
                         o = i.damage,
@@ -25142,12 +25071,12 @@
             })(Component),
             FastCore = function () { };
         (FastCore.install = function (e) {
-            _phaserCe.Phaser.Utils.mixinPrototype(this, FastCore.prototype), (this.components = {});
+            Phaser.Utils.mixinPrototype(this, FastCore.prototype), (this.components = {});
             for (var t = 0; t < e.length; t++) {
                 var i = e[t],
                     a = false;
-                if (("Destroy" === i && (a = true), !_phaserCe.Phaser.Component[i])) throw new Error("Unkown component: " + i);
-                _phaserCe.Phaser.Utils.mixinPrototype(this, _phaserCe.Phaser.Component[i].prototype, a), (this.components[i] = true);
+                if (("Destroy" === i && (a = true), !Phaser.Component[i])) throw new Error("Unkown component: " + i);
+                Phaser.Utils.mixinPrototype(this, Phaser.Component[i].prototype, a), (this.components[i] = true);
             }
         }),
             (FastCore.init = function (e, t, i, a, o) {
@@ -25155,13 +25084,13 @@
                     (this.key = a),
                     (this.data = {}),
                     this.position.set(t, i),
-                    (this.world = new _phaserCe.Phaser.Point(t, i)),
-                    (this.previousPosition = new _phaserCe.Phaser.Point(t, i)),
-                    (this.events = new _phaserCe.Phaser.Events(this)),
-                    (this._bounds = new _phaserCe.Phaser.Rectangle()),
-                    this.components.Animation && (this.animations = new _phaserCe.Phaser.AnimationManager(this)),
+                    (this.world = new Phaser.Point(t, i)),
+                    (this.previousPosition = new Phaser.Point(t, i)),
+                    (this.events = new Phaser.Events(this)),
+                    (this._bounds = new Phaser.Rectangle()),
+                    this.components.Animation && (this.animations = new Phaser.AnimationManager(this)),
                     this.components.LoadTexture && null !== a && this.loadTexture(a, o),
-                    this.components.FixedToCamera && (this.cameraOffset = new _phaserCe.Phaser.Point(t, i));
+                    this.components.FixedToCamera && (this.cameraOffset = new Phaser.Point(t, i));
             }),
             (FastCore.preUpdate = function () {
                 if (!this.exists || !this.parent.exists) return (this.renderOrderID = -1), false;
@@ -25197,8 +25126,8 @@
                 (i = i || 0),
                 (a = a || null),
                 (o = o || null),
-                (this.type = _phaserCe.Phaser.IMAGE),
-                _pixi.PIXI.Sprite.call(this, _phaserCe.Phaser.Cache.DEFAULT),
+                (this.type = Phaser.IMAGE),
+                _pixi.PIXI.Sprite.call(this, Phaser.Cache.DEFAULT),
                 FastCore.init.call(this, e, t, i, a, o),
                 "atlas" === a && this.scale.setTo(e.resolution);
         };
@@ -25254,7 +25183,7 @@
                     if (this.alive && !(Config.gameTimeSpeedUpFactor < 1))
                         if (this.targetEntity && this.targetEntity.alive) {
                             var e = this.targetEntity.worldSpaceTileCenter();
-                            this.approachTo(e), (this.angle = _phaserCe.Phaser.Math.radToDeg(Math.atan2(e[1] - this.y, e[0] - this.x)) - this.angleOffset);
+                            this.approachTo(e), (this.angle = Phaser.Math.radToDeg(Math.atan2(e[1] - this.y, e[0] - this.x)) - this.angleOffset);
                         } else this.finishCallback();
                 }),
                 t
@@ -25355,7 +25284,7 @@
                     t
                 );
             })(FastImage),
-            ccFixBaseLightningProjectile = _phaserCe.Phaser.Graphics,
+            ccFixBaseLightningProjectile = Phaser.Graphics,
             LightningProjectile = (function (e) {
                 function t(i) {
                     _classCallCheck(this, t);
@@ -25823,7 +25752,7 @@
                         l = _slicedToArray(s, 2),
                         u = l[0],
                         c = l[1];
-                    return (r._texture = n.baseTexture), (r.alive = true), (r.exists = true), (r.visible = true), (r.position = new _phaserCe.Phaser.Point(u, c)), (r.alpha = 1), r;
+                    return (r._texture = n.baseTexture), (r.alive = true), (r.exists = true), (r.visible = true), (r.position = new Phaser.Point(u, c)), (r.alpha = 1), r;
                 }
                 return (
                     _inherits(t, e),
@@ -25846,7 +25775,7 @@
                             (this._texture = null),
                             (this.exists = false),
                             (this.alive = false),
-                            this.parent && (this.parent instanceof _phaserCe.Phaser.Group ? this.parent.remove(this) : this.parent.removeChild(this), (this.parent = null));
+                            this.parent && (this.parent instanceof Phaser.Group ? this.parent.remove(this) : this.parent.removeChild(this), (this.parent = null));
                     }),
                     _createClass(t, [
                         {
@@ -26316,7 +26245,7 @@
                     _classCallCheck(this, t);
                     var i = _possibleConstructorReturn(this, e.call(this, "goldMine"));
                     return (
-                        i.addNearbyRequirement({ resourceType: GoldOre, radius: Config.radius.goldOre, errorText: translate("error_place_next_to_crystal") }),
+                        i.addNearbyRequirement({ resourceType: GoldOre, radius: Config.radius.goldOre, errorText: tr("error_place_next_to_crystal") }),
                         i.addCompatibleResourcesPlacementHelper(GoldOre),
                         i.addDependency(PlayerBaseMeta),
                         i.useTransporters(),
@@ -26382,8 +26311,8 @@
                     _classCallCheck(this, t);
                     var i = _possibleConstructorReturn(this, e.call(this, "playerBase"));
                     return (
-                        i.addRequirement(new UniqueRequirement({ errorText: translate("error_only_one_base"), buildingType: PlayerBaseBuilding })),
-                        i.addRequirement(new ReachableRequirement({ errorText: translate("error_base_unreachable") })),
+                        i.addRequirement(new UniqueRequirement({ errorText: tr("error_only_one_base"), buildingType: PlayerBaseBuilding })),
+                        i.addRequirement(new ReachableRequirement({ errorText: tr("error_base_unreachable") })),
                         i.addRadiusPlacementHelper(Config.radius.playerBase),
                         i.useTransporters(),
                         i
@@ -26479,7 +26408,7 @@
                     _classCallCheck(this, t);
                     var i = _possibleConstructorReturn(this, e.call(this, "harvester"));
                     return (
-                        i.addNearbyRequirement({ resourceType: Tree, radius: Config.radius.tree, errorText: translate("error_place_next_to_tree") }),
+                        i.addNearbyRequirement({ resourceType: Tree, radius: Config.radius.tree, errorText: tr("error_place_next_to_tree") }),
                         i.addCompatibleResourcesPlacementHelper(Tree),
                         i.addDependency(PlayerBaseMeta),
                         i.useTransporters(),
@@ -26645,7 +26574,7 @@
                     _classCallCheck(this, t);
                     var i = _possibleConstructorReturn(this, e.call(this, "ironMine"));
                     return (
-                        i.addNearbyRequirement({ resourceType: IronOre, radius: Config.radius.ironOre, errorText: translate("error_place_next_to_iron_ore") }),
+                        i.addNearbyRequirement({ resourceType: IronOre, radius: Config.radius.ironOre, errorText: tr("error_place_next_to_iron_ore") }),
                         i.addCompatibleResourcesPlacementHelper(IronOre),
                         i.addDependency(PlayerBaseMeta),
                         i.useTransporters(),
@@ -26905,7 +26834,7 @@
                     }),
                     t
                 );
-            })(BuildingInstance)
+            })(BuildingInstance);
             const ArrowTowerMeta = (function (e) {
                 function t() {
                     _classCallCheck(this, t);
@@ -26990,116 +26919,116 @@
                     ]),
                     e
                 );
-            })();
-
-            class WallMeta extends MetaBuilding {
-                constructor() {
-                    super("wall");
-                    this.addNearbyPlacementHelper({ entityClass: WallBuilding, radius: oneTileDiagonalDistance });
-                    this.addNearbyPlacementHelper({ entityClass: Resource, radius: oneTileDiagonalDistance });
-                    this.addPlacementHelper(new MultiplacePlacementHelper({ multiplace: true, smartPlace: true, smartPlaceRadius: oneTileDiagonalDistance }));
-                    this.addDependency(PlayerBaseMeta);
-                }
-            
-                static get name() {
-                    return "WallMeta";
-                }
-            
-                getInstanceClass() {
-                    return WallBuilding;
-                }
-            
-                makeSprite(Phaser, level) {
-                    const spriteGroup = Phaser.make.group();
-                    const wallDiameter = 2 * Config.ui.wallRadius + 1.3 * level;
-                    const graphicsOuter = Phaser.make.graphics(0, 0);
-
-                    graphicsOuter.beginFill(16777215, 1e-4);
-                    graphicsOuter.drawRect(-wallDiameter / 2, -wallDiameter / 2, wallDiameter, wallDiameter);
-                    graphicsOuter.beginFill(2236962, 0.35);
-                    graphicsOuter.drawCircle(0.4, 4.5, wallDiameter + 8);
-                    const wallColor = mixColorPerChannel(Config.colors.levels[level], 0.32, 0);
-                    graphicsOuter.beginFill(wallColor);
-                    graphicsOuter.lineStyle(3, wallColor);
-                    for (let i = 0; i < 3; ++i) {
-                        graphicsOuter.drawCircle(0.2 * i, 1 + i, wallDiameter);
-                    }
-                    spriteGroup.add(graphicsOuter);
-                    
-                    const graphicsInner = Phaser.make.graphics(0, 0);
-                    const innerDiameter = Config.tileSize / 2 + 10;
-                    graphicsInner.beginFill(16777215, 1e-4);
-                    graphicsInner.drawRect(-innerDiameter / 2, -innerDiameter / 2, innerDiameter, innerDiameter);
-                    graphicsInner.lineStyle(3, Config.colors.levels[level]);
-                    graphicsInner.beginFill(3355443);
-                    graphicsInner.beginFill(mixColorPerChannel(Config.colors.levels[level], 0.4, 51));
-                    graphicsInner.drawCircle(0, 0, wallDiameter);
-                    graphicsInner.endFill();
-                    spriteGroup.addChild(graphicsInner);
-                    
-                    const texture = spriteGroup.generateTexture();
-                    spriteGroup.destroy();
-                    return texture;
-                }
-            }            
-
-            class WallBuilding extends BuildingInstance {
-                constructor(i, a, o, n) {
-                    super(i, a, o, n);
-            
-                    this.addComponent(
-                        new VisualizeConnectionsComponent({
-                            connectToClasses: {
-                                WallBuilding: { color: Config.colors.wall, lineSize: 4, alpha: 1, radius: oneTileDiagonalDistance },
-                                Resource: { color: Config.colors.wall, lineSize: 4, alpha: 1, radius: oneTileDiagonalDistance },
-                                HealingTowerBuilding: { color: Config.colors.healing, lineSize: 1, alpha: 0.2, radius: Config.radius.healingTower },
-                                TransporterBuilding: { color: Config.colors.healing, lineSize: 1, alpha: 0.2, radius: Config.radius.healingTower },
-                            },
-                            group: i.rootRecursiveRef.groups.wallBordersGroup,
-                        })
+            })(),
+            WallMeta = (function (e) {
+                function t() {
+                    _classCallCheck(this, t);
+                    var i = _possibleConstructorReturn(this, e.call(this, "wall"));
+                    return (
+                        i.addNearbyPlacementHelper({ entityClass: WallBuilding, radius: oneTileDiagonalDistance }),
+                        i.addNearbyPlacementHelper({ entityClass: Resource, radius: oneTileDiagonalDistance }),
+                        i.addPlacementHelper(new MultiplacePlacementHelper({ multiplace: true, smartPlace: true, smartPlaceRadius: oneTileDiagonalDistance })),
+                        i.addDependency(PlayerBaseMeta),
+                        i
                     );
-            
-                    this.addComponent(new DodgeComponent(0));
-                    this.addComponent(new ConsumerComponent([Healing]));
-                    this.addComponent(new StorageComponent({ limits: { Healing: 10 } }));
-                    this.addComponent(new StorageVisualizerComponent(Healing));
-                    this.getComponent(StorageVisualizerComponent).inverse = true;
-                    this.getComponent(HealthBarComponent).style = "regular_custom_radius";
                 }
-            
-                static get name() {
-                    return "WallBuilding";
+                return (
+                    _inherits(t, e),
+                    _createClass(t, null, [
+                        {
+                            key: "name",
+                            get: function () {
+                                return "WallMeta";
+                            },
+                        },
+                    ]),
+                    (t.prototype.getInstanceClass = function () {
+                        return WallBuilding;
+                    }),
+                    (t.prototype.makeSprite = function (e, t) {
+                        var i = e.make.group(),
+                            a = 2 * Config.ui.wallRadius + 1.3 * t,
+                            o = e.make.graphics(0, 0);
+                        o.beginFill(16777215, 1e-4), o.drawRect(-l, -l, 2 * l, 2 * l), o.beginFill(2236962, 0.35), o.drawCircle(0.4, 4.5, a + 8);
+                        var n = mixColorPerChannel(Config.colors.levels[t], 0.32, 0);
+                        o.beginFill(n), o.lineStyle(3, n);
+                        for (var r = 0; r < 3; ++r) o.drawCircle(0.2 * r, 1 + r, a);
+                        i.add(o);
+                        var s = e.make.graphics(0, 0),
+                            l = Config.tileSize / 2 + 10;
+                        s.beginFill(16777215, 1e-4),
+                            s.drawRect(-l, -l, 2 * l, 2 * l),
+                            s.lineStyle(3, Config.colors.levels[t]),
+                            s.beginFill(3355443),
+                            s.beginFill(mixColorPerChannel(Config.colors.levels[t], 0.4, 51)),
+                            s.drawCircle(0, 0, a),
+                            s.endFill(),
+                            i.addChild(s);
+                        var u = i.generateTexture();
+                        return i.destroy(), u;
+                    }),
+                    t
+                );
+            })(MetaBuilding),
+            WallBuilding = (function (e) {
+                function t(i, a, o, n) {
+                    _classCallCheck(this, t);
+                    var r = _possibleConstructorReturn(this, e.call(this, i, a, o, n));
+                    return (
+                        r.addComponent(
+                            new VisualizeConnectionsComponent({
+                                connectToClasses: {
+                                    WallBuilding: { color: Config.colors.wall, lineSize: 4, alpha: 1, radius: oneTileDiagonalDistance },
+                                    Resource: { color: Config.colors.wall, lineSize: 4, alpha: 1, radius: oneTileDiagonalDistance },
+                                    HealingTowerBuilding: { color: Config.colors.healing, lineSize: 1, alpha: 0.2, radius: Config.radius.healingTower },
+                                    TransporterBuilding: { color: Config.colors.healing, lineSize: 1, alpha: 0.2, radius: Config.radius.healingTower },
+                                },
+                                group: i.rootRecursiveRef.groups.wallBordersGroup,
+                            })
+                        ),
+                        r.addComponent(new DodgeComponent(0)),
+                        r.addComponent(new ConsumerComponent([Healing])),
+                        r.addComponent(new StorageComponent({ limits: { Healing: 10 } })),
+                        r.addComponent(new StorageVisualizerComponent(Healing)),
+                        (r.getComponent(StorageVisualizerComponent).inverse = true),
+                        (r.getComponent(HealthBarComponent).style = "regular_custom_radius"),
+                        r
+                    );
                 }
-            
-                getMinimapScale() {
-                    return 0.75;
-                }
-            
-                updateComponentsToStats(t) {
-                    super.updateComponentsToStats(t);
-            
-                    const i = this.phaser.rootRecursiveRef.stats.getSkillGainMultiplier("wallHealth");
-                    const a = this.getComponent(HealthComponent).maxHealth * i;
-                    this.getComponent(HealthComponent).changeMaxHealth(a);
-            
-                    const o = this.getComponent(VisualizeConnectionsComponent).connectToClasses;
-                    o.WallBuilding.color = mixColorPerChannel(Config.colors.levels[this.level], 0.3, 51);
-                    o.WallBuilding.lineSize = Math.floor(4 + 0.4 * this.level);
-                    o.Resource.color = o.WallBuilding.color;
-                    o.Resource.lineSize = o.WallBuilding.lineSize;
-                    this.getComponent(VisualizeConnectionsComponent).needsRedraw = true;
-            
-                    const n = (2 + Config.ui.wallRadius + 1.3 * this.level) / 2;
-                    this.getComponent(HealthBarComponent).radius = n;
-                    this.getComponent(StorageVisualizerComponent).radius = n + 7;
-                    this.getComponent(StorageComponent).limits[Healing.name] = t.shieldStorage;
-                    this.phaser.rootRecursiveRef.stats.isSkillUnlocked("wallHealthFeatureMiss")
-                        ? (this.getComponent(DodgeComponent).chance = 0.2)
-                        : (this.getComponent(DodgeComponent).chance = 0);
-                }
-            }
-            
-            const CannonballProducerMeta = (function (e) {
+                return (
+                    _inherits(t, e),
+                    _createClass(t, null, [
+                        {
+                            key: "name",
+                            get: function () {
+                                return "WallBuilding";
+                            },
+                        },
+                    ]),
+                    (t.prototype.getMinimapScale = function () {
+                        return 0.75;
+                    }),
+                    (t.prototype.updateComponentsToStats = function (t) {
+                        e.prototype.updateComponentsToStats.call(this, t);
+                        var i = this.phaser.rootRecursiveRef.stats.getSkillGainMultiplier("wallHealth"),
+                            a = this.getComponent(HealthComponent).maxHealth * i;
+                        this.getComponent(HealthComponent).changeMaxHealth(a);
+                        var o = this.getComponent(VisualizeConnectionsComponent).connectToClasses;
+                        (o.WallBuilding.color = mixColorPerChannel(Config.colors.levels[this.level], 0.3, 51)),
+                            (o.WallBuilding.lineSize = Math.floor(4 + 0.4 * this.level)),
+                            (o.Resource.color = o.WallBuilding.color),
+                            (o.Resource.lineSize = o.WallBuilding.lineSize),
+                            (this.getComponent(VisualizeConnectionsComponent).needsRedraw = true);
+                        var n = (2 + Config.ui.wallRadius + 1.3 * this.level) / 2;
+                        (this.getComponent(HealthBarComponent).radius = n),
+                            (this.getComponent(StorageVisualizerComponent).radius = n + 7),
+                            (this.getComponent(StorageComponent).limits[Healing.name] = t.shieldStorage),
+                            this.phaser.rootRecursiveRef.stats.isSkillUnlocked("wallHealthFeatureMiss") ? (this.getComponent(DodgeComponent).chance = 0.2) : (this.getComponent(DodgeComponent).chance = 0);
+                    }),
+                    t
+                );
+            })(BuildingInstance),
+            CannonballProducerMeta = (function (e) {
                 function t() {
                     _classCallCheck(this, t);
                     var i = _possibleConstructorReturn(this, e.call(this, "cannonballProducer"));
@@ -27191,43 +27120,44 @@
                     }),
                     t
                 );
-            })(MetaBuilding);
-            class CannonBuilding extends BasicDefensiveTower {
-                constructor(i, a, o, n) {
-                    super(i, a, o, n, {
-                        producerMetaClass: CannonballProducerMeta,
-                        projectileClass: MetaCannonProjectile,
-                        projectileResource: Cannonball,
-                        additionalProjectileParams: {
-                            speedTilesPerSecond: 8,
-                            aoeRadiusTiles: oneTileDistance,
-                            explosionClass: MetaCannonExplosionParticle,
+            })(MetaBuilding),
+            CannonBuilding = (function (e) {
+                function t(i, a, o, n) {
+                    _classCallCheck(this, t);
+                    var r = _possibleConstructorReturn(
+                        this,
+                        e.call(this, i, a, o, n, {
+                            producerMetaClass: CannonballProducerMeta,
+                            projectileClass: MetaCannonProjectile,
+                            projectileResource: Cannonball,
+                            additionalProjectileParams: { speedTilesPerSecond: 8, aoeRadiusTiles: oneTileDistance, explosionClass: MetaCannonExplosionParticle },
+                            damageMultiplierKey: "cannonDamage",
+                            canCriticalStrike: true,
+                        })
+                    );
+                    return r.addComponent(new CannonTowerComponent()), r;
+                }
+                return (
+                    _inherits(t, e),
+                    _createClass(t, null, [
+                        {
+                            key: "name",
+                            get: function () {
+                                return "CannonBuilding";
+                            },
                         },
-                        damageMultiplierKey: "cannonDamage",
-                        canCriticalStrike: true,
-                    });
-            
-                    this.addComponent(new CannonTowerComponent());
-                }
-            
-                static get name() {
-                    return "CannonBuilding";
-                }
-            
-                updateComponentsToStats(t) {
-                    super.updateComponentsToStats(t);
-            
-                    const i = 8 * this.phaser.rootRecursiveRef.stats.getSkillGainMultiplier("cannonProjectileSpeed");
-                    this.getComponent(ProjectileShooterComponent).projectileParams.speedTilesPerSecond = i;
-            
-                    if (this.phaser.rootRecursiveRef.stats.isSkillUnlocked("cannon_feature_double_dmg")) {
-                        this.getComponent(ProjectileShooterComponent).projectileParams.damage *= 2;
-                        this.getComponent(ProjectileShooterComponent).consumeAmount *= 3;
-                    }
-                }
-            }
-            
-            const TransporterComponent = (function (e) {
+                    ]),
+                    (t.prototype.updateComponentsToStats = function (t) {
+                        e.prototype.updateComponentsToStats.call(this, t);
+                        var i = 8 * this.phaser.rootRecursiveRef.stats.getSkillGainMultiplier("cannonProjectileSpeed");
+                        (this.getComponent(ProjectileShooterComponent).projectileParams.speedTilesPerSecond = i),
+                            this.phaser.rootRecursiveRef.stats.isSkillUnlocked("cannon_feature_double_dmg") &&
+                            ((this.getComponent(ProjectileShooterComponent).projectileParams.damage *= 2), (this.getComponent(ProjectileShooterComponent).consumeAmount *= 3));
+                    }),
+                    t
+                );
+            })(BasicDefensiveTower),
+            TransporterComponent = (function (e) {
                 function t(i) {
                     _classCallCheck(this, t);
                     var a = _possibleConstructorReturn(this, e.call(this));
@@ -27373,7 +27303,7 @@
                     _classCallCheck(this, t);
                     var i = _possibleConstructorReturn(this, e.call(this, "uraniumMine"));
                     return (
-                        i.addNearbyRequirement({ resourceType: UraniumOre, radius: Config.radius.uraniumOre, errorText: translate("error_place_next_to_uranium_ore") }),
+                        i.addNearbyRequirement({ resourceType: UraniumOre, radius: Config.radius.uraniumOre, errorText: tr("error_place_next_to_uranium_ore") }),
                         i.addCompatibleResourcesPlacementHelper(UraniumOre),
                         i.addDependency(PlayerBaseMeta),
                         i.useTransporters(),
@@ -28049,295 +27979,6 @@
                     }),
                     e
                 );
-            })(),
-            Bot = (function () {
-                function e(t) {
-                    _classCallCheck(this, e),
-                        (this.root = t),
-                        (this.actionInterval = Timer.makeFromIntervalMs(1e3 * THINKING_TIME)),
-                        (this.playerBasePosition = null),
-                        (this.centralHubPosition = null),
-                        (this.lastActionTime = null),
-                        this.root.signals.buildingUpgraded.add(this.onActionPerformed, this),
-                        this.root.signals.buildingPlaced.add(this.onActionPerformed, this);
-                }
-                return (
-                    _createClass(e, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "Bot";
-                            },
-                        },
-                    ]),
-                    (e.prototype.onActionPerformed = function () {
-                        if (null !== this.lastActionTime) {
-                            var e = (this.root.time.now - this.lastActionTime) / 1e3;
-                            e > 10 && console.warn("Bot idled for", e, "seconds");
-                        }
-                        this.lastActionTime = this.root.time.now;
-                    }),
-                    (e.prototype.log = function () {
-                        for (var e, t = arguments.length, i = Array(t), a = 0; a < t; a++) i[a] = arguments[a];
-                        (e = console).log.apply(
-                            e,
-                            ["[BOT]"].concat(
-                                _toConsumableArray(
-                                    i.map(function (e) {
-                                        return e instanceof Entity ? entity2str(e) : "function" == typeof e ? "[fnc] " + e.name : e;
-                                    })
-                                )
-                            )
-                        );
-                    }),
-                    (e.prototype.place = function (e, t, i) {
-                        return this.log("Trying to place", e.name, "at", t, i), this.root.logic.tryPlaceBuilding({ building: BuildingRegistry.getMetaclassByClassHandle(e), position: { tileX: t, tileY: i } });
-                    }),
-                    (e.prototype.findFreeResourceSpot = function (e) {
-                        var t = this,
-                            i = this.root.map.findClosestEntity({
-                                tileX: this.playerBasePosition[0],
-                                tileY: this.playerBasePosition[1],
-                                radius: MAX_INCREMENTAL_SEARCH_RADIUS,
-                                condition: function (i) {
-                                    if (i instanceof e) {
-                                        var a = i.getTile(),
-                                            o = _slicedToArray(a, 2),
-                                            n = o[0],
-                                            r = o[1];
-                                        if (!(t.root.map.isTileUsed(n + 1, r) && t.root.map.isTileUsed(n - 1, r) && t.root.map.isTileUsed(n, r + 1) && t.root.map.isTileUsed(n, r - 1))) return true;
-                                    }
-                                    return false;
-                                },
-                            });
-                        if (!i) return console.warn("Failed to find free resource spot!"), [-1, -1];
-                        var a = i.getTile(),
-                            o = _slicedToArray(a, 2),
-                            n = o[0],
-                            r = o[1];
-                        return this.root.map.findClosestFreeTileArround(n, r);
-                    }),
-                    (e.prototype.findFreeProcessorSpot = function () {
-                        var e;
-                        return (e = this.root.map).findClosestFreeTileArround.apply(e, _toConsumableArray(this.playerBasePosition));
-                    }),
-                    (e.prototype.findFreeDefensiveSpot = function () {
-                        for (var e = BASE_RADIUS_TILES - 1; e > 0;) {
-                            for (var t = 0; t < 100; ++t) {
-                                var i = 2 * Math.random() * Math.PI,
-                                    a = this.playerBasePosition[0] + Math.round(Math.sin(i) * e),
-                                    o = this.playerBasePosition[1] + Math.round(Math.cos(i) * e);
-                                if (!this.root.map.isTileUsed(a, o)) return [a, o];
-                            }
-                            e -= 1;
-                        }
-                        throw new Error("base is full");
-                    }),
-                    (e.prototype.haveBuildingsLeft = function (e) {
-                        var t = BuildingRegistry.getMetaclassByClassHandle(e).requirements.filter(function (e) {
-                            return e instanceof PlayerLevelDependentMaxCountRequirement;
-                        });
-                        return t.length < 0 || t[0].check(this.root);
-                    }),
-                    (e.prototype.placeResourceMiner = function (e, t) {
-                        this.log("Placing miner", e);
-                        var i = this.findFreeResourceSpot(t),
-                            a = _slicedToArray(i, 2),
-                            o = a[0],
-                            n = a[1];
-                        return !(o < 0 || n < 0) && this.place(e, o, n);
-                    }),
-                    (e.prototype.placeResourceProcessor = function (e) {
-                        this.log("Placing processor", e);
-                        var t = this.findFreeProcessorSpot(),
-                            i = _slicedToArray(t, 2),
-                            a = i[0],
-                            o = i[1];
-                        return !(a < 0 || o < 0) && this.place(e, a, o);
-                    }),
-                    (e.prototype.placeDefensiveTower = function (e) {
-                        this.log("Placing defensive tower", e);
-                        var t = this.findFreeDefensiveSpot(),
-                            i = _slicedToArray(t, 2),
-                            a = i[0],
-                            o = i[1];
-                        return !(a < 0 || o < 0) && this.place(e, a, o);
-                    }),
-                    (e.prototype.isConnectedToCentralHub = function (e) {
-                        if (!this.centralHubPosition) return false;
-                        for (
-                            var t = function (e, t) {
-                                return 1e4 * e + t;
-                            },
-                            i = e.getTile(),
-                            a = _slicedToArray(i, 2),
-                            o = [[a[0], a[1]]],
-                            n = {};
-                            o.length > 0;
-
-                        ) {
-                            var r = o.pop(),
-                                s = t.apply(void 0, _toConsumableArray(r));
-                            if (!n[s]) {
-                                if (((n[s] = 1), r[0] === this.centralHubPosition[0] && r[1] === this.centralHubPosition[1])) return true;
-                                this.root.map
-                                    .getUsedTilesArround({
-                                        tileX: r[0],
-                                        tileY: r[1],
-                                        radius: Config.radius.transporter,
-                                        condition: function (e) {
-                                            return e instanceof TransporterBuilding;
-                                        },
-                                    })
-                                    .forEach(function (e) {
-                                        var t = e.entity;
-                                        o.push(t.getTile());
-                                    });
-                            }
-                        }
-                        return false;
-                    }),
-                    (e.prototype.actionPlaceBase = function () {
-                        this.log("Placing base");
-                        var e = this.root.map.findClosestFreeTileArround(Math.floor(Config.numTilesX / 2), Math.floor(Config.numTilesY / 2)),
-                            t = _slicedToArray(e, 2),
-                            i = t[0],
-                            a = t[1];
-                        if (((this.playerBasePosition = [i, a]), !this.place(PlayerBaseMeta, i, a))) throw new Error("Player base placement failed");
-                    }),
-                    (e.prototype.actionConnectToNet = function (e) {
-                        var t = this;
-                        this.log("Trying to connect", e, "to central hub");
-                        var i = e.getTile(),
-                            a = _slicedToArray(i, 2),
-                            o = a[0],
-                            n = a[1],
-                            r = this.root.map.findClosestEntityOfClass({
-                                tileX: o,
-                                tileY: n,
-                                radius: MAX_INCREMENTAL_SEARCH_RADIUS,
-                                classType: TransporterBuilding,
-                                condition: function (e) {
-                                    var i;
-                                    return t.isConnectedToCentralHub(e) && (i = t.root.map).checkTileIsReachable.apply(i, _toConsumableArray(e.getTile()));
-                                },
-                            });
-                        if (!r) throw new Error("No close transporter found!");
-                        this.log("Found closest viable transporter:", r);
-                        var s = r.getTile(),
-                            l = _slicedToArray(s, 2),
-                            u = l[0],
-                            c = l[1],
-                            d = this.root.map.findPath({ x: o, y: n }, { x: u, y: c });
-                        if (!d) return console.error("FAILED to find path on two ways"), true;
-                        for (var h = [o, n], p = null, g = 0; g < d.length; ++g) {
-                            var m,
-                                _ = d[g];
-                            if (distanceEuclidian(_, h) > Config.radius.transporter) {
-                                if (null === p) return console.error("unable to find way to hub!"), false;
-                                var f;
-                                if (this.place.apply(this, [TransporterMeta].concat(_toConsumableArray(p)))) if (((h = p), this.isConnectedToCentralHub((f = this.root.map).getTileContent.apply(f, _toConsumableArray(p))))) return true;
-                            }
-                            (m = this.root.map).isTileUsed.apply(m, _toConsumableArray(_)) || (p = _);
-                        }
-                        return this.isConnectedToCentralHub(e) || (p && this.place(TransporterMeta, p)), true;
-                    }),
-                    (e.prototype.actionPlaceCentralHub = function () {
-                        var e;
-                        this.log("Trying to place central hub");
-                        var t = (e = this.root.map).findClosestFreeTileArround.apply(e, _toConsumableArray(this.playerBasePosition)),
-                            i = _slicedToArray(t, 2),
-                            a = i[0],
-                            o = i[1];
-                        this.place(TransporterMeta, a, o) && ((this.centralHubPosition = [a, o]), this.log("Placed central hub at", this.centralHubPosition));
-                    }),
-                    (e.prototype.actionConnectEverything = function () {
-                        for (var e = this.root.entityMgr.entities, t = 0; t < e.length; ++t) {
-                            var i = e[t];
-                            if ((i.hasComponent(ConsumerComponent) || i.hasComponent(EmitterComponent)) && !(i instanceof Resource || this.isConnectedToCentralHub(i))) return this.actionConnectToNet(i);
-                        }
-                        return false;
-                    }),
-                    (e.prototype.actionPerformUpgrades = function (e) {
-                        for (var t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : 999, i = this.root.entityMgr.entities, a = 0; a < i.length; ++a) {
-                            var o = i[a];
-                            if (o instanceof e && o.getLevel() < t && this.root.logic.upgradeBuilding(o, true, t > 100)) return this.log("Upgraded", o), true;
-                        }
-                        return false;
-                    }),
-                    (e.prototype.getBuildingInstanceCount = function (e) {
-                        for (var t = this.root.entityMgr.getAllEntitiesWithComponent(BuildingComponent), i = 0, a = 0; a < t.length; ++a) t[a] instanceof e && i++;
-                        return i;
-                    }),
-                    (e.prototype.prepareSupplyChain = function (e) {
-                        for (var t = 0; t < e.length; ++t) {
-                            var i = e[t];
-                            if (this.haveBuildingsLeft(i)) return this.placeResourceProcessor(i), true;
-                        }
-                        return false;
-                    }),
-                    (e.prototype.actionPrepareDefense = function () {
-                        return (
-                            !(!this.haveBuildingsLeft(IronMineMeta) || !this.placeResourceMiner(IronMineMeta, IronOre)) ||
-                            !!this.prepareSupplyChain([CannonballProducerMeta]) ||
-                            !(!this.haveBuildingsLeft(CannonMeta) || !this.placeDefensiveTower(CannonMeta)) ||
-                            !(!this.haveBuildingsLeft(HarvesterMeta) || !this.placeResourceMiner(HarvesterMeta, Tree)) ||
-                            !!this.prepareSupplyChain([WoodProcessorMeta, SteelFactoryMeta, ArrowFactoryMeta]) ||
-                            !(!this.haveBuildingsLeft(ArrowTowerMeta) || !this.placeDefensiveTower(ArrowTowerMeta)) ||
-                            !(!this.haveBuildingsLeft(UraniumMineMeta) || !this.placeResourceMiner(UraniumMineMeta, UraniumOre)) ||
-                            !!this.prepareSupplyChain([NuclearStationMeta]) ||
-                            !(!this.haveBuildingsLeft(LightningTowerMeta) || !this.placeDefensiveTower(LightningTowerMeta))
-                        );
-                    }),
-                    (e.prototype.actionPlaceWalls = function () {
-                        if (!this.haveBuildingsLeft(WallMeta)) return false;
-                        for (var e = BASE_RADIUS_TILES + 1; e <= BASE_RADIUS_TILES + 2;) {
-                            for (var t = 0; t < 360; ++t) {
-                                var i = (t / 180) * Math.PI,
-                                    a = this.playerBasePosition[0] + Math.round(Math.sin(i) * e),
-                                    o = this.playerBasePosition[1] + Math.round(Math.cos(i) * e);
-                                if (!this.root.map.isTileUsed(a, o)) return !!this.place(WallMeta, a, o);
-                            }
-                            e++;
-                        }
-                        return false;
-                    }),
-                    (e.prototype.actionUpgradeDefenses = function () {
-                        return (
-                            !!this.actionPerformUpgrades(NuclearStationBuilding) ||
-                            !!this.actionPerformUpgrades(UraniumMineBuilding) ||
-                            !!this.actionPerformUpgrades(HarvesterBuilding) ||
-                            !!this.actionPerformUpgrades(WoodProcessorBuilding) ||
-                            !!this.actionPerformUpgrades(ArrowFactoryBuilding) ||
-                            !!this.actionPerformUpgrades(SteelFactoryBuilding) ||
-                            !!this.actionPerformUpgrades(IronMineBuilding) ||
-                            !!this.actionPerformUpgrades(CannonballProducerBuilding) ||
-                            !!this.actionPerformUpgrades(LightningTowerBuilding) ||
-                            !!this.actionPerformUpgrades(ArrowTowerBuilding) ||
-                            !!this.actionPerformUpgrades(CannonBuilding)
-                        );
-                    }),
-                    (e.prototype.performAction = function () {
-                        var e;
-                        return this.root.logic.playerHasPlacedBase()
-                            ? this.centralHubPosition && (e = this.root.map).isTileUsed.apply(e, _toConsumableArray(this.centralHubPosition))
-                                ? !(!this.haveBuildingsLeft(GoldMineMeta) || (this.log("Place gold mines ..."), !this.placeResourceMiner(GoldMineMeta, GoldOre))) ||
-                                !!this.actionConnectEverything() ||
-                                !!this.actionPerformUpgrades(PlayerBaseBuilding, 11) ||
-                                !!this.actionPerformUpgrades(GoldMineBuilding) ||
-                                !!this.actionPrepareDefense() ||
-                                !!this.actionPlaceWalls() ||
-                                !!this.actionUpgradeDefenses() ||
-                                !!this.actionPerformUpgrades(WallBuilding) ||
-                                (console.warn("BOT IDLING"), false)
-                                : (this.actionPlaceCentralHub(), true)
-                            : (this.actionPlaceBase(), true);
-                    }),
-                    (e.prototype.update = function () {
-                        for (; this.actionInterval.takeTick(this.root.time.now);) Config.autoPlay && (this.root.time.now > 1e3 * INITIAL_SLEEP ? this.performAction() : this.log("sleeping, waiting for wake up"));
-                    }),
-                    e
-                );
             })()
 
         const NUM_LEVELS = 30; // Update the number of levels to 30
@@ -28361,7 +28002,7 @@
 
         const CameraManager = (function () {
             function e(t) {
-                _classCallCheck(this, e), (this.root = t), (this.moved = new _phaserCe.Phaser.Signal()), this.initKeys();
+                _classCallCheck(this, e), (this.root = t), (this.moved = new Phaser.Signal()), this.initKeys();
             }
             return (
                 _createClass(e, null, [
@@ -28534,7 +28175,7 @@
                                 l !== this.cached.isNight &&
                                 (this.isNight()
                                     ? this.root.signals.nightEntered.dispatch(this.getDay())
-                                    : (this.root.signals.nightEnded.dispatch(this.getDay())))
+                                    : (this.root.signals.nightEnded.dispatch(this.getDay())));
                         }
                     }),
                     e
@@ -28604,20 +28245,20 @@
                             a = "--".repeat(i),
                             o = e.name || "<no name>",
                             n = e.constructor.name;
-                        e instanceof _phaserCe.Phaser.Group
+                        e instanceof Phaser.Group
                             ? (n = "Phaser.Group")
-                            : e instanceof _phaserCe.Phaser.Text
+                            : e instanceof Phaser.Text
                                 ? ((n = "Phaser.Text"), (o = "text='" + e.text + "'"))
-                                : e instanceof _phaserCe.Phaser.Sprite
+                                : e instanceof Phaser.Sprite
                                     ? (n = "Phaser.Sprite")
-                                    : e instanceof _phaserCe.Phaser.Image
+                                    : e instanceof Phaser.Image
                                         ? (n = "Phaser.Image")
                                         : e instanceof FastImage
                                             ? (n = "FastImage")
-                                            : e instanceof _phaserCe.Phaser.Graphics
+                                            : e instanceof Phaser.Graphics
                                                 ? (n = "Phaser.Graphics")
-                                                : e instanceof _phaserCe.Phaser.TileSprite && (n = "Phaser.TileSprite"),
-                            e instanceof _phaserCe.Phaser.SpriteBatch && (n = "Phaser.SpriteBatch"),
+                                                : e instanceof Phaser.TileSprite && (n = "Phaser.TileSprite"),
+                            e instanceof Phaser.SpriteBatch && (n = "Phaser.SpriteBatch"),
                             e instanceof Entity && (o = "tile=" + e.getTile()),
                             e.alive || (o += " !alive"),
                             e.exists || (o += " !exists"),
@@ -28917,210 +28558,127 @@
                     }),
                     t
                 );
-            })(EntitySpriteObj),
-            BaseSkill = (function () {
-                function e(t, i, a) {
-                    var o = arguments.length > 3 && void 0 !== arguments[3] ? arguments[3] : null;
-                    _classCallCheck(this, e), (this.key = t), (this.gains = a), (this.position = i), (this.dependsOn = o || []);
+            })(EntitySpriteObj);
+
+        class BaseSkill {
+            constructor(key, position, gains, dependsOn = null) {
+                this.key = key;
+                this.position = position;
+                this.gains = gains;
+                this.dependsOn = dependsOn || [];
+            }
+
+            static get name() {
+                return "BaseSkill";
+            }
+
+            getScale() {
+                return 1;
+            }
+
+            getCircleStyle() {
+                return "regular";
+            }
+
+            getSpriteColor() {
+                return 16777215;
+            }
+
+            getActiveColor() {
+                return Config.colors.skillUnlocked;
+            }
+
+            getBackgroundColor() {
+                for (let e in this.gains) {
+                    return GAIN_MAPPINGS[e].color;
                 }
-                return (
-                    _createClass(e, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "BaseSkill";
-                            },
-                        },
-                    ]),
-                    (e.prototype.getScale = function () {
-                        return 1;
-                    }),
-                    (e.prototype.getCircleStyle = function () {
-                        return "regular";
-                    }),
-                    (e.prototype.getSpriteColor = function () {
-                        return 16777215;
-                    }),
-                    (e.prototype.getActiveColor = function () {
-                        return Config.colors.skillUnlocked;
-                    }),
-                    (e.prototype.getBackgroundColor = function () {
-                        for (var e in this.gains) return GAIN_MAPPINGS[e].color;
-                        return 8947848;
-                    }),
-                    _createClass(e, [
-                        {
-                            key: "cost",
-                            get: function () {
-                                return 1;
-                            },
-                        },
-                    ]),
-                    e
-                );
-            })(),
-            BigSkill = (function (e) {
-                function t() {
-                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.apply(this, arguments));
-                }
-                return (
-                    _inherits(t, e),
-                    (t.prototype.getScale = function () {
-                        return 1.2;
-                    }),
-                    (t.prototype.getCircleStyle = function () {
-                        return "polygon";
-                    }),
-                    (t.prototype.getPolygonEdges = function () {
-                        return 6;
-                    }),
-                    _createClass(
-                        t,
-                        [
-                            {
-                                key: "cost",
-                                get: function () {
-                                    return 5;
-                                },
-                            },
-                        ],
-                        [
-                            {
-                                key: "name",
-                                get: function () {
-                                    return "BigSkill";
-                                },
-                            },
-                        ]
-                    ),
-                    t
-                );
-            })(BaseSkill),
-            FeatureSkill = (function (e) {
-                function t(i, a, o) {
-                    var n = arguments.length > 3 && void 0 !== arguments[3] ? arguments[3] : null,
-                        r = arguments.length > 4 && void 0 !== arguments[4] ? arguments[4] : 15;
-                    _classCallCheck(this, t);
-                    var s = _possibleConstructorReturn(this, e.call(this, i, a, {}, n));
-                    return (s.description = o), (s.skillCost = r), s;
-                }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "FeatureSkill";
-                            },
-                        },
-                    ]),
-                    (t.prototype.getScale = function () {
-                        return 1.5;
-                    }),
-                    (t.prototype.getCircleStyle = function () {
-                        return "polygon";
-                    }),
-                    (t.prototype.getPolygonEdges = function () {
-                        return 6;
-                    }),
-                    (t.prototype.getBackgroundColor = function () {
-                        return SKILL_TREE[this.dependsOn[0]].getBackgroundColor();
-                    }),
-                    _createClass(t, [
-                        {
-                            key: "cost",
-                            get: function () {
-                                return this.skillCost;
-                            },
-                        },
-                    ]),
-                    t
-                );
-            })(BaseSkill),
-            InitialSkill = (function (e) {
-                function t() {
-                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.apply(this, arguments));
-                }
-                return (
-                    _inherits(t, e),
-                    _createClass(
-                        t,
-                        [
-                            {
-                                key: "cost",
-                                get: function () {
-                                    return 1;
-                                },
-                            },
-                        ],
-                        [
-                            {
-                                key: "name",
-                                get: function () {
-                                    return "InitialSkill";
-                                },
-                            },
-                        ]
-                    ),
-                    t
-                );
-            })(BigSkill),
-            Skill2Points = (function (e) {
-                function t() {
-                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.apply(this, arguments));
-                }
-                return (
-                    _inherits(t, e),
-                    _createClass(
-                        t,
-                        [
-                            {
-                                key: "cost",
-                                get: function () {
-                                    return 2;
-                                },
-                            },
-                        ],
-                        [
-                            {
-                                key: "name",
-                                get: function () {
-                                    return "Skill2Points";
-                                },
-                            },
-                        ]
-                    ),
-                    t
-                );
-            })(BaseSkill),
-            Skill3Points = (function (e) {
-                function t() {
-                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.apply(this, arguments));
-                }
-                return (
-                    _inherits(t, e),
-                    _createClass(
-                        t,
-                        [
-                            {
-                                key: "cost",
-                                get: function () {
-                                    return 3;
-                                },
-                            },
-                        ],
-                        [
-                            {
-                                key: "name",
-                                get: function () {
-                                    return "Skill3Points";
-                                },
-                            },
-                        ]
-                    ),
-                    t
-                );
-            })(BaseSkill)  
+                return 8947848;
+            }
+
+            get cost() {
+                return 1;
+            }
+        }
+
+        class BigSkill extends BaseSkill {
+            static get name() {
+                return "BigSkill";
+            }
+
+            getScale() {
+                return 1.2;
+            }
+
+            getCircleStyle() {
+                return "polygon";
+            }
+
+            getPolygonEdges() {
+                return 6;
+            }
+
+            get cost() {
+                return 5;
+            }
+        }
+
+        class FeatureSkill extends BaseSkill {
+            constructor(key, position, description, dependsOn = null, skillCost = 15) {
+                super(key, position, {}, dependsOn);
+                this.description = description;
+                this.skillCost = skillCost;
+            }
+
+            static get name() {
+                return "FeatureSkill";
+            }
+
+            getScale() {
+                return 1.5;
+            }
+
+            getCircleStyle() {
+                return "polygon";
+            }
+
+            getPolygonEdges() {
+                return 6;
+            }
+
+            getBackgroundColor() {
+                return SKILL_TREE[this.dependsOn[0]].getBackgroundColor();
+            }
+
+            get cost() {
+                return this.skillCost;
+            }
+        }
+
+        class InitialSkill extends BigSkill {
+            static get name() {
+                return "InitialSkill";
+            }
+        }
+
+        class Skill2Points extends BaseSkill {
+            static get name() {
+                return "Skill2Points";
+            }
+
+            get cost() {
+                return 2;
+            }
+        }
+
+        class Skill3Points extends BaseSkill {
+            static get name() {
+                return "Skill3Points";
+            }
+
+            get cost() {
+                return 3;
+            }
+        } 
         
         class GameLogic {
             constructor(t) {
@@ -29341,7 +28899,7 @@
 
             getSellPrice(e) {
                 for (var t = 0, i = 0, a = e.getLevel(); i <= a; ++i) t += e.meta.getUpgradeCost(i).gems;
-                return roundDownToNext(t * GAME_BALANCING.refundOnSell, 5);
+                return Math.floor(t * GAME_BALANCING.refundOnSell, 5);
             }
 
             getSellPriceForAll(e) {
@@ -29365,7 +28923,7 @@
                         o = a.getInstanceClass();
                     if (0 === this.countBuildings(o)) return {
                         result: false,
-                        reason: translate("place_dependent_building_first", a.getDisplayName())
+                        reason: tr("place_dependent_building_first", a.getDisplayName())
                     };
                 }
                 return {
@@ -29382,7 +28940,7 @@
                 var t = e.meta;
                 if (!this.checkBuildingIsBelowBaseRequirement(e) && !Config.ignoreBuildRequirements) return {
                     result: false,
-                    reason: translate("upgrade_base_first")
+                    reason: tr("upgrade_base_first")
                 };
                 var i = this.checkSpecialUpgradeRequirements(e);
                 if (!i.result) return i;
@@ -29391,7 +28949,7 @@
                     result: true
                 } : {
                     result: false,
-                    reason: translate("can_not_afford_upgrade")
+                    reason: tr("can_not_afford_upgrade")
                 };
             }
 
@@ -29399,7 +28957,7 @@
                 var t = e.meta;
                 return e.getLevel() >= t.getMaxLevel() ? {
                     result: false,
-                    reason: translate("no_further_upgrades")
+                    reason: tr("no_further_upgrades")
                 } : {
                     result: true,
                     reason: ""
@@ -29457,12 +29015,12 @@
                 if (!o.result) return o;
                 if (null != a && !this.root.map.isValidCoordinate(a.tileX, a.tileY, Config.mapBorder)) return {
                     result: false,
-                    reason: translate("not_in_map_bounds")
+                    reason: tr("not_in_map_bounds")
                 };
                 if (!Config.ignoreBuildRequirements) {
                     if (this.root.stats.isSkillUnlocked("transporterFeatureGlobal") && "transporter" === t.buildingId) return {
                         result: false,
-                        reason: translate("transporter_no_use")
+                        reason: tr("transporter_no_use")
                     };
                     for (var n = t.getRequirements(), r = 0; r < n.length; ++r) {
                         var s = n[r];
@@ -29473,17 +29031,17 @@
                     }
                     if (!this.root.stats.canAfford(t.getUpgradeCost(0))) return {
                         result: false,
-                        reason: translate("can_not_afford")
+                        reason: tr("can_not_afford")
                     };
                 }
                 if (null != a) {
                     if (this.root.map.isTileUsed(a.tileX, a.tileY)) return {
                         result: false,
-                        reason: translate("space_already_occupied")
+                        reason: tr("space_already_occupied")
                     };
                     if (this.root.map.tileIsOccupiedByDynamicEntities(a.tileX, a.tileY)) return {
                         result: false,
-                        reason: translate("tile_occupied_by_enemies")
+                        reason: tr("tile_occupied_by_enemies")
                     };
                 }
                 return {
@@ -29548,28 +29106,6 @@
                     window.spawnSandboxWave = () => this.spawnSandboxWave();
                     window.sandboxHeal = () => this.sandboxHeal();
                     window.sandboxFill = () => this.sandboxFill();
-
-                    const sandboxWavesInput = document.getElementById("sandbox_waves");
-
-                    if (sandboxWavesInput) {
-                        sandboxWavesInput.value = "";
-
-                        // Let's see someone spawn wave 69666 lol
-                        const maxDayReached = Infinity
-
-                        // Add a change event listener to the input field
-                        sandboxWavesInput.addEventListener("change", function () {
-                            const enteredValue = parseInt(sandboxWavesInput.value, 10);
-
-                            if (!isNaN(enteredValue) && enteredValue >= 1 && enteredValue <= maxDayReached) {
-                                // Valid wave number entered, do something with the value (e.g., spawn wave)
-                                console.log("Spawning wave number:", enteredValue);
-                            } else {
-                                // Invalid input, reset the input field
-                                sandboxWavesInput.value = "";
-                            }
-                        });
-                    }
                 }
             }
 
@@ -29591,25 +29127,27 @@
                 if (this.root.gamemode && this.root.gamemode.isSandbox()) {
                     if (this.playerHasPlacedBase()) {
                         this.root.signals.uiActionPerformed.dispatch();
-                        var e = document.getElementById("sandbox_waves");
-                        if (e) {
-                            var t = e.value;
-                            var i = null;
-                            try {
-                                i = parseInt(t, 10);
-                            } catch (err) {
-                                return;
-                            }
-                            if (!isNaN(i) && i >= 1) {
-                                console.log("[SANDBOX] Spawn wave", i);
-                                this.root.waveMgr.spawnWave(i);
+                        const sandboxWavesDiv = document.getElementById("sandbox_waves");
+                        if (sandboxWavesDiv) {
+                            const waveValue = prompt('Insert wave value here:');
+                            const enteredValue = parseInt(waveValue, 10);
+                            if (waveValue !== null && !isNaN(enteredValue) && enteredValue >= 1) {
+                                sandboxWavesDiv.textContent = `Wave: ${waveValue}`;
+                                console.log("[SANDBOX] Spawn wave", enteredValue);
+                                this.root.waveMgr.spawnWave(enteredValue);
+                            } else if (waveValue === null) {
+                                alert('value cannot be null!');
+                            } else if (isNaN(enteredValue) === true) {
+                                alert('Value must be a number!');
+                            } else if (enteredValue <= 0) {
+                                alert('Wave must be above 0!');
                             }
                         }
                     } else {
-                        this.root.gui.uiNotifications.showError(translate("place_base_before_wave"));
+                        this.root.gui.uiNotifications.showError(tr("place_base_before_wave"));
                     }
                 }
-            }
+            }            
 
             refreshBuildingInstances() {
                 for (var e = this, t = this.root.entityMgr.getAllEntitiesWithComponent(BuildingComponent), i = 0; i < t.length; ++i) {
@@ -29663,7 +29201,7 @@
                 return "easy";
             }
             getTitle() {
-                return translate("gamemode_easy");
+                return tr("gamemode_easy");
             }
             getColor() {
                 return 2544453;
@@ -29673,7 +29211,7 @@
             }
             initialize() {
                 super.initialize();
-                initBalancing({
+                const initBalancing = new Balancing({
                     upgradeCostMultiplier: 0.6,
                     zombieDamageMultiplier: 0.6,
                     zombieHealthMultiplier: 0.6
@@ -29689,7 +29227,7 @@
                 return "regular";
             }
             getTitle() {
-                return translate("gamemode_regular");
+                return tr("gamemode_regular");
             }
             getColor() {
                 return 11184810;
@@ -29699,7 +29237,7 @@
             }
             initialize() {
                 super.initialize();
-                initBalancing({
+                const initBalancing = new Balancing({
                     upgradeCostMultiplier: 1,
                     zombieDamageMultiplier: 1,
                     zombieHealthMultiplier: 1
@@ -29715,7 +29253,7 @@
                 return "hard";
             }
             getTitle() {
-                return translate("gamemode_hard");
+                return tr("gamemode_hard");
             }
             getColor() {
                 return 16035906;
@@ -29725,7 +29263,7 @@
             }
             initialize() {
                 super.initialize();
-                initBalancing({
+                const initBalancing = new Balancing({
                     upgradeCostMultiplier: 1.5,
                     zombieDamageMultiplier: 1,
                     zombieHealthMultiplier: 4
@@ -29741,7 +29279,7 @@
                 return "impossible";
             }
             getTitle() {
-                return translate("gamemode_impossible");
+                return tr("gamemode_impossible");
             }
             getColor() {
                 return 16720767;
@@ -29751,7 +29289,7 @@
             }
             initialize() {
                 super.initialize();
-                initBalancing({
+                const initBalancing = new Balancing({
                     upgradeCostMultiplier: 2,
                     zombieDamageMultiplier: 1.5,
                     zombieHealthMultiplier: 6
@@ -29777,7 +29315,7 @@
             }
             initialize() {
                 super.initialize();
-                initBalancing({
+                const initBalancing = new Balancing({
                     upgradeCostMultiplier: 0.5,
                     zombieDamageMultiplier: 10,
                     zombieHealthMultiplier: 5
@@ -29793,7 +29331,7 @@
                 return "challenge_boss_only";
             }
             getTitle() {
-                return translate("gamemode_challenge_boss_only");
+                return tr("gamemode_challenge_boss_only");
             }
             getColor() {
                 return 16742263;
@@ -29806,7 +29344,7 @@
             }
             initialize() {
                 super.initialize();
-                initBalancing({
+                const initBalancing = new Balancing({
                     upgradeCostMultiplier: 1.25,
                     zombieDamageMultiplier: 1,
                     zombieHealthMultiplier: 1,
@@ -29828,7 +29366,7 @@
                 return 3381759;
             }
             getTitle() {
-                return translate("gamemode_sandbox");
+                return tr("gamemode_sandbox");
             }
             getUniqueIndex() {
                 return 2000;
@@ -29838,7 +29376,7 @@
             }
             initialize() {
                 super.initialize();
-                initBalancing({
+                const initBalancing = new Balancing({
                     upgradeCostMultiplier: 0,
                     zombieDamageMultiplier: 1,
                     zombieHealthMultiplier: 1,
@@ -29879,7 +29417,7 @@
                 const t = {
                     random: randomInt(1e3, 1e13),
                     version: SAVEGAME_VERSION,
-                    beta: IS_BETA,
+                    beta: YORGIO.IS_BETA,
                     day: this.root.daytime.getDay(),
                     daySeconds: this.root.daytime.secondsOfCurrentDay(),
                     stats: this.root.stats.serialize(),
@@ -29940,27 +29478,27 @@
                 const data = this.stringToData(e, forceCompatibility);
                 if (!data) return false;
                 if (data.version > SAVEGAME_VERSION) {
-                    if (forceCompatibility) this.root.gui.uiNotifications.showLongError(translate("savegame_too_new"));
+                    if (forceCompatibility) this.root.gui.uiNotifications.showLongError(tr("savegame_too_new"));
                     return false;
                 }
                 if (data.version < LAST_COMPATIBLE_VERSION) {
-                    if (forceCompatibility) this.root.gui.uiNotifications.showLongError(translate("savegame_too_old"));
+                    if (forceCompatibility) this.root.gui.uiNotifications.showLongError(tr("savegame_too_old"));
                     return false;
                 }
                 if (data.version < SAVEGAME_VERSION && forceCompatibility) {
-                    this.root.gui.uiNotifications.showLongHint(translate("savegame_old_version"));
+                    this.root.gui.uiNotifications.showLongHint(tr("savegame_old_version"));
                 }
         
-                const isBeta = IS_BETA;
+                const isBeta = YORGIO.IS_BETA;
                 if (data.beta && !isBeta) {
-                    if (forceCompatibility) this.root.gui.uiNotifications.showLongError(translate("savegame_from_beta"));
+                    if (forceCompatibility) this.root.gui.uiNotifications.showLongError(tr("savegame_from_beta"));
                     return false;
                 }
         
                 const gamemodeId = data.gamemode || "impossible";
                 const gameMode = createGameModeFromId(gamemodeId);
                 if (!gameMode) {
-                    if (forceCompatibility) this.root.gui.uiNotifications.showLongError(translate("gamemode_no_longer_exists", gamemodeId));
+                    if (forceCompatibility) this.root.gui.uiNotifications.showLongError(tr("gamemode_no_longer_exists", gamemodeId));
                     return false;
                 }
         
@@ -29997,7 +29535,7 @@
                 this.root.zoom.setZoomLevel(data.view.zoom, true);
                 this.root.syncer.load(data.sync);
                 this.root.gui.uiGameTimeButtons.requestPause();
-                this.root.gui.uiNotifications.showLongSuccess(translate("game_successfully_loaded"));
+                this.root.gui.uiNotifications.showLongSuccess(tr("game_successfully_loaded"));
                 this.lastSavegame = e;
                 return true;
             }
@@ -30014,22 +29552,22 @@
                 try {
                     decompressed = _lzString2.default.decompressFromEncodedURIComponent(trimmed);
                 } catch (err) {
-                    if (forceCompatibility) this.root.gui.uiNotifications.showLongError(translate("invalid_or_corrupt_savegame"));
+                    if (forceCompatibility) this.root.gui.uiNotifications.showLongError(tr("invalid_or_corrupt_savegame"));
                     return null;
                 }
                 if (decompressed === null) {
-                    if (forceCompatibility) this.root.gui.uiNotifications.showLongError(translate("invalid_or_corrupt_savegame"));
+                    if (forceCompatibility) this.root.gui.uiNotifications.showLongError(tr("invalid_or_corrupt_savegame"));
                     return null;
                 }
                 let data = {};
                 try {
                     data = JSON.parse(decompressed);
                 } catch (err) {
-                    if (forceCompatibility) this.root.gui.uiNotifications.showLongError(translate("invalid_or_corrupt_savegame"));
+                    if (forceCompatibility) this.root.gui.uiNotifications.showLongError(tr("invalid_or_corrupt_savegame"));
                     return null;
                 }
                 if (data === null) {
-                    if (forceCompatibility) this.root.gui.uiNotifications.showLongError(translate("invalid_or_corrupt_savegame"));
+                    if (forceCompatibility) this.root.gui.uiNotifications.showLongError(tr("invalid_or_corrupt_savegame"));
                     return null;
                 }
                 return data;
@@ -30053,7 +29591,7 @@
                             a = "setting_" + e;
                         this.root.persistent.setBool(a, i),
                             (this[e] = i),
-                            console.log("[SETTINGS] Changed", e, "to", i)
+                            console.log("[SETTINGS] Changed", e, "to", i);
                     }),
                     (e.prototype.loadSettings = function () {
                         var e = this;
@@ -30320,66 +29858,51 @@
                     }),
                     t
                 );
-            })(GameSystem);
-
-            class EnemyAISystem extends GameSystem {
-                constructor(root) {
-                    super(root, { necessaryComponents: [EnemyAIComponent] });
+            })(GameSystem),
+            EnemyAISystem = (function (e) {
+                function t(i) {
+                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.call(this, i, { necessaryComponents: [EnemyAIComponent] }));
                 }
-            
-                static get name() {
-                    return "EnemyAISystem";
-                }
-            
-                getMovementSpeed(entity, aiComponent) {
-                    const base = this.root.map;
-                    const tile = entity.getTile();
-                    const pathLengthToBase = base.getPathLengthToBase(...tile);
-            
-                    if (pathLengthToBase > aiComponent.nearDistanceTiles) {
-                        let normalizedDistance = (pathLengthToBase - aiComponent.nearDistanceTiles) /
-                            (aiComponent.farDistanceTiles - aiComponent.nearDistanceTiles);
-                        normalizedDistance = Math.min(1, normalizedDistance);
-            
-                        return aiComponent.speedTilesPerSecond * (1 - normalizedDistance + normalizedDistance * aiComponent.farSpeedBoost);
-                    }
-            
-                    return aiComponent.speedTilesPerSecond;
-                }
-            
-                processEntity(entity, components) {
-                    const aiComponent = components.EnemyAIComponent;
-                    const physicsComponent = components.PhysicsComponent;
-                    const map = this.root.map;
-                    const worldSpaceTileCenter = entity.worldSpaceTileCenter();
-                    const nextTileOnPath = map.findNextTileOnPathToBaseWorldSpace(...worldSpaceTileCenter);
-            
-                    if (nextTileOnPath) {
-                        const [targetX, targetY] = nextTileOnPath.map(tile => tile * Config.tileSize);
-                        const deltaX = targetX - entity.x;
-                        const deltaY = targetY - entity.y;
-                        const movementSpeed = this.getMovementSpeed(entity, aiComponent);
-            
-                        const [desiredVelocityX, desiredVelocityY] = vectorClamp([deltaX, deltaY]);
-            
-                        physicsComponent.desiredVelocityX = desiredVelocityX * movementSpeed;
-                        physicsComponent.desiredVelocityY = desiredVelocityY * movementSpeed;
-                        aiComponent.currentAttackTargetTile = nextTileOnPath;
-                    } else {
-                        physicsComponent.desiredVelocityX = 0;
-                        physicsComponent.desiredVelocityY = 0;
-                        aiComponent.currentAttackTargetTile = null;
-                    }
-                }
-            
-                update() {
-                    if (Config.gameTimeSpeedUpFactor >= 1) {
-                        super.update();
-                    }
-                }
-            }
-            
-            const HealthBarSystem = (function (e) {
+                return (
+                    _inherits(t, e),
+                    _createClass(t, null, [
+                        {
+                            key: "name",
+                            get: function () {
+                                return "EnemyAISystem";
+                            },
+                        },
+                    ]),
+                    (t.prototype.getMovementSpeed = function (e, t) {
+                        var i,
+                            a = t.speedTilesPerSecond,
+                            o = (i = this.root.map).getPathLengthToBase.apply(i, _toConsumableArray(e.getTile()));
+                        if (o > t.nearDistanceTiles) {
+                            var n = o - t.nearDistanceTiles;
+                            (n /= t.farDistanceTiles - t.nearDistanceTiles), (a *= 1 - (n = Math.min(1, n)) + n * t.farSpeedBoost);
+                        }
+                        return a;
+                    }),
+                    (t.prototype.processEntity = function (e, t) {
+                        var i,
+                            a = t.EnemyAIComponent,
+                            o = t.PhysicsComponent,
+                            n = (i = this.root.map).findNextTileOnPathToBaseWorldSpace.apply(i, _toConsumableArray(e.worldSpaceTileCenter()));
+                        if (n) {
+                            var r = n[0] * Config.tileSize - e.x,
+                                s = n[1] * Config.tileSize - e.y,
+                                l = this.getMovementSpeed(e, a),
+                                u = vectorClamp([r, s]);
+                            (o.desiredVelocityX = u[0] * l), (o.desiredVelocityY = u[1] * l), (a.currentAttackTargetTile = n);
+                        } else (o.desiredVelocityX = 0), (o.desiredVelocityY = 0), (a.currentAttackTargetTile = null);
+                    }),
+                    (t.prototype.update = function () {
+                        Config.gameTimeSpeedUpFactor < 1 || e.prototype.update.call(this);
+                    }),
+                    t
+                );
+            })(GameSystem),
+            HealthBarSystem = (function (e) {
                 function t(i) {
                     return _classCallCheck(this, t), _possibleConstructorReturn(this, e.call(this, i, { necessaryComponents: [HealthBarComponent], updateOutOfScreen: false }));
                 }
@@ -31694,115 +31217,103 @@
                     }),
                     t
                 );
-            })(GameSystem),
-            ExplodesOnHitComponent = (function (e) {
-                function t(i) {
-                    var a = i.radiusTiles,
-                        o = void 0 === a ? 1.5 : a,
-                        n = i.damage,
-                        r = void 0 === n ? 1e4 : n,
-                        s = i.minimumDistance,
-                        l = void 0 === s ? 0.9 : s;
-                    _classCallCheck(this, t);
-                    var u = _possibleConstructorReturn(this, e.call(this));
-                    return (u.radiusTiles = o), (u.damage = r), (u.minimumDistance = l), u;
+            })(GameSystem);
+
+            class ExplodesOnHitComponent extends Component {
+                constructor({
+                    radiusTiles = 1.5,
+                    damage = 10000,
+                    minimumDistance = 0.9
+                } = {}) {
+                    super();
+                    this.radiusTiles = radiusTiles;
+                    this.damage = damage;
+                    this.minimumDistance = minimumDistance;
                 }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "ExplodesOnHitComponent";
-                            },
-                        },
-                    ]),
-                    (t.prototype.debugStr = function () {
-                        return "Explodes on contact (d < " + this.minimumDistance + "), does " + this.damage + " damage in a radius of " + this.radiusTiles + " tiles";
-                    }),
-                    t
-                );
-            })(Component),
-            ExplodesOnHitSystem = (function (e) {
-                function t(i) {
-                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.call(this, i, { necessaryComponents: [ExplodesOnHitComponent] }));
+            
+                static get name() {
+                    return "ExplodesOnHitComponent";
                 }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "ExplodesOnHitSystem";
-                            },
-                        },
-                    ]),
-                    (t.prototype.explodeEntity = function (e, t) {
-                        e.getComponent(HealthComponent).health = 0;
-                        var i = e.worldSpaceTileCenter();
-                        this.damageNearbyBuildings(e, t.radiusTiles, t.damage), this.spawnExplosion(i, t.radiusTiles);
-                    }),
-                    (t.prototype.damageNearbyBuildings = function (e, t, i) {
-                        for (
-                            var a = this.root.map.getUsedTilesArround({
-                                tileX: e.getTileX(),
-                                tileY: e.getTileY(),
-                                radius: t + 1,
-                                condition: function (e) {
-                                    return e.hasComponent(BuildingComponent) && !e.hasComponent(InvisibleComponent);
-                                },
-                            }),
-                            o = 0;
-                            o < a.length;
-                            ++o
-                        ) {
-                            var n = a[o].entity;
-                            n.tileDistanceToNonSnapped(e) <= t && n.takeDamage(i);
+            
+                debugStr() {
+                    return `Explodes on contact (d < ${this.minimumDistance}), does ${this.damage} damage in a radius of ${this.radiusTiles} tiles`;
+                }
+            }
+            
+            class ExplodesOnHitSystem extends GameSystem {
+                constructor(config) {
+                    super(config, { necessaryComponents: [ExplodesOnHitComponent] });
+                }
+            
+                static get name() {
+                    return "ExplodesOnHitSystem";
+                }
+            
+                explodeEntity(entity, component) {
+                    entity.getComponent(HealthComponent).health = 0;
+                    const tileCenter = entity.worldSpaceTileCenter();
+                    this.damageNearbyBuildings(entity, component.radiusTiles, component.damage);
+                    this.spawnExplosion(tileCenter, component.radiusTiles);
+                }
+            
+                damageNearbyBuildings(entity, radius, damage) {
+                    const usedTiles = this.root.map.getUsedTilesArround({
+                        tileX: entity.getTileX(),
+                        tileY: entity.getTileY(),
+                        radius: radius + 1,
+                        condition: (tile) =>
+                            tile.hasComponent(BuildingComponent) && !tile.hasComponent(InvisibleComponent)
+                    });
+            
+                    for (const tile of usedTiles) {
+                        const buildingEntity = tile.entity;
+                        if (buildingEntity.tileDistanceToNonSnapped(entity) <= radius) {
+                            buildingEntity.takeDamage(damage);
                         }
-                    }),
-                    (t.prototype.spawnExplosion = function (e, t) {
-                        var i,
-                            a = this,
-                            o = t * Config.tileSize,
-                            n = this.root.particles.spawnNew(e[0], e[1], MetaEnemyExplosionParticle);
-                        (n.width = 2 * o),
-                            (n.height = 2 * o),
-                            (n.alpha = 0.6),
-                            this.root.animations
-                                .animate(n)
-                                .to({ alpha: 0, width: 10, height: 10 }, 500)
-                                .onDone(function () {
-                                    a.root.particles.kill(n);
-                                }),
-                            (i = this.root.sound).playCreeperExplosion.apply(i, _toConsumableArray(e));
-                    }),
-                    (t.prototype.processEntity = function (e, t) {
-                        for (
-                            var i = t.ExplodesOnHitComponent,
-                            a = this.root.map.getUsedTilesArround({
-                                tileX: e.getTileX(),
-                                tileY: e.getTileY(),
-                                radius: i.minimumDistance + 1,
-                                condition: function (e) {
-                                    return e.hasComponent(BuildingComponent) && !e.hasComponent(InvisibleComponent);
-                                },
-                            }),
-                            o = false,
-                            n = 0;
-                            n < a.length;
-                            ++n
-                        ) {
-                            if (a[n].entity.tileDistanceToNonSnapped(e) <= i.minimumDistance) {
-                                o = true;
-                                break;
-                            }
+                    }
+                }
+            
+                spawnExplosion(center, radius) {
+                    const size = radius * Config.tileSize;
+                    const particle = this.root.particles.spawnNew(center[0], center[1], MetaEnemyExplosionParticle);
+                    particle.width = 2 * size;
+                    particle.height = 2 * size;
+                    particle.alpha = 0.6;
+                    this.root.animations
+                        .animate(particle)
+                        .to({ alpha: 0, width: 10, height: 10 }, 500)
+                        .onDone(() => {
+                            this.root.particles.kill(particle);
+                        });
+                    this.root.sound.playCreeperExplosion(...center);
+                }
+            
+                processEntity(entity, component) {
+                    const { ExplodesOnHitComponent } = component;
+                    const usedTiles = this.root.map.getUsedTilesArround({
+                        tileX: entity.getTileX(),
+                        tileY: entity.getTileY(),
+                        radius: ExplodesOnHitComponent.minimumDistance + 1,
+                        condition: (tile) =>
+                            tile.hasComponent(BuildingComponent) && !tile.hasComponent(InvisibleComponent)
+                    });
+            
+                    let shouldExplode = false;
+            
+                    for (const tile of usedTiles) {
+                        if (tile.entity.tileDistanceToNonSnapped(entity) <= ExplodesOnHitComponent.minimumDistance) {
+                            shouldExplode = true;
+                            break;
                         }
-                        o && this.explodeEntity(e, i);
-                    }),
-                    t
-                );
-            })(GameSystem),
-            BuildingAnimationsSystem = (function (e) {
+                    }
+            
+                    if (shouldExplode) {
+                        this.explodeEntity(entity, ExplodesOnHitComponent);
+                    }
+                }
+            }
+            
+            const BuildingAnimationsSystem = (function (e) {
                 function t(i) {
                     _classCallCheck(this, t);
                     var a = _possibleConstructorReturn(this, e.call(this, i, { necessaryComponents: [] }));
@@ -32179,7 +31690,7 @@
                     _classCallCheck(this, e),
                         (this.root = t),
                         (this.uiGroup = i),
-                        (this.onSelectBuilding = new _phaserCe.Phaser.Signal()),
+                        (this.onSelectBuilding = new Phaser.Signal()),
                         (this.classNameToGroup = newEmptyMap()),
                         this.init(),
                         this.initKeybindings(),
@@ -32260,7 +31771,7 @@
                                     return e instanceof UniqueRequirement;
                                 });
                                 s && ((o.amountText.visible = true), (r = s.check(e.root) ? 1 : 0)),
-                                    r < 0 ? (o.amountText.visible = false) : ((o.amountText.visible = true), r > 500 ? o.amountText.setText(translate("no_limit"), true) : o.amountText.setText(r, true));
+                                    r < 0 ? (o.amountText.visible = false) : ((o.amountText.visible = true), r > 500 ? o.amountText.setText(tr("no_limit"), true) : o.amountText.setText(r, true));
                                 var l = pastellizeColor(t.getBackgroundColor()),
                                     u = 1,
                                     c = 1;
@@ -32318,10 +31829,10 @@
                                 (this.tooltipDesc.text = e.getDescription());
                             var a = e.getUpgradeCost(0),
                                 o = formatBigNumber(a.gems);
-                            0 === a.gems && (o = translate("no_cost")),
+                            0 === a.gems && (o = tr("no_cost")),
                                 (this.tooltipPriceTextGems.text = o),
                                 this.root.stats.canAfford(a) ? (this.tooltipPriceTextGems.tint = 16777215) : (this.tooltipPriceTextGems.tint = 16742263),
-                                (this.tooltipHotkey.text = (0, _trim2.default)(translate("prefix_hotkey")) + " " + keyToString(e.getKeybinding()));
+                                (this.tooltipHotkey.text = (0, _trim2.default)(tr("prefix_hotkey")) + " " + keyToString(e.getKeybinding()));
                             var n = this.root.logic.checkBuildingRequirements({ building: e });
                             n.result ? (this.tooltipDependency.visible = false) : ((this.tooltipDependency.text = n.reason), (this.tooltipDependency.visible = true));
                         }
@@ -32384,7 +31895,7 @@
                         this.init(),
                         this.initKeybindings(),
                         this.root.signals.gameSizeChanged.add(this.onResolutionChanged, this),
-                        (this.keyAlt = this.root.keyboard.addKey(_phaserCe.Phaser.Keyboard.ALT));
+                        (this.keyAlt = this.root.keyboard.addKey(Phaser.Keyboard.ALT));
                 }
                 return (
                     _createClass(e, null, [
@@ -32401,7 +31912,7 @@
                     (e.prototype.initKeybindings = function () {
                         var e = this;
                         this.root.keyboard.addKey(Config.keys.cancelBuild).onDown.add(this.cancelPlacement, this),
-                            this.root.keyboard.addKey(_phaserCe.Phaser.Keyboard.SHIFT).onUp.add(function () {
+                            this.root.keyboard.addKey(Phaser.Keyboard.SHIFT).onUp.add(function () {
                                 var t = window.mouseTracker.leftButtonDown;
                                 (null === e.lastPlacedPosition && t) || e.cancelPlacement(true);
                             });
@@ -32474,7 +31985,7 @@
                             }),
                             this.clickCatcher.events.onInputUp.add(function () {
                                 (e.placing = false),
-                                    e.root.keyboard.isDown(_phaserCe.Phaser.Keyboard.SHIFT) ? e.smartPlaceActive && e.onPlacementFinished() : e.cancelPlacement(),
+                                    e.root.keyboard.isDown(Phaser.Keyboard.SHIFT) ? e.smartPlaceActive && e.onPlacementFinished() : e.cancelPlacement(),
                                     (e.lastPlacedPosition = null),
                                     (e.lastPositionInRadius = null),
                                     (e.lastMousePos = null);
@@ -32484,7 +31995,7 @@
                                 (this.cancelGroup.fixedToCamera = true),
                                 (this.cancelButton = makeButton({
                                     phaser: this.root.phaser,
-                                    text: translate("kb_cancel_placement"),
+                                    text: tr("kb_cancel_placement"),
                                     width: 140,
                                     fill: Config.colors.ui.sellBuilding,
                                     clickHandler: function () {
@@ -32525,7 +32036,7 @@
                             i && (this.lastPositionInRadius ? (n = this.lastPositionInRadius) : (console.error("no last position in radius, using", n), (this.lastPlacedPosition = null)));
                             var r = { building: this.objectToPlace, position: { tileX: n[0], tileY: n[1] } };
                             this.doPlaceBuilding(r) && (this.lastPlacedPosition = n);
-                            var s = this.root.keyboard.isDown(_phaserCe.Phaser.Keyboard.SHIFT),
+                            var s = this.root.keyboard.isDown(Phaser.Keyboard.SHIFT),
                                 l = false;
                             o || s || (l = true), this.root.logic.checkBuildingRequirements({ building: this.objectToPlace }).result || (l = true), l && this.cancelPlacement();
                         }
@@ -32633,7 +32144,7 @@
                             n ? ((this.radiusIndicator.visible = true), this.radiusIndicator.scale.setTo((n.radius * Config.tileSize) / 100)) : (this.radiusIndicator.visible = false);
                             var r = this.root.logic.checkBuildingRequirements(i),
                                 s = Config.colors.ui.placementGood;
-                            this.root.entityMgr.getAllEntitiesWithComponent(EnemyAIComponent).length > 0 && Config.gameTimeSpeedUpFactor < 1 && (r = { result: false, reason: translate("placement_not_possible_during_night_paused") }),
+                            this.root.entityMgr.getAllEntitiesWithComponent(EnemyAIComponent).length > 0 && Config.gameTimeSpeedUpFactor < 1 && (r = { result: false, reason: tr("placement_not_possible_during_night_paused") }),
                                 r.result
                                     ? ((this.reasonText.visible = false), (this.reasonBackground.visible = false))
                                     : ((s = Config.colors.ui.placementBad),
@@ -32792,8 +32303,8 @@
                             (this.currentEntity = null),
                             this.initTooltip(),
                             this.bindSignals(),
-                            (this.unusedMouseDown = new _phaserCe.Phaser.Signal()),
-                            (this.unusedMouseUp = new _phaserCe.Phaser.Signal()),
+                            (this.unusedMouseDown = new Phaser.Signal()),
+                            (this.unusedMouseUp = new Phaser.Signal()),
                             (this.updateTimer = Timer.makeFromIntervalMs(1e3)),
                             (this.forceUpgradeAll = false),
                             (this.heightToTooltipPanel = {}),
@@ -32842,12 +32353,12 @@
                             this.root.signals.mapDragged.add(this.hideTooltip, this),
                             this.root.signals.actionPerformed.add(this.hideTooltip, this),
                             this.root.signals.buildingDestroyed.add(this.checkTooltip, this),
-                            (this.keyEscape = this.root.keyboard.addKey(_phaserCe.Phaser.Keyboard.ESC)),
+                            (this.keyEscape = this.root.keyboard.addKey(Phaser.Keyboard.ESC)),
                             this.keyEscape.onDown.add(this.hideTooltip, this),
-                            (this.keyShift = this.root.keyboard.addKey(_phaserCe.Phaser.Keyboard.SHIFT)),
+                            (this.keyShift = this.root.keyboard.addKey(Phaser.Keyboard.SHIFT)),
                             this.keyShift.onDown.add(this.updateDialogButtons, this),
                             this.keyShift.onUp.add(this.updateDialogButtons, this),
-                            (this.keyAlt = this.root.keyboard.addKey(_phaserCe.Phaser.Keyboard.ALT)),
+                            (this.keyAlt = this.root.keyboard.addKey(Phaser.Keyboard.ALT)),
                             this.keyAlt.onDown.add(this.updateDialogButtons, this),
                             this.keyAlt.onUp.add(this.updateDialogButtons, this);
                     }),
@@ -32875,7 +32386,7 @@
                                     this.tooltipSellButton.visible = true;
                                     var i = 0,
                                         a = "";
-                                    this.getBatchUpgradeMode() == UPGRADE_ONE_BUILDING ? ((i = this.root.logic.getSellPrice(e)), (a = translate("sell_for"))) : ((a = translate("sell_all_for")), (i = this.root.logic.getSellPriceForAll(e))),
+                                    this.getBatchUpgradeMode() == UPGRADE_ONE_BUILDING ? ((i = this.root.logic.getSellPrice(e)), (a = tr("sell_for"))) : ((a = tr("sell_all_for")), (i = this.root.logic.getSellPriceForAll(e))),
                                         this.tooltipSellButton.textHandle.setText(a.toUpperCase(), true),
                                         this.sellGemsText.setText(formatBigNumber(i), true),
                                         (this.sellGemsText.visible = true),
@@ -32886,7 +32397,7 @@
                                         (this.sellGemsText.visible = false),
                                         (this.sellGemsIcon.visible = false),
                                         (this.tooltipSellTextGroup.visible = true),
-                                        this.tooltipSellText.setText(translate("can_not_sell_building"), true);
+                                        this.tooltipSellText.setText(tr("can_not_sell_building"), true);
                                 this.tooltipUpgradeButton.getChildAt(0).tint = Config.colors.ui.upgradeBuilding;
                                 var o = this.root.logic.checkSpecialUpgradeRequirements(e);
                                 if (o.result)
@@ -32902,10 +32413,10 @@
                                         this.getLevelUpgradeMode() === UPGRADE_ONE_LEVEL
                                             ? (r = this.getBatchUpgradeMode() === UPGRADE_ONE_BUILDING ? "upgrade" : "upgrade_all")
                                             : ((s = true), (r = this.getBatchUpgradeMode() === UPGRADE_ONE_BUILDING ? "max_out" : "max_out_all")),
-                                            this.tooltipUpgradeButton.textHandle.setText(translate(r).toUpperCase(), true),
+                                            this.tooltipUpgradeButton.textHandle.setText(tr(r).toUpperCase(), true),
                                             (this.tooltipUpgradeButton.getChildAt(0).tint = s ? Config.colors.ui.maxOutBuilding : Config.colors.ui.upgradeBuilding),
                                             this.root.logic.checkCanUpgradeBuilding(e).result || setButtonEnabled(this.tooltipUpgradeButton, false);
-                                    } else (this.tooltipUpgradeTextGroup.visible = true), this.tooltipUpgradeText.setText(translate("upgrade_base_to_upgrade_building"), true), (this.tooltipUpgradeButton.visible = false);
+                                    } else (this.tooltipUpgradeTextGroup.visible = true), this.tooltipUpgradeText.setText(tr("upgrade_base_to_upgrade_building"), true), (this.tooltipUpgradeButton.visible = false);
                                 else (this.tooltipUpgradeTextGroup.visible = true), this.tooltipUpgradeText.setText(o.reason, true), (this.tooltipUpgradeButton.visible = false);
                             } else console.warn("Current entity has no meta");
                         }
@@ -32969,7 +32480,7 @@
                         (this.buttonsGroup = t.make.group()), a.add(this.buttonsGroup);
                         var p = this.makeTooltipButton(
                             i / 2 - 5,
-                            translate("upgrade"),
+                            tr("upgrade"),
                             16777214,
                             function () {
                                 return e.tryUpgrade();
@@ -32986,7 +32497,7 @@
                         (this.upgradeGemsIcon = b), (this.upgradeGemsText = A);
                         var y = this.makeTooltipButton(
                             i / 2 - 5,
-                            translate("sell_for"),
+                            tr("sell_for"),
                             Config.colors.ui.sellBuilding,
                             function () {
                                 return e.trySell();
@@ -33030,7 +32541,7 @@
                         if (this.currentEntity && this.currentEntity.meta.isSellable()) {
                             if (this.getBatchUpgradeMode() === UPGRADE_ALL_BUILDINGS) {
                                 var e = this.currentEntity.meta;
-                                return (document.getElementById("sell_all_confirm_content").innerText = translate("sell_confirmation_text", e.getDisplayName())), void window.showDialog("sell_all_confirmation_bg");
+                                return (document.getElementById("sell_all_confirm_content").innerText = tr("sell_confirmation_text", e.getDisplayName())), void window.showDialog("sell_all_confirmation_bg");
                             }
                             this.root.logic.sellBuilding(this.currentEntity) && ((this.currentEntity = null), this.hideTooltip());
                         }
@@ -33064,7 +32575,7 @@
                         if (null == i) throw new Error("Entity has no meta handle");
                         (this.currentRadiusParams = [0, 0]), this.initializeRadiusHelper(), this.tooltipTitle.setText(i.getDisplayName(), true), this.tooltipDesc.setText(i.getDescription(), true);
                         var a = Config.colors.levels[e.getLevel()];
-                        this.tooltipLevelText.setText(translate("level").toUpperCase() + " " + (e.getLevel() + 1), true), (this.tooltipLevelText.tint = a), (this.tooltipLevelIcon.tint = a);
+                        this.tooltipLevelText.setText(tr("level").toUpperCase() + " " + (e.getLevel() + 1), true), (this.tooltipLevelText.tint = a), (this.tooltipLevelIcon.tint = a);
                         var o = i.getLevelKeyStats(e.getLevel()),
                             n = i.getLevelKeyStats(e.getLevel() + 1),
                             r = 0;
@@ -33077,7 +32588,7 @@
                                     l = a[1];
                                 if (o[s]) {
                                     var u = t.tooltipStatLines[r],
-                                        c = translate("stat_" + s);
+                                        c = tr("stat_" + s);
                                     u.icon.loadTexture("atlas", "icon-" + s + ".png");
                                     var d = formatBigNumber(o[s], true);
                                     if ((u.currentValueText.setText(d, true), l)) {
@@ -33423,7 +32934,7 @@
                             t.anchor.setTo(0.5, 0.5),
                             this.group.add(t),
                             (this.arrowSprite = t),
-                            (this.text = e.make.text(0, 0, translate("base_arrow_hint").toUpperCase(), { font: "22px Roboto", fill: "#FFF" })),
+                            (this.text = e.make.text(0, 0, tr("base_arrow_hint").toUpperCase(), { font: "22px Roboto", fill: "#FFF" })),
                             this.text.anchor.setTo(0.5, 0.5),
                             (this.text.y = 30),
                             this.group.add(this.text);
@@ -33449,7 +32960,7 @@
                             var d = normalizedDirection(o, n),
                                 h = Math.min((0.5 * Math.max(0, t - 200)) / Math.max(0.001, Math.abs(d[0])), (0.5 * Math.max(0, i - 200)) / Math.max(0.001, Math.abs(d[1])));
                             this.group.position.setTo(d[0] * h + t / 2, d[1] * h + i / 2);
-                            var p = 180 - _phaserCe.Phaser.Math.radToDeg(Math.atan2(d[0], d[1]));
+                            var p = 180 - Phaser.Math.radToDeg(Math.atan2(d[0], d[1]));
                             (this.arrowSprite.angle = p), this.text.position.setTo(50 * -d[0], 40 * -d[1] + 2);
                         } else this.group.visible = false;
                     }),
@@ -33601,9 +33112,9 @@
                         e.prototype.init.call(this);
                         var i = this.root.phaser,
                             a = [
-                                { label: translate("cannon"), id: "cannonballs", color: Config.colors.cannonball },
-                                { label: translate("arrow"), id: "arrows", color: Config.colors.basicArrow },
-                                { label: translate("lightning"), id: "power", color: Config.colors.power },
+                                { label: tr("cannon"), id: "cannonballs", color: Config.colors.cannonball },
+                                { label: tr("arrow"), id: "arrows", color: Config.colors.basicArrow },
+                                { label: tr("lightning"), id: "power", color: Config.colors.power },
                             ];
                         this.barHandles = {};
                         var o = 10,
@@ -33643,7 +33154,7 @@
             GoldIncomeVisualizerUI = (function (e) {
                 function t(i, a, o) {
                     _classCallCheck(this, t);
-                    var n = _possibleConstructorReturn(this, e.call(this, i, a, o, { height: 33, label: translate("crystals_per_sec").toUpperCase(), updateInterval: 500 }));
+                    var n = _possibleConstructorReturn(this, e.call(this, i, a, o, { height: 33, label: tr("crystals_per_sec").toUpperCase(), updateInterval: 500 }));
                     return (n.lastGemCount = n.root.stats.gems), (n.gainAverage = 0), n.root.signals.gameLoadedAndStarted.add(n.doUpdate, n), n;
                 }
                 return (
@@ -33822,8 +33333,8 @@
                         if ((this.label.setText(e.toUpperCase(), true), t >= 60)) {
                             var i = Math.floor(t / 60),
                                 a = t % 60;
-                            this.text.setText(i + translate("minute_suffix") + " " + a.toString().padStart(2, "0") + translate("seconds_suffix"), true);
-                        } else this.text.setText(t + translate("seconds_suffix"), true);
+                            this.text.setText(i + tr("minute_suffix") + " " + a.toString().padStart(2, "0") + tr("seconds_suffix"), true);
+                        } else this.text.setText(t + tr("seconds_suffix"), true);
                         if (t <= 15) {
                             (this.root.time.now / 1e3) % 0.4 > 0.2 ? (this.text.tint = 16742263) : (this.text.tint = 16777214);
                         }
@@ -33835,12 +33346,12 @@
                                 var t = this.root.time.now - e.placedBaseAtTime,
                                     i = Config.initialDayDurationAdditional + Config.dayDurationTotalSeconds - Config.nightDurationSeconds - t / 1e3,
                                     a = Math.floor(i);
-                                a > 0 && ((this.panelGroup.visible = true), this.setDisplayParameters(translate("first_zombie_wave_in"), a));
+                                a > 0 && ((this.panelGroup.visible = true), this.setDisplayParameters(tr("first_zombie_wave_in"), a));
                             }
                             if (e.placedBaseAtTime && e.getDay() % GAME_BALANCING.bossInterval == 0 && !e.isNight() && e.getDay() > 1) {
                                 this.panelGroup.visible = true;
                                 var o = Math.floor(e.secondsUntilNight());
-                                this.setDisplayParameters(translate("zombie_boss_in"), o);
+                                this.setDisplayParameters(tr("zombie_boss_in"), o);
                             }
                         }
                     }),
@@ -33940,7 +33451,7 @@
                     e
                 );
             })(),
-            ccFixBaseMenuButton = _phaserCe.Phaser.Group,
+            ccFixBaseMenuButton = Phaser.Group,
             MenuButton = (function (e) {
                 function t(i) {
                     var a = i.root,
@@ -33998,7 +33509,7 @@
                     }),
                     (t.prototype.initSignals = function () {
                         var e = this;
-                        (this.toggleable ? ((this.toggled = new _phaserCe.Phaser.Signal()), (this.isToggled = false)) : (this.clicked = new _phaserCe.Phaser.Signal()), this.keybinding) &&
+                        (this.toggleable ? ((this.toggled = new Phaser.Signal()), (this.isToggled = false)) : (this.clicked = new Phaser.Signal()), this.keybinding) &&
                             this.root.keyboard.addKey(this.keybinding).onDown.add(function () {
                                 e.handleClick();
                             });
@@ -34152,7 +33663,7 @@
                     _classCallCheck(this, t);
                     var n = _possibleConstructorReturn(
                         this,
-                        e.call(this, { root: i, uiGroup: a, index: o, spriteKey: "view-defense.png", title: translate("defense_view"), description: translate("defense_view_desc"), keybinding: Config.keys.viewDefense })
+                        e.call(this, { root: i, uiGroup: a, index: o, spriteKey: "view-defense.png", title: tr("defense_view"), description: tr("defense_view_desc"), keybinding: Config.keys.viewDefense })
                     );
                     return (
                         (n.group = n.root.groups.defensiveViewGroup),
@@ -34203,7 +33714,7 @@
                     _classCallCheck(this, t);
                     var n = _possibleConstructorReturn(
                         this,
-                        e.call(this, { root: i, uiGroup: a, index: o, spriteKey: "view-transport.png", title: translate("transport_view"), description: translate("transport_view_desc"), keybinding: Config.keys.viewTransport })
+                        e.call(this, { root: i, uiGroup: a, index: o, spriteKey: "view-transport.png", title: tr("transport_view"), description: tr("transport_view_desc"), keybinding: Config.keys.viewTransport })
                     );
                     return (
                         (n.group = n.root.groups.transportViewGroup),
@@ -34353,7 +33864,7 @@
                     for (var t = arguments.length, i = Array(t), a = 0; a < t; a++) i[a] = arguments[a];
                     this.text = i
                         .map(function (e) {
-                            return translate(e);
+                            return tr(e);
                         })
                         .join("<br /><br />");
                 }
@@ -35387,7 +34898,7 @@
                         var e = this.getCurrentStepInstance();
                         e
                             ? ((document.getElementById("tutorial_next_text").innerHTML = e.text),
-                                this.currentStepIndex === TUTORIAL_STEPS.length - 1 && (document.getElementById("next_tutorial_btn").innerText = translate("tutorial_finish")),
+                                this.currentStepIndex === TUTORIAL_STEPS.length - 1 && (document.getElementById("next_tutorial_btn").innerText = tr("tutorial_finish")),
                                 this.updateArrowPosition(),
                                 e.requiresArrowAction() ? document.getElementById("tutorial_arrow").classList.add("clickable") : document.getElementById("tutorial_arrow").classList.remove("clickable"),
                                 e.hasNextButton() ? (document.getElementById("next_tutorial_btn").style.display = "inline-block") : (document.getElementById("next_tutorial_btn").style.display = "none"),
@@ -35407,7 +34918,7 @@
                     (e.prototype.resetTutorialButtons = function () {
                         this.abortRequested = false;
                         try {
-                            document.getElementById("abort_tutorial_btn").innerText = translate("tutorial_abort");
+                            document.getElementById("abort_tutorial_btn").innerText = tr("tutorial_abort");
                         } catch (e) { }
                     }),
                     (e.prototype.init = function () {
@@ -35421,7 +34932,7 @@
                                 e.abortRequested
                                     ? (e.finishTutorial(), (e.root.stats.gems = 100))
                                     : ((e.abortRequested = true),
-                                        (document.getElementById("abort_tutorial_btn").innerText = translate("tutorial_confirm_abort")),
+                                        (document.getElementById("abort_tutorial_btn").innerText = tr("tutorial_confirm_abort")),
                                         setTimeout(function () {
                                             return e.resetTutorialButtons();
                                         }, 2e3)),
@@ -35462,7 +34973,7 @@
                     _classCallCheck(this, t);
                     var n = _possibleConstructorReturn(
                         this,
-                        e.call(this, { root: i, uiGroup: a, index: o, spriteKey: "view-processor_usage.png", title: translate("processor_usage_view"), description: translate("processor_usage_view_desc"), keybinding: Config.keys.viewProcessorUsage })
+                        e.call(this, { root: i, uiGroup: a, index: o, spriteKey: "view-processor_usage.png", title: tr("processor_usage_view"), description: tr("processor_usage_view_desc"), keybinding: Config.keys.viewProcessorUsage })
                     );
                     return (
                         (n.group = n.root.groups.processorUsageViewGroup),
@@ -35547,7 +35058,7 @@
                         (this.title = n),
                         (this.description = r),
                         (this.spriteXOffs = l),
-                        (this.clicked = new _phaserCe.Phaser.Signal()),
+                        (this.clicked = new Phaser.Signal()),
                         this.init(),
                         this.initTooltip();
                 }
@@ -35665,7 +35176,7 @@
                             !Config.tutorialActive &&
                             (this.isBasePlaced()
                                 ? ((Config.gameTimeSpeedUpFactor = 1e-12), this.setTimeIndicator("icon-pause.png", 700), this.clearActiveState(), this.buttonSpeedPause.activate(), true)
-                                : (this.showNotAvailableHint(translate("pause_not_possible_before_base")), false))
+                                : (this.showNotAvailableHint(tr("pause_not_possible_before_base")), false))
                         );
                     }),
                     (e.prototype.requestRegularSpeed = function () {
@@ -35675,10 +35186,10 @@
                         return (
                             !Config.tutorialActive &&
                             (this.isBossAlive() && this.root.settings.disableFastForwardDuringBoss
-                                ? (this.showNotAvailableHint(translate("fastforward_disabled_while_boss")), this.requestRegularSpeed(), false)
+                                ? (this.showNotAvailableHint(tr("fastforward_disabled_while_boss")), this.requestRegularSpeed(), false)
                                 : this.isBasePlaced()
                                     ? ((Config.gameTimeSpeedUpFactor = Config.fastForwardSpeed), this.setTimeIndicator("icon-fast-forward.png", 150), this.clearActiveState(), this.buttonSpeedFast.activate(), true)
-                                    : (this.showNotAvailableHint(translate("fastforward_not_possible_before_base")), this.requestRegularSpeed(), false))
+                                    : (this.showNotAvailableHint(tr("fastforward_not_possible_before_base")), this.requestRegularSpeed(), false))
                         );
                     }),
                     (e.prototype.setTimeIndicator = function (e) {
@@ -35699,7 +35210,7 @@
                             i = Config.mobileDevice ? 30 : 40,
                             a = makeRoundedPanelBackground(this.root.phaser, 3 * t, i, Config.colors.ui.panelBackground, Config.colors.ui.panelAlpha);
                         this.buttonGroup.add(a),
-                            (this.buttonSpeedPause = new GameTimeButton({ root: this.root, parentGroup: this.buttonGroup, spriteKey: "icon-pause-button.png", title: translate("pause_game"), description: translate("pause_game_desc") })),
+                            (this.buttonSpeedPause = new GameTimeButton({ root: this.root, parentGroup: this.buttonGroup, spriteKey: "icon-pause-button.png", title: tr("pause_game"), description: tr("pause_game_desc") })),
                             this.buttonSpeedPause.clicked.add(function () {
                                 e.requestPause() ? e.root.signals.uiActionPerformed.dispatch(e) : e.root.signals.uiActionPerformedAndFailed.dispatch(e);
                             }, this),
@@ -35707,8 +35218,8 @@
                                 root: this.root,
                                 parentGroup: this.buttonGroup,
                                 spriteKey: "icon-regular-speed-button.png",
-                                title: translate("regular_speed"),
-                                description: translate("regular_speed_desc"),
+                                title: tr("regular_speed"),
+                                description: tr("regular_speed_desc"),
                                 spriteXOffs: 1,
                             })),
                             (this.buttonSpeedRegular.handle().position.x = t),
@@ -35719,8 +35230,8 @@
                                 root: this.root,
                                 parentGroup: this.buttonGroup,
                                 spriteKey: "icon-fast-forward-button.png",
-                                title: translate("fast_forward"),
-                                description: translate("fast_forward_desc"),
+                                title: tr("fast_forward"),
+                                description: tr("fast_forward_desc"),
                                 spriteXOffs: 1,
                             })),
                             (this.buttonSpeedFast.handle().position.x = 2 * t),
@@ -35748,7 +35259,7 @@
                     e
                 );
             })(),
-            ccFixBaseSingleSpriteButton = _phaserCe.Phaser.Image,
+            ccFixBaseSingleSpriteButton = Phaser.Image,
             SingleSpriteButton = (function (e) {
                 function t(i, a) {
                     _classCallCheck(this, t);
@@ -35756,7 +35267,7 @@
                     return (
                         o.enableInput(),
                         (o.name = "SingleSpriteButton"),
-                        (o.clicked = new _phaserCe.Phaser.Signal()),
+                        (o.clicked = new Phaser.Signal()),
                         o.events.onInputOver.add(function () {
                             (i.canvas.style.cursor = "pointer"), (o.alpha = 0.8);
                         }),
@@ -35797,7 +35308,7 @@
                         (this.dragging = false),
                         (this.lastDragPosition = null),
                         this.toggleDialog(false),
-                        this.root.keyboard.addKey(_phaserCe.Phaser.Keyboard.ESC).onDown.add(this.hideDialogIfOpen, this),
+                        this.root.keyboard.addKey(Phaser.Keyboard.ESC).onDown.add(this.hideDialogIfOpen, this),
                         (this.cameraManager = new CameraManager(this.root)),
                         this.cameraManager.moved.add(this.onKeyboardMovement, this);
                 }
@@ -35847,8 +35358,8 @@
                         (this.button = new MenuButton({
                             root: this.root,
                             spriteKey: "icon-global-upgrades.png",
-                            title: translate("global_upgrades"),
-                            description: translate("global_upgrades_desc"),
+                            title: tr("global_upgrades"),
+                            description: tr("global_upgrades_desc"),
                             keybinding: Config.keys.globalUpgrades,
                             toggleable: true,
                             haveBadge: true,
@@ -35913,7 +35424,7 @@
                         this.descriptionGroup.add(a);
                         var o = t.make.group();
                         o.position.setTo(PADDING), this.descriptionGroup.add(o);
-                        var n = t.make.text(0, 2, translate("global_upgrades").toUpperCase(), { font: "18px Roboto", fill: "#fff" });
+                        var n = t.make.text(0, 2, tr("global_upgrades").toUpperCase(), { font: "18px Roboto", fill: "#fff" });
                         o.add(n);
                         (this.pointsLeftBadge = makeBorderedRoundedPanelBackground({ phaser: t, w: 120, h: 30, fill: 3355448, lineFill: 2414703, lineWidth: 2, alpha: 1, borderRadius: 4 })),
                             this.dialogGroup.add(this.pointsLeftBadge),
@@ -35924,21 +35435,21 @@
                             (this.pointsLeftText = t.make.text(0, 8, "0 Points", { fill: "#" + (2414703).toString(16).padStart(6, "0"), font: "12px Roboto", fontWeight: 700, align: "center", boundsAlignH: "center" })),
                             this.pointsLeftText.setTextBounds(0, 0, 120, 20),
                             this.pointsLeftBadge.addChild(this.pointsLeftText),
-                            (this.noPointsText = t.make.text(0, 0, translate("no_points"), { fill: "#f77", font: "14px Roboto", fontWeight: 700, align: "right", boundsAlignH: "right" })),
+                            (this.noPointsText = t.make.text(0, 0, tr("no_points"), { fill: "#f77", font: "14px Roboto", fontWeight: 700, align: "right", boundsAlignH: "right" })),
                             this.noPointsText.setTextBounds(0, 7, 250, 20),
                             this.dialogGroup.add(this.noPointsText),
                             (this.closeButton = makeButton({
                                 phaser: t,
                                 width: 130,
-                                text: translate("close_dialog"),
+                                text: tr("close_dialog"),
                                 fill: 16742263,
                                 clickHandler: function () {
                                     return e.toggleDialog(false);
                                 },
-                                keybinding: _phaserCe.Phaser.Keyboard.ESC,
+                                keybinding: Phaser.Keyboard.ESC,
                             })),
                             this.dialogGroup.add(this.closeButton);
-                        var r = t.make.text(0, 32, translate("global_upgrades_explain"), { font: "13px Roboto", fill: "#999", wordWrap: true, wordWrapWidth: DESCRIPTION_WIDTH - 2 * PADDING });
+                        var r = t.make.text(0, 32, tr("global_upgrades_explain"), { font: "13px Roboto", fill: "#999", wordWrap: true, wordWrapWidth: DESCRIPTION_WIDTH - 2 * PADDING });
                         o.add(r);
                         var s = new SingleSpriteButton(t, "icon-close.png");
                         o.add(s),
@@ -35950,7 +35461,7 @@
                             (this.toggleStatsButton = makeButton({
                                 phaser: t,
                                 width: 160,
-                                text: translate("toggle_skill_summary"),
+                                text: tr("toggle_skill_summary"),
                                 fill: 7829503,
                                 clickHandler: function () {
                                     return e.toggleSummary();
@@ -36001,7 +35512,7 @@
                                 l = n * NODE_SCALE,
                                 u = -r * NODE_SCALE,
                                 c = mixColorPerChannel(s.color, 0.2, 34),
-                                d = t.make.text(l, u, translate("skill_group_" + o).toUpperCase(), { font: "14px Roboto", fill: "#" + c.toString(16).padStart(6, "0"), align: "center", fontWeight: 700, boundsAlignH: "center" });
+                                d = t.make.text(l, u, tr("skill_group_" + o).toUpperCase(), { font: "14px Roboto", fill: "#" + c.toString(16).padStart(6, "0"), align: "center", fontWeight: 700, boundsAlignH: "center" });
                             d.setTextBounds(-100, 0, 200, 30), e.labelsGroup.add(d);
                         });
                     }),
@@ -36031,7 +35542,7 @@
                                     }),
                                     u.events.onInputDown.add(function () {
                                         e.root.stats.isSkillUnlocked(o) && e.root.signals.uiActionPerformedAndFailed.dispatch(),
-                                            e.tryUnlock(o) ? e.root.signals.uiSkillMarkedForLevelUp.dispatch() : e.root.gui.uiNotifications.showError(translate("can_not_unlock_skill"));
+                                            e.tryUnlock(o) ? e.root.signals.uiSkillMarkedForLevelUp.dispatch() : e.root.gui.uiNotifications.showError(tr("can_not_unlock_skill"));
                                     });
                                 var c = t.make.graphics();
                                 s.add(c);
@@ -36092,14 +35603,14 @@
                                         a = n[l],
                                         o = a.text,
                                         r = a.value;
-                                    (o.tint = i.color), o.setText(translate("gain_" + e), true), r.setText("+" + t.gains[e] + "%", true), (o.visible = true), (r.visible = true), (l += 1);
+                                    (o.tint = i.color), o.setText(tr("gain_" + e), true), r.setText("+" + t.gains[e] + "%", true), (o.visible = true), (r.visible = true), (l += 1);
                                 }
                             }),
                                 (a = 20 * l + 15);
                         }
                         (s.y = a + 2),
                             (a += 25),
-                            1 === t.cost ? s.setText(translate("points_cost_single", t.cost), true) : s.setText(translate("points_cost", t.cost), true),
+                            1 === t.cost ? s.setText(tr("points_cost_single", t.cost), true) : s.setText(tr("points_cost", t.cost), true),
                             t.cost > this.root.stats.points ? (s.tint = 16751001) : (s.tint = 10066431),
                             Config.showSkillIds && (s.setText(t.cost + " // " + e, true), (s.tint = 3381759)),
                             this.tooltipGroup.position.setTo(i[0] - TOOLTIP_W / 2, i[1] - a - Math.floor(14 * t.getScale()) - 15);
@@ -36174,7 +35685,7 @@
                                         o = GAIN_MAPPINGS[t];
                                     if (a !== o.default) {
                                         var n = Math.floor(a - o.default) + " %";
-                                        0 !== o.default && (n = "+ " + n), i.push({ color: o.color, text: translate("gain_" + t), value: n });
+                                        0 !== o.default && (n = "+ " + n), i.push({ color: o.color, text: tr("gain_" + t), value: n });
                                     }
                                 }),
                                 i.length < 1 ? ((this.summaryGroup.renderable = false), (this.toggleStatsButton.visible = false)) : ((this.summaryGroup.renderable = true), (this.toggleStatsButton.visible = true));
@@ -36205,8 +35716,8 @@
                     (e.prototype.rerenderBadge = function () {
                         if (this.root.stats.points > 0) {
                             (this.pointsLeftBadge.visible = true), (this.noPointsText.visible = false);
-                            var e = translate("points_cost", this.root.stats.points);
-                            1 === this.root.stats.points && (e = translate("points_cost_single", this.root.stats.points)), this.pointsLeftText.setText(e.toUpperCase(), true);
+                            var e = tr("points_cost", this.root.stats.points);
+                            1 === this.root.stats.points && (e = tr("points_cost_single", this.root.stats.points)), this.pointsLeftText.setText(e.toUpperCase(), true);
                         } else (this.noPointsText.visible = true), (this.pointsLeftBadge.visible = false);
                     }),
                     (e.prototype.update = function (e) {
@@ -36234,29 +35745,29 @@
                             i = function (t) {
                                 e += '<b class="keybinding_section_header">' + t + "</b>";
                             },
-                            a = _phaserCe.Phaser.Keyboard;
-                        i(translate("kb_section_building")),
-                            t(translate("kb_place_multiple"), a.SHIFT),
-                            t(translate("kb_place_maxlevel"), a.ALT),
-                            t(translate("kb_cancel_placement"), a.ESC),
-                            t(translate("kb_sell_building"), Config.keys.sellBuilding),
-                            t(translate("kb_sell_all_building"), [a.SHIFT, "+", Config.keys.sellBuilding]),
-                            i(translate("kb_section_upgrading")),
-                            t(translate("upgrade"), Config.keys.upgradeBuilding),
-                            t(translate("upgrade_all"), [a.SHIFT, "+", Config.keys.upgradeBuilding]),
-                            t(translate("max_out"), [a.ALT, "+", Config.keys.upgradeBuilding]),
-                            t(translate("max_out_all"), [a.ALT, "+", a.SHIFT, "+", Config.keys.upgradeBuilding]),
-                            i(translate("kb_section_movement")),
-                            t(translate("kb_move"), [Config.keys.moveUp, Config.keys.moveLeft, Config.keys.moveDown, Config.keys.moveRight]),
-                            t(translate("kb_move_alternate"), [a.UP, a.LEFT, a.DOWN, a.RIGHT]),
-                            (e += "<span class='mouse_hint'>" + translate("kb_mouse_hint") + "</span><br>"),
-                            i(translate("kb_section_misc")),
-                            t(translate("fast_forward"), Config.keys.fastForward),
-                            t(translate("pause_game"), Config.keys.pause),
-                            t(translate("restart_game"), a.F5),
-                            t(translate("toggle_gui"), Config.keys.toggleGui),
-                            t(translate("toggle_minimap"), Config.keys.toggleMapView),
-                            t(translate("zoom"), [translate("mouse_wheel")]),
+                            a = Phaser.Keyboard;
+                        i(tr("kb_section_building")),
+                            t(tr("kb_place_multiple"), a.SHIFT),
+                            t(tr("kb_place_maxlevel"), a.ALT),
+                            t(tr("kb_cancel_placement"), a.ESC),
+                            t(tr("kb_sell_building"), Config.keys.sellBuilding),
+                            t(tr("kb_sell_all_building"), [a.SHIFT, "+", Config.keys.sellBuilding]),
+                            i(tr("kb_section_upgrading")),
+                            t(tr("upgrade"), Config.keys.upgradeBuilding),
+                            t(tr("upgrade_all"), [a.SHIFT, "+", Config.keys.upgradeBuilding]),
+                            t(tr("max_out"), [a.ALT, "+", Config.keys.upgradeBuilding]),
+                            t(tr("max_out_all"), [a.ALT, "+", a.SHIFT, "+", Config.keys.upgradeBuilding]),
+                            i(tr("kb_section_movement")),
+                            t(tr("kb_move"), [Config.keys.moveUp, Config.keys.moveLeft, Config.keys.moveDown, Config.keys.moveRight]),
+                            t(tr("kb_move_alternate"), [a.UP, a.LEFT, a.DOWN, a.RIGHT]),
+                            (e += "<span class='mouse_hint'>" + tr("kb_mouse_hint") + "</span><br>"),
+                            i(tr("kb_section_misc")),
+                            t(tr("fast_forward"), Config.keys.fastForward),
+                            t(tr("pause_game"), Config.keys.pause),
+                            t(tr("restart_game"), a.F5),
+                            t(tr("toggle_gui"), Config.keys.toggleGui),
+                            t(tr("toggle_minimap"), Config.keys.toggleMapView),
+                            t(tr("zoom"), [tr("mouse_wheel")]),
                             (document.getElementById("keybindings_content").innerHTML = e),
                             window.showDialog("keybindings_dialog_bg");
                     }),
@@ -36303,16 +35814,16 @@
                                         (t += "<input onchange='window.updateGameSetting(\"" + a + "\", this)'  type='checkbox'"),
                                         (t += o ? " checked" : ""),
                                         (t += ">"),
-                                        (t += translate("setting_" + a)),
-                                        (t += "<span>" + translate("setting_" + a + "_desc") + "</span>"),
+                                        (t += tr("setting_" + a)),
+                                        (t += "<span>" + tr("setting_" + a + "_desc") + "</span>"),
                                         (t += "</label>");
                                 });
                         }),
                             (t += "<strong>Build Information</strong>"),
                             (t += "<span class='build_info'>"),
-                            (t += "<b>Version:</b> " + YORGIO_VERSION + "<br />"),
-                            (t += "<b>Environment:</b> <span style='color: " + YORGIO_ENVIRONMENT_COLOR + "'>"),
-                            (t += YORGIO_ENVIRONMENT),
+                            (t += "<b>Version:</b> " + YORGIO.VERSION + "<br />"),
+                            (t += "<b>Environment:</b> <span style='color: " + YORGIO.ENVIRONMENT_COLOR + "'>"),
+                            (t += YORGIO.ENVIRONMENT),
                             (t += "</span><br>"),
                             (t += "Built using JavaScript, HTML5, PIXI.js and modified Phaser CE <i>(it sucks, don't use it)</i><br />"),
                             (t += "YORG.io &copy; 2018 Tobias Springer"),
@@ -36357,30 +35868,30 @@
                             (this.group.fixedToCamera = true),
                             this.uiGroup.add(this.group),
                             this.group.cameraOffset.setTo(Config.ui.screenBorder, Config.ui.screenBorderTop + (Config.mobileDevice ? 75 : 95)),
-                            (this.settingsButton = new MenuButton({ root: this.root, title: translate("settings"), description: translate("settings_desc"), spriteKey: "menu-settings.png", tooltipPosition: "right" })),
+                            (this.settingsButton = new MenuButton({ root: this.root, title: tr("settings"), description: tr("settings_desc"), spriteKey: "menu-settings.png", tooltipPosition: "right" })),
                             this.settingsButton.clicked.add(this.showSettingsDialog, this),
                             this.addButton(this.settingsButton),
                             Config.mobileDevice ||
-                            ((this.keybindingsButton = new MenuButton({ root: this.root, title: translate("keyboard_shortcuts"), description: translate("keyboard_shortcuts_desc"), spriteKey: "menu-keyboard.png", tooltipPosition: "right" })),
+                            ((this.keybindingsButton = new MenuButton({ root: this.root, title: tr("keyboard_shortcuts"), description: tr("keyboard_shortcuts_desc"), spriteKey: "menu-keyboard.png", tooltipPosition: "right" })),
                                 this.keybindingsButton.clicked.add(this.showKeybindingsDialog, this),
                                 this.addButton(this.keybindingsButton)),
-                            (this.restartButton = new MenuButton({ root: this.root, title: translate("back_to_menu"), description: translate("back_to_menu_desc"), spriteKey: "menu-restart.png", tooltipPosition: "right" })),
+                            (this.restartButton = new MenuButton({ root: this.root, title: tr("back_to_menu"), description: tr("back_to_menu_desc"), spriteKey: "menu-restart.png", tooltipPosition: "right" })),
                             this.restartButton.clicked.add(this.showRestartDialog, this),
                             this.addButton(this.restartButton),
                             Config.mobileDevice ||
-                            ((this.fullscreenButton = new MenuButton({ root: this.root, title: translate("toggle_fullscreen"), description: translate("toggle_fullscreen_desc"), spriteKey: "menu-fullscreen-on.png", tooltipPosition: "right" })),
+                            ((this.fullscreenButton = new MenuButton({ root: this.root, title: tr("toggle_fullscreen"), description: tr("toggle_fullscreen_desc"), spriteKey: "menu-fullscreen-on.png", tooltipPosition: "right" })),
                                 this.fullscreenButton.clicked.add(this.toggleFullscreen, this),
                                 this.addButton(this.fullscreenButton)),
-                            (this.soundToggleButton = new MenuButton({ root: this.root, title: translate("toggle_sound"), description: translate("toggle_sound_desc"), spriteKey: "menu-sound-on.png", tooltipPosition: "right" })),
+                            (this.soundToggleButton = new MenuButton({ root: this.root, title: tr("toggle_sound"), description: tr("toggle_sound_desc"), spriteKey: "menu-sound-on.png", tooltipPosition: "right" })),
                             this.soundToggleButton.clicked.add(this.toggleSounds, this),
                             this.addButton(this.soundToggleButton),
-                            (this.musicToggleButton = new MenuButton({ root: this.root, title: translate("toggle_music"), description: translate("toggle_music_desc"), spriteKey: "menu-music-on.png", tooltipPosition: "right" })),
+                            (this.musicToggleButton = new MenuButton({ root: this.root, title: tr("toggle_music"), description: tr("toggle_music_desc"), spriteKey: "menu-music-on.png", tooltipPosition: "right" })),
                             this.musicToggleButton.clicked.add(this.toggleMusic, this),
                             this.addButton(this.musicToggleButton),
-                            (this.saveButton = new MenuButton({ root: this.root, title: translate("save_game"), description: translate("save_game_desc"), spriteKey: "menu-save.png", tooltipPosition: "right" })),
+                            (this.saveButton = new MenuButton({ root: this.root, title: tr("save_game"), description: tr("save_game_desc"), spriteKey: "menu-save.png", tooltipPosition: "right" })),
                             this.saveButton.clicked.add(this.saveGame, this),
                             this.addButton(this.saveButton),
-                            (this.loadButton = new MenuButton({ root: this.root, title: translate("load_game"), description: translate("load_game_desc"), spriteKey: "menu-load.png", tooltipPosition: "right" })),
+                            (this.loadButton = new MenuButton({ root: this.root, title: tr("load_game"), description: tr("load_game_desc"), spriteKey: "menu-load.png", tooltipPosition: "right" })),
                             this.loadButton.clicked.add(this.loadGame, this),
                             this.addButton(this.loadButton),
                             this.buttons.reverse().forEach(function (t) {
@@ -36390,7 +35901,7 @@
                             this.updateFullscreenButton();
                     }),
                     (e.prototype.saveGame = function () {
-                        this.root.logic.playerHasPlacedBase() ? this.root.savegames.saveGame() : this.root.gui.uiNotifications.showError(translate("error_save_not_possible_before_base"));
+                        this.root.logic.playerHasPlacedBase() ? this.root.savegames.saveGame() : this.root.gui.uiNotifications.showError(tr("error_save_not_possible_before_base"));
                     }),
                     (e.prototype.loadGame = function () {
                         this.root.savegames.showDialog();
@@ -36440,10 +35951,10 @@
             BaseUnlockTip = (function () {
                 function e(t, i, a) {
                     _classCallCheck(this, e),
-                        (this.title = translate(t)),
+                        (this.title = tr(t)),
                         (this.description = i
                             .map(function (e) {
-                                return translate(e);
+                                return tr(e);
                             })
                             .join("<br />")),
                         (this.shown = false),
@@ -36629,121 +36140,6 @@
                     t
                 );
             })(BaseUnlockTip),
-            TipVoteForUs = (function (e) {
-                function t() {
-                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.call(this, "unlock_vote_for_us_title", ["unlock_vote_for_us_text_1"], __webpack_require__(434)));
-                }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "TipVoteForUs";
-                            },
-                        },
-                    ]),
-                    (t.prototype.shouldShow = function (e) {
-                        return false;
-                    }),
-                    (t.prototype.getLinkAction = function () {
-                        return window.inThirdpartyIframe ? null : { text: translate("unlock_vote_visit_iogames_space"), url: "http://iogames.space/yorg-io" };
-                    }),
-                    t
-                );
-            })(BaseUnlockTip),
-            TipSteamVersion = (function (e) {
-                function t() {
-                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.call(this, "unlock_standalone_title", ["unlock_standalone_text_1"], __webpack_require__(100)));
-                }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "TipSteamVersion";
-                            },
-                        },
-                    ]),
-                    (t.prototype.shouldShow = function (e) {
-                        return false;
-                    }),
-                    (t.prototype.getLinkAction = function () {
-                        return { text: translate("unlock_standalone_btn"), url: "http://steam.yorg.io" };
-                    }),
-                    t
-                );
-            })(BaseUnlockTip),
-            TipSteamVersion2 = (function (e) {
-                function t() {
-                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.call(this, "unlock_standalone_title", ["unlock_standalone_text_1"], __webpack_require__(100)));
-                }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "TipSteamVersion2";
-                            },
-                        },
-                    ]),
-                    (t.prototype.shouldShow = function (e) {
-                        return false;
-                    }),
-                    (t.prototype.getLinkAction = function () {
-                        return { text: translate("unlock_standalone_btn"), url: "http://steam.yorg.io" };
-                    }),
-                    t
-                );
-            })(BaseUnlockTip),
-            TipSteamVersion3 = (function (e) {
-                function t() {
-                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.call(this, "unlock_standalone_title", ["unlock_standalone_text_1"], __webpack_require__(100)));
-                }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "TipSteamVersion3";
-                            },
-                        },
-                    ]),
-                    (t.prototype.shouldShow = function (e) {
-                        return false;
-                    }),
-                    (t.prototype.getLinkAction = function () {
-                        return { text: translate("unlock_standalone_btn"), url: "http://steam.yorg.io" };
-                    }),
-                    t
-                );
-            })(BaseUnlockTip),
-            TipFollowTwitter = (function (e) {
-                function t() {
-                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.call(this, "unlock_follow_twitter_title", ["unlock_follow_twitter_text_1"], __webpack_require__(435)));
-                }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "TipFollowTwitter";
-                            },
-                        },
-                    ]),
-                    (t.prototype.shouldShow = function (e) {
-                        return false;
-                    }),
-                    (t.prototype.getLinkAction = function () {
-                        return { text: translate("unlock_follow_twitter_visit_twitter"), url: "https://twitter.com/yorg_io" };
-                    }),
-                    t
-                );
-            })(BaseUnlockTip),
             UnlockTipsManager = (function () {
                 function e(t) {
                     _classCallCheck(this, e),
@@ -36786,8 +36182,11 @@
                     (e.prototype.showTip = function (e) {
                         e.shown = true;
                         var t = e.description;
+                            (window.trackUnlockLinkClick = function () {
+                                // no
+                            });
                         var i = e.getLinkAction();
-                        null !== i && (t += "<br/><button class='' onclick='window.open(\"" + i.url + '", "blank"); \'>' + i.text + "</button>"),
+                        null !== i && (t += "<br/><button class='' onclick='window.open(\"" + i.url + '", "blank"); window.trackUnlockLinkClick()\'>' + i.text + "</button>"),
                             (document.getElementById("unlock_tips_header").innerHTML = e.title),
                             (document.getElementById("unlock_tips_dynamic_content").innerHTML = t);
                         var a = document.getElementById("unlock_tips_image");
@@ -36806,7 +36205,7 @@
                         this.init(),
                         (this.keyUpgrade = this.root.keyboard.addKey(Config.keys.upgradeBuilding)),
                         (this.keySell = this.root.keyboard.addKey(Config.keys.sellBuilding)),
-                        (this.keyMaxOut = this.root.keyboard.addKey(_phaserCe.Phaser.Keyboard.ALT)),
+                        (this.keyMaxOut = this.root.keyboard.addKey(Phaser.Keyboard.ALT)),
                         this.root.signals.consistentGameUpdate.add(this.update, this),
                         this.root.signals.gameFocusChanged.add(this.onFocusChange, this),
                         (this.cachedMode = null);
@@ -36849,13 +36248,13 @@
                         (this.group = e.make.group()),
                             (this.group.fixedToCamera = true),
                             this.uiGroup.add(this.group),
-                            (this.upgradeModeHint = this.makeHint(translate("upgrade_mode_active"), Config.colors.ui.upgradeBuilding)),
+                            (this.upgradeModeHint = this.makeHint(tr("upgrade_mode_active"), Config.colors.ui.upgradeBuilding)),
                             this.group.add(this.upgradeModeHint),
-                            (this.sellModeHint = this.makeHint(translate("sell_mode_active"), Config.colors.ui.sellBuilding)),
+                            (this.sellModeHint = this.makeHint(tr("sell_mode_active"), Config.colors.ui.sellBuilding)),
                             this.group.add(this.sellModeHint),
-                            (this.placeMaxedOutHint = this.makeHint(translate("place_maxed_out_active"), Config.colors.ui.maxOutBuilding)),
+                            (this.placeMaxedOutHint = this.makeHint(tr("place_maxed_out_active"), Config.colors.ui.maxOutBuilding)),
                             this.group.add(this.placeMaxedOutHint),
-                            (this.maxOutHint = this.makeHint(translate("max_out_mode_active"), Config.colors.ui.maxOutBuilding)),
+                            (this.maxOutHint = this.makeHint(tr("max_out_mode_active"), Config.colors.ui.maxOutBuilding)),
                             this.group.add(this.maxOutHint);
                     }),
                     (e.prototype.makeHint = function (e, t) {
@@ -36948,7 +36347,7 @@
                         var t = this.root.phaser;
                         (this.graphics = t.make.graphics(10, 22)),
                             this.group.add(this.graphics),
-                            (this.text = t.make.text(29, 10, translate("updating_routes").toUpperCase(), { font: "12px Roboto", fontWeight: 400, fill: "#eee" })),
+                            (this.text = t.make.text(29, 10, tr("updating_routes").toUpperCase(), { font: "12px Roboto", fontWeight: 400, fill: "#eee" })),
                             (this.textAmount = t.make.text(10, 27, "", { font: "11px Roboto", fontWeight: 700, fill: "#aaa" })),
                             this.group.add(this.textAmount),
                             this.group.add(this.text);
@@ -36959,7 +36358,7 @@
                             o.precomputeConsumers && o.precomputedConsumersDirty && (e += 1);
                         }
                         if (e > 5) {
-                            (this.group.visible = true), this.textAmount.setText(translate("routes_remaining", e).toUpperCase(), true);
+                            (this.group.visible = true), this.textAmount.setText(tr("routes_remaining", e).toUpperCase(), true);
                             var n = 7864183;
                             e >= 50 && (n = 16777079), e >= 100 && (n = 16742263), (this.text.tint = n), this.graphics.clear();
                             var r = 0.01 * new Date().getTime();
@@ -36994,10 +36393,10 @@
                         (this.group = e.make.group()),
                             (this.group.fixedToCamera = true),
                             this.uiGroup.add(this.group),
-                            (this.zoomInButton = new MenuButton({ root: this.root, spriteKey: "icon-zoom-in.png", title: translate("zoom_in"), description: translate("zoom_in_desc"), small: true, tooltipPosition: "top" })),
+                            (this.zoomInButton = new MenuButton({ root: this.root, spriteKey: "icon-zoom-in.png", title: tr("zoom_in"), description: tr("zoom_in_desc"), small: true, tooltipPosition: "top" })),
                             this.group.add(this.zoomInButton),
                             this.zoomInButton.clicked.add(this.zoomIn, this),
-                            (this.zoomOutButton = new MenuButton({ root: this.root, spriteKey: "icon-zoom-out.png", title: translate("zoom_out"), description: translate("zoom_out_desc"), small: true, tooltipPosition: "top" })),
+                            (this.zoomOutButton = new MenuButton({ root: this.root, spriteKey: "icon-zoom-out.png", title: tr("zoom_out"), description: tr("zoom_out_desc"), small: true, tooltipPosition: "top" })),
                             this.group.add(this.zoomOutButton),
                             this.zoomOutButton.clicked.add(this.zoomOut, this),
                             (this.zoomOutButton.x = 24);
@@ -37042,8 +36441,8 @@
                         (this.button = new MenuButton({
                             root: this.root,
                             spriteKey: "menu-chat.png",
-                            title: translate("chat"),
-                            description: translate("chat_desc"),
+                            title: tr("chat"),
+                            description: tr("chat_desc"),
                             keybinding: null,
                             toggleable: true,
                             haveBadge: true,
@@ -37155,7 +36554,7 @@
                     (e.prototype.initToggling = function () {
                         var e = this,
                             t = this.root.phaser.add.group(),
-                            i = this.root.phaser.make.text(Config.ui.screenBorder, Config.ui.screenBorder, keyToString(Config.keys.toggleGui) + ": " + translate("toggle_gui"), { font: "12px Roboto", fill: "#eee" });
+                            i = this.root.phaser.make.text(Config.ui.screenBorder, Config.ui.screenBorder, keyToString(Config.keys.toggleGui) + ": " + tr("toggle_gui"), { font: "12px Roboto", fill: "#eee" });
                         (t.fixedToCamera = true),
                             t.add(i),
                             (this.toggleHint = t),
@@ -37260,7 +36659,7 @@
                                 this.currentInputDownObject && (this.currentInputDownObject.events.onInputUp.dispatch(), (this.currentInputDownObject = null)));
                     }),
                     (e.prototype.isObjectViableForInput = function (e) {
-                        return e instanceof _phaserCe.Phaser.Stage || (!!(e.alive && e.exists && e.visible) && !(!e.inputAlwaysCatch && e.parent && !this.isObjectViableForInput(e.parent)));
+                        return e instanceof Phaser.Stage || (!!(e.alive && e.exists && e.visible) && !(!e.inputAlwaysCatch && e.parent && !this.isObjectViableForInput(e.parent)));
                     }),
                     (e.prototype.handleMouseUp = function () {
                         this.currentInputDownObject && (this.currentInputDownObject.events.onInputUp.dispatch(), (this.currentInputDownObject = null));
@@ -37304,7 +36703,7 @@
                     e
                 );
             })(),
-            ccFixBaseBootState = _phaserCe.Phaser.State,
+            ccFixBaseBootState = Phaser.State,
             BootState = (function (e) {
                 function t() {
                     return _classCallCheck(this, t), _possibleConstructorReturn(this, e.apply(this, arguments));
@@ -37316,9 +36715,9 @@
                     }),
                     (t.prototype.preload = function () {
                         var e = this;
-                        this.load.atlas("atlas", __webpack_require__(436), null, ATLAS, _phaserCe.Phaser.Loader.TEXTURE_ATLAS_JSON_ARRAY),
+                        this.load.atlas("atlas", __webpack_require__(436), null, ATLAS, Phaser.Loader.TEXTURE_ATLAS_JSON_ARRAY),
                             this.load.onLoadComplete.add(function () {
-                                console.log("Atlas loaded at", Math.floor(performance && performance.now())),
+                                console.log("Atlas loaded at", Math.floor(performance.now())),
                                     setTimeout(function () {
                                         e.state.start("Game", true, false);
                                     }, 100);
@@ -37478,31 +36877,31 @@
                     this.componentInspector = null;
             
                     this.signals = {
-                        gameSizeChanged: new _phaserCe.Phaser.Signal(),
-                        gameOver: new _phaserCe.Phaser.Signal(),
-                        mapLayoutChanged: new _phaserCe.Phaser.Signal(),
-                        nightEntered: new _phaserCe.Phaser.Signal(),
-                        nightEnded: new _phaserCe.Phaser.Signal(),
-                        playerBasePlaced: new _phaserCe.Phaser.Signal(),
-                        buildingPlaced: new _phaserCe.Phaser.Signal(),
-                        buildingDestroyed: new _phaserCe.Phaser.Signal(),
-                        buildingUpgraded: new _phaserCe.Phaser.Signal(),
-                        buildingSold: new _phaserCe.Phaser.Signal(),
-                        gameLoadedAndStarted: new _phaserCe.Phaser.Signal(),
-                        actionPerformed: new _phaserCe.Phaser.Signal(),
-                        mapDragged: new _phaserCe.Phaser.Signal(),
-                        consumerNetworkRecomputed: new _phaserCe.Phaser.Signal(),
-                        consistentGameUpdate: new _phaserCe.Phaser.Signal(),
-                        viewSelected: new _phaserCe.Phaser.Signal(),
-                        zoomLevelChanged: new _phaserCe.Phaser.Signal(),
-                        uiActionPerformed: new _phaserCe.Phaser.Signal(),
-                        uiActionPerformedAndFailed: new _phaserCe.Phaser.Signal(),
-                        uiSkillMarkedForLevelUp: new _phaserCe.Phaser.Signal(),
-                        uiNotificationDialogOpened: new _phaserCe.Phaser.Signal(),
-                        skillLeveledUp: new _phaserCe.Phaser.Signal(),
-                        gameFocusChanged: new _phaserCe.Phaser.Signal(),
-                        gameReset: new _phaserCe.Phaser.Signal(),
-                        gameReload: new _phaserCe.Phaser.Signal(),
+                        gameSizeChanged: new Phaser.Signal(),
+                        gameOver: new Phaser.Signal(),
+                        mapLayoutChanged: new Phaser.Signal(),
+                        nightEntered: new Phaser.Signal(),
+                        nightEnded: new Phaser.Signal(),
+                        playerBasePlaced: new Phaser.Signal(),
+                        buildingPlaced: new Phaser.Signal(),
+                        buildingDestroyed: new Phaser.Signal(),
+                        buildingUpgraded: new Phaser.Signal(),
+                        buildingSold: new Phaser.Signal(),
+                        gameLoadedAndStarted: new Phaser.Signal(),
+                        actionPerformed: new Phaser.Signal(),
+                        mapDragged: new Phaser.Signal(),
+                        consumerNetworkRecomputed: new Phaser.Signal(),
+                        consistentGameUpdate: new Phaser.Signal(),
+                        viewSelected: new Phaser.Signal(),
+                        zoomLevelChanged: new Phaser.Signal(),
+                        uiActionPerformed: new Phaser.Signal(),
+                        uiActionPerformedAndFailed: new Phaser.Signal(),
+                        uiSkillMarkedForLevelUp: new Phaser.Signal(),
+                        uiNotificationDialogOpened: new Phaser.Signal(),
+                        skillLeveledUp: new Phaser.Signal(),
+                        gameFocusChanged: new Phaser.Signal(),
+                        gameReset: new Phaser.Signal(),
+                        gameReload: new Phaser.Signal(),
                     };
                 }
             
@@ -37703,10 +37102,7 @@
                             level: bossWaveLevel
                         });
                         totalZombies = Math.floor(totalZombies * GAME_BALANCING.zombieAmountInBossWave);
-                        KongregateWrapper.push("bosses_killed", 1);
                     }
-            
-                    KongregateWrapper.push("zombies_killed", totalZombies);
             
                     const undeadCount = totalZombies * (1 - creeperAmountPercent);
                     const creeperCount = totalZombies * creeperAmountPercent;
@@ -37858,7 +37254,7 @@
                         Config.tutorialActive && (this.usedTutorial = true),
                             this.root.focus.isVisible() &&
                             ((this.root.gamemode && this.root.gamemode.isSandbox()) ||
-                                (KongregateWrapper.push("gems", this.root.stats.gems), KongregateWrapper.push("day", this.root.daytime.getDay()), this.gameId ? this.sendUpdate(e) : this.registerGame()));
+                                (this.gameId ? this.sendUpdate(e) : this.registerGame()));
                     }),
                     (e.prototype.registerGame = function () {
                         var e = this;
@@ -37869,7 +37265,7 @@
                             GamesSite: this.getGameSite(),
                             Adblock: !window.adsSupported,
                             Mapseed: this.root.logic.mapSeed.toString(),
-                            Version: YORGIO_VERSION,
+                            Version: YORGIO.VERSION,
                             Tutorial: Config.tutorialActive,
                             GameMode: this.root.gamemode.getId(),
                         };
@@ -37916,7 +37312,7 @@
                                 i[a.name] = e.root.logic.countBuildings(a);
                             }),
                             {
-                                version: YORGIO_VERSION,
+                                version: YORGIO.VERSION,
                                 playerid: this.playerId,
                                 playername: this.playerName,
                                 pageload: this.pageload,
@@ -37972,7 +37368,7 @@
                     return;
                 }
 
-                let entriesHtml = translate("score_no_entries");
+                let entriesHtml = tr("score_no_entries");
                 if (this.permanentData && this.permanentData.Entries) {
                     const modeSelector = document.getElementById("leaderboardGamemodeSelector");
                     const rangeSelector = document.getElementById("leaderboardRangeSelector");
@@ -37985,11 +37381,11 @@
 
                     if (entries && entries.length > 0) {
                         entriesHtml = `<table>${entries.map(({ PlayerName, Day, Gems }, index) => `
-                              <translate class='lbRank${index}'>
+                              <tr class='lbRank${index}'>
                                 <td class='lbPlayerName'>${PlayerName}</td>
                                 <td class='lbPlayerGems'>${formatBigNumber(Gems)}</td>
                                 <td class='lbDay'>${Day}</td>
-                              </translate>
+                              </tr>
                             `).join("")}</table>`;
                     }
                 }
@@ -38006,7 +37402,7 @@
                 console.error("Failed to get permanent leaderboard!");
                 try {
                     const dynamicInner = document.getElementById("permanentLeaderboardDynamicInner");
-                    if (dynamicInner) dynamicInner.innerHTML = translate("failed_to_fetch_leaderboard");
+                    if (dynamicInner) dynamicInner.innerHTML = tr("failed_to_fetch_leaderboard");
                 } catch (error) {
                     console.error(error);
                 }
@@ -38016,7 +37412,7 @@
                 const rowClass = isCurrentPlayer ? `currentPlayer${topDivider ? " topDivider" : ""}` : "";
                 const dayId = isCurrentPlayer ? "id='curentPlayerDay'" : "";
 
-                return `<translate class='${rowClass}'><td class='td_rank'>${rank}</td><td class='td_player'>${playerName}</td><td class='td_day' ${dayId}>${day}</td></translate>`;
+                return `<tr class='${rowClass}'><td class='td_rank'>${rank}</td><td class='td_player'>${playerName}</td><td class='td_day' ${dayId}>${day}</td></tr>`;
             }
 
             fetchNewData() {
@@ -38048,7 +37444,7 @@
             redrawLeaderboard() {
                 let leaderboardHtml = "<table border='0' cellspacing='0'>";
                 ["rank", "name", "day"].forEach((header) => {
-                    leaderboardHtml += `<th>${translate("leaderboard_" + header)}</th>`;
+                    leaderboardHtml += `<th>${tr("leaderboard_" + header)}</th>`;
                 });
 
                 let isTopPlayer = this.currentData.PlayerRank > 0 && this.currentData.PlayerRank < 5;
@@ -38171,7 +37567,7 @@
         
             handleWheelEvent(e) {
                 if (this.root.dialogs.modalDialogIsOpen()) {
-                    //if (true === e.ctrlKey) e.preventDefault();
+                    if (true === e.ctrlKey) e.preventDefault();
                 } else {
                     this.root.gameStarted && e.preventDefault();
                     let t = e.deltaX || 0;
@@ -38428,9 +37824,9 @@
                             (this.notificationSound = new _howler.Howl({ src: [__webpack_require__(447)] })),
                             (this.errorNotification = new _howler.Howl({ src: [__webpack_require__(448)] })),
                             (this.backgroundSounds = {
-                                normal: new _howler.Howl({ src: ["./assets/sounds_pkg/background.mp3"], loop: true, autoplay: false, html5: true, preload: false }),
-                                boss: new _howler.Howl({ src: ["./assets/sounds_pkg/background_boss.mp3"], loop: true, autoplay: false, html5: true, preload: false, volume: 0 }),
-                                night: new _howler.Howl({ src: ["./assets/sounds_pkg/background_night.mp3"], loop: true, autoplay: false, html5: true, preload: false, volume: 0 }),
+                                normal: new _howler.Howl({ src: ["./asset/sound_pkg/background.mp3"], loop: true, autoplay: false, html5: true, preload: false }),
+                                boss: new _howler.Howl({ src: ["./asset/sound_pkg/background_boss.mp3"], loop: true, autoplay: false, html5: true, preload: false, volume: 0 }),
+                                night: new _howler.Howl({ src: ["./asset/sound_pkg/background_night.mp3"], loop: true, autoplay: false, html5: true, preload: false, volume: 0 }),
                             });
                     }),
                     e
@@ -38685,7 +38081,7 @@
                     i.id === e.activeSavegameId && (t += e.generateSavegameHTML(i, true));
                 }), this.savegames.forEach(i => {
                     i.id !== e.activeSavegameId && (t += e.generateSavegameHTML(i));
-                }), 0 === this.savegames.length && (t += translate("no_savegames_yet")), document.getElementById("savegames_list").innerHTML = t, window.showDialog("savegame_bg");
+                }), 0 === this.savegames.length && (t += tr("no_savegames_yet")), document.getElementById("savegames_list").innerHTML = t, window.showDialog("savegame_bg");
             }
             generateSavegameHTML({
                 id,
@@ -38703,12 +38099,12 @@
                         <div class="savegame_stats">
                           <strong class="sv_stat sv_day"><i>Day</i>${day}</strong>
                           <strong class="sv_stat sv_base"><i>Saved</i>${s}</strong>
-                          <strong class="sv_stat sv_gamemode"><i>Mode</i>${translate("gamemode_" + gamemode)}</strong>
+                          <strong class="sv_stat sv_gamemode"><i>Mode</i>${tr("gamemode_" + gamemode)}</strong>
                         </div>
                         <div class="delete_savegame_confirm" id="sv_confirm_delete_${id}">
-                          ${translate("delete_savegame_warning")}<br />
-                          <button class="dialog_button cancel" onclick="window.deleteSavegame('${id}')">${translate("delete_savegame")}</button>
-                          <button class="dialog_button" onclick="document.getElementById('sv_confirm_delete_${id}').classList.remove('visible')">${translate("keep_savegame")}</button>
+                          ${tr("delete_savegame_warning")}<br />
+                          <button class="dialog_button cancel" onclick="window.deleteSavegame('${id}')">${tr("delete_savegame")}</button>
+                          <button class="dialog_button" onclick="document.getElementById('sv_confirm_delete_${id}').classList.remove('visible')">${tr("keep_savegame")}</button>
                         </div>
                         <div class="savegame_actions">
                           <span class="delete_savegame" onclick="document.getElementById('sv_confirm_delete_${id}').classList.add('visible')"></span>
@@ -38732,7 +38128,7 @@
                 if (this.activeSavegameId) {
                     console.log("[SAVEGAMES] Updating savegame:", this.activeSavegameId);
                     const t = this.getMetadataById(this.activeSavegameId);
-                    t.time = (new Date).getTime(), t.day = this.root.daytime.getDay(), this.root.gui.uiNotifications.showLongSuccess(translate("existing_savegame_updated"));
+                    t.time = (new Date).getTime(), t.day = this.root.daytime.getDay(), this.root.gui.uiNotifications.showLongSuccess(tr("existing_savegame_updated"));
                 } else {
                     const i = this.generateSavegameId();
                     console.log("[SAVEGAMES] Creating new savegame:", i);
@@ -38742,7 +38138,7 @@
                         day: this.root.daytime.getDay(),
                         gamemode: this.root.gamemode.getId()
                     };
-                    this.savegames.unshift(a), this.activeSavegameId = i, this.root.gui.uiNotifications.showLongSuccess(translate("new_savegame_created"));
+                    this.savegames.unshift(a), this.activeSavegameId = i, this.root.gui.uiNotifications.showLongSuccess(tr("new_savegame_created"));
                 }
                 this.storeBlob(this.activeSavegameId, e), this.updateMetadata(), this.rebuildImageData(this.activeSavegameId);
             }
@@ -38772,7 +38168,7 @@
                 console.log("[SAVEGAMES] Found", t.length, "stored savegames"), this.savegames = t;
             }
         }
-        const ccFixBaseGameState = _phaserCe.Phaser.State
+        const ccFixBaseGameState = Phaser.State
         class GameState extends ccFixBaseGameState {
             constructor() {
                 super();
@@ -38797,7 +38193,7 @@
                 this.game.scale.setShowAll();
                 this.game.scale.pageAlignHorizontally = true;
                 this.game.scale.pageAlignVertically = true;
-                this.game.scale.fullScreenScaleMode = _phaserCe.Phaser.ScaleManager.EXACT_FIT;
+                this.game.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT;
                 this.game.scale.fullScreenTarget = document.documentElement;
 
                 window.addEventListener("resize", () => {
@@ -38806,6 +38202,7 @@
 
                 makePhaserFast();
 
+                // Ensure canvas elements are opaque for performance.
                 this.game.canvas.mozOpaque = true;
                 this.game.canvas.webkitOpaque = true;
                 this.game.canvas.opaque = true;
@@ -38910,7 +38307,7 @@
             }
 
             create() {
-                console.log("Game loaded at", Math.floor(performance && performance.now()));
+                console.log("Game loaded at", Math.floor(performance.now()));
                 this.initGameEngine();
                 this.initMessageHandling();
 
@@ -39075,33 +38472,19 @@
                         }
 
                         this.root.signals.gameLoadedAndStarted.dispatch();
-                        this.initAds();
-                        KongregateWrapper.push("initialized", 1);
                         this.root.signals.consistentGameUpdate.dispatch();
 
                         if (Config.testGameOver) {
                             setTimeout(() => this.onGameOver(), 7000);
                         }
-
-                        if (!this.root.persistent.getBool("skipAdOnNextPlay")) {
-                            this.root.persistent.setBool("skipAdOnNextPlay", false);
-                            this.showVideoAd();
-                        }
                     } else {
-                        alert("Failed to create the game mode. Mode '" + selectedGameModeId + "' is not supported. Please report this!");
+                        alert(`Failed to create GameMode: ${selectedGameModeId}. Please report this!`);
                     }
                 } else {
-                    alert("Unable to determine the game mode. Please report this.");
+                    alert("Unable to determine the game mode. Please report this!");
                 }
             }
 
-            initAds() {
-                // No lol
-            }
-
-            showVideoAd() {
-                // No lol
-            }
             onGameOver() {
                 for (var e in (console.warn("GAME OVER"),
                     this.dumpInterval && clearInterval(this.dumpInterval),
@@ -39127,7 +38510,7 @@
             }
 
             gameIsPaused() {
-                return !!this.root.adRunning || !!this.root.dialogs.modalDialogIsOpen() || !this.root.focus.isVisibleAndFocused() || !!this.root.externalAdRunning;
+                return !!this.root.dialogs.modalDialogIsOpen() || !this.root.focus.isVisibleAndFocused();
             }
 
             update() {
@@ -39160,6 +38543,7 @@
                 return "GameState"
             }
         }
+
         class GameOverUI {
             constructor(t, i, a) {
                 this.phaser = t;
@@ -39187,7 +38571,7 @@
              */
             genTok(gamemode, day, name) {
                 // Determine the base value depending on whether it's beta or not
-                const baseValue = IS_BETA ? String.fromCodePoint(1001) : String.fromCodePoint(1000);
+                const baseValue = YORGIO.IS_BETA ? String.fromCodePoint(1001) : String.fromCodePoint(1000);
 
                 // Pad the input string with '=' characters to a length of 16 characters
                 const paddedInput = name.toLowerCase().padEnd(16, "=");
@@ -39220,7 +38604,6 @@
                 return _lzString2.default.compressToEncodedURIComponent(result);
             }
 
-        
             init() {
                 const e = this.phaser;
                 this.overlay = makePanelBackground(e, 1, 1, 2228241, 0.77);
@@ -39237,7 +38620,7 @@
                 this.logo.y = this.bg.height - this.logo.height - 30;
                 this.group.add(this.logo);
         
-                this.gameOverText = e.make.text(0, 30, translate("game_over").toUpperCase(), {
+                this.gameOverText = e.make.text(0, 30, tr("game_over").toUpperCase(), {
                     font: "60px Roboto",
                     fill: "#FF5555",
                     boundsAlignH: "center",
@@ -39249,9 +38632,9 @@
         
                 let t = "";
                 let i = this.stats.day;
-                t += translate("gameover_surived_text", i) + " - ";
+                t += tr("gameover_surived_text", i) + " - ";
                 t += this.rateDay(i) + "\n\n";
-                t += translate("gameover_stats_text", formatBigNumber(this.stats.gems), formatBigNumber(this.stats.score));
+                t += tr("gameover_stats_text", formatBigNumber(this.stats.gems), formatBigNumber(this.stats.score));
         
                 this.statsText = e.make.text(0, 120, t, {
                     font: "14px Roboto",
@@ -39263,7 +38646,7 @@
                 this.statsText.setTextBounds(0, 0, this.bg.width, 20);
                 this.group.add(this.statsText);
         
-                this.gemsHeader = e.make.text(30, 200, translate("gameover_gems_over_time").toUpperCase(), {
+                this.gemsHeader = e.make.text(30, 200, tr("gameover_gems_over_time").toUpperCase(), {
                     font: "13px Roboto",
                     fill: "#f77",
                     fontWeight: 700,
@@ -39304,7 +38687,7 @@
         
                 let h = document.createElement("span");
                 h.className = "channelHint";
-                h.innerText = translate("validation_token_desc2");
+                h.innerText = tr("validation_token_desc2");
                 d.appendChild(h);
         
                 document.body.appendChild(d);
@@ -39312,19 +38695,19 @@
                 this.retryButton = makeButton({
                     phaser: e,
                     width: 190,
-                    text: translate("gameover_try_again"),
+                    text: tr("gameover_try_again"),
                     fill: 16733525,
                     clickHandler: () => {
                         window.location.reload(true);
                     },
-                    keybinding: _phaserCe.Phaser.Keyboard.F5,
+                    keybinding: Phaser.Keyboard.F5,
                 });
                 this.retryButton.x = Math.floor(this.bg.width - this.retryButton.width - 30);
                 this.retryButton.y = this.bg.height - this.retryButton.height - 30;
                 this.group.add(this.retryButton);
                 e.add.tween(this.retryButton).to({
                     alpha: 0.8
-                }, 200, _phaserCe.Phaser.Easing.Linear.None, true, 0, false, true);
+                }, 200, Phaser.Easing.Linear.None, true, 0, false, true);
             }
         
             rateDay(e) {
@@ -39333,7 +38716,7 @@
                 for (let i = t.length - 1; i >= 0; i -= 1) {
                     let a = t[i];
                     if (e >= a) {
-                        return translate("gameover_score_" + a);
+                        return tr("gameover_score_" + a);
                     }
                 }
         
@@ -39348,7 +38731,8 @@
                 this.overlay.scale.setTo(e, t);
             }
         }
-        class GameOverState extends _phaserCe.Phaser.State {
+
+        class GameOverState extends Phaser.State {
             constructor() {
                 super();
             }
@@ -39367,11 +38751,6 @@
                 document.body.classList.add("gameOver");
             }
 
-            addAd() { }
-
-            showVideoAd() {
-            }
-
             update() {
                 this.ui.update();
                 this.backgroundSprite.position.setTo(this.game.width / 2, this.game.height / 2);
@@ -39383,228 +38762,259 @@
                 return "GameOverState";
             }
         }
-            const MouseTracker = (function () {
-                function e(t) {
-                    var i = this;
-                    _classCallCheck(this, e), (this.leftButtonDown = false), (this.rightButtonDown = false), (this.enabled = false);
-                    var a = t.canvas;
-                    Config.mobileDevice ||
-                        (a.addEventListener(
-                            "mousedown",
-                            function (e) {
-                                return i.handleMouseChange(e, true);
-                            },
-                            true
-                        ),
-                            window.addEventListener(
-                                "mousemove",
-                                function (e) {
-                                    return i.handleMouseMove(e);
-                                },
-                                true
-                            ),
-                            window.addEventListener(
-                                "mouseup",
-                                function (e) {
-                                    return i.handleMouseChange(e, false);
-                                },
-                                true
-                            )),
-                        window.addEventListener(
-                            "touchmove",
-                            function (e) {
-                                return i.handleTouchMove(e);
-                            },
-                            true
-                        ),
-                        a.addEventListener(
-                            "touchstart",
-                            function (e) {
-                                return i.handleTouchClick(e, true);
-                            },
-                            true
-                        ),
-                        window.addEventListener(
-                            "touchend",
-                            function (e) {
-                                return i.handleTouchClick(e, false);
-                            },
-                            true
-                        ),
-                        t.input.mouse.stop(),
-                        t.input.touch.stop(),
-                        t.input.mspointer.stop(),
-                        (this.onMouseMove = new _phaserCe.Phaser.Signal()),
-                        (this.onMouseDown = new _phaserCe.Phaser.Signal()),
-                        (this.onMouseUp = new _phaserCe.Phaser.Signal());
-                }
-                return (
-                    _createClass(e, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "MouseTracker";
-                            },
-                        },
-                    ]),
-                    (e.prototype.onFocusLost = function () {
-                        console.log("[MOUSE] Lost focus"), (this.leftButtonDown = false), (this.rightButtonDown = false);
-                    }),
-                    (e.prototype.handleMouseChange = function (e, t) {
-                        this.handleMouseMove(e),
-                            (3 !== e.which && 2 !== e.button) || (this.rightButtonDown = t),
-                            (1 !== e.which && 0 !== e.button) || (this.leftButtonDown = t),
-                            this.enabled && (t ? this.onMouseDown.dispatch() : this.onMouseUp.dispatch());
-                    }),
-                    (e.prototype.handleTouchClick = function (e, t) {
-                        this.enabled && (this.handleTouchMove(e), t ? this.onMouseDown.dispatch() : this.onMouseUp.dispatch());
-                    }),
-                    (e.prototype.handleMouseMove = function (e) {
-                        (this.mouseX = e.clientX), (this.mouseY = e.clientY), this.enabled && this.onMouseMove.dispatch();
-                    }),
-                    (e.prototype.handleTouchMove = function (e) {
-                        if (!(e.touches.length < 1)) {
-                            for (var t = 0, i = 0, a = 0; a < e.touches.length; ++a) {
-                                var o = e.touches[a];
-                                (t += o.clientX), (i += o.clientY);
-                            }
-                            var n = e.touches.length;
-                            (this.mouseX = t / n), (this.mouseY = i / n), this.enabled && this.onMouseMove.dispatch();
-                        }
-                    }),
-                    (e.prototype.getPosition = function () {
-                        return { x: this.mouseX, y: this.mouseY };
-                    }),
-                    (e.register = function (t) {
-                        window.mouseTracker = new e(t);
-                    }),
-                    e
-                );
-            })(),
-            App = (function () {
-                function e() {
-                    _classCallCheck(this, e), console.log("App booted at", Math.floor(performance && performance.now())), s(), Config.mobileDevice ? document.body.classList.add("mobileDevice") : this.addBetaHint();
-                    var t = {
-                        width: "100%",
-                        height: "100%",
-                        renderer: _phaserCe.Phaser.CANVAS,
-                        antialias: false,
-                        multiTexture: false,
-                        transparent: false,
-                        parent: "renderer",
-                        legacy: true,
-                        resolution: (Config.mobileDevice && window.devicePixelRatio) || 1,
-                        roundPixels: Config.roundPixels,
-                        state: { Boot: BootState, Game: GameState, GameOver: GameOverState },
-                    },
-                        i = new _phaserCe.Phaser.Game(t);
-                    setTimeout(function () {
-                        MouseTracker.register(i);
-                    }, 1),
-                        i.state.add("Boot", BootState, false),
-                        i.state.add("Game", GameState, false),
-                        i.state.add("GameOver", GameOverState, false),
-                        i.state.start("Boot");
-                }
-                return (
-                    _createClass(e, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "App";
-                            },
-                        },
-                    ]),
-                    (e.prototype.addBetaHint = function () { }),
-                    e
-                );
-            })(),
-            StorageFullIndicatorSystem = (function (e) {
-                function t(i) {
-                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.call(this, i, { necessaryComponents: [StorageComponent] }));
-                }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "StorageFullIndicatorSystem";
-                            },
-                        },
-                    ]),
-                    (t.prototype.processEntity = function (e, t) {
-                        var i = this;
-                        t.StorageComponent.isAnyFull(true)
-                            ? createOrGetEntityAttachment(e, "storageFullText", function () {
-                                var e = i.root.phaser.make.text(0, 0, "FULL", { font: "11px Roboto", fill: "#AA1100", boundsAlignH: "center", fontWeight: 700 });
-                                return e.setTextBounds(0, Config.tileSize - 3, Config.tileSize, 15), e;
-                            })
-                            : hideEntityAttachment(e, "storageFullText");
-                    }),
-                    t
-                );
-            })(GameSystem),
-            BasementHealthVisualizerUI = (function (e) {
-                function t(i, a, o) {
-                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.call(this, i, a, o, { height: 32, label: "BASE HEALTH", updateInterval: 350 }));
-                }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "BasementHealthVisualizerUI";
-                            },
-                        },
-                    ]),
-                    (t.prototype.init = function () {
-                        e.prototype.init.call(this);
-                        var t = this.root.phaser,
-                            i = Config.ui.visualizerWidth,
-                            a = Math.floor(i / 3) + 10,
-                            o = makeRoundedPanelBackground(t, i - 10 - a, 12, 15658734, 0.1, 2);
-                        o.position.setTo(a, 11), this.group.add(o), (this.bar = makeRoundedPanelBackground(t, i - 10 - a, 12, 16742263, 1, 2)), this.bar.position.setTo(a, o.y), this.group.add(this.bar);
-                    }),
-                    (t.prototype.doUpdate = function () {
-                        var e = this.root.logic.getPlayerBase();
-                        if (e) {
-                            var t = e.getComponent(HealthComponent),
-                                i = t.health / t.maxHealth;
-                            (this.bar.scale.x = i), (this.bar.visible = true);
-                        } else this.bar.visible = false;
-                    }),
-                    t
-                );
-            })(Visualizer),
-            trackingSeverity = { info: "info", error: "error", warn: "warn" };
 
-        var YORGIO_VERSION = "dev-unkown",
-            IS_BETA = "beta.yorg.io" === window.location.host,
-            YORGIO_ENVIRONMENT = "unkown",
-            YORGIO_ENVIRONMENT_COLOR = "#fff";
-        function printYorgVersionHeader() {
-            console.log(""),
-                console.log("%cYORG.io", "color: #333; font-size: 27px; font-family: Roboto, Arial;font-weight: 700;"),
-                console.log("%cCopyright 2018 Tobias Springer IT Solutions (tobspr)", "color: #333; font-size: 11px;"),
-                console.log("%cVersion: %c" + YORGIO_VERSION, "font-size: 11px;", "color: #39f; font-size: 11px;"),
-                (YORGIO_ENVIRONMENT = "live"),
-                (YORGIO_ENVIRONMENT_COLOR = "#6D6"),
-                IS_BETA && ((YORGIO_ENVIRONMENT = "public beta"), (YORGIO_ENVIRONMENT_COLOR = "#8c42f4")),
-                (YORGIO_ENVIRONMENT = "standalone"),
-                (YORGIO_ENVIRONMENT_COLOR = "#6D6"),
-                console.log("%cEnvironment: %c" + YORGIO_ENVIRONMENT, "", "color: " + YORGIO_ENVIRONMENT_COLOR),
-                console.log("");
+        const MouseTracker = (function () {
+            function e(t) {
+                var i = this;
+                _classCallCheck(this, e), (this.leftButtonDown = false), (this.rightButtonDown = false), (this.enabled = false);
+                var a = t.canvas;
+                Config.mobileDevice ||
+                    (a.addEventListener(
+                        "mousedown",
+                        function (e) {
+                            return i.handleMouseChange(e, true);
+                        },
+                        true
+                    ),
+                        window.addEventListener(
+                            "mousemove",
+                            function (e) {
+                                return i.handleMouseMove(e);
+                            },
+                            true
+                        ),
+                        window.addEventListener(
+                            "mouseup",
+                            function (e) {
+                                return i.handleMouseChange(e, false);
+                            },
+                            true
+                        )),
+                    window.addEventListener(
+                        "touchmove",
+                        function (e) {
+                            return i.handleTouchMove(e);
+                        },
+                        true
+                    ),
+                    a.addEventListener(
+                        "touchstart",
+                        function (e) {
+                            return i.handleTouchClick(e, true);
+                        },
+                        true
+                    ),
+                    window.addEventListener(
+                        "touchend",
+                        function (e) {
+                            return i.handleTouchClick(e, false);
+                        },
+                        true
+                    ),
+                    t.input.mouse.stop(),
+                    t.input.touch.stop(),
+                    t.input.mspointer.stop(),
+                    (this.onMouseMove = new _phaserCe.Phaser.Signal()),
+                    (this.onMouseDown = new _phaserCe.Phaser.Signal()),
+                    (this.onMouseUp = new _phaserCe.Phaser.Signal());
+            }
+            return (
+                _createClass(e, null, [
+                    {
+                        key: "name",
+                        get: function () {
+                            return "MouseTracker";
+                        },
+                    },
+                ]),
+                (e.prototype.onFocusLost = function () {
+                    console.log("[MOUSE] Lost focus"), (this.leftButtonDown = false), (this.rightButtonDown = false);
+                }),
+                (e.prototype.handleMouseChange = function (e, t) {
+                    this.handleMouseMove(e),
+                        (3 !== e.which && 2 !== e.button) || (this.rightButtonDown = t),
+                        (1 !== e.which && 0 !== e.button) || (this.leftButtonDown = t),
+                        this.enabled && (t ? this.onMouseDown.dispatch() : this.onMouseUp.dispatch());
+                }),
+                (e.prototype.handleTouchClick = function (e, t) {
+                    this.enabled && (this.handleTouchMove(e), t ? this.onMouseDown.dispatch() : this.onMouseUp.dispatch());
+                }),
+                (e.prototype.handleMouseMove = function (e) {
+                    (this.mouseX = e.clientX), (this.mouseY = e.clientY), this.enabled && this.onMouseMove.dispatch();
+                }),
+                (e.prototype.handleTouchMove = function (e) {
+                    if (!(e.touches.length < 1)) {
+                        for (var t = 0, i = 0, a = 0; a < e.touches.length; ++a) {
+                            var o = e.touches[a];
+                            (t += o.clientX), (i += o.clientY);
+                        }
+                        var n = e.touches.length;
+                        (this.mouseX = t / n), (this.mouseY = i / n), this.enabled && this.onMouseMove.dispatch();
+                    }
+                }),
+                (e.prototype.getPosition = function () {
+                    return { x: this.mouseX, y: this.mouseY };
+                }),
+                (e.register = function (t) {
+                    window.mouseTracker = new e(t);
+                }),
+                e
+            );
+        })()
+        
+        class App {
+            constructor() {
+                console.log("App booted at", Math.floor(performance.now()));
+                s();
+                Config.mobileDevice ? document.body.classList.add("mobileDevice") : this.addBetaHint();
+
+                const gameConfig = {
+                    width: "100%",
+                    height: "100%",
+                    renderer: Phaser.CANVAS,
+                    antialias: false,
+                    multiTexture: false,
+                    transparent: false,
+                    parent: "renderer",
+                    legacy: true,
+                    resolution: (Config.mobileDevice && window.devicePixelRatio) || 1,
+                    roundPixels: Config.roundPixels,
+                    state: { Boot: BootState, Game: GameState, GameOver: GameOverState },
+                };
+
+                const game = new Phaser.Game(gameConfig);
+                setTimeout(() => MouseTracker.register(game), 1);
+
+                game.state.add("Boot", BootState, false);
+                game.state.add("Game", GameState, false);
+                game.state.add("GameOver", GameOverState, false);
+                game.state.start("Boot");
+            }
+
+            static get name() {
+                return "App";
+            }
+
+            addBetaHint() { }
         }
-        printYorgVersionHeader();
+
+
+        class StorageFullIndicatorSystem extends GameSystem {
+            constructor(i) {
+                super(i, { necessaryComponents: [StorageComponent] });
+            }
+
+            static get name() {
+                return "StorageFullIndicatorSystem";
+            }
+
+            processEntity(entity, components) {
+                if (components.StorageComponent.isAnyFull(true)) {
+                    createOrGetEntityAttachment(entity, "storageFullText", () => {
+                        const text = this.root.phaser.make.text(0, 0, "FULL", {
+                            font: "11px Roboto",
+                            fill: "#AA1100",
+                            boundsAlignH: "center",
+                            fontWeight: 700
+                        });
+                        text.setTextBounds(0, Config.tileSize - 3, Config.tileSize, 15);
+                        return text;
+                    });
+                } else {
+                    hideEntityAttachment(entity, "storageFullText");
+                }
+            }
+        }
+
+        class BasementHealthVisualizerUI extends Visualizer {
+            constructor(i, o, r) {
+                super(i, o, r, { height: 32, label: "BASE HEALTH", updateInterval: 350 });
+            }
+
+            static get name() {
+                return "BasementHealthVisualizerUI";
+            }
+
+            init() {
+                super.init();
+                const t = this.root.phaser;
+                const i = Config.ui.visualizerWidth;
+                const a = Math.floor(i / 3) + 10;
+                const o = makeRoundedPanelBackground(t, i - 10 - a, 12, 15658734, 0.1, 2);
+                o.position.setTo(a, 11);
+                this.group.add(o);
+                this.bar = makeRoundedPanelBackground(t, i - 10 - a, 12, 16742263, 1, 2);
+                this.bar.position.setTo(a, o.y);
+                this.group.add(this.bar);
+            }
+
+            doUpdate() {
+                const playerBase = this.root.logic.getPlayerBase();
+                if (playerBase) {
+                    const healthComponent = playerBase.getComponent(HealthComponent);
+                    const healthRatio = healthComponent.health / healthComponent.maxHealth;
+                    this.bar.scale.x = healthRatio;
+                    this.bar.visible = true;
+                } else {
+                    this.bar.visible = false;
+                }
+            }
+        }
+
+
+        const trackingSeverity = { 
+            info: "info", 
+            error: "error", 
+            warn: "warn" 
+        };
+
+        const YORGIO = {
+            VERSION: "dev-unknown",
+            IS_BETA: true,
+            ENVIRONMENT: "unknown",
+            ENVIRONMENT_COLOR: "#fff"
+        };
+
+        function setEnvironmentInfo() {
+            if (YORGIO.IS_BETA) {
+                YORGIO.ENVIRONMENT = "InDev";
+                YORGIO.ENVIRONMENT_COLOR = "#8c42f4";
+            } else {
+                YORGIO.ENVIRONMENT = "live";
+                YORGIO.ENVIRONMENT_COLOR = "#6D6";
+            }
+        }
+
+        function printYorgVersionHeader() {
+            console.log(
+                `%cYORG.io CE Edition`,
+                "color: gray; font-size: 27px; font-family: Roboto, Arial; font-weight: 700;"
+            );
+            console.log(
+                `%cMod made by BlueLatios, CopyRight of Tobspr`,
+                "color: gray; font-size: 11px;"
+            );
+            console.log(
+                `%cVersion: %c${YORGIO.VERSION}`,
+                "font-size: 11px;",
+                `color: #39f; font-size: 11px;`
+            );
+            setEnvironmentInfo();
+            console.log(
+                `%cEnvironment: %c${YORGIO.ENVIRONMENT}`,
+                "",
+                `color: ${YORGIO.ENVIRONMENT_COLOR}`
+            );
+        }
+
+        printYorgVersionHeader(); 
         var tileDistance = 1.01,
             defaultTransportDistance = 3.5 * tileDistance,
-            cameFromThirdparty = window.location.search.indexOf("came_from_thirdparty") >= 0,
+            cameFromThirdparty = false,
             isMobile = false,
             Config = {
                 roundPixels: true,
-                mobileDevice: false,
+                mobileDevice: isMobile,
                 videoAdIntervalMinutes: 11,
                 textResolution: 1,
                 tileSize: 64,
@@ -39643,8 +39053,8 @@
                 spawnDefaultBuildings: false,
                 testHealthBars: false,
                 visualizeNodeNet: false,
-                displayBalancing: true,
-                displayWaves: true,
+                displayBalancing: false,
+                displayWaves: false,
                 noDamage: false,
                 zombiesEnabled: true,
                 autoPlay: false,
@@ -39775,446 +39185,518 @@
                     ui: { panelBackground: 2236962, panelAlpha: 0.94, placementGood: 7864183, placementBad: 16742263, active: 4249212, upgradeBuilding: 7829503, sellBuilding: 16742263, maxOutBuilding: 4910200 },
                 },
                 keys: {
-                    debugToggleRequirements: _phaserCe.Phaser.Keyboard.FOUR,
-                    debugSpawnZombie: _phaserCe.Phaser.Keyboard.FIVE,
-                    debugTogglePhysics: _phaserCe.Phaser.Keyboard.SIX,
-                    debugToggleZombies: _phaserCe.Phaser.Keyboard.SEVEN,
-                    debugFillAllStorage: _phaserCe.Phaser.Keyboard.EIGHT,
-                    debugSpawnWave: _phaserCe.Phaser.Keyboard.NINE,
-                    debugToggleAutoplay: _phaserCe.Phaser.Keyboard.ZERO,
-                    debugDumpSceneGraph: _phaserCe.Phaser.Keyboard.F4,
-                    toggleGui: _phaserCe.Phaser.Keyboard.F2,
-                    fastForward: _phaserCe.Phaser.Keyboard.Q,
-                    pause: _phaserCe.Phaser.Keyboard.SPACEBAR,
-                    globalUpgrades: _phaserCe.Phaser.Keyboard.R,
-                    viewDefense: _phaserCe.Phaser.Keyboard.THREE,
-                    viewTransport: _phaserCe.Phaser.Keyboard.TWO,
-                    viewProcessorUsage: _phaserCe.Phaser.Keyboard.ONE,
-                    moveUp: _phaserCe.Phaser.Keyboard.W,
-                    moveDown: _phaserCe.Phaser.Keyboard.S,
-                    moveLeft: _phaserCe.Phaser.Keyboard.A,
-                    moveRight: _phaserCe.Phaser.Keyboard.D,
-                    toggleUpgradeSummary: _phaserCe.Phaser.Keyboard.E,
-                    toggleMapView: _phaserCe.Phaser.Keyboard.M,
+                    debugToggleRequirements: Phaser.Keyboard.FOUR,
+                    debugSpawnZombie: Phaser.Keyboard.FIVE,
+                    debugTogglePhysics: Phaser.Keyboard.SIX,
+                    debugToggleZombies: Phaser.Keyboard.SEVEN,
+                    debugFillAllStorage: Phaser.Keyboard.EIGHT,
+                    debugSpawnWave: Phaser.Keyboard.NINE,
+                    debugToggleAutoplay: Phaser.Keyboard.ZERO,
+                    debugDumpSceneGraph: Phaser.Keyboard.F4,
+                    toggleGui: Phaser.Keyboard.F2,
+                    fastForward: Phaser.Keyboard.Q,
+                    pause: Phaser.Keyboard.SPACEBAR,
+                    globalUpgrades: Phaser.Keyboard.R,
+                    viewDefense: Phaser.Keyboard.THREE,
+                    viewTransport: Phaser.Keyboard.TWO,
+                    viewProcessorUsage: Phaser.Keyboard.ONE,
+                    moveUp: Phaser.Keyboard.W,
+                    moveDown: Phaser.Keyboard.S,
+                    moveLeft: Phaser.Keyboard.A,
+                    moveRight: Phaser.Keyboard.D,
+                    toggleUpgradeSummary: Phaser.Keyboard.E,
+                    toggleMapView: Phaser.Keyboard.M,
                     build: {
-                        wall: _phaserCe.Phaser.Keyboard.E,
-                        transporter: _phaserCe.Phaser.Keyboard.F,
-                        playerBase: _phaserCe.Phaser.Keyboard.B,
-                        goldMine: _phaserCe.Phaser.Keyboard.T,
-                        ironMine: _phaserCe.Phaser.Keyboard.Y,
-                        cannonballProducer: _phaserCe.Phaser.Keyboard.U,
-                        cannon: _phaserCe.Phaser.Keyboard.I,
-                        harvester: _phaserCe.Phaser.Keyboard.O,
-                        steelFactory: _phaserCe.Phaser.Keyboard.P,
-                        woodProcessor: _phaserCe.Phaser.Keyboard.G,
-                        arrowFactory: _phaserCe.Phaser.Keyboard.H,
-                        arrowTower: _phaserCe.Phaser.Keyboard.J,
-                        uraniumMine: _phaserCe.Phaser.Keyboard.K,
-                        nuclearStation: _phaserCe.Phaser.Keyboard.L,
-                        lightningTower: _phaserCe.Phaser.Keyboard.C,
-                        healingTower: _phaserCe.Phaser.Keyboard.V,
+                        wall: Phaser.Keyboard.E,
+                        transporter: Phaser.Keyboard.F,
+                        playerBase: Phaser.Keyboard.B,
+                        goldMine: Phaser.Keyboard.T,
+                        ironMine: Phaser.Keyboard.Y,
+                        cannonballProducer: Phaser.Keyboard.U,
+                        cannon: Phaser.Keyboard.I,
+                        harvester: Phaser.Keyboard.O,
+                        steelFactory: Phaser.Keyboard.P,
+                        woodProcessor: Phaser.Keyboard.G,
+                        arrowFactory: Phaser.Keyboard.H,
+                        arrowTower: Phaser.Keyboard.J,
+                        uraniumMine: Phaser.Keyboard.K,
+                        nuclearStation: Phaser.Keyboard.L,
+                        lightningTower: Phaser.Keyboard.C,
+                        healingTower: Phaser.Keyboard.V,
                     },
-                    cancelBuild: _phaserCe.Phaser.Keyboard.ESC,
-                    upgradeBuilding: _phaserCe.Phaser.Keyboard.N,
-                    sellBuilding: _phaserCe.Phaser.Keyboard.X,
+                    cancelBuild: Phaser.Keyboard.ESC,
+                    upgradeBuilding: Phaser.Keyboard.N,
+                    sellBuilding: Phaser.Keyboard.X,
                 },
             };
-        function detectBetaParams() {
-            var e = _queryString2.default.parse(location.search);
-            if (e.__dev_startDay)
-                try {
-                    (Config.startDay = Math.max(0, Math.min(300, parseInt(e.__dev_startDay, 10)))), console.log("[DEV] Start day set to", Config.startDay);
-                } catch (t) {
-                    alert("Invalid start day:" + e.__dev_startDay);
-                }
-            if (e.__dev_startGems)
-                try {
-                    (Config.startGems = Math.max(0, parseInt(e.__dev_startGems, 10))), console.log("[DEV] Start gems set to", Config.startGems);
-                } catch (t) {
-                    alert("Invalid start gems:" + e.__dev_startGems);
-                }
-            if (e.__dev_startPoints)
-                try {
-                    (Config.startPoints = Math.max(0, parseInt(e.__dev_startPoints, 10))), console.log("[DEV] Start points set to", Config.startPoints);
-                } catch (t) {
-                    alert("Invalid start points:" + e.__dev_startPoints);
-                }
-            e.__dev_superFast && (console.log("[DEV] Super Fast Forward Enabled"), (Config.fastForwardSpeed = 40)),
-                e.__dev_hyperFast && (console.log("[DEV] Hyper Fast Forward Enabled"), (Config.fastForwardSpeed = 400)),
-                e.__dev_testGameover && (console.log("[DEV] Instant Gameover enabled"), (Config.testGameOver = true)),
-                e.__dev_allowOldSavegames && (Config.allowOldSavegames = true);
-        }
-        var LANGUAGES = {
+
+        const LANGUAGES = {
             en: _en2.default,
-            "zh-tw": _zhTW2.default,
-            "zh-cn": _zhCN2.default
+            "zh-cn": _zhCN2.default,
         };
-        function browserLocale() {
-            return navigator.languages && navigator.languages.length ? navigator.languages[0] : navigator.userLanguage ? navigator.userLanguage : navigator.language;
-        }
-        function initLanguage() {
-            var e = _queryString2.default.parse(location.search);
-            if (e.lang) {
-                var t = e.lang.toLowerCase();
-                if (LANGUAGES[t]) {
+
+        const browserLocale = () => (
+            navigator.languages && navigator.languages.length ?
+                navigator.languages[0] :
+                navigator.userLanguage ?
+                    navigator.userLanguage :
+                    navigator.language
+        );
+
+        const initLanguage = () => {
+            const queryParameters = _queryString2.default.parse(location.search);
+
+            if (queryParameters.lang) {
+                const lang = queryParameters.lang.toLowerCase();
+                if (LANGUAGES[lang]) {
                     try {
-                        window.localStorage.setItem("languageOverride", t);
+                        window.localStorage.setItem("languageOverride", lang);
+                        return lang;
                     } catch (e) {
                         console.warn("[LANG] Failed to set local storage item, local storage unsupported?");
                     }
-                    return t;
+                } else {
+                    console.error("[LANG] Unknown language specified:", lang);
                 }
-                console.error("[LANG] Unkown language specified:", t);
             }
-            var i = null;
+
+            let storedLanguage = null;
             try {
-                i = window.localStorage.getItem("languageOverride");
+                storedLanguage = window.localStorage.getItem("languageOverride");
             } catch (e) {
                 console.warn("[LANG] Failed to get language from local storage, maybe unsupported?");
             }
-            if (i) {
-                var a = i;
-                if (LANGUAGES[a]) return a;
-                console.error("[LANG] Unkown language in local storage:", a);
+
+            if (storedLanguage) {
+                const languageOverride = storedLanguage;
+                if (LANGUAGES[languageOverride]) return languageOverride;
+                console.error("[LANG] Unknown language in local storage:", languageOverride);
             }
-            var o = browserLocale().toLowerCase();
-            if (LANGUAGES[o]) return console.log("[LANG] Auto detected to", o), o;
-            var n = o.split("-")[0],
-                r = null;
-            for (var s in LANGUAGES) {
-                n === s.split("-")[0].toLowerCase() && (r = s);
+
+            const browserLocaleLowerCase = browserLocale().toLowerCase();
+            if (LANGUAGES[browserLocaleLowerCase]) {
+                console.log("[LANG] Auto detected to", browserLocaleLowerCase);
+                return browserLocaleLowerCase;
             }
-            return r ? (console.warn("[LANG] Unkown lang", o, "but usable country locale:", r), r) : (console.warn("[LANG] Unkown browser locale:", o), "en");
-        }
-        var BASE_LANGUAGE_DICT = _en2.default,
-            CURRENT_LANGUAGE = initLanguage();
+
+            const languageWithoutCountry = browserLocaleLowerCase.split("-")[0];
+            let usableCountryLocale = null;
+
+            for (const language in LANGUAGES) {
+                if (languageWithoutCountry === language.split("-")[0].toLowerCase()) {
+                    usableCountryLocale = language;
+                }
+            }
+
+            if (usableCountryLocale) {
+                console.warn("[LANG] Unknown language", browserLocaleLowerCase, "but usable country locale:", usableCountryLocale);
+                return usableCountryLocale;
+            } else {
+                console.warn("[LANG] Unknown browser locale:", browserLocaleLowerCase);
+                return "en";
+            }
+        };
+
+        const BASE_LANGUAGE_DICT = _en2.default;
+        const CURRENT_LANGUAGE = initLanguage();
         console.log("[LANG] Using language", CURRENT_LANGUAGE);
-        var CURRENT_LANG_DICT = LANGUAGES[CURRENT_LANGUAGE];
-        function parseTranslation(e) {
-            return e.replace(/\[\[([^\]]*)\]\]/g, "<i>$1</i>").replace(/\[([^\]]*)\]/g, "<b>$1</b>");
-        }
-        function translate(e) {
-            if (Config.testTranslations) return "[" + e + "]";
-            var t = CURRENT_LANG_DICT[e];
-            if (!t) {
-                if (!BASE_LANGUAGE_DICT[e]) return console.error("[LANG] Invalid id:", e), "[" + e + "]";
-                t = BASE_LANGUAGE_DICT[e];
+        const CURRENT_LANG_DICT = LANGUAGES[CURRENT_LANGUAGE];
+
+        const parseTranslation = (text) => (
+            text.replace(/\[\[([^\]]*)\]\]/g, "<i>$1</i>").replace(/\[([^\]]*)\]/g, "<b>$1</b>")
+        );
+
+        const tr = (key, ...values) => {
+            if (Config.testTranslations) return `[${key}]`;
+
+            let translation = CURRENT_LANG_DICT[key];
+
+            if (!translation) {
+                if (!BASE_LANGUAGE_DICT[key]) {
+                    console.error("[LANG] Invalid id:", key);
+                    return `[${key}]`;
+                }
+                translation = BASE_LANGUAGE_DICT[key];
             }
-            for (var i = arguments.length, a = Array(i > 1 ? i - 1 : 0), o = 1; o < i; o++) a[o - 1] = arguments[o];
-            return (
-                a.forEach(function (e, i) {
-                    t = t.replace("%" + (i + 1), e);
-                }),
-                parseTranslation(t)
-            );
-        }
-        function translateDocument() {
-            if ((console.log("[LANG] Translating document ..."), document.querySelectorAll)) {
-                Array.from(document.querySelectorAll("[data-translate]")).forEach(function (e) {
-                    var t = e.getAttribute("data-translate");
-                    e.innerHTML = translate(t);
+
+            values.forEach((value, index) => {
+                translation = translation.replace(`%${index + 1}`, value);
+            });
+
+            return parseTranslation(translation);
+        };
+
+        const translateDocument = () => {
+            console.log("[LANG] Translating document ...");
+
+            if (document.querySelectorAll) {
+                Array.from(document.querySelectorAll("[data-translate]")).forEach((element) => {
+                    const translationKey = element.getAttribute("data-translate");
+                    element.innerHTML = tr(translationKey);
                 });
-                var e = document.getElementById("languageChooserParent");
-                e && e.classList.add("loaded");
-                var t = document.getElementById("languageChooserInner");
-                if (t) {
-                    t.classList.add("loaded");
-                    for (var i = 0; i < t.options.length; ++i) {
-                        if (t.options[i].value === CURRENT_LANGUAGE) {
-                            t.selectedIndex = i;
+
+                const languageChooserParent = document.getElementById("languageChooserParent");
+                if (languageChooserParent) {
+                    languageChooserParent.classList.add("loaded");
+                }
+
+                const languageChooserInner = document.getElementById("languageChooserInner");
+                if (languageChooserInner) {
+                    languageChooserInner.classList.add("loaded");
+                    for (let i = 0; i < languageChooserInner.options.length; i++) {
+                        if (languageChooserInner.options[i].value === CURRENT_LANGUAGE) {
+                            languageChooserInner.selectedIndex = i;
                             break;
                         }
                     }
                 }
-                Config.testTranslations && document.body.classList.add("highlightTranslations");
-            } else console.error("[LANG] Query selector all not supported! Not translating document");
-        }
-        var oneTileDistance = 1.01,
+
+                if (Config.testTranslations) {
+                    document.body.classList.add("highlightTranslations");
+                }
+            } else {
+                console.error("[LANG] Query selector all not supported! Not translating document");
+            }
+        };
+
+        const oneTileDistance = 1.01,
             meleeAttackDistance = 2,
             oneTileDiagonalDistance = 1.42;
-        function tileToWorld(e, t) {
-            return [e * Config.tileSize, t * Config.tileSize];
-        }
-        function tileCenterToWorld(e, t) {
-            return [Math.floor((e + 0.5) * Config.tileSize), Math.floor((t + 0.5) * Config.tileSize)];
-        }
-        function worldToTile(e, t) {
-            return [Math.floor(e / Config.tileSize), Math.floor(t / Config.tileSize)];
-        }
-        function isValidWorldCoordinate(e, t) {
-            return e >= 0 && t >= 0 && e < Config.numTilesX * Config.tileSize && t < Config.numTilesY * Config.tileSize;
-        }
-        function randomInt(e, t) {
-            return e + Math.floor(Math.random() * (t - e));
-        }
-        function randomArrayEntry(e) {
-            return e[randomInt(0, e.length)];
-        }
-        function make2DArray(e, t, i) {
-            for (var a = [], o = 0; o < e; ++o) {
-                for (var n = [], r = 0; r < t; ++r) n.push(i(o, r));
-                a.push(n);
+
+        const tileToWorld = (e, t) => [e * Config.tileSize, t * Config.tileSize];
+
+        const tileCenterToWorld = (e, t) => [
+            Math.floor((e + 0.5) * Config.tileSize),
+            Math.floor((t + 0.5) * Config.tileSize)
+        ];
+
+        const worldToTile = (e, t) => [
+            Math.floor(e / Config.tileSize),
+            Math.floor(t / Config.tileSize)
+        ];
+
+        const isValidWorldCoordinate = (e, t) =>
+            e >= 0 &&
+            t >= 0 &&
+            e < Config.numTilesX * Config.tileSize &&
+            t < Config.numTilesY * Config.tileSize;
+
+        const randomInt = (e, t) => e + Math.floor(Math.random() * (t - e));
+
+        const randomArrayEntry = (e) => e[randomInt(0, e.length)];
+
+        const make2DArray = (e, t, i) => {
+            const array = [];
+            for (let o = 0; o < e; ++o) {
+                const row = [];
+                for (let r = 0; r < t; ++r) {
+                    row.push(i(o, r));
+                }
+                array.push(row);
             }
-            return a;
-        }
-        function make1DArray(e, t) {
-            for (var i = [], a = 0; a < e; ++a) i.push(t(a));
-            return i;
-        }
-        function distanceManhattan(e, t) {
-            return Math.max(Math.abs(e[0] - t[0]), Math.abs(e[1] - t[1]));
-        }
-        function distanceEuclidianSquare(e, t) {
-            var i = e[0] - t[0],
-                a = e[1] - t[1];
+            return array;
+        };
+
+        const make1DArray = (e, t) => {
+            const array = [];
+            for (let a = 0; a < e; ++a) {
+                array.push(t(a));
+            }
+            return array;
+        };
+
+        const distanceManhattan = (e, t) =>
+            Math.max(Math.abs(e[0] - t[0]), Math.abs(e[1] - t[1]));
+
+        const distanceEuclidianSquare = (e, t) => {
+            const i = e[0] - t[0];
+            const a = e[1] - t[1];
             return i * i + a * a;
-        }
-        function distanceEuclidian(e, t) {
-            return Math.sqrt(distanceEuclidianSquare(e, t));
-        }
-        function vectorLength(e, t) {
-            return Math.sqrt(e * e + t * t);
-        }
-        function vectorSubstract(e, t) {
-            return [e[0] - t[0], e[1] - t[1]];
-        }
-        function vectorNormalize(e) {
-            var t = Math.max(1e-10, vectorLength.apply(void 0, _toConsumableArray(e)));
+        };
+
+        const distanceEuclidian = (e, t) => Math.sqrt(distanceEuclidianSquare(e, t));
+
+        const vectorLength = (e, t) => Math.sqrt(e * e + t * t);
+
+        const vectorSubstract = (e, t) => [e[0] - t[0], e[1] - t[1]];
+
+        const vectorNormalize = (e) => {
+            const t = Math.max(1e-10, vectorLength(...e));
             return [e[0] / t, e[1] / t];
-        }
-        function vectorClamp(e) {
-            var t = Math.max(1, vectorLength.apply(void 0, _toConsumableArray(e)));
+        };
+
+        const vectorClamp = (e) => {
+            const t = Math.max(1, vectorLength(...e));
             return [e[0] / t, e[1] / t];
-        }
-        function dotProduct(e, t) {
-            return e[0] * t[0] + e[1] * t[1];
-        }
-        function vectorScalarMultiply(e, t) {
-            return [e[0] * t, e[1] * t];
-        }
-        function normalizedDirection(e, t) {
-            return vectorNormalize(vectorSubstract(t, e));
-        }
-        function findNormalVectorTo(e) {
-            return [-e[1], e[0]];
-        }
-        function createOrGetEntityAttachment(e, t, i) {
-            var a = e[t];
-            if (a) return a.alive || a.revive(), a;
-            var o = i();
-            if (!o) throw new Error("creator() returned null");
-            return e.addChild(o), (e[t] = o), o;
-        }
-        function hideEntityAttachment(e, t) {
-            var i = e[t];
-            i && i.alive && i.kill();
-        }
-        function destroyEntityAttachment(e, t) {
-            var i = e[t];
-            i && i.alive && i.destroy(), Reflect.deleteProperty(e, t);
-        }
-        function getWorldSpaceMouse(e) {
-            var t = e.customZoomLevel;
-            return vectorScalarMultiply(getWorldSpaceMouseNoZoom(e), t);
-        }
-        function getWorldSpaceMouseNoZoom(e) {
-            var t = window.mouseTracker.getPosition();
-            return [t.x + e.camera.x, t.y + e.camera.y];
-        }
-        function getTileBelowCursor(e) {
-            var t = getWorldSpaceMouse(e),
-                i = _slicedToArray(t, 2);
-            return worldToTile(i[0], i[1]);
-        }
-        function upDownLinearMorph(e, t) {
-            var i = (e % t) / t;
-            return (i = 2 * Math.min(i, 1 - i));
-        }
-        function connectSignals(e, t) {
-            e.add(t.dispatch, t);
-        }
-        function normalizeAngle(e) {
-            for (var t = e; t < 0;) t += 2 * Math.PI;
-            return t % 360;
-        }
-        function isinstanceString(e, t) {
-            var i = e.constructor;
-            if (i.name === t) return true;
-            for (var a = 20; null != i && null != i.name && i.name.length > 0 && a > 0;) {
-                if (i.name === t) return true;
-                (i = i.__proto__), (a -= 1);
+        };
+
+        const dotProduct = (e, t) => e[0] * t[0] + e[1] * t[1];
+
+        const vectorScalarMultiply = (e, t) => [e[0] * t, e[1] * t];
+
+        const normalizedDirection = (e, t) => vectorNormalize(vectorSubstract(t, e));
+
+        const findNormalVectorTo = (e) => [-e[1], e[0]];
+
+        const createOrGetEntityAttachment = (e, t, i) => {
+            const a = e[t];
+            if (a) {
+                a.alive || a.revive();
+                return a;
             }
-            return false;
-        }
-        function arraysAreEqual(e, t) {
-            return (
-                e.length == t.length &&
-                e.every(function (e, i) {
-                    return e === t[i];
-                })
-            );
-        }
-        function clearGroup(e) {
+            const o = i();
+            if (!o) {
+                throw new Error("creator() returned null");
+            }
+            e.addChild(o);
+            e[t] = o;
+            return o;
+        };
+
+        const hideEntityAttachment = (e, t) => {
+            const i = e[t];
+            i && i.alive && i.kill();
+        };
+
+        const destroyEntityAttachment = (e, t) => {
+            const i = e[t];
+            i && i.alive && i.destroy();
+            Reflect.deleteProperty(e, t);
+        };
+
+        const getWorldSpaceMouse = (e) => {
+            const t = e.customZoomLevel;
+            return vectorScalarMultiply(getWorldSpaceMouseNoZoom(e), t);
+        };
+
+        const getWorldSpaceMouseNoZoom = (e) => {
+            const t = window.mouseTracker.getPosition();
+            return [t.x + e.camera.x, t.y + e.camera.y];
+        };
+
+        const getTileBelowCursor = (e) => {
+            const t = getWorldSpaceMouse(e);
+            const [x, y] = t;
+            return worldToTile(x, y);
+        };
+
+        const upDownLinearMorph = (e, t) => {
+            let i = (e % t) / t;
+            return (i = 2 * Math.min(i, 1 - i));
+        };
+
+        const connectSignals = (e, t) => e.add(t.dispatch, t);
+
+        const normalizeAngle = (e) => {
+            let t = e;
+            while (t < 0) {
+                t += 2 * Math.PI;
+            }
+            return t % 360;
+        };
+
+        const isinstanceString = (e, t) => {
+            let i = e.constructor;
+            while (i && i.name !== t) {
+                i = i.__proto__;
+            }
+            return !!i;
+        };
+        
+        const arraysAreEqual = (e, t) =>
+            e.length === t.length && e.every((value, index) => value === t[index]);
+        
+        const clearGroup = (e) => {
             if (e.destroyAllChildren) e.destroyAllChildren();
             else if (e.removeAll) e.removeAll(true, true);
             else {
-                var t = e.children;
-                e.children = [];
-                for (var i = 0; i < t.length; ++i) {
-                    var a = t[i];
-                    (a.alive = false), (a.exists = false), (a.renderable = false), (a.game = null), (a.parent = null), a.clear && a.clear(), (a.texture = null);
-                }
+                e.children.forEach((a) => {
+                    a.alive = false;
+                    a.exists = false;
+                    a.renderable = false;
+                    a.game = null;
+                    a.parent = null;
+                    if (a.clear) a.clear();
+                    a.texture = null;
+                });
+                e.children.length = 0;
             }
-        }
-        function checkParamSet(e) {
-            if (null === e || void 0 === e) throw new Error("Parameter is null or NaN: '" + e + "'!");
-            if ("number" == typeof e && isNaN(e)) throw new Error("Parameter is NaN: '" + e + "'!");
-        }
-        function checkParamsSet() {
-            for (var e = arguments.length, t = Array(e), i = 0; i < e; i++) t[i] = arguments[i];
-            t.forEach(function (e) {
-                return checkParamSet(e);
-            });
-        }
-        function checkIsSetAndArray(e) {
-            if ((checkParamSet(e), !Array.isArray(e))) throw new Error("Parameter is no array");
-        }
-        function fastArrayDelete(e, t) {
-            if (t < 0 || t >= e.length) throw new Error("Out of bounds");
-            if (t == e.length - 1) return e.pop();
-            var i = e.pop();
-            return (e[t] = i), i;
-        }
-        function fastArrayDeleteValue(e, t) {
-            if (null == e) throw new Error("Tried to delete from non array!");
-            var i = e.indexOf(t);
-            return i < 0 ? (console.error("Value", t, "not contained in array:", e, "!"), t) : fastArrayDelete(e, i);
-        }
-        function countObjectKeysUnsafe(e) {
-            var t = 0;
-            for (var i in e) t += 1;
+        };
+        
+        const checkParamSet = (e) => {
+            if (e === null || e === undefined) {
+                throw new Error(`Parameter is null or NaN: '${e}'!`);
+            }
+            if (typeof e === 'number' && isNaN(e)) {
+                throw new Error(`Parameter is NaN: '${e}'!`);
+            }
+        };
+        
+        const checkParamsSet = (...args) => {
+            args.forEach((e) => checkParamSet(e));
+        };
+        
+        const checkIsSetAndArray = (e) => {
+            checkParamSet(e);
+            if (!Array.isArray(e)) {
+                throw new Error('Parameter is not an array');
+            }
+        };
+        
+        const fastArrayDelete = (e, t) => {
+            if (t < 0 || t >= e.length) {
+                throw new Error('Out of bounds');
+            }
+            if (t === e.length - 1) {
+                e.pop();
+            } else {
+                const i = e.pop();
+                e[t] = i;
+            }
+        };
+        
+        const fastArrayDeleteValue = (e, t) => {
+            if (!Array.isArray(e)) {
+                throw new Error('Tried to delete from non-array');
+            }
+            const i = e.indexOf(t);
+            if (i < 0) {
+                console.error(`Value ${t} not contained in array: ${e}!`);
+            } else {
+                fastArrayDelete(e, i);
+            }
+        };
+        
+        const countObjectKeysUnsafe = (e) => {
+            let t = 0;
+            for (const i in e) {
+                t += 1;
+            }
             return t;
-        }
-        var NUMBER_ENTRIES = [
-            [1e15, translate("quadrillion_suffix"), 1e15],
-            [1e12, translate("trillions_suffix"), 1e12],
-            [1e9, translate("billions_suffix"), 1e9],
-            [1e6, translate("millions_suffix"), 1e6],
-            [1e3, translate("thousands_suffix"), 1e4],
+        };
+        
+        const NUMBER_ENTRIES = [
+            [1e15, tr("quadrillion_suffix"), 1e15],
+            [1e12, tr("trillions_suffix"), 1e12],
+            [1e9, tr("billions_suffix"), 1e9],
+            [1e6, tr("millions_suffix"), 1e6],
+            [1e3, tr("thousands_suffix"), 1e3],
         ];
-        function formatBigNumber(e) {
-            var t = arguments.length > 1 && void 0 !== arguments[1] && arguments[1];
-            if (e < 0) return "-" + formatBigNumber(-e, t);
-            for (var i = 0; i < NUMBER_ENTRIES.length; ++i) {
-                var a = _slicedToArray(NUMBER_ENTRIES[i], 3),
-                    o = a[0],
-                    n = a[1];
-                if (e >= a[2]) {
-                    var r = e / o;
-                    return r < 10 ? floorDecimals(r, 2).toFixed(2).replace(",", ".") + n : r < 100 ? floorDecimals(r, 1).toFixed(1).replace(",", ".") + n : Math.floor(r) + n;
+        
+        const formatBigNumber = (e) => {
+            if (e < 0) return `-${formatBigNumber(-e)}`;
+        
+            for (let [value, suffix, divisor] of NUMBER_ENTRIES) {
+                if (e >= divisor) {
+                    let result = e / value;
+                    if (result < 10) return `${result.toFixed(2).replace(",", ".")}${suffix}`;
+                    if (result < 100) return `${result.toFixed(1).replace(",", ".")}${suffix}`;
+                    return `${Math.floor(result)}${suffix}`;
                 }
             }
+        
             if (e >= 100) return Math.floor(e).toString();
-            if (t) {
-                var s = Math.floor((e % 1) * 10);
-                return 0 === s ? Math.floor(e).toString() : Math.floor(e) + "." + s;
-            }
             return Math.floor(e).toString();
-        }
-        function formatBigNumberIfNumber(e) {
-            return Number(e) === e ? formatBigNumber(e) : (console.log("STR:", e), e);
-        }
-        function keyToString(e) {
-            return e === _phaserCe.Phaser.Keyboard.ESC
-                ? translate("key_esc")
-                : e >= _phaserCe.Phaser.Keyboard.F1 && e <= _phaserCe.Phaser.Keyboard.F15
-                    ? "F" + (e - _phaserCe.Phaser.Keyboard.F1 + 1)
-                    : e === _phaserCe.Phaser.Keyboard.SHIFT
-                        ? translate("key_shift")
-                        : e === _phaserCe.Phaser.Keyboard.ALT
-                            ? translate("key_alt")
-                            : e === _phaserCe.Phaser.Keyboard.UP
-                                ? "&#8593;"
-                                : e === _phaserCe.Phaser.Keyboard.DOWN
-                                    ? "&#8595;"
-                                    : e === _phaserCe.Phaser.Keyboard.LEFT
-                                        ? "&#8592;"
-                                        : e === _phaserCe.Phaser.Keyboard.RIGHT
-                                            ? "&#8594;"
-                                            : e === _phaserCe.Phaser.Keyboard.SPACEBAR
-                                                ? translate("key_space")
-                                                : e === _phaserCe.Phaser.Keyboard.ENTER
-                                                    ? translate("key_enter")
-                                                    : String.fromCharCode(e);
-        }
-        function roundDecimals(e, t) {
-            var i = Math.pow(10, t);
+        };
+        
+        const keyToString = (e) => {
+            switch (e) {
+                case Phaser.Keyboard.ESC:
+                    return tr("key_esc");
+                case Phaser.Keyboard.F1:
+                case Phaser.Keyboard.F2:
+                case Phaser.Keyboard.F3:
+                case Phaser.Keyboard.F4:
+                case Phaser.Keyboard.F5:
+                case Phaser.Keyboard.F6:
+                case Phaser.Keyboard.F7:
+                case Phaser.Keyboard.F8:
+                case Phaser.Keyboard.F9:
+                case Phaser.Keyboard.F10:
+                case Phaser.Keyboard.F11:
+                case Phaser.Keyboard.F12:
+                case Phaser.Keyboard.F13:
+                case Phaser.Keyboard.F14:
+                case Phaser.Keyboard.F15:
+                    return "F" + (e - Phaser.Keyboard.F1 + 1);
+                case Phaser.Keyboard.SHIFT:
+                    return tr("key_shift");
+                case Phaser.Keyboard.ALT:
+                    return tr("key_alt");
+                case Phaser.Keyboard.UP:
+                    return "&#8593;";
+                case Phaser.Keyboard.DOWN:
+                    return "&#8595;";
+                case Phaser.Keyboard.LEFT:
+                    return "&#8592;";
+                case Phaser.Keyboard.RIGHT:
+                    return "&#8594;";
+                case Phaser.Keyboard.SPACEBAR:
+                    return tr("key_space");
+                case Phaser.Keyboard.ENTER:
+                    return tr("key_enter");
+                default:
+                    return String.fromCharCode(e);
+            }
+        };
+        
+        const roundDecimals = (e, t) => {
+            const i = Math.pow(10, t);
             return Math.round(e * i) / i;
-        }
-        function floorDecimals(e, t) {
-            var i = Math.pow(10, t);
+        };
+        
+        const floorDecimals = (e, t) => {
+            const i = Math.pow(10, t);
             return Math.floor(e * i) / i;
-        }
-        function newEmptyMap() {
-            return Object.create(null);
-        }
-        function randomPointInCircle() {
-            var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : 1,
-                t = Math.random() * e,
-                i = 2 * Math.random() * Math.PI;
+        };
+        
+        const newEmptyMap = () => Object.create(null);
+        
+        const randomPointInCircle = (e = 1) => {
+            const t = Math.random() * e;
+            const i = 2 * Math.random() * Math.PI;
             return [Math.sin(i) * t, Math.cos(i) * t];
-        }
-        function roundUpToNext(e, t) {
-            return Math.ceil(e / t) * t;
-        }
-        function roundDownToNext(e, t) {
-            return Math.floor(e / t) * t;
-        }
-        function drawJaggedLine(e, t, i) {
-            var a = arguments.length > 3 && void 0 !== arguments[3] ? arguments[3] : 0.1,
-                o = arguments.length > 4 && void 0 !== arguments[4] ? arguments[4] : 7,
-                n = i[0] - t[0],
-                r = i[1] - t[1],
-                s = -1 * r,
-                l = n;
+        };
+        
+        const drawJaggedLine = (e, t, i, a = 0.1, o = 7) => {
+            const n = i[0] - t[0];
+            const r = i[1] - t[1];
+            const s = -1 * r;
+            const l = n;
+        
             e.moveTo(t[0], t[1]);
-            for (var u = 0; u < o; ++u) {
-                var c = (u + 1) / o,
-                    d = 2 * Math.random() - 1,
-                    h = n * c + t[0] + s * d * a,
-                    p = r * c + t[1] + l * d * a;
+        
+            for (let u = 0; u < o; ++u) {
+                const c = (u + 1) / o;
+                const d = 2 * Math.random() - 1;
+                const h = n * c + t[0] + s * d * a;
+                const p = r * c + t[1] + l * d * a;
                 e.lineTo(h, p);
             }
-        }
-        function getGoodMultiplier(e) {
-            return e < 10 ? 0.25 : e < 50 ? 1 : e < 100 ? 5 : e < 1e3 ? 50 : e < 1e4 ? 500 : e < 1e5 ? 2e3 : e < 1e6 ? 1e4 : 1e5;
-        }
-        function dynamicRound(e) {
-            return roundDownToNext(e, getGoodMultiplier(e));
-        }
+        };        
+
         function secondsToDuration(e) {
             var t = Math.floor(e),
                 i = Math.floor(t / 60),
                 a = Math.floor(i / 60),
                 o = Math.floor(a / 24);
-            return t <= 60
-                ? t <= 1
-                    ? translate("second_before")
-                    : translate("seconds_before", t)
-                : i <= 60
-                    ? i <= 1
-                        ? translate("minute_before")
-                        : translate("minutes_before", i)
-                    : a <= 60
-                        ? a <= 1
-                            ? translate("hour_before")
-                            : translate("hours_before", a)
-                        : o <= 1
-                            ? translate("day_before")
-                            : translate("days_before", o);
-        }
-        window.fn = formatBigNumber;
-        var EASING = {
+        
+            switch (true) {
+                case t <= 60:
+                    return t <= 1 ? tr("second_before") : tr("seconds_before", t);
+        
+                case i <= 60:
+                    return i <= 1 ? tr("minute_before") : tr("minutes_before", i);
+        
+                case a <= 60:
+                    return a <= 1 ? tr("hour_before") : tr("hours_before", a);
+        
+                default:
+                    return o <= 1 ? tr("day_before") : tr("days_before", o);
+            }
+        }        
+
+        const EASING = {
             linear: function (e) {
                 return e;
             },
@@ -40261,194 +39743,282 @@
                 return 0.5 * Math.sin(300 * e) + 0.5;
             },
         }
-        var GAME_BALANCING = {},
-            MAXLEVEL_INDEX = 29;
-        function exponentialRaise(e) {
-            for (var t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : 1.6, i = [], a = 0; a <= MAXLEVEL_INDEX; ++a) i.push(dynamicRound(e * Math.pow(t, a)));
-            return i;
-        }
-        function exponentialRaiseFirstZero() {
-            var e = exponentialRaise.apply(void 0, arguments);
-            return e.unshift(0), e.pop(), e;
-        }
-        function exponentialRaiseIntegersStartOffset(e, t) {
-            for (var i = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : 0, a = [], o = 0; o < i; ++o) a.push(0);
-            for (var n = 0; n <= MAXLEVEL_INDEX - i; ++n) a.push(Math.round(e * Math.pow(t, n) + n));
-            return a;
-        }
-        function linearRaise(e, t) {
-            for (var i = [], a = 0; a <= MAXLEVEL_INDEX; ++a) i.push(dynamicRound(e + t * a));
-            return i;
-        }
-        function overrideObj(e, t) {
-            for (var i in t) e[i] && "object" === _typeof(e[i]) ? overrideObj(e[i], t[i]) : (e[i] = t[i]);
-            return e;
-        }
-        function initBalancing(e) {
-            var t = e.upgradeCostMultiplier,
-                i = void 0 === t ? 1 : t,
-                a = e.zombieHealthMultiplier,
-                o = void 0 === a ? 1 : a,
-                n = e.zombieDamageMultiplier,
-                r = void 0 === n ? 1 : n,
-                s = e.zombieAmountInBossWave,
-                l = void 0 === s ? 0.3 : s,
-                u = e.bossInterval,
-                c = void 0 === u ? 10 : u;
-            console.log("[BALANCING] (Re-)Initializing balancing");
-            var d = {
-                refundOnSell: 0.6,
-                zombieLevelIncreaseDays: 13,
-                bossLevelIncrease: 10,
-                bossInterval: c,
-                zombieCount: function (e) {
-                    return 1 + Math.floor(1.3 * Math.pow(e, 1.2));
-                },
-                creeperAmountPercent: 0.2,
-                zombieAmountInBossWave: l,
-                enemies: {
-                    zombie: {
-                        health: function (e) {
-                            return o * (270 + 1e3 * Math.pow(e, 3.4));
+
+        let GAME_BALANCING = {};
+        const MAXLEVEL_INDEX = 29;
+        
+        class Balancing {
+            constructor({
+                upgradeCostMultiplier = 1,
+                HealthMultiplier = 1,
+                damageMultiplier = 1,
+                zombieAmountInBossWave = 0.3,
+                bossInterval = 10
+            } = {}) {
+                this.upgradeCostMultiplier = upgradeCostMultiplier;
+                this.HealthMultiplier = HealthMultiplier;
+                this.damageMultiplier = damageMultiplier;
+                this.zombieAmountInBossWave = zombieAmountInBossWave;
+                this.bossInterval = bossInterval;
+        
+                console.log("[BALANCING] (Re-)Initializing balancing");
+        
+                let d = {
+                        refundOnSell: 0.6,
+                        zombieLevelIncreaseDays: 13,
+                        bossLevelIncrease: 10,
+                        bossInterval: bossInterval,
+                        zombieCount: function(wave) {
+                            return 1 + Math.floor(1.3 * Math.pow(wave, 1.2));
                         },
-                        grantsGold: function (e) {
-                            return Math.floor(20 + 12 * Math.pow(e, 1.1));
+                        creeperAmountPercent: 0.2,
+                        zombieAmountInBossWave: zombieAmountInBossWave,
+                        enemies: {
+                            zombie: {
+                                health: (wave) => HealthMultiplier * (270 + 1000 * Math.pow(wave, 3.4)),
+                                grantsGold: (wave) => Math.floor(20 + 12 * Math.pow(wave, 1.1)),
+                                damage: (wave) => damageMultiplier * (40 + 60 * Math.pow(wave, 2.5)),
+                                hitsPerSecond: (wave) => Math.min(1 + 0.1 * wave, 10),
+                                percentageAttackingBase: 0.7,
+                                speed: (wave) => 0.6 + 0.1 * Math.min(wave, 10) + 0.7 * Math.random(),
+                            },
+                            creeper: {
+                                health: (wave) => HealthMultiplier * (100 + 1200 * Math.pow(wave, 1.6)),
+                                grantsGold: (wave) => 50 + 17 * wave,
+                                damage: (wave) => damageMultiplier * (200 + 200 * Math.pow(wave, 1.3)),
+                                explosionRadius: (wave) => Math.min(1.5 + 0.05 * wave, 100),
+                                speed: (wave) => 2 + 0.2 * Math.min(wave, 10) + Math.random(),
+                                percentageAttackingBase: 0.8,
+                            },
+                            zombieBoss: {
+                                health: (wave) => HealthMultiplier * (15000 + 40000 * Math.pow(wave, 2.8)),
+                                grantsGold: (wave) => 5000 + Math.floor(20000 * Math.pow(wave, 1.75)),
+                                damage: (wave) => damageMultiplier * (35 + 225 * Math.pow(wave, 1.6)),
+                                hitsPerSecond: () => 10,
+                                speed: (wave) => 0.9 + 0.1 * Math.min(wave, 10),
+                            },
                         },
-                        damage: function (e) {
-                            return r * (40 + 60 * Math.pow(e, 2.5));
-                        },
-                        hitsPerSecond: function (e) {
-                            return Math.min(1 + 0.1 * e);
-                        },
-                        percentageAttackingBase: 0.7,
-                        speed: function (e) {
-                            return 0.6 + 0.1 * Math.min(e, 10) + 0.7 * Math.random();
-                        },
-                    },
-                    creeper: {
-                        health: function (e) {
-                            return o * (100 + 1200 * Math.pow(e, 1.6));
-                        },
-                        grantsGold: function (e) {
-                            return 50 + 17 * e;
-                        },
-                        damage: function (e) {
-                            return r * (200 + 200 * Math.pow(e, 1.3));
-                        },
-                        explosionRadius: function (e) {
-                            return 1.5 + 0.05 * e;
-                        },
-                        speed: function (e) {
-                            return 2 + 0.2 * Math.min(e, 10) + Math.random();
-                        },
-                        percentageAttackingBase: 0.8,
-                    },
-                    zombieBoss: {
-                        health: function (e) {
-                            return o * (15e3 + 4e4 * Math.pow(e, 2.8));
-                        },
-                        grantsGold: function (e) {
-                            return 5e3 + Math.floor(2e4 * Math.pow(e, 1.75));
-                        },
-                        damage: function (e) {
-                            return r * (35 + 225 * Math.pow(e, 1.6));
-                        },
-                        hitsPerSecond: function () {
-                            return 11;
-                        },
-                        speed: function (e) {
-                            return 0.9 + 0.1 * Math.min(e, 15);
+                        buildings: {},
+                        amountLimits: {
+                            goldMine: this.exponentialRaiseIntegersStartOffset(2.49, 1.35),
+                            transporter: this.exponentialRaiseIntegersStartOffset(10, 1.35),
+                            wall: this.exponentialRaiseIntegersStartOffset(20, 1.35),
+                            ironMine: [],
+                            cannonballProducer: [],
+                            cannon: this.exponentialRaiseIntegersStartOffset(2, 1.35),
+                            harvester: [],
+                            steelFactory: [],
+                            woodProcessor: [],
+                            arrowFactory: [],
+                            arrowTower: this.exponentialRaiseIntegersStartOffset(2.5, 1.35, 2),
+                            uraniumMine: [],
+                            nuclearStation: [],
+                            lightningTower: this.exponentialRaiseIntegersStartOffset(2.5, 1.35, 5),
+                            healingTower: this.exponentialRaiseIntegersStartOffset(1.5, 1.35, 8),
                         },
                     },
-                },
-                buildings: {},
-                amountLimits: {
-                    goldMine: exponentialRaiseIntegersStartOffset(2.49, 1.35),
-                    transporter: exponentialRaiseIntegersStartOffset(10, 1.35),
-                    wall: exponentialRaiseIntegersStartOffset(20, 1.35),
-                    ironMine: [],
-                    cannonballProducer: [],
-                    cannon: exponentialRaiseIntegersStartOffset(2, 1.35),
-                    harvester: [],
-                    steelFactory: [],
-                    woodProcessor: [],
-                    arrowFactory: [],
-                    arrowTower: exponentialRaiseIntegersStartOffset(2.5, 1.35, 2),
-                    uraniumMine: [],
-                    nuclearStation: [],
-                    lightningTower: exponentialRaiseIntegersStartOffset(2.5, 1.35, 5),
-                    healingTower: exponentialRaiseIntegersStartOffset(1.5, 1.35, 8),
-                },
-            },
-                h = exponentialRaise(500, 1.35),
-                p = exponentialRaise(2, 1.2),
-                g = exponentialRaise(2.5, 1.22),
-                m = { health: exponentialRaise(800, 1.4), throughput: g, cost: exponentialRaise(150, 1.9) },
-                _ = { health: h, throughput: p, cost: exponentialRaise(150, 1.95) },
-                f = {
-                    goldMine: { health: h, throughput: exponentialRaise(3.5), cost: exponentialRaiseFirstZero(150) },
-                    playerBase: { health: exponentialRaise(1e3, 1.95), damage: exponentialRaise(50), cost: exponentialRaiseFirstZero(850, 2.8) },
-                    wall: { health: exponentialRaise(3e3), shieldStorage: linearRaise(10, 3), cost: exponentialRaise(30, 2) },
-                    cannon: { health: h, damage: exponentialRaise(100), cost: exponentialRaise(100, 2.1), shootsPerSecond: linearRaise(1, 0.3), consumeAmount: exponentialRaise(2, 1.2), radius: linearRaise(5, 0.5) },
-                    cannonballProducer: _,
-                    steelFactory: _,
-                    woodProcessor: _,
-                    nuclearStation: _,
-                    harvester: m,
-                    ironMine: m,
-                    uraniumMine: m,
-                    arrowFactory: { health: h, throughput: p, outcome: linearRaise(2, 0.3), cost: exponentialRaise(200, 1.95) },
-                    arrowTower: { health: h, damage: exponentialRaise(200), radius: linearRaise(6, 0.3), shootsPerSecond: linearRaise(1, 0.5), consumeAmount: linearRaise(2, 1), cost: exponentialRaise(250, 1.9) },
-                    lightningTower: {
-                        damage: exponentialRaise(400, 1.4),
-                        health: exponentialRaise(100, 1.7),
-                        radius: linearRaise(4, 0.125),
-                        spread: linearRaise(3, 0.25),
-                        shootsPerSecond: linearRaise(1, 0.4),
-                        consumeAmount: linearRaise(1, 1.8),
-                        cost: exponentialRaise(1e3, 1.75),
+                    h = this.exponentialRaise(500, 1.35),
+                    mineConfig = {
+                        health: this.exponentialRaise(800, 1.4),
+                        throughput: this.exponentialRaise(2.5, 1.22),
+                        cost: this.exponentialRaise(150, 1.9)
                     },
-                    transporter: { cost: exponentialRaiseFirstZero(100, 1.9), health: exponentialRaise(100, 1.7), transportSpeed: linearRaise(1, 0.45) },
-                    healingTower: { cost: exponentialRaise(5e4, 1.25), health: h, throughput: linearRaise(1, 1.6), outcome: linearRaise(1, 0.12) },
-                };
-            for (var b in f) {
-                for (var A = f[b], y = [], v = 0; v <= MAXLEVEL_INDEX; ++v) {
-                    var k = { cost: { gems: A.cost[v] * i } };
-                    for (var w in A) "cost" !== w && (k[w] = A[w][v]);
-                    y.push(k);
+                    factoryConfig = {
+                        health: h,
+                        throughput: this.exponentialRaise(2, 1.2),
+                        cost: this.exponentialRaise(150, 1.95)
+                    },
+                    f = {
+                        goldMine: {
+                            health: h,
+                            throughput: this.exponentialRaise(3.5),
+                            cost: this.exponentialRaiseFirstZero(150)
+                        },
+                        playerBase: {
+                            health: this.exponentialRaise(1e3, 1.95),
+                            damage: this.exponentialRaise(50),
+                            cost: this.exponentialRaiseFirstZero(850, 2.8)
+                        },
+                        wall: {
+                            health: this.exponentialRaise(3e3),
+                            shieldStorage: this.linearRaise(10, 3),
+                            cost: this.exponentialRaise(30, 2)
+                        },
+                        cannon: {
+                            health: h,
+                            damage: this.exponentialRaise(100),
+                            cost: this.exponentialRaise(100, 2.1),
+                            shootsPerSecond: this.linearRaise(1, 0.3),
+                            consumeAmount: this.exponentialRaise(2, 1.2),
+                            radius: this.linearRaise(5, 0.5)
+                        },
+                        cannonballProducer: factoryConfig,
+                        steelFactory: factoryConfig,
+                        woodProcessor: factoryConfig,
+                        nuclearStation: factoryConfig,
+                        harvester: mineConfig,
+                        ironMine: mineConfig,
+                        uraniumMine: mineConfig,
+                        arrowFactory: {
+                            health: h,
+                            throughput: this.exponentialRaise(2, 1.2),
+                            outcome: this.linearRaise(2, 0.3),
+                            cost: this.exponentialRaise(200, 1.95)
+                        },
+                        arrowTower: {
+                            health: h,
+                            damage: this.exponentialRaise(200),
+                            radius: this.linearRaise(6, 0.3),
+                            shootsPerSecond: this.linearRaise(1, 0.5),
+                            consumeAmount: this.linearRaise(2, 1),
+                            cost: this.exponentialRaise(250, 1.9)
+                        },
+                        lightningTower: {
+                            damage: this.exponentialRaise(400, 1.4),
+                            health: this.exponentialRaise(100, 1.7),
+                            radius: this.linearRaise(4, 0.125),
+                            spread: this.linearRaise(3, 0.25),
+                            shootsPerSecond: this.linearRaise(1, 0.4),
+                            consumeAmount: this.linearRaise(1, 1.8),
+                            cost: this.exponentialRaise(1e3, 1.75),
+                        },
+                        transporter: {
+                            cost: this.exponentialRaiseFirstZero(100, 1.9),
+                            health: this.exponentialRaise(100, 1.7),
+                            transportSpeed: this.linearRaise(1, 0.45)
+                        },
+                        healingTower: {
+                            cost: this.exponentialRaise(5e4, 1.25),
+                            health: h,
+                            throughput: this.linearRaise(1, 1.6),
+                            outcome: this.linearRaise(1, 0.12)
+                        },
+                    };
+                for (var b in f) {
+                    for (var A = f[b], y = [], v = 0; v <= MAXLEVEL_INDEX; ++v) {
+                        var k = {
+                            cost: {
+                                gems: A.cost[v] * upgradeCostMultiplier
+                            }
+                        };
+                        for (var w in A) "cost" !== w && (k[w] = A[w][v]);
+                        y.push(k);
+                    }
+                    d.buildings[b] = y;
                 }
-                d.buildings[b] = y;
+        
+                function calculateAmountLimits() {
+                    const {
+                        amountLimits,
+                        buildings
+                    } = d;
+        
+                    for (let q = 0; q <= MAXLEVEL_INDEX; ++q) {
+                        const {
+                            arrowTower,
+                            cannon,
+                            lightningTower,
+                            ironMine,
+                            cannonballProducer,
+                            harvester,
+                            steelFactory,
+                            woodProcessor,
+                            arrowFactory,
+                            nuclearStation,
+                            uraniumMine,
+                        } = amountLimits;
+        
+                        const updateStorage = (building, amount) => {
+                            building.storage = Math.ceil(
+                                building.shootsPerSecond * building.consumeAmount * 25
+                            );
+                        };
+        
+                        const updateBuildingLimits = (e) => {
+                            const t = amountLimits.arrowTower[e];
+                            const i = Math.ceil(t / 4);
+                            const a = i;
+                            const o = i;
+                            const n = 2 * a + o;
+                            const r = amountLimits.cannon[e];
+                            const s = Math.ceil(r / 3);
+                            const l = 2 * s + 2 * o;
+                            const u = amountLimits.lightningTower[e];
+                            const c = amountLimits.healingTower[e];
+                            const d = u > 0 ? Math.ceil(u / 2) : 0;
+                            const h = d + 4 * c;
+        
+                            ironMine.push(l);
+                            cannonballProducer.push(s);
+                            harvester.push(n);
+                            steelFactory.push(o);
+                            woodProcessor.push(a);
+                            arrowFactory.push(i);
+                            nuclearStation.push(d);
+                            uraniumMine.push(h);
+        
+                            ["arrowTower", "cannon", "lightningTower"].forEach((t) =>
+                                updateStorage(buildings[t][e], amountLimits[t][e])
+                            );
+                        };
+        
+                        updateBuildingLimits(q);
+                    }
+                }
+        
+                calculateAmountLimits();
+                this.overrideObj(GAME_BALANCING, d);
             }
-            for (
-                var V = d.amountLimits,
-                C = d.buildings,
-                S = function (e) {
-                    var t = V.arrowTower[e],
-                        i = Math.ceil(t / 4),
-                        a = i,
-                        o = i,
-                        n = 2 * a + o,
-                        r = V.cannon[e],
-                        s = Math.ceil(r / 3),
-                        l = 2 * s + 2 * o,
-                        u = V.lightningTower[e],
-                        c = V.healingTower[e],
-                        d = u > 0 ? Math.ceil(u / 2) : 0,
-                        h = d + 4 * c;
-                    V.ironMine.push(l), V.cannonballProducer.push(s), V.harvester.push(n), V.steelFactory.push(o), V.woodProcessor.push(a), V.arrowFactory.push(i), V.nuclearStation.push(d), V.uraniumMine.push(h);
-                    ["arrowTower", "cannon", "lightningTower"].forEach(function (t) {
-                        C[t][e].storage = roundUpToNext(C[t][e].shootsPerSecond * C[t][e].consumeAmount * 25, 10);
-                    });
-                },
-                q = 0;
-                q <= MAXLEVEL_INDEX;
-                ++q
-            )
-                S(q);
-            overrideObj(GAME_BALANCING, d);
+        
+            exponentialRaise(base, ratio = 1.6) {
+                const result = [];
+                for (let a = 0; a <= MAXLEVEL_INDEX; ++a) {
+                    result.push(Math.round(base * Math.pow(ratio, a)));
+                }
+                return result;
+            }
+        
+            exponentialRaiseFirstZero(base, ratio = 1.6) {
+                const result = this.exponentialRaise(base, ratio);
+                result.unshift(0);
+                result.pop();
+                return result;
+            }
+        
+            exponentialRaiseIntegersStartOffset(base, ratio, offset = 0) {
+                const result = [];
+                for (let o = 0; o < offset; ++o) {
+                    result.push(0);
+                }
+                for (let n = 0; n <= MAXLEVEL_INDEX - offset; ++n) {
+                    result.push(Math.round(base * Math.pow(ratio, n) + n));
+                }
+                return result;
+            }
+        
+            linearRaise(start, increment) {
+                const result = [];
+                for (let a = 0; a <= MAXLEVEL_INDEX; ++a) {
+                    result.push(Math.round(start + increment * a));
+                }
+                return result;
+            }
+        
+            overrideObj(target, source) {
+                for (const key in source) {
+                    if (target[key] && typeof target[key] === 'object') {
+                        this.overrideObj(target[key], source[key]);
+                    } else {
+                        target[key] = source[key];
+                    }
+                }
+                return target;
+            }
         }
-        initBalancing({});
+        const initBalancing = new Balancing({});
+
         var MAX_STALL_TIME = 1e3;
+
         function makePanelBackground(e, t, i, a) {
             var o = arguments.length > 4 && void 0 !== arguments[4] ? arguments[4] : 1,
                 n = arguments.length > 5 && void 0 !== arguments[5] ? arguments[5] : 0,
@@ -40773,115 +40343,10 @@
             ADD_BASE = 68234,
             ATTRIBUTE_NAMES = ["\0"],
             CULLING_BORDER_SIZE = 10;
-
-        window.displayBalancing - function() {
-            for (var e = 1; e <= MAXLEVEL_INDEX; ++e) {
-                var t = GAME_BALANCING.buildings.goldMine[e - 1],
-                    i = GAME_BALANCING.buildings.goldMine[e],
-                    a = i.throughput - t.throughput,
-                    o = i.cost.gems;
-                console.log("Level", e, "gold mine costs", o, "and produces", i.throughput, "(", a, "more than last ) - takes", Math.round(o / a / 60), "minutes to pay off");
-            }
-            console.log("Amount limits:", GAME_BALANCING.amountLimits);
-            for (var n = 0; n <= 15; ++n) {
-                var r = GAME_BALANCING.enemies.zombie;
-                console.log("Zombie level", n, "(day", 15 * n, ") has", formatBigNumber(r.health(n)), "health and", formatBigNumber(r.damage(n)), "damage,", r.hitsPerSecond(n), "per second, granting", r.grantsGold(n), "gold");
-            }
-            for (var s = 0; s <= 15; ++s) {
-                var l = GAME_BALANCING.enemies.creeper;
-                console.log("Creeper level", s, "has", formatBigNumber(l.health(s)), "health and", formatBigNumber(l.damage(s)), "damage with a radius of", l.explosionRadius(s), ", granting", l.grantsGold(s), "gold");
-            }
-            for (var u = 0; u <= 25; ++u) {
-                var c = GAME_BALANCING.enemies.zombieBoss;
-                console.log(
-                    "Boss level",
-                    u,
-                    "(day ",
-                    10 * (u + 1),
-                    ") has",
-                    formatBigNumber(c.health(u)),
-                    "health and",
-                    formatBigNumber(c.damage(u)),
-                    "damage,",
-                    c.hitsPerSecond(u),
-                    "per second, granting",
-                    formatBigNumber(c.grantsGold(u)),
-                    "gold"
-                );
-            }
-            for (
-                var d = GAME_BALANCING.buildings,
-                h = GAME_BALANCING.amountLimits,
-                p = Config.dayDurationTotalSeconds,
-                g = Config.nightDurationSeconds,
-                m = function (e) {
-                    var t = function (t) {
-                        return h[t][e] * d[t][e].shootsPerSecond * d[t][e].consumeAmount;
-                    },
-                        i = function (t) {
-                            return h[t][e] * d[t][e].throughput;
-                        };
-                    console.warn("LEVEL", e);
-                    var a = i("ironMine");
-                    console.log("Iron mines produce", a, "unprocessed iron /s");
-                    var o = 2 * i("cannonballProducer"),
-                        n = i("cannonballProducer");
-                    console.log("Cannonbal producer requires", o, "unprocessed iron /s and produce", n, "cannonballs /s");
-                    var r = i("harvester");
-                    console.log("Harvester produce", r, "unprocessed wood /s");
-                    var s = 2 * i("woodProcessor"),
-                        l = i("woodProcessor");
-                    console.log("Sawmills require", s, "unprocessed wood /s and produce ", l, "processed wood /s");
-                    var u = 2 * i("steelFactory"),
-                        c = i("steelFactory"),
-                        m = i("steelFactory");
-                    console.log("Steel factories require", u, "unprocessed iron and ", c, " unprocessed wood /s and produce ", m, "steel /s");
-                    var _ = i("arrowFactory"),
-                        f = i("arrowFactory"),
-                        b = i("arrowFactory") * d.arrowFactory[e].outcome;
-                    console.log("Arrow factories require", _, "steel/s and", f, "processed wood /s and produce", b, "arrows /s");
-                    var A = i("uraniumMine");
-                    console.log("Uranium mines produce", A, "mined uranium /s");
-                    var y = i("nuclearStation"),
-                        v = i("nuclearStation");
-                    console.log("Nuclear stations require", y, "mined uranium /s and produce", v, "power /s");
-                    var k = t("cannon"),
-                        w = t("arrowTower"),
-                        V = t("lightningTower");
-                    console.log("The cannon requires", k, "cannonballs per second"),
-                        console.log("The arrow tower requires", w, "arrows per second"),
-                        console.log("The lightning tower requires", V, "power per second"),
-                        console.log("Balance [unprocessed wood] =", r - s - c),
-                        console.log("Balance [processed wood] =", l - f),
-                        console.log("Balance [uranium]", A - y),
-                        console.log("Balance [unprocessed iron]", a - u - o),
-                        console.log("Balance [steel]", m - _);
-                    var C = n * p,
-                        S = b * p,
-                        q = v * p;
-                    console.log("Total cannonballs:", C), console.log("Total arrows:", S), console.log("Total power:", q);
-                    var T = C / Math.max(1, k),
-                        x = S / Math.max(1, w),
-                        B = q / Math.max(1, V),
-                        M = (T / g) * 100,
-                        P = (x / g) * 100,
-                        E = (B / g) * 100;
-                    console.log("Cannon tower can shoot", roundDecimals(T, 1), "seconds, that is", roundDecimals(M, 1), "percent"),
-                        console.log("Arrow tower can shoot", roundDecimals(x, 1), "seconds, that is", roundDecimals(P, 1), "percent"),
-                        console.log("Lightning tower can shoot", roundDecimals(B, 1), "seconds, that is", roundDecimals(E, 1), "percent");
-                },
-                _ = 0;
-                _ <= MAXLEVEL_INDEX;
-                ++_
-            )
-                m(_);
-        }
-
         (window.showDialog = function (e) {
             console.log("[UI] Showing dialog", e),
                 document.getElementById(e).classList.add("visible_dialog"),
                 document.getElementById("renderer").classList.add("blurred"),
-                window.gtag && window.gtag("event", "dialog_shown", { event_category: "general", event_label: e }),
                 document.body.classList.add("dialogOpened");
         }),
             (window.closeDialog = function (e) {
@@ -40904,6 +40369,7 @@
                     window.showDialog("bug_report_bg");
                 }
             });
+            
         var ZOMBIE_ANIMATION_SEED = 0,
             MAP_DISTRIBUTE_X = _randomJs2.default.integer(Config.mapBorder, Config.numTilesX - Config.mapBorder - 1),
             MAP_DISTRIBUTE_Y = _randomJs2.default.integer(Config.mapBorder, Config.numTilesY - Config.mapBorder - 1),
@@ -40911,9 +40377,11 @@
             CENTER_X = Config.numTilesX / 2,
             CENTER_Y = Config.numTilesY / 2,
             TUTORIAL_AREA_SIZE = 3;
+
         function isInTutorialArea(e, t) {
             return e > CENTER_X - TUTORIAL_AREA_SIZE && e < CENTER_X + TUTORIAL_AREA_SIZE && t > CENTER_Y - TUTORIAL_AREA_SIZE && t < CENTER_Y + TUTORIAL_AREA_SIZE;
         }
+
         var randomize1 = 0.2 * Math.random() + 0.8,
             randomize2 = 0.2 * Math.random() + 0.8,
             RIVER_METHOD = function (e) {
@@ -40922,83 +40390,120 @@
             RIVER_HEIGHT_METHOD = function () {
                 return 5;
             };
-        function getRandomUnusedTileSeed(e, t) {
-            for (var i = 50; i > 0;) {
-                var a = MAP_DISTRIBUTE_X(t),
-                    o = MAP_DISTRIBUTE_Y(t);
-                if (!e.isTileUsed(a, o) && !isInTutorialArea(a, o)) return [a, o];
-                i -= 1;
+
+        function getRandomUnusedTileSeed(e, t, maxAttempts = 50) {
+            while (maxAttempts > 0) {
+                const [a, o] = getRandomCoordinates(t);
+
+                if (!e.isTileUsed(a, o) && !isInTutorialArea(a, o)) {
+                    return [a, o];
+                }
+
+                maxAttempts--;
             }
-            return console.error("Failed to find free tile on map!"), [0, 0];
+
+            console.error("Failed to find a free tile on the map!");
+            return [0, 0];
         }
+
+        function getRandomCoordinates(t) {
+            return [MAP_DISTRIBUTE_X(t), MAP_DISTRIBUTE_Y(t)];
+        }
+
         function getRandomUnusedTileSeedMultiple(e, t) {
-            for (var i = { pos: null, distanceToClosest: 0 }, a = 0; a < 3; ++a) {
-                var o = getRandomUnusedTileSeed(e, t),
-                    n = _slicedToArray(o, 2),
-                    r = n[0],
-                    s = n[1],
-                    l = e.findClosestEntity({
-                        tileX: r,
-                        tileY: s,
-                        radius: INIT_RADIUS,
-                        condition: function (e) {
-                            return !(e instanceof RiverEntity);
-                        },
-                    }),
-                    u = null;
-                if (l) {
-                    var c = r - l.getTileX(),
-                        d = s - l.getTileY();
-                    u = c * c + d * d;
-                } else u = INIT_RADIUS + 1;
-                u > i.distanceToClosest && ((i.pos = [r, s]), (i.distanceToClosest = u));
+            let bestSeed = { pos: null, distanceToClosest: 0 };
+        
+            for (let a = 0; a < 3; ++a) {
+                const [r, s] = getRandomUnusedTileSeed(e, t);
+                const closestEntity = e.findClosestEntity({
+                    tileX: r,
+                    tileY: s,
+                    radius: INIT_RADIUS,
+                    condition: entity => !(entity instanceof RiverEntity),
+                });
+        
+                const distanceToClosest = closestEntity
+                    ? Math.pow(r - closestEntity.getTileX(), 2) + Math.pow(s - closestEntity.getTileY(), 2)
+                    : Math.pow(INIT_RADIUS + 1, 2);
+        
+                if (distanceToClosest > bestSeed.distanceToClosest) {
+                    bestSeed = { pos: [r, s], distanceToClosest };
+                }
             }
-            return i.pos;
+        
+            return bestSeed.pos;
         }
-        var BINOMES = {
-            river: { id: 0, color: 3381759, resource: MetaRiverEntity, density: 1 },
-            forest: { id: 1, color: 7864183, resource: MetaTree, density: 0.3 },
-            mines: { id: 2, color: 11184810, resource: MetaIronOre, density: 0.2 },
-            uranium: { id: 3, color: 7001728, resource: MetaUraniumOre, density: 0.3 },
-            crystals: { id: 4, color: 16742263, resource: MetaGoldOre, density: 0.4 },
+
+        const BINOMES = {
+            river: {
+                id: 0,
+                color: 3381759,
+                resource: MetaRiverEntity,
+                density: 1
+            },
+            forest: {
+                id: 1,
+                color: 7864183,
+                resource: MetaTree,
+                density: 0.3
+            },
+            mines: {
+                id: 2,
+                color: 11184810,
+                resource: MetaIronOre,
+                density: 0.2
+            },
+            uranium: {
+                id: 3,
+                color: 7001728,
+                resource: MetaUraniumOre,
+                density: 0.3
+            },
+            crystals: {
+                id: 4,
+                color: 16742263,
+                resource: MetaGoldOre,
+                density: 0.4
+            },
         };
-        function initializeMap(e) {
-            var t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : 0;
-            if (!Config.emptyMap && !Config.spawnDefaultBuildings) {
-                var i = e.map,
-                    a = function (t, a, o) {
-                        var n = tileToWorld(t, a),
-                            r = _slicedToArray(n, 2),
-                            s = r[0],
-                            l = r[1],
-                            u = e.particles.spawnNew(s, l, o);
-                        i.setTileContent(t, a, u), e.entityMgr.registerEntity(u), u.onSpawned(t, a);
-                    },
-                    o = _randomJs2.default.engines.mt19937();
-                o.seed(t);
-                a(CENTER_X - 3, CENTER_Y, MetaGoldOre), a(CENTER_X + 2, CENTER_Y - 2, MetaIronOre), a(CENTER_X - 2, CENTER_Y - 1, MetaTree), a(CENTER_X + 1, CENTER_Y + 2, MetaUraniumOre);
-                for (var n = 0; n < 300; ++n) {
-                    var r = getRandomUnusedTileSeedMultiple(i, o),
-                        s = _slicedToArray(r, 2);
-                    a(s[0], s[1], MetaUraniumOre);
-                }
-                for (var l = 0; l < 270; ++l) {
-                    var u = getRandomUnusedTileSeedMultiple(i, o),
-                        c = _slicedToArray(u, 2);
-                    a(c[0], c[1], MetaGoldOre);
-                }
-                for (var d = 0; d < 400; ++d) {
-                    var h = getRandomUnusedTileSeedMultiple(i, o),
-                        p = _slicedToArray(h, 2);
-                    a(p[0], p[1], MetaIronOre);
-                }
-                for (var g = 0; g < 1e3; ++g) {
-                    var m = getRandomUnusedTileSeedMultiple(i, o),
-                        _ = _slicedToArray(m, 2);
-                    a(_[0], _[1], MetaTree);
-                }
+        
+        function initializeMap(e, seed = 0) {
+            if (Config.emptyMap || Config.spawnDefaultBuildings) {
+                return;
             }
+        
+            const map = e.map;
+        
+            const spawnEntity = (t, a, resource) => {
+                const [s, l] = tileToWorld(t, a);
+                const u = e.particles.spawnNew(s, l, resource);
+                map.setTileContent(t, a, u);
+                e.entityMgr.registerEntity(u);
+                u.onSpawned(t, a);
+            };
+        
+            const o = _randomJs2.default.engines.mt19937();
+            console.log(`World seed generated: ${seed}`)
+            o.seed(seed);
+        
+            spawnEntity(CENTER_X - 3, CENTER_Y, MetaGoldOre);
+            spawnEntity(CENTER_X + 2, CENTER_Y - 2, MetaIronOre);
+            spawnEntity(CENTER_X - 2, CENTER_Y - 1, MetaTree);
+            spawnEntity(CENTER_X + 1, CENTER_Y + 2, MetaUraniumOre);
+        
+            const spawnResources = (amount, resource) => {
+                for (let n = 0; n < amount; ++n) {
+                    const [x, y] = getRandomUnusedTileSeedMultiple(map, o);
+                    spawnEntity(x, y, resource);
+                }
+            };
+        
+            spawnResources(300, MetaUraniumOre);
+            spawnResources(270, MetaTree);
+            spawnResources(400, MetaIronOre);
+            spawnResources(1000, MetaGoldOre);
         }
+
         var BASE = "base",
             DAMAGE = "damage",
             HEALTH = "health",
@@ -41035,130 +40540,362 @@
             big = BigSkill,
             feature = FeatureSkill,
             SKILL_TREE = {
-                base: new InitialSkill(BASE, [0, 0], { damage: 3, health: 3 }),
-                damage_0: new skill(DAMAGE, [1.5, 0], { damage: 2 }, ["base"]),
-                damage_1: new skill(DAMAGE, [1, 1], { damage: 2 }, ["damage_0"]),
-                damage_2: new skill(DAMAGE, [1, 0], { damage: 2 }, ["damage_1"]),
-                damage_3: new skill2(DAMAGE, [1, 0], { damage: 2 }, ["damage_2"]),
-                damage_circle_l: new skill2(DAMAGE, [1, 0], { damage: 2 }, ["damage_3"]),
-                damage_circle_tl: new skill2(DAMAGE, [0.75, 1], { damage: 2 }, ["damage_circle_l"]),
-                damage_circle_bl: new skill2(DAMAGE, [0.75, -1], { damage: 2 }, ["damage_circle_l"]),
-                damage_circle_tr: new skill2(DAMAGE, [0.75, 0], { damage: 2 }, ["damage_circle_tl"]),
-                damage_circle_br: new skill2(DAMAGE, [0.75, 0], { damage: 2 }, ["damage_circle_bl"]),
-                damage_circle_r: new skill2(DAMAGE, [0.75, -1], { damage: 2 }, ["damage_circle_tr", "damage_circle_br"]),
-                damage_circle_center: new big(DAMAGE, [-1.125, 0], { damage: 10 }, ["damage_circle_r"]),
-                damage_4: new skill3(DAMAGE, [1.25, 0], { damage: 2 }, ["damage_circle_r"]),
-                crit_0: new skill(DAMAGE, [1, -1], { damage: 2 }, ["damage_0"]),
-                crit_initial: new big(CRITICAL, [1, 0], { critical: 5 }, ["crit_0"]),
-                crit_1: new skill2(CRITICAL, [1, -1], { critical: 2 }, ["crit_initial"]),
-                crit_2: new skill2(CRITICAL, [1, 0], { critical: 2 }, ["crit_1"]),
-                crit_3_t: new skill2(CRITICAL, [0.75, 0.75], { critical: 2 }, ["crit_2"]),
-                crit_3_b: new skill2(CRITICAL, [0.75, -0.75], { critical: 2 }, ["crit_2"]),
-                crit_3_r: new skill2(CRITICAL, [0.75, -0.75], { critical: 2 }, ["crit_3_t", "crit_3_b"]),
-                crit_n_damage: new big(CRITICAL, [1, 0], { damage: 2, critical: 6 }, ["crit_3_r"]),
-                crit_4: new skill3(CRITICAL, [1, 0], { critical: 2 }, ["crit_n_damage"]),
-                crit_5: new skill3(CRITICAL, [0, 1], { critical: 2 }, ["crit_4"]),
-                crit_n_damage_1: new skill3(DAMAGE, [1, -1], { damage: 2, critical: 2 }, ["damage_4", "crit_5"]),
-                double_crit_feature: new feature(DAMAGE, [1, 0], translate("feature_criticalHitsx3"), ["crit_n_damage_1"]),
-                health_0: new skill(HEALTH, [-1, 1], { health: 3 }, ["base"]),
-                health_1: new skill(HEALTH, [-1, 0], { health: 3 }, ["health_0"]),
-                health_2: new skill(HEALTH, [-1, 1], { health: 3 }, ["health_1"]),
-                health_3: new big(HEALTH, [-1, 0], { health: 10 }, ["health_2"]),
-                health_4: new skill2(HEALTH, [-1, 0], { health: 3 }, ["health_3"]),
-                health_circle_tr: new skill2(HEALTH, [-0.75, 1], { health: 3 }, ["health_4"]),
-                health_circle_br: new skill2(HEALTH, [-0.75, -1], { health: 3 }, ["health_4"]),
-                health_circle_tl: new skill2(HEALTH, [-0.75, 0], { health: 3 }, ["health_circle_tr"]),
-                health_circle_bl: new skill2(HEALTH, [-0.75, 0], { health: 3 }, ["health_circle_br"]),
-                health_circle_l: new skill2(HEALTH, [-0.75, -1], { health: 3 }, ["health_circle_tl", "health_circle_bl"]),
-                health_circle_center: new big(HEALTH, [1.125, 0], { health: 10 }, ["health_circle_l", "health_circle_l"]),
-                health_5: new skill3(HEALTH, [-1, 0], { health: 3 }, ["health_circle_l"]),
-                health_6: new skill3(HEALTH, [-1, -1], { health: 3 }, ["health_5"]),
-                health_regen_feature: new feature(HEALTH, [0, -1], translate("feature_buildingHealthReg"), ["health_6"]),
-                cannonDamage_0: new skill(CANNON, [1, -1], { cannonDamage: 4 }, ["base"]),
-                cannonDamage_1: new skill(CANNON, [0, -1], { cannonProjectileSpeed: 10 }, ["cannonDamage_0"]),
-                cannonDamage_2: new skill2(CANNON, [1, -1], { cannonDamage: 4 }, ["cannonDamage_1"]),
-                cannonDamage_3: new skill2(CANNON, [-0.75, -0.75], { cannonProjectileSpeed: 10 }, ["cannonDamage_2"]),
-                cannonDamage_4: new skill2(CANNON, [0.75, -0.75], { cannonProjectileSpeed: 10 }, ["cannonDamage_2"]),
-                cannonDamage_5: new skill2(CANNON, [-0.75, -0.75], { cannonDamage: 4 }, ["cannonDamage_4", "cannonDamage_3"]),
-                cannonDamage_6: new big(CANNON, [0, -1], { cannonDamage: 15, cannonProjectileSpeed: 10 }, ["cannonDamage_5"]),
-                cannonDamage_7: new skill3(CANNON, [1, -1], { cannonDamage: 4 }, ["cannonDamage_6"]),
-                cannonDamage_8: new skill3(CANNON, [1, 0], { cannonDamage: 4 }, ["cannonDamage_7"]),
-                cannon_feature_double_dmg: new feature(CANNON, [1, 0], translate("feature_cannonDoubleDmg"), ["cannonDamage_8"]),
-                arrowDamage_0: new skill(ARROW, [0, -1.5], { arrowDamage: 4 }, ["base"]),
-                arrowDamage_1: new skill(ARROW, [0, -1], { arrowDamage: 4 }, ["arrowDamage_0"]),
-                arrowFireRate_0: new skill2(ARROW, [0, -1], { arrowFireRate: 5 }, ["arrowDamage_1"]),
-                arrowFireRate_1: new big(ARROW, [0, -1], { arrowFireRate: 5, arrowDamage: 10 }, ["arrowFireRate_0"]),
-                arrowDamage_2: new skill2(ARROW, [1, -1], { arrowDamage: 4 }, ["arrowFireRate_1"]),
-                arrowDamage_3: new skill2(ARROW, [0, -1], { arrowDamage: 4 }, ["arrowDamage_2"]),
-                arrowRadius_0: new skill2(ARROW, [-1, -1], { arrowRadius: 15 }, ["arrowFireRate_1"]),
-                arrowRadius_1: new skill2(ARROW, [0, -1], { arrowRadius: 15 }, ["arrowRadius_0"]),
-                arrowRadius_2: new big(ARROW, [1, -1], { arrowRadius: 35, arrowDamage: 10 }, ["arrowRadius_1", "arrowDamage_3"]),
-                arrowRadius_3: new skill3(ARROW, [0, -1], { arrowRadius: 15 }, ["arrowRadius_2"]),
-                arrowFeatureDoubleDamage: new feature(ARROW, [0, -1], translate("feature_arrowDoubleDmg"), ["arrowRadius_3"]),
-                lightningDamage_0: new skill(LIGHTNING, [-1, -1], { lightningDamage: 4 }, ["base"]),
-                lightningRadius_0: new skill(LIGHTNING, [0, -1], { lightningRadius: 5 }, ["lightningDamage_0"]),
-                lightningDamage_1: new skill2(LIGHTNING, [-1, -1], { lightningDamage: 4 }, ["lightningRadius_0"]),
-                lightningRadius_1: new skill2(LIGHTNING, [0, -1], { lightningRadius: 5 }, ["lightningDamage_1"]),
-                lightningDamage_2: new skill2(LIGHTNING, [-1, -1], { lightningDamage: 4 }, ["lightningRadius_1"]),
-                lightningDamageRadius_0: new big(LIGHTNING, [-1, 0], { lightningRadius: 5, lightningDamage: 7 }, ["lightningDamage_2"]),
-                lightningDamage_3: new skill3(LIGHTNING, [0, -1], { lightningDamage: 4 }, ["lightningDamageRadius_0"]),
-                lightningRadius_2: new skill3(LIGHTNING, [-1, -1], { lightningRadius: 5 }, ["lightningDamage_3"]),
-                lightningRadius_3: new skill3(LIGHTNING, [0, -1], { lightningRadius: 5 }, ["lightningRadius_2"]),
-                lightningFeatureCrit: new feature(LIGHTNING, [0, -1], translate("feature_lightningCritV2"), ["lightningRadius_3"]),
-                wallHealth_0: new skill(WALL, [-1.5, 0], { wallHealth: 4 }, ["base"]),
-                wallHealth_1: new skill(WALL, [-1, -1], { wallHealth: 4 }, ["wallHealth_0"]),
-                wallHealth_2: new skill(WALL, [-1, 0], { wallHealth: 4 }, ["wallHealth_1"]),
-                wallHealth_3: new skill2(WALL, [-1, 0], { wallHealth: 4 }, ["wallHealth_2"]),
-                wallHealthSub_1: new skill2(WALL, [0, -1], { wallHealth: 4 }, ["wallHealth_3"]),
-                wallHealthSub_2: new skill2(WALL, [-0.75, -1], { wallHealth: 4 }, ["wallHealthSub_1"]),
-                wallHealth_4: new big(WALL, [-1.5, 0], { wallHealth: 10 }, ["wallHealth_3", "health_circle_bl"]),
-                wallHealth_5: new skill2(WALL, [-1, -1], { wallHealth: 4 }, ["wallHealth_4"]),
-                wallHealth_6: new skill2(WALL, [0, -1], { wallHealth: 4 }, ["wallHealth_5"]),
-                wallHealth_7: new skill3(WALL, [1, -1], { wallHealth: 4 }, ["wallHealth_6", "wallHealthSub_2"]),
-                wallHealthFeatureMiss: new feature(WALL, [0, -1], translate("feature_wallMiss"), ["wallHealth_7"]),
-                minersSpeed_0: new skill(MINERS, [0, 1.5], { minersSpeed: 4, transporterSpeed: 5 }, ["base"]),
-                minersSpeed_1: new skill(MINERS, [-1, 1], { minersSpeed: 4 }, ["minersSpeed_0"]),
-                minersSpeed_2: new big(MINERS, [-1, 0], { minersSpeed: 12 }, ["minersSpeed_1"]),
-                minersSpeed_3: new skill2(MINERS, [0, 1], { minersSpeed: 4 }, ["minersSpeed_2"]),
-                minersSpeed_4_bl: new skill2(MINERS, [-1, 0.75], { minersSpeed: 4 }, ["minersSpeed_3"]),
-                minersSpeed_4_br: new skill2(MINERS, [1, 0.75], { minersSpeed: 4 }, ["minersSpeed_3"]),
-                minersSpeed_4_tl: new skill2(MINERS, [0, 0.75], { minersSpeed: 4 }, ["minersSpeed_4_bl"]),
-                minersSpeed_4_tr: new skill2(MINERS, [0, 0.75], { minersSpeed: 4 }, ["minersSpeed_4_br"]),
-                minersSpeed_4_top: new skill2(MINERS, [1, 0.75], { minersSpeed: 4 }, ["minersSpeed_4_tl", "minersSpeed_4_tr"]),
-                minersSpeed_4_inner: new big(MINERS, [0, -1.125], { minersSpeed: 12 }, ["minersSpeed_4_top"]),
-                minersSpeed_5: new skill3(MINERS, [0, 1], { minersSpeed: 4 }, ["minersSpeed_4_top"]),
-                minersSpeed_6: new skill3(MINERS, [-1, 1], { minersSpeed: 4 }, ["minersSpeed_5"]),
-                minersRadius_feature1: new feature(MINERS, [-1, 1], translate("feature_minerRadius1"), ["minersSpeed_6"], 25),
-                minersSpeed_7: new skill3(MINERS, [-1, 0], { minersSpeed: 4 }, ["minersRadius_feature1"]),
-                minersSpeed_8: new skill3(MINERS, [-1, 0], { minersSpeed: 4 }, ["minersSpeed_7"]),
-                minersRadius_feature2: new feature(MINERS, [-1, 1], translate("feature_minerRadius2"), ["minersSpeed_8"], 50),
-                buildingStorage_0: new skill2(BUILDINGS, [-1, 1], { buildingStorage: 15 }, ["minersSpeed_4_tl"]),
-                buildingStorage_1: new skill2(BUILDINGS, [-1, 0], { buildingStorage: 15 }, ["buildingStorage_0"]),
-                buildingStorage_2: new big(BUILDINGS, [-1, 0], { buildingStorage: 40 }, ["buildingStorage_1"]),
-                buildingStorage_3: new skill3(BUILDINGS, [-1, 0], { buildingStorage: 15 }, ["buildingStorage_2"]),
-                buildingStorage_4: new skill3(BUILDINGS, [-1, -1], { buildingStorage: 15 }, ["buildingStorage_3"]),
-                buildingStorageDouble: new feature(DAMAGE, [-1, 0], translate("feature_doubleStorage"), ["buildingStorage_4"]),
-                factorySpeed_0: new skill(FACTORIES, [1, 1], { factorySpeed: 10 }, ["base"]),
-                factorySpeed_1: new skill(FACTORIES, [0, 1], { factorySpeed: 10 }, ["factorySpeed_0"]),
-                factorySpeed_2: new skill(FACTORIES, [1, 1], { factorySpeed: 10 }, ["factorySpeed_1"]),
-                factorySpeed_3_b: new skill2(FACTORIES, [1, 0], { factorySpeed: 10 }, ["factorySpeed_2"]),
-                factorySpeed_3_ru: new skill2(FACTORIES, [1, 1], { factorySpeed: 10 }, ["factorySpeed_3_b"]),
-                factorySpeed_3_u: new skill2(FACTORIES, [0, 1], { factorySpeed: 10 }, ["factorySpeed_2"]),
-                factorySpeed_3_rl: new skill2(FACTORIES, [1, 1], { factorySpeed: 10 }, ["factorySpeed_3_u"]),
-                factorySpeed_3_t: new big(FACTORIES, [0, 1], { factorySpeed: 30 }, ["factorySpeed_3_ru", "factorySpeed_3_rl"]),
-                factorySpeed_4: new skill3(FACTORIES, [1, 0], { factorySpeed: 10 }, ["factorySpeed_3_t"]),
-                factoryFeatureSpeed: new feature(FACTORIES, [1, 1], translate("feature_factoriesSpeed"), ["factorySpeed_4"]),
-                transporterFeatureInvisible: new feature(TRANSPORTERS, [0, 1.5], translate("feature_transporterInvisible"), ["minersSpeed_0"], 5),
-                transporterSpeed_0: new skill2(TRANSPORTERS, [0, 1], { transporterSpeed: 10 }, ["transporterFeatureInvisible"]),
-                transporterSpeed_1: new skill2(TRANSPORTERS, [1, 1], { transporterSpeed: 10 }, ["transporterSpeed_0"]),
-                transporterSpeed_2: new skill2(TRANSPORTERS, [0, 1], { transporterSpeed: 10 }, ["transporterSpeed_1"]),
-                transporterSpeed_3_l: new skill3(TRANSPORTERS, [-1, 0.75], { transporterSpeed: 10 }, ["transporterSpeed_2"]),
-                transporterSpeed_3_lm: new skill3(TRANSPORTERS, [0, 0.75], { transporterSpeed: 10 }, ["transporterSpeed_3_l"]),
-                transporterSpeed_3_r: new skill3(TRANSPORTERS, [1, 0.75], { transporterSpeed: 10 }, ["transporterSpeed_2"]),
-                transporterSpeed_3_rm: new skill3(TRANSPORTERS, [0, 0.75], { transporterSpeed: 10 }, ["transporterSpeed_3_r"]),
-                transporterSpeed_3_t: new skill3(TRANSPORTERS, [1, 0.75], { transporterSpeed: 10 }, ["transporterSpeed_3_lm", "transporterSpeed_3_rm"]),
-                transporterSpeed_3_c: new big(TRANSPORTERS, [0, 1.125], { transporterSpeed: 40 }, ["transporterSpeed_3_t"]),
-                transporterFeatureGlobal: new feature(TRANSPORTERS, [0, 1.125], translate("feature_transporterGlobal"), ["transporterSpeed_3_c"], 25),
+                base: new InitialSkill(BASE, [0, 0], {
+                    damage: 3,
+                    health: 3
+                }),
+                damage_0: new skill(DAMAGE, [1.5, 0], {
+                    damage: 2
+                }, ["base"]),
+                damage_1: new skill(DAMAGE, [1, 1], {
+                    damage: 2
+                }, ["damage_0"]),
+                damage_2: new skill(DAMAGE, [1, 0], {
+                    damage: 2
+                }, ["damage_1"]),
+                damage_3: new skill2(DAMAGE, [1, 0], {
+                    damage: 2
+                }, ["damage_2"]),
+                damage_circle_l: new skill2(DAMAGE, [1, 0], {
+                    damage: 2
+                }, ["damage_3"]),
+                damage_circle_tl: new skill2(DAMAGE, [0.75, 1], {
+                    damage: 2
+                }, ["damage_circle_l"]),
+                damage_circle_bl: new skill2(DAMAGE, [0.75, -1], {
+                    damage: 2
+                }, ["damage_circle_l"]),
+                damage_circle_tr: new skill2(DAMAGE, [0.75, 0], {
+                    damage: 2
+                }, ["damage_circle_tl"]),
+                damage_circle_br: new skill2(DAMAGE, [0.75, 0], {
+                    damage: 2
+                }, ["damage_circle_bl"]),
+                damage_circle_r: new skill2(DAMAGE, [0.75, -1], {
+                    damage: 2
+                }, ["damage_circle_tr", "damage_circle_br"]),
+                damage_circle_center: new big(DAMAGE, [-1.125, 0], {
+                    damage: 10
+                }, ["damage_circle_r"]),
+                damage_4: new skill3(DAMAGE, [1.25, 0], {
+                    damage: 2
+                }, ["damage_circle_r"]),
+                crit_0: new skill(DAMAGE, [1, -1], {
+                    damage: 2
+                }, ["damage_0"]),
+                crit_initial: new big(CRITICAL, [1, 0], {
+                    critical: 5
+                }, ["crit_0"]),
+                crit_1: new skill2(CRITICAL, [1, -1], {
+                    critical: 2
+                }, ["crit_initial"]),
+                crit_2: new skill2(CRITICAL, [1, 0], {
+                    critical: 2
+                }, ["crit_1"]),
+                crit_3_t: new skill2(CRITICAL, [0.75, 0.75], {
+                    critical: 2
+                }, ["crit_2"]),
+                crit_3_b: new skill2(CRITICAL, [0.75, -0.75], {
+                    critical: 2
+                }, ["crit_2"]),
+                crit_3_r: new skill2(CRITICAL, [0.75, -0.75], {
+                    critical: 2
+                }, ["crit_3_t", "crit_3_b"]),
+                crit_n_damage: new big(CRITICAL, [1, 0], {
+                    damage: 2,
+                    critical: 6
+                }, ["crit_3_r"]),
+                crit_4: new skill3(CRITICAL, [1, 0], {
+                    critical: 2
+                }, ["crit_n_damage"]),
+                crit_5: new skill3(CRITICAL, [0, 1], {
+                    critical: 2
+                }, ["crit_4"]),
+                crit_n_damage_1: new skill3(DAMAGE, [1, -1], {
+                    damage: 2,
+                    critical: 2
+                }, ["damage_4", "crit_5"]),
+                double_crit_feature: new feature(DAMAGE, [1, 0], tr("feature_criticalHitsx3"), ["crit_n_damage_1"]),
+                health_0: new skill(HEALTH, [-1, 1], {
+                    health: 3
+                }, ["base"]),
+                health_1: new skill(HEALTH, [-1, 0], {
+                    health: 3
+                }, ["health_0"]),
+                health_2: new skill(HEALTH, [-1, 1], {
+                    health: 3
+                }, ["health_1"]),
+                health_3: new big(HEALTH, [-1, 0], {
+                    health: 10
+                }, ["health_2"]),
+                health_4: new skill2(HEALTH, [-1, 0], {
+                    health: 3
+                }, ["health_3"]),
+                health_circle_tr: new skill2(HEALTH, [-0.75, 1], {
+                    health: 3
+                }, ["health_4"]),
+                health_circle_br: new skill2(HEALTH, [-0.75, -1], {
+                    health: 3
+                }, ["health_4"]),
+                health_circle_tl: new skill2(HEALTH, [-0.75, 0], {
+                    health: 3
+                }, ["health_circle_tr"]),
+                health_circle_bl: new skill2(HEALTH, [-0.75, 0], {
+                    health: 3
+                }, ["health_circle_br"]),
+                health_circle_l: new skill2(HEALTH, [-0.75, -1], {
+                    health: 3
+                }, ["health_circle_tl", "health_circle_bl"]),
+                health_circle_center: new big(HEALTH, [1.125, 0], {
+                    health: 10
+                }, ["health_circle_l", "health_circle_l"]),
+                health_5: new skill3(HEALTH, [-1, 0], {
+                    health: 3
+                }, ["health_circle_l"]),
+                health_6: new skill3(HEALTH, [-1, -1], {
+                    health: 3
+                }, ["health_5"]),
+                health_regen_feature: new feature(HEALTH, [0, -1], tr("feature_buildingHealthReg"), ["health_6"]),
+                cannonDamage_0: new skill(CANNON, [1, -1], {
+                    cannonDamage: 4
+                }, ["base"]),
+                cannonDamage_1: new skill(CANNON, [0, -1], {
+                    cannonProjectileSpeed: 10
+                }, ["cannonDamage_0"]),
+                cannonDamage_2: new skill2(CANNON, [1, -1], {
+                    cannonDamage: 4
+                }, ["cannonDamage_1"]),
+                cannonDamage_3: new skill2(CANNON, [-0.75, -0.75], {
+                    cannonProjectileSpeed: 10
+                }, ["cannonDamage_2"]),
+                cannonDamage_4: new skill2(CANNON, [0.75, -0.75], {
+                    cannonProjectileSpeed: 10
+                }, ["cannonDamage_2"]),
+                cannonDamage_5: new skill2(CANNON, [-0.75, -0.75], {
+                    cannonDamage: 4
+                }, ["cannonDamage_4", "cannonDamage_3"]),
+                cannonDamage_6: new big(CANNON, [0, -1], {
+                    cannonDamage: 15,
+                    cannonProjectileSpeed: 10
+                }, ["cannonDamage_5"]),
+                cannonDamage_7: new skill3(CANNON, [1, -1], {
+                    cannonDamage: 4
+                }, ["cannonDamage_6"]),
+                cannonDamage_8: new skill3(CANNON, [1, 0], {
+                    cannonDamage: 4
+                }, ["cannonDamage_7"]),
+                cannon_feature_double_dmg: new feature(CANNON, [1, 0], tr("feature_cannonDoubleDmg"), ["cannonDamage_8"]),
+                arrowDamage_0: new skill(ARROW, [0, -1.5], {
+                    arrowDamage: 4
+                }, ["base"]),
+                arrowDamage_1: new skill(ARROW, [0, -1], {
+                    arrowDamage: 4
+                }, ["arrowDamage_0"]),
+                arrowFireRate_0: new skill2(ARROW, [0, -1], {
+                    arrowFireRate: 5
+                }, ["arrowDamage_1"]),
+                arrowFireRate_1: new big(ARROW, [0, -1], {
+                    arrowFireRate: 5,
+                    arrowDamage: 10
+                }, ["arrowFireRate_0"]),
+                arrowDamage_2: new skill2(ARROW, [1, -1], {
+                    arrowDamage: 4
+                }, ["arrowFireRate_1"]),
+                arrowDamage_3: new skill2(ARROW, [0, -1], {
+                    arrowDamage: 4
+                }, ["arrowDamage_2"]),
+                arrowRadius_0: new skill2(ARROW, [-1, -1], {
+                    arrowRadius: 15
+                }, ["arrowFireRate_1"]),
+                arrowRadius_1: new skill2(ARROW, [0, -1], {
+                    arrowRadius: 15
+                }, ["arrowRadius_0"]),
+                arrowRadius_2: new big(ARROW, [1, -1], {
+                    arrowRadius: 35,
+                    arrowDamage: 10
+                }, ["arrowRadius_1", "arrowDamage_3"]),
+                arrowRadius_3: new skill3(ARROW, [0, -1], {
+                    arrowRadius: 15
+                }, ["arrowRadius_2"]),
+                arrowFeatureDoubleDamage: new feature(ARROW, [0, -1], tr("feature_arrowDoubleDmg"), ["arrowRadius_3"]),
+                lightningDamage_0: new skill(LIGHTNING, [-1, -1], {
+                    lightningDamage: 4
+                }, ["base"]),
+                lightningRadius_0: new skill(LIGHTNING, [0, -1], {
+                    lightningRadius: 5
+                }, ["lightningDamage_0"]),
+                lightningDamage_1: new skill2(LIGHTNING, [-1, -1], {
+                    lightningDamage: 4
+                }, ["lightningRadius_0"]),
+                lightningRadius_1: new skill2(LIGHTNING, [0, -1], {
+                    lightningRadius: 5
+                }, ["lightningDamage_1"]),
+                lightningDamage_2: new skill2(LIGHTNING, [-1, -1], {
+                    lightningDamage: 4
+                }, ["lightningRadius_1"]),
+                lightningDamageRadius_0: new big(LIGHTNING, [-1, 0], {
+                    lightningRadius: 5,
+                    lightningDamage: 7
+                }, ["lightningDamage_2"]),
+                lightningDamage_3: new skill3(LIGHTNING, [0, -1], {
+                    lightningDamage: 4
+                }, ["lightningDamageRadius_0"]),
+                lightningRadius_2: new skill3(LIGHTNING, [-1, -1], {
+                    lightningRadius: 5
+                }, ["lightningDamage_3"]),
+                lightningRadius_3: new skill3(LIGHTNING, [0, -1], {
+                    lightningRadius: 5
+                }, ["lightningRadius_2"]),
+                lightningFeatureCrit: new feature(LIGHTNING, [0, -1], tr("feature_lightningCritV2"), ["lightningRadius_3"]),
+                wallHealth_0: new skill(WALL, [-1.5, 0], {
+                    wallHealth: 4
+                }, ["base"]),
+                wallHealth_1: new skill(WALL, [-1, -1], {
+                    wallHealth: 4
+                }, ["wallHealth_0"]),
+                wallHealth_2: new skill(WALL, [-1, 0], {
+                    wallHealth: 4
+                }, ["wallHealth_1"]),
+                wallHealth_3: new skill2(WALL, [-1, 0], {
+                    wallHealth: 4
+                }, ["wallHealth_2"]),
+                wallHealthSub_1: new skill2(WALL, [0, -1], {
+                    wallHealth: 4
+                }, ["wallHealth_3"]),
+                wallHealthSub_2: new skill2(WALL, [-0.75, -1], {
+                    wallHealth: 4
+                }, ["wallHealthSub_1"]),
+                wallHealth_4: new big(WALL, [-1.5, 0], {
+                    wallHealth: 10
+                }, ["wallHealth_3", "health_circle_bl"]),
+                wallHealth_5: new skill2(WALL, [-1, -1], {
+                    wallHealth: 4
+                }, ["wallHealth_4"]),
+                wallHealth_6: new skill2(WALL, [0, -1], {
+                    wallHealth: 4
+                }, ["wallHealth_5"]),
+                wallHealth_7: new skill3(WALL, [1, -1], {
+                    wallHealth: 4
+                }, ["wallHealth_6", "wallHealthSub_2"]),
+                wallHealthFeatureMiss: new feature(WALL, [0, -1], tr("feature_wallMiss"), ["wallHealth_7"]),
+                minersSpeed_0: new skill(MINERS, [0, 1.5], {
+                    minersSpeed: 4,
+                    transporterSpeed: 5
+                }, ["base"]),
+                minersSpeed_1: new skill(MINERS, [-1, 1], {
+                    minersSpeed: 4
+                }, ["minersSpeed_0"]),
+                minersSpeed_2: new big(MINERS, [-1, 0], {
+                    minersSpeed: 12
+                }, ["minersSpeed_1"]),
+                minersSpeed_3: new skill2(MINERS, [0, 1], {
+                    minersSpeed: 4
+                }, ["minersSpeed_2"]),
+                minersSpeed_4_bl: new skill2(MINERS, [-1, 0.75], {
+                    minersSpeed: 4
+                }, ["minersSpeed_3"]),
+                minersSpeed_4_br: new skill2(MINERS, [1, 0.75], {
+                    minersSpeed: 4
+                }, ["minersSpeed_3"]),
+                minersSpeed_4_tl: new skill2(MINERS, [0, 0.75], {
+                    minersSpeed: 4
+                }, ["minersSpeed_4_bl"]),
+                minersSpeed_4_tr: new skill2(MINERS, [0, 0.75], {
+                    minersSpeed: 4
+                }, ["minersSpeed_4_br"]),
+                minersSpeed_4_top: new skill2(MINERS, [1, 0.75], {
+                    minersSpeed: 4
+                }, ["minersSpeed_4_tl", "minersSpeed_4_tr"]),
+                minersSpeed_4_inner: new big(MINERS, [0, -1.125], {
+                    minersSpeed: 12
+                }, ["minersSpeed_4_top"]),
+                minersSpeed_5: new skill3(MINERS, [0, 1], {
+                    minersSpeed: 4
+                }, ["minersSpeed_4_top"]),
+                minersSpeed_6: new skill3(MINERS, [-1, 1], {
+                    minersSpeed: 4
+                }, ["minersSpeed_5"]),
+                minersRadius_feature1: new feature(MINERS, [-1, 1], tr("feature_minerRadius1"), ["minersSpeed_6"], 25),
+                minersSpeed_7: new skill3(MINERS, [-1, 0], {
+                    minersSpeed: 4
+                }, ["minersRadius_feature1"]),
+                minersSpeed_8: new skill3(MINERS, [-1, 0], {
+                    minersSpeed: 4
+                }, ["minersSpeed_7"]),
+                minersRadius_feature2: new feature(MINERS, [-1, 1], tr("feature_minerRadius2"), ["minersSpeed_8"], 50),
+                buildingStorage_0: new skill2(BUILDINGS, [-1, 1], {
+                    buildingStorage: 15
+                }, ["minersSpeed_4_tl"]),
+                buildingStorage_1: new skill2(BUILDINGS, [-1, 0], {
+                    buildingStorage: 15
+                }, ["buildingStorage_0"]),
+                buildingStorage_2: new big(BUILDINGS, [-1, 0], {
+                    buildingStorage: 40
+                }, ["buildingStorage_1"]),
+                buildingStorage_3: new skill3(BUILDINGS, [-1, 0], {
+                    buildingStorage: 15
+                }, ["buildingStorage_2"]),
+                buildingStorage_4: new skill3(BUILDINGS, [-1, -1], {
+                    buildingStorage: 15
+                }, ["buildingStorage_3"]),
+                buildingStorageDouble: new feature(DAMAGE, [-1, 0], tr("feature_doubleStorage"), ["buildingStorage_4"]),
+                factorySpeed_0: new skill(FACTORIES, [1, 1], {
+                    factorySpeed: 10
+                }, ["base"]),
+                factorySpeed_1: new skill(FACTORIES, [0, 1], {
+                    factorySpeed: 10
+                }, ["factorySpeed_0"]),
+                factorySpeed_2: new skill(FACTORIES, [1, 1], {
+                    factorySpeed: 10
+                }, ["factorySpeed_1"]),
+                factorySpeed_3_b: new skill2(FACTORIES, [1, 0], {
+                    factorySpeed: 10
+                }, ["factorySpeed_2"]),
+                factorySpeed_3_ru: new skill2(FACTORIES, [1, 1], {
+                    factorySpeed: 10
+                }, ["factorySpeed_3_b"]),
+                factorySpeed_3_u: new skill2(FACTORIES, [0, 1], {
+                    factorySpeed: 10
+                }, ["factorySpeed_2"]),
+                factorySpeed_3_rl: new skill2(FACTORIES, [1, 1], {
+                    factorySpeed: 10
+                }, ["factorySpeed_3_u"]),
+                factorySpeed_3_t: new big(FACTORIES, [0, 1], {
+                    factorySpeed: 30
+                }, ["factorySpeed_3_ru", "factorySpeed_3_rl"]),
+                factorySpeed_4: new skill3(FACTORIES, [1, 0], {
+                    factorySpeed: 10
+                }, ["factorySpeed_3_t"]),
+                factoryFeatureSpeed: new feature(FACTORIES, [1, 1], tr("feature_factoriesSpeed"), ["factorySpeed_4"]),
+                transporterFeatureInvisible: new feature(TRANSPORTERS, [0, 1.5], tr("feature_transporterInvisible"), ["minersSpeed_0"], 5),
+                transporterSpeed_0: new skill2(TRANSPORTERS, [0, 1], {
+                    transporterSpeed: 10
+                }, ["transporterFeatureInvisible"]),
+                transporterSpeed_1: new skill2(TRANSPORTERS, [1, 1], {
+                    transporterSpeed: 10
+                }, ["transporterSpeed_0"]),
+                transporterSpeed_2: new skill2(TRANSPORTERS, [0, 1], {
+                    transporterSpeed: 10
+                }, ["transporterSpeed_1"]),
+                transporterSpeed_3_l: new skill3(TRANSPORTERS, [-1, 0.75], {
+                    transporterSpeed: 10
+                }, ["transporterSpeed_2"]),
+                transporterSpeed_3_lm: new skill3(TRANSPORTERS, [0, 0.75], {
+                    transporterSpeed: 10
+                }, ["transporterSpeed_3_l"]),
+                transporterSpeed_3_r: new skill3(TRANSPORTERS, [1, 0.75], {
+                    transporterSpeed: 10
+                }, ["transporterSpeed_2"]),
+                transporterSpeed_3_rm: new skill3(TRANSPORTERS, [0, 0.75], {
+                    transporterSpeed: 10
+                }, ["transporterSpeed_3_r"]),
+                transporterSpeed_3_t: new skill3(TRANSPORTERS, [1, 0.75], {
+                    transporterSpeed: 10
+                }, ["transporterSpeed_3_lm", "transporterSpeed_3_rm"]),
+                transporterSpeed_3_c: new big(TRANSPORTERS, [0, 1.125], {
+                    transporterSpeed: 40
+                }, ["transporterSpeed_3_t"]),
+                transporterFeatureGlobal: new feature(TRANSPORTERS, [0, 1.125], tr("feature_transporterGlobal"), ["transporterSpeed_3_c"], 25),
             };
         if (Config.showTotalSkillPoints) {
             var points = 0;
@@ -41180,7 +40917,7 @@
             JSON_STRINGIFY = JSON.stringify,
             META_GAME_SETTINGS = [
                 {
-                    title: translate("performance_settings"),
+                    title: tr("performance_settings"),
                     settings: [
                         { id: "enableParticles", defaultValue: true },
                         { id: "enableFancyZombies", defaultValue: true },
@@ -41188,7 +40925,7 @@
                     ],
                 },
                 {
-                    title: translate("misc_settings"),
+                    title: tr("misc_settings"),
                     settings: [
                         { id: "autosave", defaultValue: true },
                         { id: "disableFastForwardAtNight", defaultValue: true },
@@ -41196,7 +40933,7 @@
                     ],
                 },
                 {
-                    title: translate("ui_settings"),
+                    title: tr("ui_settings"),
                     settings: [
                         { id: "enableAdvancedUi", defaultValue: true },
                         { id: "showFps", defaultValue: false },
@@ -41366,12 +41103,12 @@
             },
             BUILD_TOOLTIP_W = 305,
             BUILD_TOOLTIP_H = 165,
-            BUILDING_BAR_ENTRY_SIZE = 50,
-            BUILDING_BAR_ENTRY_SPACING = 5,
+            BUILDING_BAR_ENTRY_SIZE = Config.mobileDevice ? 40 : 50,
+            BUILDING_BAR_ENTRY_SPACING = Config.mobileDevice ? 3 : 5,
             MAX_ITEMS_PER_ROW = 7,
-            LINE_THICKNESS = 5,
+            LINE_THICKNESS = Config.mobileDevice ? 4 : 5,
             HALF_LINE_THICKNESS = Math.floor(LINE_THICKNESS / 2),
-            RADIUS = 30,
+            RADIUS = Config.mobileDevice ? 20 : 30,
             GRADIENT_SIZE = 3,
             TOOLTIP_WIDTH = 300,
             MAX_STATS = 7,
@@ -41450,14 +41187,14 @@
             ],
             DRAG_THRESHOLD_PIXELS = Config.tileSize / 2,
             DISPLAY_RESOURCES = [
-                { title: translate("iron"), resourceClass: UnprocessedIron, color: Config.colors.unprocessedIron },
-                { title: translate("wood"), resourceClass: UnprocessedWood, color: Config.colors.unprocessedWood },
-                { title: translate("uranium"), resourceClass: MinedUranium, color: Config.colors.uranium },
-                { title: translate("steel"), resourceClass: Steel, color: Config.colors.steel },
-                { title: translate("trunks"), resourceClass: ProcessedWood, color: Config.colors.processedWood },
-                { title: translate("power"), resourceClass: Power, color: Config.colors.power },
+                { title: tr("iron"), resourceClass: UnprocessedIron, color: Config.colors.unprocessedIron },
+                { title: tr("wood"), resourceClass: UnprocessedWood, color: Config.colors.unprocessedWood },
+                { title: tr("uranium"), resourceClass: MinedUranium, color: Config.colors.uranium },
+                { title: tr("steel"), resourceClass: Steel, color: Config.colors.steel },
+                { title: tr("trunks"), resourceClass: ProcessedWood, color: Config.colors.processedWood },
+                { title: tr("power"), resourceClass: Power, color: Config.colors.power },
             ],
-            buildingTooltipYOffset = -200,
+            buildingTooltipYOffset = Config.mobileDevice ? -100 : -200,
             goldMineXOffset = -2 * Config.tileSize,
             TUTORIAL_STEPS = [
                 new TutorialStepInitial(),
@@ -41494,9 +41231,9 @@
                 new TutorialStepPerformUpgradeOnAllGoldMines(),
                 new TutorialStepFinished(),
             ],
-            DESCRIPTION_WIDTH = 320,
-            DESCRIPTION_HEIGHT = 150,
-            PADDING = 20,
+            DESCRIPTION_WIDTH = Config.mobileDevice ? 290 : 320,
+            DESCRIPTION_HEIGHT = Config.mobileDevice ? 130 : 150,
+            PADDING = Config.mobileDevice ? 10 : 20,
             NODE_SCALE = 40,
             TOOLTIP_W = 195,
             MAXBOUNDS = 8 * NODE_SCALE,
@@ -41520,12 +41257,8 @@
                 new TipUnlockedShieldTower(),
                 new TipBoss(),
                 new TipPerformance(),
-                new TipVoteForUs(),
                 new TipUsefulSettings(),
                 new TipMoreThan10Points(),
-                new TipSteamVersion(),
-                new TipSteamVersion2(),
-                new TipSteamVersion3(),
             ],
             MODE_NONE = 0,
             MODE_UPGRADE = 1,
@@ -41556,8 +41289,8 @@
             POINTS_ATTR_NAME = "",
             CREEPER_ANIMATION_SEED = 0;
         function makePhaserFast() {
-            var e = [_phaserCe.Phaser.Sprite.prototype, _phaserCe.Phaser.Image.prototype, _phaserCe.Phaser.Graphics.prototype, _phaserCe.Phaser.TileSprite.prototype, _phaserCe.Phaser.Group.prototype, _phaserCe.Phaser.Text.prototype];
-            (_phaserCe.Phaser.Component.LifeSpan.preUpdate = function () {
+            var e = [Phaser.Sprite.prototype, Phaser.Image.prototype, Phaser.Graphics.prototype, Phaser.TileSprite.prototype, Phaser.Group.prototype, Phaser.Text.prototype];
+            (Phaser.Component.LifeSpan.preUpdate = function () {
                 return true;
             }),
                 e.forEach(function (e) {
@@ -41565,21 +41298,21 @@
                         return true;
                     };
                 }),
-                [_phaserCe.Phaser.Sprite.prototype, _phaserCe.Phaser.Image.prototype, _phaserCe.Phaser.Graphics.prototype].forEach(function (e) {
+                [Phaser.Sprite.prototype, Phaser.Image.prototype, Phaser.Graphics.prototype].forEach(function (e) {
                     e.enableInput = function () {
                         var e = arguments.length > 0 && void 0 !== arguments[0] && arguments[0];
                         this.game.rootRecursiveRef.inputManager.register(this, e);
                     };
                 }),
                 e.forEach(function (e) {
-                    e != _phaserCe.Phaser.Group.prototype && (e.preUpdate = _phaserCe.Phaser.Component.Core.preUpdate);
+                    e != Phaser.Group.prototype && (e.preUpdate = Phaser.Component.Core.preUpdate);
                 }),
-                (_phaserCe.Phaser.Component.FixedToCamera.postUpdate = function () {
+                (Phaser.Component.FixedToCamera.postUpdate = function () {
                     this.fixedToCamera &&
                         ((this.position.x = Math.floor((this.game.camera.view.x + this.cameraOffset.x) / this.game.camera.scale.x)),
                             (this.position.y = Math.floor((this.game.camera.view.y + this.cameraOffset.y) / this.game.camera.scale.y)));
                 }),
-                (_phaserCe.Phaser.Group.prototype.postUpdate = function () {
+                (Phaser.Group.prototype.postUpdate = function () {
                     this.fixedToCamera &&
                         ((this.x = Math.floor((this.game.camera.view.x + this.cameraOffset.x) / this.game.camera.scale.x)), (this.y = Math.floor((this.game.camera.view.y + this.cameraOffset.y) / this.game.camera.scale.y)));
                     for (var e = 0; e < this.children.length; e++) this.children[e].postUpdate();
@@ -41587,26 +41320,26 @@
                 (_pixi.PIXI.DisplayObjectContainer.prototype.updateTransform = function () {
                     if (this.visible && (this.displayObjectUpdateTransform(), !this._cacheAsBitmap)) for (var e = this.children.length, t = 0; t < e; ++t) this.children[t].updateTransform();
                 }),
-                (_phaserCe.Phaser.GameObjectCreator.prototype.group = function (e, t, i, a, o) {
-                    return void 0 === e && (e = null), new _phaserCe.Phaser.Group(this.game, e, t, i, a, o);
+                (Phaser.GameObjectCreator.prototype.group = function (e, t, i, a, o) {
+                    return void 0 === e && (e = null), new Phaser.Group(this.game, e, t, i, a, o);
                 }),
-                (_phaserCe.Phaser.GameObjectFactory.prototype.group = function (e, t, i, a, o) {
-                    return null === e && (e = void 0), new _phaserCe.Phaser.Group(this.game, e, t, i, a, o);
+                (Phaser.GameObjectFactory.prototype.group = function (e, t, i, a, o) {
+                    return null === e && (e = void 0), new Phaser.Group(this.game, e, t, i, a, o);
                 }),
-                (_phaserCe.Phaser.GameObjectCreator.prototype.fastGroup = function (e, t) {
+                (Phaser.GameObjectCreator.prototype.fastGroup = function (e, t) {
                     return new FastGroup(this.game, t, e);
                 }),
-                (_phaserCe.Phaser.GameObjectFactory.prototype.fastGroup = function (e, t) {
+                (Phaser.GameObjectFactory.prototype.fastGroup = function (e, t) {
                     return null == e && (e = this.game.world), new FastGroup(this.game, t, e);
                 }),
-                (_phaserCe.Phaser.GameObjectCreator.prototype.image = function (e, t, i, a) {
+                (Phaser.GameObjectCreator.prototype.image = function (e, t, i, a) {
                     return new FastImage(this.game, e, t, i, a);
                 }),
-                (_phaserCe.Phaser.GameObjectFactory.prototype.image = function (e, t, i, a, o) {
+                (Phaser.GameObjectFactory.prototype.image = function (e, t, i, a, o) {
                     return void 0 === o && (o = this.world), o.add(new FastImage(this.game, e, t, i, a));
                 });
             var t = ["Roboto 300", "Roboto 400", "Roboto 700", "Roboto Mono 400", "Roboto Mono 700"];
-            (_phaserCe.Phaser.GameObjectCreator.prototype.text = function (e, i, a, o) {
+            (Phaser.GameObjectCreator.prototype.text = function (e, i, a, o) {
                 var n = o.font,
                     r = o.fontWeight || 400;
                 if (!n) throw new Error("Please specify a font when creating text");
@@ -41615,14 +41348,14 @@
                 var s = n.substr(n.indexOf(" ") + 1) + " " + r;
                 if (t.indexOf(s) < 0) throw new Error("Font family '" + s + "' is not loaded!");
                 o.fontWeight = r;
-                var l = new _phaserCe.Phaser.Text(this.game, e, i, a, o);
+                var l = new Phaser.Text(this.game, e, i, a, o);
                 return (l.resolution = Config.textResolution), l;
             }),
-                (_phaserCe.Phaser.GameObjectFactory.prototype.text = function () {
+                (Phaser.GameObjectFactory.prototype.text = function () {
                     throw new Error("please use .make.text");
                 });
-            var i = _phaserCe.Phaser.Text.prototype._renderCanvas;
-            _phaserCe.Phaser.Text.prototype._renderCanvas = function (e, t) {
+            var i = Phaser.Text.prototype._renderCanvas;
+            Phaser.Text.prototype._renderCanvas = function (e, t) {
                 var a = e.roundPixels;
                 (e.roundPixels = true), i.apply(this, [e, t]), (e.roundPixels = a);
             };
@@ -41630,12 +41363,12 @@
             _pixi.PIXI.DisplayObject.prototype.generateTexture = function (e, t, i) {
                 return (e = e || this.game.resolution), a.apply(this, [e, t, i]);
             };
-            var o = _phaserCe.Phaser.Graphics.prototype.generateTexture;
-            (_phaserCe.Phaser.Graphics.prototype.generateTexture = function (e, t, i) {
+            var o = Phaser.Graphics.prototype.generateTexture;
+            (Phaser.Graphics.prototype.generateTexture = function (e, t, i) {
                 return o.apply(this, [e, t, i]);
             }),
                 ("zh-tw" !== CURRENT_LANGUAGE && "zh-cn" !== CURRENT_LANGUAGE) ||
-                (_phaserCe.Phaser.Text.prototype.runWordWrap = function (e) {
+                (Phaser.Text.prototype.runWordWrap = function (e) {
                     for (var t = this.context, i = this.style.wordWrapWidth, a = "", o = e.replace(/ +/gi, " ").split(/\r?\n/gi), n = o.length, r = 0; r < n; r++) {
                         var s = o[r],
                             l = "";
@@ -41682,7 +41415,7 @@
         }
 
         function initWelcomeScreen(initialPlayerName = null, selectedGameMode = null) {
-            console.log("Initialize welcome screen at", Math.floor(performance && performance.now()));
+            console.log("Initialize welcome screen at", Math.floor(performance.now()));
 
             const playerNameInput = document.getElementById("playerName");
             playerNameInput.disabled = false;
@@ -41703,7 +41436,7 @@
                 const option = document.createElement("option");
                 let modeTitle = e.getTitle().toUpperCase();
                 if (e.isChallenge()) {
-                    modeTitle = "[" + translate("challenge") + "] " + modeTitle;
+                    modeTitle = "[" + tr("challenge") + "] " + modeTitle;
                 }
                 option.value = e.getId();
                 option.innerText = modeTitle;
@@ -41785,12 +41518,11 @@
             }
         }
 
-
         var MIN_ZOOM_LEVEL = 1,
             MAX_ZOOM_LEVEL = 3,
             ZOOM_STRENGTH = 0.3,
             SMOOTH_ZOOM = true,
-            ZOOM_TAKE = 0.3,
+            ZOOM_TAKE = Config.mobileDevice ? 0.6 : 0.3,
             PINCH_STRENGTH = 3.5,
             MAX_SOUNDS_PER_FRAME = 1,
             USE_DEV_API = false,
@@ -41829,9 +41561,9 @@
         var app = null;
         initPolyfills(),
             translateDocument(),
-            console.log("JS parsed at", Math.floor(performance && performance.now())),
+            console.log("JS parsed at", Math.floor(performance.now())),
             setTimeout(function () {
-                console.log("Booting app at", Math.floor(performance && performance.now())), (app = new App());
+                console.log("Booting app at", Math.floor(performance.now())), (app = new App());
             }, 10);
 
         const originalGetElementById = document.getElementById;
@@ -43495,7 +43227,7 @@
                 (/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows (ce|phone)|xda|xiino/i.test(
                     e
                 ) ||
-                    /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|Config(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(
+                    /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(
                         e.substr(0, 4)
                     ))
             );
@@ -44906,7 +44638,7 @@
                             "gn",
                             "gp",
                             "gq",
-                            "Config",
+                            "gr",
                             "gs",
                             "gt",
                             "gu",
@@ -45043,7 +44775,7 @@
                             "tn",
                             "to",
                             "tp",
-                            "translate",
+                            "tr",
                             "tt",
                             "tv",
                             "tw",
@@ -51619,7 +51351,7 @@
                         "tl",
                         "tn",
                         "to",
-                        "translate",
+                        "tr",
                         "ts",
                         "tt",
                         "tw",
@@ -52115,8 +51847,8 @@
                         "ti-ER",
                         "ti-ET",
                         "to-TO",
-                        "translate-CY",
-                        "translate-TR",
+                        "tr-CY",
+                        "tr-TR",
                         "ug-Arab",
                         "ug-Arab-CN",
                         "uk-UA",
@@ -58664,67 +58396,67 @@
         /*
          * Module 437
          */
-        e.exports = "yorg/asset/sound_pkg/modules/building_placed.mp3"
+        e.exports = "asset/sound_pkg/modules/building_placed.mp3"
     }, function (e, t) {
         /*
          * Module 438
          */
-        e.exports = "yorg/asset/sound_pkg/modules/button_clicked.mp3"
+        e.exports = "asset/sound_pkg/modules/button_clicked.mp3"
     }, function (e, t) {
         /*
          * Module 439
          */
-        e.exports = "yorg/asset/sound_pkg/modules/button_failed.mp3"
+        e.exports = "asset/sound_pkg/modules/button_failed.mp3"
     }, function (e, t) {
         /*
          * Module 440
          */
-        e.exports = "yorg/asset/sound_pkg/modules/building_destroyed.mp3"
+        e.exports = "asset/sound_pkg/modules/building_destroyed.mp3"
     }, function (e, t) {
         /*
          * Module 441
          */
-        e.exports = "yorg/asset/sound_pkg/modules/cannon_explosion.mp3"
+        e.exports = "asset/sound_pkg/modules/cannon_explosion.mp3"
     }, function (e, t) {
         /*
          * Module 442
          */
-        e.exports = "yorg/asset/sound_pkg/modules/arrow_hit.mp3"
+        e.exports = "asset/sound_pkg/modules/arrow_hit.mp3"
     }, function (e, t) {
         /*
          * Module 443
          */
-        e.exports = "yorg/asset/sound_pkg/modules/lightning_zap.mp3"
+        e.exports = "asset/sound_pkg/modules/lightning_zap.mp3"
     }, function (e, t) {
         /*
          * Module 444
          */
-        e.exports = "yorg/asset/sound_pkg/modules/map_notif.mp3"
+        e.exports = "asset/sound_pkg/modules/map_notif.mp3"
     }, function (e, t) {
         /*
          * Module 445
         */
-        e.exports = "yorg/asset/sound_pkg/modules/boss_attack.mp3"
+        e.exports = "asset/sound_pkg/modules/boss_attack.mp3"
     }, function (e, t) {
         /*
          * Module 446
         */
-        e.exports = "yorg/asset/sound_pkg/modules/creeper_explosion.mp3"
+        e.exports = "asset/sound_pkg/modules/creeper_explosion.mp3"
     }, function (e, t) {
         /*
          * Module 447
         */
-        e.exports = "yorg/asset/sound_pkg/modules/notif.mp3"
+        e.exports = "asset/sound_pkg/modules/notif.mp3"
     }, function (e, t) {
         /*
          * Module 448
         */
-        e.exports = "yorg/asset/sound_pkg/modules/error.mp3"
+        e.exports = "asset/sound_pkg/modules/error.mp3"
     }, function (e, t) {
         /*
          * Module 449
         */
-        e.exports = "yorg/asset/images/broken_preview.png"
+        e.exports = "asset/images/broken_preview.png"
     },
     function (e, t) {
         e.exports =
