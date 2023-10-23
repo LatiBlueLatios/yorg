@@ -22534,7 +22534,7 @@
         function _classCallCheck(e, t) {
             if (!(e instanceof t)) throw new TypeError("Cannot call a class as a function");
         }
-
+        
         const Phaser = _phaserCe.Phaser;
         var Animation = (function () {
             function e(t, i) {
@@ -23135,9 +23135,8 @@
                     ]),
                     e
                 );
-            })();
-
-            const HealthComponent = (function (e) {
+            })(),
+            HealthComponent = (function (e) {
                 function t(i) {
                     var a = i.maxHealth;
                     _classCallCheck(this, t);
@@ -23178,23 +23177,31 @@
                     }),
                     t
                 );
-            })(Component);
-            
-            class RegenHealthOnDayComponent extends Component {
-                constructor(regenPercentPerSecond = 0) {
-                    super();
-                    this.regenPercentPerSecond = regenPercentPerSecond;
-                    if (Config.testHealthBars) {
-                        this.regenPercentPerSecond = 0;
-                    }
+            })(Component),
+            RegenHealthOnDayComponent = (function (e) {
+                function t(i) {
+                    var a = i.regenPercentPerSecond;
+                    _classCallCheck(this, t);
+                    var o = _possibleConstructorReturn(this, e.call(this));
+                    return checkParamsSet(a), (o.regenPercentPerSecond = a), Config.testHealthBars && (o.regenPercentPerSecond = 0), o;
                 }
-            
-                static get name() {
-                    return "RegenHealthOnDayComponent";
-                }
-            }
-            
-            const HealthBarComponent = (function (e) {
+                return (
+                    _inherits(t, e),
+                    _createClass(t, null, [
+                        {
+                            key: "name",
+                            get: function () {
+                                return "RegenHealthOnDayComponent";
+                            },
+                        },
+                    ]),
+                    (t.prototype.debugStr = function () {
+                        return "Regenerate " + this.regenPercentPerSecond + " % of health per second, during daytime";
+                    }),
+                    t
+                );
+            })(Component),
+            HealthBarComponent = (function (e) {
                 function t(i) {
                     var a = i.style,
                         o = void 0 === a ? "regular" : a;
@@ -23217,213 +23224,215 @@
                     }),
                     t
                 );
-            })(Component);
-            
-            class VisualizeConnectionsComponent extends Component {
-                constructor({ connectToClasses, group = null }) {
-                    super();
-                    this.group = group;
-                    this.connectToClasses = connectToClasses;
-                    this.cachedImage = null;
-                    this.needsRedraw = true;
-                    this.needsRedrawCheck = false;
-                    this.connectionCount = -1;
-                    this.drawDashed = false;
-                    for (const s in this.connectToClasses) {
-                        const l = this.connectToClasses[s];
-                        if (!l.color) {
-                            console.error("Data has no color:", l, "for class", s);
+            })(Component),
+            VisualizeConnectionsComponent = (function (e) {
+                function t(i) {
+                    var a = i.connectToClasses,
+                        o = i.group,
+                        n = void 0 === o ? null : o;
+                    _classCallCheck(this, t);
+                    var r = _possibleConstructorReturn(this, e.call(this));
+                    for (var s in (checkParamsSet(a), (r.group = n), (r.connectToClasses = a), r.connectToClasses)) {
+                        var l = r.connectToClasses[s];
+                        l.color || console.error("Data has no color:", l, "for class", s), l.radius || (console.error("Data has no radius:", l, "for class", s), (l.radius = 1));
+                    }
+                    return (r.cachedImage = null), (r.needsRedraw = true), (r.needsRedrawCheck = false), (r.connectionCount = -1), (r.drawDashed = false), r;
+                }
+                return (
+                    _inherits(t, e),
+                    _createClass(t, null, [
+                        {
+                            key: "name",
+                            get: function () {
+                                return "VisualizeConnectionsComponent";
+                            },
+                        },
+                    ]),
+                    (t.prototype.destroy = function () {
+                        this.cachedImage && this.cachedImage.destroy(true, true);
+                    }),
+                    (t.prototype.debugStr = function () {
+                        var e = "draw connections: ";
+                        for (var t in this.connectToClasses) e += t + " [" + JSON.stringify(this.connectToClasses[t]) + "] ";
+                        return e;
+                    }),
+                    t
+                );
+            })(Component),
+            BuildingComponent = (function (e) {
+                function t() {
+                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.apply(this, arguments));
+                }
+                return (
+                    _inherits(t, e),
+                    (t.prototype.debugStr = function () {
+                        return "This is a building";
+                    }),
+                    _createClass(t, null, [
+                        {
+                            key: "name",
+                            get: function () {
+                                return "BuildingComponent";
+                            },
+                        },
+                    ]),
+                    t
+                );
+            })(Component),
+            SpawnGraveOnDeathComponent = (function (e) {
+                function t(i) {
+                    var a = i.particleClass,
+                        o = void 0 === a ? null : a,
+                        n = i.fadeDuration,
+                        r = void 0 === n ? 5 : n,
+                        s = i.randomFactor,
+                        l = void 0 === s ? 0 : s,
+                        u = i.startAlpha,
+                        c = void 0 === u ? 0.3 : u,
+                        d = i.destinationAlpha,
+                        h = void 0 === d ? 0 : d,
+                        p = i.sprite,
+                        g = void 0 === p ? null : p,
+                        m = i.showOnMinimap,
+                        _ = void 0 !== m && m;
+                    _classCallCheck(this, t);
+                    var f = _possibleConstructorReturn(this, e.call(this));
+                    return (f.particleClass = o), (f.fadeDuration = r), (f.randomFactor = l), (f.destinationAlpha = h), (f.startAlpha = c), (f.sprite = g), (f.showOnMinimap = _), f;
+                }
+                return (
+                    _inherits(t, e),
+                    _createClass(t, null, [
+                        {
+                            key: "name",
+                            get: function () {
+                                return "SpawnGraveOnDeathComponent";
+                            },
+                        },
+                    ]),
+                    (t.prototype.debugStr = function () {
+                        var e = "sprite " + this.sprite;
+                        return (
+                            this.particleClass && (e = "particle " + this.particleClass.name),
+                            "Spawns (" + e + ") on death for " + this.fadeDuration + " ms, from alpha " + this.startAlpha + " to " + this.destinationAlpha + ", random " + this.randomFactor + " showOnMinimap " + this.showOnMinimap
+                        );
+                    }),
+                    t
+                );
+            })(Component),
+            StorageComponent = (function (e) {
+                function t(i) {
+                    var a = i.limits,
+                        o = i.initialResources;
+                    _classCallCheck(this, t);
+                    var n = _possibleConstructorReturn(this, e.call(this));
+                    return (n.limits = a || {}), (n.resources = o || {}), (n.pending = newEmptyMap()), n;
+                }
+                return (
+                    _inherits(t, e),
+                    _createClass(t, null, [
+                        {
+                            key: "name",
+                            get: function () {
+                                return "StorageComponent";
+                            },
+                        },
+                    ]),
+                    (t.prototype.getResources = function () {
+                        return this.resources;
+                    }),
+                    (t.prototype.removeResource = function (e) {
+                        delete this.limits[e], delete this.resources[e], delete this.pending[e];
+                    }),
+                    (t.prototype.getPendingResources = function () {
+                        return this.pending;
+                    }),
+                    (t.prototype.getFirstLimit = function () {
+                        for (var e in this.limits) return this.limits[e];
+                        return 0;
+                    }),
+                    (t.prototype.debugStr = function () {
+                        var e = "";
+                        for (var t in this.resources) {
+                            var i = ", " + (this.pending[t] || 0) + " pending";
+                            (e += t + "(" + this.resources[t]), (e += " of " + (this.limits[t] + i) + ") ");
                         }
-                        if (!l.radius) {
-                            console.error("Data has no radius:", l, "for class", s);
-                            l.radius = 1;
+                        for (var a in this.limits)
+                            if (void 0 === this.resources[a]) {
+                                var o = ", " + (this.pending[a] || 0) + " pending";
+                                e += a + "(0 of " + this.limits[a] + o + ") ";
+                            }
+                        return e;
+                    }),
+                    (t.prototype.fillAll = function () {
+                        for (var e in this.limits) {
+                            var t = this.pending[e] || 0;
+                            this.resources[e] = this.limits[e] - t;
                         }
-                    }
-                }
-            
-                static get name() {
-                    return "VisualizeConnectionsComponent";
-                }
-            
-                destroy() {
-                    if (this.cachedImage) {
-                        this.cachedImage.destroy(true, true);
-                    }
-                }
-            }
-            
-            class BuildingComponent extends Component {
-                static get name() {
-                    return "BuildingComponent";
-                }
-            }
-            
-            class SpawnGraveOnDeathComponent extends Component {
-                constructor({
-                    particleClass = null,
-                    fadeDuration = 5,
-                    randomFactor = 0,
-                    startAlpha = 0.3,
-                    destinationAlpha = 0,
-                    sprite = null,
-                    showOnMinimap = false
-                } = {}) {
-                    super();
-                    this.particleClass = particleClass;
-                    this.fadeDuration = fadeDuration;
-                    this.randomFactor = randomFactor;
-                    this.destinationAlpha = destinationAlpha;
-                    this.startAlpha = startAlpha;
-                    this.sprite = sprite;
-                    this.showOnMinimap = showOnMinimap;
-                }
-            
-                static get name() {
-                    return "SpawnGraveOnDeathComponent";
-                }
-            }
-            
-            class StorageComponent extends Component {
-                constructor({ limits, initialResources } = {}) {
-                    super();
-                    this.limits = limits || {};
-                    this.resources = initialResources || {};
-                    this.pending = newEmptyMap();
-                }
-            
-                static get name() {
-                    return "StorageComponent";
-                }
-            
-                getResources() {
-                    return this.resources;
-                }
-            
-                removeResource(resource) {
-                    delete this.limits[resource];
-                    delete this.resources[resource];
-                    delete this.pending[resource];
-                }
-            
-                getPendingResources() {
-                    return this.pending;
-                }
-            
-                getFirstLimit() {
-                    for (const resource in this.limits) {
-                        return this.limits[resource];
-                    }
-                    return 0;
-                }
-            
-                fillAll() {
-                    for (const resource in this.limits) {
-                        const pending = this.pending[resource] || 0;
-                        this.resources[resource] = this.limits[resource] - pending;
-                    }
-                }
-            
-                isAnyFull(considerPending = false) {
-                    let anyFull = false;
-                    for (const resource in this.limits) {
-                        if (!this.hasSpaceLeft(resource, 1, considerPending)) {
-                            anyFull = true;
+                    }),
+                    (t.prototype.isAnyFull = function () {
+                        var e = arguments.length > 0 && void 0 !== arguments[0] && arguments[0],
+                            t = false;
+                        for (var i in this.limits) this.hasSpaceLeft(i, 1, e) || (t = true);
+                        return t;
+                    }),
+                    (t.prototype.takeResource = function (e) {
+                        var t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : 1;
+                        return null != this.resources[e] && this.resources[e] >= t && ((this.resources[e] -= t), true);
+                    }),
+                    (t.prototype.addResource = function (e) {
+                        var t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : 1;
+                        null == this.resources[e] && (this.resources[e] = 0), (this.resources[e] += t);
+                    }),
+                    (t.prototype.getResourceCount = function (e) {
+                        return this.resources[e] || 0;
+                    }),
+                    (t.prototype.haveResourceAmount = function (e) {
+                        var t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : 1;
+                        return this.getResourceCount(e) >= t;
+                    }),
+                    (t.prototype.getResourceLimit = function (e) {
+                        return this.limits[e] || 0;
+                    }),
+                    (t.prototype.addPendingResources = function (e) {
+                        var t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : 1;
+                        null == this.pending[e] && (this.pending[e] = 0), null == this.resources[e] && (this.resources[e] = 0), (this.pending[e] += t);
+                    }),
+                    (t.prototype.takeRecipe = function (e) {
+                        var t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : 1;
+                        if (null == e || countObjectKeysUnsafe(e) < 1) throw new Error("invalid recipe");
+                        var i = true;
+                        for (var a in e) i = i && this.takeResource(a, e[a] * t);
+                        return i;
+                    }),
+                    (t.prototype.resolvePendingResources = function (e) {
+                        var t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : 1;
+                        if (null == this.pending[e]) throw new Error("resolve: pending resource is null");
+                        this.pending[e] < t ? (this.pending[e] = 0) : ((this.pending[e] -= t), (this.resources[e] += t), this.resources[e] > this.limits[e] && (this.resources[e] = this.limits[e]));
+                    }),
+                    (t.prototype.hasSpaceLeft = function (e) {
+                        var t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : 1,
+                            i = arguments.length > 2 && void 0 !== arguments[2] && arguments[2],
+                            a = this.getResourceCount(e) + t;
+                        return i || (a += this.pending[e] || 0), a <= this.getResourceLimit(e);
+                    }),
+                    (t.prototype.canBuildRecipe = function (e) {
+                        var t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : 1;
+                        return 0 == this.getMissingResourcesForRecipe(e, t).length;
+                    }),
+                    (t.prototype.getMissingResourcesForRecipe = function (e) {
+                        var t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : 1;
+                        if (null == e || countObjectKeysUnsafe(e) < 1) throw new Error("invalid recipe");
+                        var i = [];
+                        for (var a in e) {
+                            var o = e[a] * t;
+                            this.haveResourceAmount(a, o) || i.push(a);
                         }
-                    }
-                    return anyFull;
-                }
-            
-                takeResource(resource, amount = 1) {
-                    if (this.resources[resource] != null && this.resources[resource] >= amount) {
-                        this.resources[resource] -= amount;
-                        return true;
-                    }
-                    return false;
-                }
-            
-                addResource(resource, amount = 1) {
-                    if (this.resources[resource] == null) {
-                        this.resources[resource] = 0;
-                    }
-                    this.resources[resource] += amount;
-                }
-            
-                getResourceCount(resource) {
-                    return this.resources[resource] || 0;
-                }
-            
-                haveResourceAmount(resource, amount = 1) {
-                    return this.getResourceCount(resource) >= amount;
-                }
-            
-                getResourceLimit(resource) {
-                    return this.limits[resource] || 0;
-                }
-            
-                addPendingResources(resource, amount = 1) {
-                    if (this.pending[resource] == null) {
-                        this.pending[resource] = 0;
-                    }
-                    if (this.resources[resource] == null) {
-                        this.resources[resource] = 0;
-                    }
-                    this.pending[resource] += amount;
-                }
-            
-                takeRecipe(recipe, amount = 1) {
-                    if (recipe == null || countObjectKeysUnsafe(recipe) < 1) {
-                        throw new Error("invalid recipe");
-                    }
-                    let success = true;
-                    for (const resource in recipe) {
-                        success = success && this.takeResource(resource, recipe[resource] * amount);
-                    }
-                    return success;
-                }
-            
-                resolvePendingResources(resource, amount = 1) {
-                    if (this.pending[resource] == null) {
-                        throw new Error("resolve: pending resource is null");
-                    }
-                    if (this.pending[resource] < amount) {
-                        this.pending[resource] = 0;
-                    } else {
-                        this.pending[resource] -= amount;
-                        this.resources[resource] += amount;
-                        if (this.resources[resource] > this.limits[resource]) {
-                            this.resources[resource] = this.limits[resource];
-                        }
-                    }
-                }
-            
-                hasSpaceLeft(resource, amount = 1, considerPending) {
-                    let available = this.getResourceCount(resource) + amount;
-                    if (!considerPending) {
-                        available += this.pending[resource] || 0;
-                    }
-                    return available <= this.getResourceLimit(resource);
-                }
-            
-                canBuildRecipe(recipe, amount = 1) {
-                    return this.getMissingResourcesForRecipe(recipe, amount).length === 0;
-                }
-            
-                getMissingResourcesForRecipe(recipe, amount = 1) {
-                    if (recipe == null || countObjectKeysUnsafe(recipe) < 1) {
-                        throw new Error("invalid recipe");
-                    }
-                    const missingResources = [];
-                    for (const resource in recipe) {
-                        const requiredAmount = recipe[resource] * amount;
-                        if (!this.haveResourceAmount(resource, requiredAmount)) {
-                            missingResources.push(resource);
-                        }
-                    }
-                    return missingResources;
-                }
-            }
-            
-            const FastParticleSprite = (function () {
+                        return i;
+                    }),
+                    t
+                );
+            })(Component),
+            FastParticleSprite = (function () {
                 function e(t) {
                     _classCallCheck(this, e), (this._texture = t.baseTexture), (this.alive = true), (this.exists = true), (this.position = new Phaser.Point(0, 0)), (this.alpha = 1);
                 }
@@ -26835,37 +26844,29 @@
                     t
                 );
             })(BuildingInstance);
-            const ArrowTowerMeta = (function (e) {
-                function t() {
-                    _classCallCheck(this, t);
-                    var i = _possibleConstructorReturn(this, e.call(this, "arrowTower"));
-                    return (
-                        i.addNearbyPlacementHelper({ entityClass: ArrowFactoryBuilding, radius: Config.radius.arrowFactory }),
-                        i.addRadiusPlacementHelper(GAME_BALANCING.buildings.arrowTower[0].radius),
-                        i.addDependency(ArrowFactoryMeta),
-                        i.useTransporters(),
-                        i
-                    );
+
+            class ArrowTowerMeta extends MetaBuilding {
+                constructor() {
+                    super('arrowTower');
+                    this.addNearbyPlacementHelper({ entityClass: ArrowFactoryBuilding, radius: Config.radius.arrowFactory })
+                    this.addRadiusPlacementHelper(GAME_BALANCING.buildings.arrowTower[0].radius)
+                    this.addDependency(ArrowFactoryMeta)
+                    this.useTransporters();
                 }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "ArrowTowerMeta";
-                            },
-                        },
-                    ]),
-                    (t.prototype.getInstanceClass = function () {
-                        return ArrowTowerBuilding;
-                    }),
-                    (t.prototype.getDockingStyle = function () {
-                        return "sharp";
-                    }),
-                    t
-                );
-            })(MetaBuilding);
+            
+                static get name() {
+                    return "ArrowTowerMeta";
+                }
+            
+                getInstanceClass() {
+                    return ArrowTowerBuilding;
+                }
+            
+                getDockingStyle() {
+                    return "sharp";
+                }
+            }
+
             class ArrowTowerBuilding extends BasicDefensiveTower {
                 constructor(i, a, o, n) {
                     super(i, a, o, n, {
@@ -26919,598 +26920,561 @@
                     ]),
                     e
                 );
-            })(),
-            WallMeta = (function (e) {
-                function t() {
-                    _classCallCheck(this, t);
-                    var i = _possibleConstructorReturn(this, e.call(this, "wall"));
-                    return (
-                        i.addNearbyPlacementHelper({ entityClass: WallBuilding, radius: oneTileDiagonalDistance }),
-                        i.addNearbyPlacementHelper({ entityClass: Resource, radius: oneTileDiagonalDistance }),
-                        i.addPlacementHelper(new MultiplacePlacementHelper({ multiplace: true, smartPlace: true, smartPlaceRadius: oneTileDiagonalDistance })),
-                        i.addDependency(PlayerBaseMeta),
-                        i
-                    );
+            })();
+            
+            class WallMeta extends MetaBuilding {
+                constructor() {
+                    super("wall");
+                    this.addNearbyPlacementHelper({ entityClass: WallBuilding, radius: oneTileDiagonalDistance });
+                    this.addNearbyPlacementHelper({ entityClass: Resource, radius: oneTileDiagonalDistance });
+                    this.addPlacementHelper(new MultiplacePlacementHelper({ multiplace: true, smartPlace: true, smartPlaceRadius: oneTileDiagonalDistance }));
+                    this.addDependency(PlayerBaseMeta);
                 }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "WallMeta";
-                            },
+            
+                static get name() {
+                    return "WallMeta";
+                }
+            
+                getInstanceClass() {
+                    return WallBuilding;
+                }
+            
+                makeSprite(e, t) {
+                    const i = e.make.group();
+                    const a = 2 * Config.ui.wallRadius + 1.3 * t;
+                    const o = e.make.graphics(0, 0);
+                    const l = Config.tileSize / 2 + 10;
+            
+                    o.beginFill(16777215, 1e-4);
+                    o.drawRect(-l, -l, 2 * l, 2 * l);
+                    o.beginFill(2236962, 0.35);
+                    o.drawCircle(0.4, 4.5, a + 8);
+                    const n = mixColorPerChannel(Config.colors.levels[t], 0.32, 0);
+                    o.beginFill(n);
+                    o.lineStyle(3, n);
+                    for (let r = 0; r < 3; ++r) o.drawCircle(0.2 * r, 1 + r, a);
+                    i.add(o);
+
+                    const s = e.make.graphics(0, 0);
+                    s.beginFill(16777215, 1e-4);
+                    s.drawRect(-l, -l, 2 * l, 2 * l);
+                    s.lineStyle(3, Config.colors.levels[t]);
+                    s.beginFill(3355443);
+                    s.beginFill(mixColorPerChannel(Config.colors.levels[t], 0.4, 51));
+                    s.drawCircle(0, 0, a);
+                    s.endFill();
+                    i.addChild(s);
+                    const u = i.generateTexture();
+                    i.destroy();
+                    return u;
+                }
+            }
+            
+            class WallBuilding extends BuildingInstance {
+                constructor(i, a, o, n) {
+                    super(i, a, o, n);
+                    this.addComponent(new VisualizeConnectionsComponent({
+                        connectToClasses: {
+                            WallBuilding: { color: Config.colors.wall, lineSize: 4, alpha: 1, radius: oneTileDiagonalDistance },
+                            Resource: { color: Config.colors.wall, lineSize: 4, alpha: 1, radius: oneTileDiagonalDistance },
+                            HealingTowerBuilding: { color: Config.colors.healing, lineSize: 1, alpha: 0.2, radius: Config.radius.healingTower },
+                            TransporterBuilding: { color: Config.colors.healing, lineSize: 1, alpha: 0.2, radius: Config.radius.healingTower },
                         },
-                    ]),
-                    (t.prototype.getInstanceClass = function () {
-                        return WallBuilding;
-                    }),
-                    (t.prototype.makeSprite = function (e, t) {
-                        var i = e.make.group(),
-                            a = 2 * Config.ui.wallRadius + 1.3 * t,
-                            o = e.make.graphics(0, 0);
-                        o.beginFill(16777215, 1e-4), o.drawRect(-l, -l, 2 * l, 2 * l), o.beginFill(2236962, 0.35), o.drawCircle(0.4, 4.5, a + 8);
-                        var n = mixColorPerChannel(Config.colors.levels[t], 0.32, 0);
-                        o.beginFill(n), o.lineStyle(3, n);
-                        for (var r = 0; r < 3; ++r) o.drawCircle(0.2 * r, 1 + r, a);
-                        i.add(o);
-                        var s = e.make.graphics(0, 0),
-                            l = Config.tileSize / 2 + 10;
-                        s.beginFill(16777215, 1e-4),
-                            s.drawRect(-l, -l, 2 * l, 2 * l),
-                            s.lineStyle(3, Config.colors.levels[t]),
-                            s.beginFill(3355443),
-                            s.beginFill(mixColorPerChannel(Config.colors.levels[t], 0.4, 51)),
-                            s.drawCircle(0, 0, a),
-                            s.endFill(),
-                            i.addChild(s);
-                        var u = i.generateTexture();
-                        return i.destroy(), u;
-                    }),
-                    t
-                );
-            })(MetaBuilding),
-            WallBuilding = (function (e) {
-                function t(i, a, o, n) {
-                    _classCallCheck(this, t);
-                    var r = _possibleConstructorReturn(this, e.call(this, i, a, o, n));
-                    return (
-                        r.addComponent(
-                            new VisualizeConnectionsComponent({
-                                connectToClasses: {
-                                    WallBuilding: { color: Config.colors.wall, lineSize: 4, alpha: 1, radius: oneTileDiagonalDistance },
-                                    Resource: { color: Config.colors.wall, lineSize: 4, alpha: 1, radius: oneTileDiagonalDistance },
-                                    HealingTowerBuilding: { color: Config.colors.healing, lineSize: 1, alpha: 0.2, radius: Config.radius.healingTower },
-                                    TransporterBuilding: { color: Config.colors.healing, lineSize: 1, alpha: 0.2, radius: Config.radius.healingTower },
+                        group: i.rootRecursiveRef.groups.wallBordersGroup,
+                    }));
+                    this.addComponent(new DodgeComponent(0));
+                    this.addComponent(new ConsumerComponent([Healing]));
+                    this.addComponent(new StorageComponent({ limits: { Healing: 10 } }));
+                    this.addComponent(new StorageVisualizerComponent(Healing));
+                    this.getComponent(StorageVisualizerComponent).inverse = true;
+                    this.getComponent(HealthBarComponent).style = "regular_custom_radius";
+                }
+            
+                static get name() {
+                    return "WallBuilding";
+                }
+            
+                getMinimapScale() {
+                    return 0.75;
+                }
+            
+                updateComponentsToStats(t) {
+                    super.updateComponentsToStats(t);
+                    const i = this.phaser.rootRecursiveRef.stats.getSkillGainMultiplier("wallHealth");
+                    const a = this.getComponent(HealthComponent).maxHealth * i;
+                    this.getComponent(HealthComponent).changeMaxHealth(a);
+            
+                    const o = this.getComponent(VisualizeConnectionsComponent).connectToClasses;
+                    o.WallBuilding.color = mixColorPerChannel(Config.colors.levels[this.level], 0.3, 51);
+                    o.WallBuilding.lineSize = Math.floor(4 + 0.4 * this.level);
+                    o.Resource.color = o.WallBuilding.color;
+                    o.Resource.lineSize = o.WallBuilding.lineSize;
+                    this.getComponent(VisualizeConnectionsComponent).needsRedraw = true;
+            
+                    const n = (2 + Config.ui.wallRadius + 1.3 * this.level) / 2;
+                    this.getComponent(HealthBarComponent).radius = n;
+                    this.getComponent(StorageVisualizerComponent).radius = n + 7;
+                    this.getComponent(StorageComponent).limits[Healing.name] = t.shieldStorage;
+                    this.phaser.rootRecursiveRef.stats.isSkillUnlocked("wallHealthFeatureMiss") ? this.getComponent(DodgeComponent).chance = 0.2 : this.getComponent(DodgeComponent).chance = 0;
+                }
+            }
+            
+            class CannonballProducerMeta extends MetaBuilding {
+                constructor() {
+                    super("cannonballProducer");
+                    this.addNearbyPlacementHelper({ entityClass: IronMineBuilding, radius: Config.radius.ironMine });
+                    this.addDependency(IronMineMeta);
+                    this.useTransporters();
+                }
+            
+                static get name() {
+                    return "CannonballProducerMeta";
+                }
+            
+                getInstanceClass() {
+                    return CannonballProducerBuilding;
+                }
+            
+                getBackgroundColor() {
+                    return Config.colors.cannonball;
+                }
+            }
+            
+            class CannonballProducerBuilding extends BasicProcessor {
+                constructor(i, a, o, n) {
+                    super(i, a, o, n, {
+                        producersMetaClasses: [IronMineMeta],
+                        recipe: { UnprocessedIron: 2 },
+                        produceResource: Cannonball,
+                        processingDuration: 2
+                    });
+                }
+            
+                static get name() {
+                    return "CannonballProducerBuilding";
+                }
+            }
+            
+            class CannonTowerComponent extends Component {
+                constructor() {
+                    super();
+                }
+            
+                debugStr() {
+                    return "Is a cannon tower";
+                }
+            
+                static get name() {
+                    return "CannonTowerComponent";
+                }
+            }
+            
+            class CannonMeta extends MetaBuilding {
+                constructor() {
+                    super("cannon");
+                    this.addNearbyPlacementHelper({ entityClass: CannonballProducerBuilding, radius: Config.radius.cannonballProducer });
+                    this.addRadiusPlacementHelper(GAME_BALANCING.buildings.cannon[0].radius);
+                    this.addDependency(CannonballProducerMeta);
+                    this.useTransporters();
+                }
+            
+                static get name() {
+                    return "CannonMeta";
+                }
+            
+                getInstanceClass() {
+                    return CannonBuilding;
+                }
+            
+                getDockingStyle() {
+                    return "sharp";
+                }
+            }
+            
+            class CannonBuilding extends BasicDefensiveTower {
+                constructor(i, a, o, n) {
+                    super(i, a, o, n, {
+                        producerMetaClass: CannonballProducerMeta,
+                        projectileClass: MetaCannonProjectile,
+                        projectileResource: Cannonball,
+                        additionalProjectileParams: {
+                            speedTilesPerSecond: 8,
+                            aoeRadiusTiles: oneTileDistance,
+                            explosionClass: MetaCannonExplosionParticle
+                        },
+                        damageMultiplierKey: "cannonDamage",
+                        canCriticalStrike: true
+                    });
+                    this.addComponent(new CannonTowerComponent());
+                }
+            
+                static get name() {
+                    return "CannonBuilding";
+                }
+            
+                updateComponentsToStats(t) {
+                    super.updateComponentsToStats(t);
+                    const i = 8 * this.phaser.rootRecursiveRef.stats.getSkillGainMultiplier("cannonProjectileSpeed");
+                    this.getComponent(ProjectileShooterComponent).projectileParams.speedTilesPerSecond = i;
+            
+                    if (this.phaser.rootRecursiveRef.stats.isSkillUnlocked("cannon_feature_double_dmg")) {
+                        this.getComponent(ProjectileShooterComponent).projectileParams.damage *= 2;
+                        this.getComponent(ProjectileShooterComponent).consumeAmount *= 3;
+                    }
+                }
+            }
+            
+            class TransporterComponent extends Component {
+                constructor(speed) {
+                    super();
+                    this.speed = speed;
+                }
+            
+                setSpeed(speed) {
+                    this.speed = speed;
+                }
+            
+                debugStr() {
+                    return "Transports resources";
+                }
+            
+                static get name() {
+                    return "TransporterComponent";
+                }
+            }
+            
+            class InvisibleComponent extends Component {
+                debugStr() {
+                    return "Invisible to attackers. Can be walked over";
+                }
+            
+                static get name() {
+                    return "InvisibleComponent";
+                }
+            }
+            
+            class TransporterMeta extends MetaBuilding {
+                constructor() {
+                    super("transporter");
+                    this.addNearbyPlacementHelper({ entityClass: BuildingInstance, radius: Config.radius.transporter, condition: isRelevantForTransport });
+                    this.addPlacementHelper(new MultiplacePlacementHelper({ multiplace: true, smartPlace: true, smartPlaceRadius: Config.radius.transporter }));
+                    this.addRadiusPlacementHelper(Config.radius.transporter);
+                    this.addDependency(PlayerBaseMeta);
+                }
+            
+                static get name() {
+                    return "TransporterMeta";
+                }
+            
+                getInstanceClass() {
+                    return TransporterBuilding;
+                }
+            
+                makeSprite(e, t) {
+                    const i = e.make.group();
+                    const a = e.make.graphics(0, 0);
+                    const o = Config.tileSize / 2 + 10;
+            
+                    a.beginFill(16777215, 1e-4);
+                    a.drawRect(-o, -o, 2 * o, 2 * o);
+                    a.beginFill(2236962, 0.5);
+                    a.drawRoundedRect(-6.6, -4, 14, 14, 3);
+            
+                    const n = mixColorPerChannel(Config.colors.levels[t], 0.32, 0);
+                    a.beginFill(n);
+            
+                    for (let r = 0; r < 3; ++r) {
+                        a.drawRoundedRect(0.2 * r - 5, -4 + r, 10, 10, 3);
+                    }
+            
+                    a.beginFill(Config.colors.levels[t]);
+                    a.drawRoundedRect(-5, -5, 10, 10, 3);
+                    a.endFill();
+            
+                    i.addChild(a);
+                    const s = i.generateTexture();
+                    i.destroy();
+                    return s;
+                }
+            }
+            
+            class TransporterBuilding extends BuildingInstance {
+                constructor(i, a, o, n) {
+                    super(i, a, o, n);
+                    const r = this;
+                    const visualizeConnectionsComponent = new VisualizeConnectionsComponent({
+                        connectToClasses: {
+                            TransporterBuilding: { color: Config.colors.transporter, lineSize: 2, alpha: 0.5, radius: Config.radius.transporter, style: STYLE_DOUBLE, doubleSpacing: 2 },
+                            BuildingInstance: {
+                                color: Config.colors.transporter,
+                                lineSize: 2,
+                                alpha: 0.3,
+                                radius: Config.radius.transporter,
+                                condition: function (e) {
+                                    return isRelevantForTransport(e) && !e.hasComponent(TransporterComponent);
                                 },
-                                group: i.rootRecursiveRef.groups.wallBordersGroup,
-                            })
-                        ),
-                        r.addComponent(new DodgeComponent(0)),
-                        r.addComponent(new ConsumerComponent([Healing])),
-                        r.addComponent(new StorageComponent({ limits: { Healing: 10 } })),
-                        r.addComponent(new StorageVisualizerComponent(Healing)),
-                        (r.getComponent(StorageVisualizerComponent).inverse = true),
-                        (r.getComponent(HealthBarComponent).style = "regular_custom_radius"),
-                        r
-                    );
-                }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "WallBuilding";
                             },
                         },
-                    ]),
-                    (t.prototype.getMinimapScale = function () {
-                        return 0.75;
-                    }),
-                    (t.prototype.updateComponentsToStats = function (t) {
-                        e.prototype.updateComponentsToStats.call(this, t);
-                        var i = this.phaser.rootRecursiveRef.stats.getSkillGainMultiplier("wallHealth"),
-                            a = this.getComponent(HealthComponent).maxHealth * i;
-                        this.getComponent(HealthComponent).changeMaxHealth(a);
-                        var o = this.getComponent(VisualizeConnectionsComponent).connectToClasses;
-                        (o.WallBuilding.color = mixColorPerChannel(Config.colors.levels[this.level], 0.3, 51)),
-                            (o.WallBuilding.lineSize = Math.floor(4 + 0.4 * this.level)),
-                            (o.Resource.color = o.WallBuilding.color),
-                            (o.Resource.lineSize = o.WallBuilding.lineSize),
-                            (this.getComponent(VisualizeConnectionsComponent).needsRedraw = true);
-                        var n = (2 + Config.ui.wallRadius + 1.3 * this.level) / 2;
-                        (this.getComponent(HealthBarComponent).radius = n),
-                            (this.getComponent(StorageVisualizerComponent).radius = n + 7),
-                            (this.getComponent(StorageComponent).limits[Healing.name] = t.shieldStorage),
-                            this.phaser.rootRecursiveRef.stats.isSkillUnlocked("wallHealthFeatureMiss") ? (this.getComponent(DodgeComponent).chance = 0.2) : (this.getComponent(DodgeComponent).chance = 0);
-                    }),
-                    t
-                );
-            })(BuildingInstance),
-            CannonballProducerMeta = (function (e) {
-                function t() {
-                    _classCallCheck(this, t);
-                    var i = _possibleConstructorReturn(this, e.call(this, "cannonballProducer"));
-                    return i.addNearbyPlacementHelper({ entityClass: IronMineBuilding, radius: Config.radius.ironMine }), i.addDependency(IronMineMeta), i.useTransporters(), i;
+                    });
+            
+                    visualizeConnectionsComponent.needsRedraw = true;
+                    visualizeConnectionsComponent.drawDashed = true;
+                    this.addComponent(visualizeConnectionsComponent);
+                    this.addComponent(new TransporterComponent());
+                    this.getComponent(HealthBarComponent).style = "regular_custom_radius";
+                    this.getComponent(HealthBarComponent).radius = 3;
+                    this.getComponent(SpawnGraveOnDeathComponent).particleClass = MetaWallDestroyedParticle;
                 }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "CannonballProducerMeta";
-                            },
-                        },
-                    ]),
-                    (t.prototype.getInstanceClass = function () {
-                        return CannonballProducerBuilding;
-                    }),
-                    (t.prototype.getBackgroundColor = function () {
-                        return Config.colors.cannonball;
-                    }),
-                    t
-                );
-            })(MetaBuilding),
-            CannonballProducerBuilding = (function (e) {
-                function t(i, a, o, n) {
-                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.call(this, i, a, o, n, { producersMetaClasses: [IronMineMeta], recipe: { UnprocessedIron: 2 }, produceResource: Cannonball, processingDuration: 2 }));
+            
+                static get name() {
+                    return "TransporterBuilding";
                 }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "CannonballProducerBuilding";
-                            },
-                        },
-                    ]),
-                    t
-                );
-            })(BasicProcessor),
-            CannonTowerComponent = (function (e) {
-                function t() {
-                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.apply(this, arguments));
+            
+                getMinimapScale() {
+                    return 0.75;
                 }
-                return (
-                    _inherits(t, e),
-                    (t.prototype.debugStr = function () {
-                        return "Is a cannon tower";
-                    }),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "CannonTowerComponent";
-                            },
-                        },
-                    ]),
-                    t
-                );
-            })(Component),
-            CannonMeta = (function (e) {
-                function t() {
-                    _classCallCheck(this, t);
-                    var i = _possibleConstructorReturn(this, e.call(this, "cannon"));
-                    return (
-                        i.addNearbyPlacementHelper({ entityClass: CannonballProducerBuilding, radius: Config.radius.cannonballProducer }),
-                        i.addRadiusPlacementHelper(GAME_BALANCING.buildings.cannon[0].radius),
-                        i.addDependency(CannonballProducerMeta),
-                        i.useTransporters(),
-                        i
-                    );
-                }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "CannonMeta";
-                            },
-                        },
-                    ]),
-                    (t.prototype.getInstanceClass = function () {
-                        return CannonBuilding;
-                    }),
-                    (t.prototype.getDockingStyle = function () {
-                        return "sharp";
-                    }),
-                    t
-                );
-            })(MetaBuilding),
-            CannonBuilding = (function (e) {
-                function t(i, a, o, n) {
-                    _classCallCheck(this, t);
-                    var r = _possibleConstructorReturn(
-                        this,
-                        e.call(this, i, a, o, n, {
-                            producerMetaClass: CannonballProducerMeta,
-                            projectileClass: MetaCannonProjectile,
-                            projectileResource: Cannonball,
-                            additionalProjectileParams: { speedTilesPerSecond: 8, aoeRadiusTiles: oneTileDistance, explosionClass: MetaCannonExplosionParticle },
-                            damageMultiplierKey: "cannonDamage",
-                            canCriticalStrike: true,
-                        })
-                    );
-                    return r.addComponent(new CannonTowerComponent()), r;
-                }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "CannonBuilding";
-                            },
-                        },
-                    ]),
-                    (t.prototype.updateComponentsToStats = function (t) {
-                        e.prototype.updateComponentsToStats.call(this, t);
-                        var i = 8 * this.phaser.rootRecursiveRef.stats.getSkillGainMultiplier("cannonProjectileSpeed");
-                        (this.getComponent(ProjectileShooterComponent).projectileParams.speedTilesPerSecond = i),
-                            this.phaser.rootRecursiveRef.stats.isSkillUnlocked("cannon_feature_double_dmg") &&
-                            ((this.getComponent(ProjectileShooterComponent).projectileParams.damage *= 2), (this.getComponent(ProjectileShooterComponent).consumeAmount *= 3));
-                    }),
-                    t
-                );
-            })(BasicDefensiveTower),
-            TransporterComponent = (function (e) {
-                function t(i) {
-                    _classCallCheck(this, t);
-                    var a = _possibleConstructorReturn(this, e.call(this));
-                    return (a.speed = i), a;
-                }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "TransporterComponent";
-                            },
-                        },
-                    ]),
-                    (t.prototype.setSpeed = function (e) {
-                        this.speed = e;
-                    }),
-                    (t.prototype.debugStr = function () {
-                        return "Transports resources";
-                    }),
-                    t
-                );
-            })(Component),
-            InvisibleComponent = (function (e) {
-                function t() {
-                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.apply(this, arguments));
-                }
-                return (
-                    _inherits(t, e),
-                    (t.prototype.debugStr = function () {
-                        return "Invisible to attackers. Can be walked over";
-                    }),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "InvisibleComponent";
-                            },
-                        },
-                    ]),
-                    t
-                );
-            })(Component),
-            TransporterMeta = (function (e) {
-                function t() {
-                    _classCallCheck(this, t);
-                    var i = _possibleConstructorReturn(this, e.call(this, "transporter"));
-                    return (
-                        i.addNearbyPlacementHelper({ entityClass: BuildingInstance, radius: Config.radius.transporter, condition: isRelevantForTransport }),
-                        i.addPlacementHelper(new MultiplacePlacementHelper({ multiplace: true, smartPlace: true, smartPlaceRadius: Config.radius.transporter })),
-                        i.addRadiusPlacementHelper(Config.radius.transporter),
-                        i.addDependency(PlayerBaseMeta),
-                        i
-                    );
-                }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "TransporterMeta";
-                            },
-                        },
-                    ]),
-                    (t.prototype.getInstanceClass = function () {
-                        return TransporterBuilding;
-                    }),
-                    (t.prototype.makeSprite = function (e, t) {
-                        var i = e.make.group(),
-                            a = e.make.graphics(0, 0),
-                            o = Config.tileSize / 2 + 10;
-                        a.beginFill(16777215, 1e-4), a.drawRect(-o, -o, 2 * o, 2 * o);
-                        a.beginFill(2236962, 0.5), a.drawRoundedRect(-6.6, -4, 14, 14, 3);
-                        var n = mixColorPerChannel(Config.colors.levels[t], 0.32, 0);
-                        a.beginFill(n);
-                        for (var r = 0; r < 3; ++r) a.drawRoundedRect(0.2 * r - 5, -4 + r, 10, 10, 3);
-                        a.beginFill(Config.colors.levels[t]), a.drawRoundedRect(-5, -5, 10, 10, 3), a.endFill(), i.addChild(a);
-                        var s = i.generateTexture();
-                        return i.destroy(), s;
-                    }),
-                    t
-                );
-            })(MetaBuilding),
-            TransporterBuilding = (function (e) {
-                function t(i, a, o, n) {
-                    _classCallCheck(this, t);
-                    var r = _possibleConstructorReturn(this, e.call(this, i, a, o, n));
-                    return (
-                        r.addComponent(
-                            new VisualizeConnectionsComponent({
-                                connectToClasses: {
-                                    TransporterBuilding: { color: Config.colors.transporter, lineSize: 2, alpha: 0.5, radius: Config.radius.transporter, style: STYLE_DOUBLE, doubleSpacing: 2 },
-                                    BuildingInstance: {
-                                        color: Config.colors.transporter,
-                                        lineSize: 2,
-                                        alpha: 0.3,
-                                        radius: Config.radius.transporter,
-                                        condition: function (e) {
-                                            return isRelevantForTransport(e) && !e.hasComponent(TransporterComponent);
-                                        },
-                                    },
-                                },
-                            })
-                        ),
-                        r.addComponent(new TransporterComponent()),
-                        (r.getComponent(HealthBarComponent).style = "regular_custom_radius"),
-                        (r.getComponent(HealthBarComponent).radius = 3),
-                        (r.getComponent(SpawnGraveOnDeathComponent).particleClass = MetaWallDestroyedParticle),
-                        r
-                    );
-                }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "TransporterBuilding";
-                            },
-                        },
-                    ]),
-                    (t.prototype.getMinimapScale = function () {
-                        return 0.75;
-                    }),
-                    (t.prototype.updateComponentsToStats = function (t) {
-                        e.prototype.updateComponentsToStats.call(this, t);
-                        var i = this.phaser.rootRecursiveRef.stats.getSkillGainMultiplier("transporterSpeed");
-                        if ((this.getComponent(TransporterComponent).setSpeed(t.transportSpeed * i), this.phaser.rootRecursiveRef.stats.isSkillUnlocked("transporterFeatureInvisible") && !this.hasComponent(InvisibleComponent))) {
-                            this.addComponent(new InvisibleComponent());
-                            var a = this.getComponent(VisualizeConnectionsComponent),
-                                o = a.connectToClasses;
-                            for (var n in o) o[n].alpha *= 0.5;
-                            (a.needsRedraw = true), (this.children[0].alpha = 0.5), (a.drawDashed = true);
+            
+                updateComponentsToStats(t) {
+                    super.updateComponentsToStats(t);
+                    const i = this.phaser.rootRecursiveRef.stats.getSkillGainMultiplier("transporterSpeed");
+                    this.getComponent(TransporterComponent).setSpeed(t.transportSpeed * i);
+            
+                    if (this.phaser.rootRecursiveRef.stats.isSkillUnlocked("transporterFeatureInvisible") && !this.hasComponent(InvisibleComponent)) {
+                        this.addComponent(new InvisibleComponent());
+                        const a = this.getComponent(VisualizeConnectionsComponent);
+                        const o = a.connectToClasses;
+                        for (let n in o) {
+                            o[n].alpha *= 0.5;
                         }
-                    }),
-                    t
-                );
-            })(BuildingInstance),
-            UraniumMineMeta = (function (e) {
-                function t() {
-                    _classCallCheck(this, t);
-                    var i = _possibleConstructorReturn(this, e.call(this, "uraniumMine"));
-                    return (
-                        i.addNearbyRequirement({ resourceType: UraniumOre, radius: Config.radius.uraniumOre, errorText: tr("error_place_next_to_uranium_ore") }),
-                        i.addCompatibleResourcesPlacementHelper(UraniumOre),
-                        i.addDependency(PlayerBaseMeta),
-                        i.useTransporters(),
-                        i
-                    );
+                        a.needsRedraw = true;
+                        this.children[0].alpha = 0.5;
+                        a.drawDashed = true;
+                    }
                 }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "UraniumMineMeta";
-                            },
-                        },
-                    ]),
-                    (t.prototype.getInstanceClass = function () {
-                        return UraniumMineBuilding;
-                    }),
-                    (t.prototype.getBackgroundColor = function () {
-                        return Config.colors.uranium;
-                    }),
-                    (t.prototype.getDockingStyle = function () {
-                        return "miner";
-                    }),
-                    t
-                );
-            })(MetaBuilding),
-            UraniumMineBuilding = (function (e) {
-                function t(i, a, o, n) {
-                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.call(this, i, a, o, n, { producerMetaClass: MetaUraniumOre, sourceResource: Uranium, destResource: MinedUranium }));
+            }
+            
+            class UraniumMineMeta extends MetaBuilding {
+                constructor() {
+                    super("uraniumMine");
+                    this.addNearbyRequirement({ resourceType: UraniumOre, radius: Config.radius.uraniumOre, errorText: tr("error_place_next_to_uranium_ore") });
+                    this.addCompatibleResourcesPlacementHelper(UraniumOre);
+                    this.addDependency(PlayerBaseMeta);
+                    this.useTransporters();
                 }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "UraniumMineBuilding";
-                            },
-                        },
-                    ]),
-                    t
-                );
-            })(BasicResourceMiner),
-            NuclearStationMeta = (function (e) {
-                function t() {
-                    _classCallCheck(this, t);
-                    var i = _possibleConstructorReturn(this, e.call(this, "nuclearStation"));
-                    return i.addNearbyPlacementHelper({ entityClass: UraniumMineBuilding, radius: Config.radius.uraniumMine }), i.addDependency(UraniumMineMeta), i.useTransporters(), i;
+            
+                static get name() {
+                    return "UraniumMineMeta";
                 }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "NuclearStationMeta";
-                            },
-                        },
-                    ]),
-                    (t.prototype.getInstanceClass = function () {
-                        return NuclearStationBuilding;
-                    }),
-                    (t.prototype.getBackgroundColor = function () {
-                        return Config.colors.power;
-                    }),
-                    t
-                );
-            })(MetaBuilding),
-            NuclearStationBuilding = (function (e) {
-                function t(i, a, o, n) {
-                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.call(this, i, a, o, n, { producersMetaClasses: [UraniumMineMeta], recipe: { MinedUranium: 1 }, produceResource: Power, processingDuration: 2 }));
+            
+                getInstanceClass() {
+                    return UraniumMineBuilding;
                 }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "NuclearStationBuilding";
-                            },
-                        },
-                    ]),
-                    t
-                );
-            })(BasicProcessor),
-            LightningTowerComponent = (function (e) {
-                function t() {
-                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.apply(this, arguments));
+            
+                getBackgroundColor() {
+                    return Config.colors.uranium;
                 }
-                return (
-                    _inherits(t, e),
-                    (t.prototype.debugStr = function () {
-                        return "Is a lightning tower";
-                    }),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "LightningTowerComponent";
-                            },
-                        },
-                    ]),
-                    t
-                );
-            })(Component),
-            LightningTowerMeta = (function (e) {
-                function t() {
-                    _classCallCheck(this, t);
-                    var i = _possibleConstructorReturn(this, e.call(this, "lightningTower"));
-                    return (
-                        i.addNearbyPlacementHelper({ entityClass: NuclearStationBuilding, radius: Config.radius.nuclearStation }),
-                        i.addRadiusPlacementHelper(GAME_BALANCING.buildings.lightningTower[0].radius),
-                        i.addDependency(NuclearStationMeta),
-                        i.useTransporters(),
-                        i
-                    );
+            
+                getDockingStyle() {
+                    return "miner";
                 }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "LightningTowerMeta";
-                            },
-                        },
-                    ]),
-                    (t.prototype.getInstanceClass = function () {
-                        return LightningTowerBuilding;
-                    }),
-                    (t.prototype.getDockingStyle = function () {
-                        return "sharp";
-                    }),
-                    t
-                );
-            })(MetaBuilding),
-            LightningTowerBuilding = (function (e) {
-                function t(i, a, o, n) {
-                    _classCallCheck(this, t);
-                    var r = _possibleConstructorReturn(this, e.call(this, i, a, o, n, { producerMetaClass: NuclearStationMeta, projectileResource: Power, projectileClass: MetaLightningParticle, radiusMultiplierKey: "lightningRadius" }));
-                    return r.addComponent(new LightningTowerComponent()), r;
+            }
+            
+            class UraniumMineBuilding extends BasicResourceMiner {
+                constructor(i, a, o, n) {
+                    super(i, a, o, n, { producerMetaClass: MetaUraniumOre, sourceResource: Uranium, destResource: MinedUranium });
                 }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "LightningTowerBuilding";
-                            },
-                        },
-                    ]),
-                    (t.prototype.updateComponentsToStats = function (t) {
-                        if ((e.prototype.updateComponentsToStats.call(this, t), !t.spread)) throw new Error("missing 'spread' for lightning tower");
-                        var i = t.spread;
-                        (this.getComponent(ProjectileShooterComponent).projectileParams.spread = i),
-                            (this.getComponent(ProjectileShooterComponent).projectileParams.fillColor = Config.colors.levels[this.level]),
-                            this.phaser.rootRecursiveRef.stats.isSkillUnlocked("lightningFeatureCrit") && (this.getComponent(ProjectileShooterComponent).canCriticalStrike = true);
-                    }),
-                    t
-                );
-            })(BasicDefensiveTower),
-            HealingTowerMeta = (function (e) {
-                function t() {
-                    _classCallCheck(this, t);
-                    var i = _possibleConstructorReturn(this, e.call(this, "healingTower"));
-                    return i.addNearbyPlacementHelper({ entityClass: UraniumMineBuilding, radius: Config.radius.uraniumMine }), i.addDependency(UraniumMineMeta), i.useTransporters(), i;
+            
+                static get name() {
+                    return "UraniumMineBuilding";
                 }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "HealingTowerMeta";
-                            },
-                        },
-                    ]),
-                    (t.prototype.getInstanceClass = function () {
-                        return HealingTowerBuilding;
-                    }),
-                    (t.prototype.getBackgroundColor = function () {
-                        return Config.colors.healing;
-                    }),
-                    t
-                );
-            })(MetaBuilding),
-            HealingTowerBuilding = (function (e) {
-                function t(i, a, o, n) {
-                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.call(this, i, a, o, n, { producersMetaClasses: [UraniumMineMeta], recipe: { MinedUranium: 4 }, produceResource: Healing, processingDuration: 2 }));
+            }
+            
+            class NuclearStationMeta extends MetaBuilding {
+                constructor() {
+                    super("nuclearStation");
+                    this.addNearbyPlacementHelper({ entityClass: UraniumMineBuilding, radius: Config.radius.uraniumMine });
+                    this.addDependency(UraniumMineMeta);
+                    this.useTransporters();
                 }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "HealingTowerBuilding";
-                            },
+            
+                static get name() {
+                    return "NuclearStationMeta";
+                }
+            
+                getInstanceClass() {
+                    return NuclearStationBuilding;
+                }
+            
+                getBackgroundColor() {
+                    return Config.colors.power;
+                }
+            }
+            
+            class NuclearStationBuilding extends BasicProcessor {
+                constructor(i, a, o, n) {
+                    super(i, a, o, n, { producersMetaClasses: [UraniumMineMeta], recipe: { MinedUranium: 1 }, produceResource: Power, processingDuration: 2 });
+                }
+            
+                static get name() {
+                    return "NuclearStationBuilding";
+                }
+            }
+
+            class BombTowerComponent extends Component {
+                constructor() {
+                    super();
+                }
+            
+                debugStr() {
+                    return "Is a bomb tower";
+                }
+            
+                static get name() {
+                    return "BombTowerComponent";
+                }
+            }
+            
+            class BombTowerMeta extends MetaBuilding {
+                constructor() {
+                    super("bombTower");
+                    this.addNearbyPlacementHelper({ entityClass: CannonballProducerBuilding, radius: Config.radius.cannonballProducer });
+                    this.addRadiusPlacementHelper(GAME_BALANCING.buildings.cannon[0].radius);
+                    this.addDependency(CannonballProducerMeta);
+                    this.useTransporters();
+                }
+            
+                static get name() {
+                    return "BombMeta";
+                }
+            
+                getInstanceClass() {
+                    return BombBuilding;
+                }
+            
+                getDockingStyle() {
+                    return "sharp";
+                }
+            }
+            
+            class BombBuilding extends BasicDefensiveTower {
+                constructor(i, a, o, n) {
+                    super(i, a, o, n, {
+                        producerMetaClass: CannonballProducerMeta,
+                        projectileClass: MetaCannonProjectile,
+                        projectileResource: Cannonball,
+                        additionalProjectileParams: {
+                            speedTilesPerSecond: 2,
+                            aoeRadiusTiles: 10,
+                            explosionClass: MetaCannonExplosionParticle
                         },
-                    ]),
-                    t
-                );
-            })(BasicProcessor),
-            BuildingRegistry = (function () {
+                        //damageMultiplierKey: "bombDamage",
+                        canCriticalStrike: true
+                    });
+                    this.addComponent(new BombTowerComponent());
+                }
+            
+                static get name() {
+                    return "BombBuilding";
+                }
+            
+                updateComponentsToStats(t) {
+                    super.updateComponentsToStats(t);
+                }
+            }
+            
+            class LightningTowerComponent extends Component {
+                debugStr() {
+                    return "Is a lightning tower";
+                }
+            
+                static get name() {
+                    return "LightningTowerComponent";
+                }
+            }
+            
+            class LightningTowerMeta extends MetaBuilding {
+                constructor() {
+                    super("lightningTower");
+                    this.addNearbyPlacementHelper({ entityClass: NuclearStationBuilding, radius: Config.radius.nuclearStation });
+                    this.addRadiusPlacementHelper(GAME_BALANCING.buildings.lightningTower[0].radius);
+                    this.addDependency(NuclearStationMeta);
+                    this.useTransporters();
+                }
+            
+                static get name() {
+                    return "LightningTowerMeta";
+                }
+            
+                getInstanceClass() {
+                    return LightningTowerBuilding;
+                }
+            
+                getDockingStyle() {
+                    return "sharp";
+                }
+            }
+            
+            class LightningTowerBuilding extends BasicDefensiveTower {
+                constructor(i, a, o, n) {
+                    super(i, a, o, n, {
+                        producerMetaClass: NuclearStationMeta,
+                        projectileResource: Power,
+                        projectileClass: MetaLightningParticle,
+                        radiusMultiplierKey: "lightningRadius",
+                    });
+                    this.addComponent(new LightningTowerComponent());
+                }
+            
+                static get name() {
+                    return "LightningTowerBuilding";
+                }
+            
+                updateComponentsToStats(t) {
+                    super.updateComponentsToStats(t);
+                    if (!t.spread) {
+                        throw new Error("missing 'spread' for lightning tower");
+                    }
+                    const i = t.spread;
+                    this.getComponent(ProjectileShooterComponent).projectileParams.spread = i;
+                    this.getComponent(ProjectileShooterComponent).projectileParams.fillColor = Config.colors.levels[this.level];
+                    if (this.phaser.rootRecursiveRef.stats.isSkillUnlocked("lightningFeatureCrit")) {
+                        this.getComponent(ProjectileShooterComponent).canCriticalStrike = true;
+                    }
+                }
+            }
+            
+            class HealingTowerMeta extends MetaBuilding {
+                constructor() {
+                    super("healingTower");
+                    this.addNearbyPlacementHelper({ entityClass: UraniumMineBuilding, radius: Config.radius.uraniumMine });
+                    this.addDependency(UraniumMineMeta);
+                    this.useTransporters();
+                }
+            
+                static get name() {
+                    return "HealingTowerMeta";
+                }
+            
+                getInstanceClass() {
+                    return HealingTowerBuilding;
+                }
+            
+                getBackgroundColor() {
+                    return Config.colors.healing;
+                }
+            }
+            
+            class HealingTowerBuilding extends BasicProcessor {
+                constructor(i, a, o, n) {
+                    super(i, a, o, n, { producersMetaClasses: [UraniumMineMeta], recipe: { MinedUranium: 4 }, produceResource: Healing, processingDuration: 2 });
+                }
+            
+                static get name() {
+                    return "HealingTowerBuilding";
+                }
+            }
+            
+            const BuildingRegistry = (function () {
                 function e() {
                     _classCallCheck(this, e);
                 }
@@ -27976,6 +27940,295 @@
                     }),
                     (e.prototype.getPathLengthToBase = function (e, t) {
                         return this.flowGrid[e][t].weight;
+                    }),
+                    e
+                );
+            })(),
+            Bot = (function () {
+                function e(t) {
+                    _classCallCheck(this, e),
+                        (this.root = t),
+                        (this.actionInterval = Timer.makeFromIntervalMs(1e3 * THINKING_TIME)),
+                        (this.playerBasePosition = null),
+                        (this.centralHubPosition = null),
+                        (this.lastActionTime = null),
+                        this.root.signals.buildingUpgraded.add(this.onActionPerformed, this),
+                        this.root.signals.buildingPlaced.add(this.onActionPerformed, this);
+                }
+                return (
+                    _createClass(e, null, [
+                        {
+                            key: "name",
+                            get: function () {
+                                return "Bot";
+                            },
+                        },
+                    ]),
+                    (e.prototype.onActionPerformed = function () {
+                        if (null !== this.lastActionTime) {
+                            var e = (this.root.time.now - this.lastActionTime) / 1e3;
+                            e > 10 && console.warn("Bot idled for", e, "seconds");
+                        }
+                        this.lastActionTime = this.root.time.now;
+                    }),
+                    (e.prototype.log = function () {
+                        for (var e, t = arguments.length, i = Array(t), a = 0; a < t; a++) i[a] = arguments[a];
+                        (e = console).log.apply(
+                            e,
+                            ["[BOT]"].concat(
+                                _toConsumableArray(
+                                    i.map(function (e) {
+                                        return e instanceof Entity ? entity2str(e) : "function" == typeof e ? "[fnc] " + e.name : e;
+                                    })
+                                )
+                            )
+                        );
+                    }),
+                    (e.prototype.place = function (e, t, i) {
+                        return this.log("Trying to place", e.name, "at", t, i), this.root.logic.tryPlaceBuilding({ building: BuildingRegistry.getMetaclassByClassHandle(e), position: { tileX: t, tileY: i } });
+                    }),
+                    (e.prototype.findFreeResourceSpot = function (e) {
+                        var t = this,
+                            i = this.root.map.findClosestEntity({
+                                tileX: this.playerBasePosition[0],
+                                tileY: this.playerBasePosition[1],
+                                radius: MAX_INCREMENTAL_SEARCH_RADIUS,
+                                condition: function (i) {
+                                    if (i instanceof e) {
+                                        var a = i.getTile(),
+                                            o = _slicedToArray(a, 2),
+                                            n = o[0],
+                                            r = o[1];
+                                        if (!(t.root.map.isTileUsed(n + 1, r) && t.root.map.isTileUsed(n - 1, r) && t.root.map.isTileUsed(n, r + 1) && t.root.map.isTileUsed(n, r - 1))) return true;
+                                    }
+                                    return false;
+                                },
+                            });
+                        if (!i) return console.warn("Failed to find free resource spot!"), [-1, -1];
+                        var a = i.getTile(),
+                            o = _slicedToArray(a, 2),
+                            n = o[0],
+                            r = o[1];
+                        return this.root.map.findClosestFreeTileArround(n, r);
+                    }),
+                    (e.prototype.findFreeProcessorSpot = function () {
+                        var e;
+                        return (e = this.root.map).findClosestFreeTileArround.apply(e, _toConsumableArray(this.playerBasePosition));
+                    }),
+                    (e.prototype.findFreeDefensiveSpot = function () {
+                        for (var e = BASE_RADIUS_TILES - 1; e > 0;) {
+                            for (var t = 0; t < 100; ++t) {
+                                var i = 2 * Math.random() * Math.PI,
+                                    a = this.playerBasePosition[0] + Math.round(Math.sin(i) * e),
+                                    o = this.playerBasePosition[1] + Math.round(Math.cos(i) * e);
+                                if (!this.root.map.isTileUsed(a, o)) return [a, o];
+                            }
+                            e -= 1;
+                        }
+                        throw new Error("base is full");
+                    }),
+                    (e.prototype.haveBuildingsLeft = function (e) {
+                        var t = BuildingRegistry.getMetaclassByClassHandle(e).requirements.filter(function (e) {
+                            return e instanceof PlayerLevelDependentMaxCountRequirement;
+                        });
+                        return t.length < 0 || t[0].check(this.root);
+                    }),
+                    (e.prototype.placeResourceMiner = function (e, t) {
+                        this.log("Placing miner", e);
+                        var i = this.findFreeResourceSpot(t),
+                            a = _slicedToArray(i, 2),
+                            o = a[0],
+                            n = a[1];
+                        return !(o < 0 || n < 0) && this.place(e, o, n);
+                    }),
+                    (e.prototype.placeResourceProcessor = function (e) {
+                        this.log("Placing processor", e);
+                        var t = this.findFreeProcessorSpot(),
+                            i = _slicedToArray(t, 2),
+                            a = i[0],
+                            o = i[1];
+                        return !(a < 0 || o < 0) && this.place(e, a, o);
+                    }),
+                    (e.prototype.placeDefensiveTower = function (e) {
+                        this.log("Placing defensive tower", e);
+                        var t = this.findFreeDefensiveSpot(),
+                            i = _slicedToArray(t, 2),
+                            a = i[0],
+                            o = i[1];
+                        return !(a < 0 || o < 0) && this.place(e, a, o);
+                    }),
+                    (e.prototype.isConnectedToCentralHub = function (e) {
+                        if (!this.centralHubPosition) return false;
+                        for (
+                            var t = function (e, t) {
+                                return 1e4 * e + t;
+                            },
+                            i = e.getTile(),
+                            a = _slicedToArray(i, 2),
+                            o = [[a[0], a[1]]],
+                            n = {};
+                            o.length > 0;
+
+                        ) {
+                            var r = o.pop(),
+                                s = t.apply(void 0, _toConsumableArray(r));
+                            if (!n[s]) {
+                                if (((n[s] = 1), r[0] === this.centralHubPosition[0] && r[1] === this.centralHubPosition[1])) return true;
+                                this.root.map
+                                    .getUsedTilesArround({
+                                        tileX: r[0],
+                                        tileY: r[1],
+                                        radius: Config.radius.transporter,
+                                        condition: function (e) {
+                                            return e instanceof TransporterBuilding;
+                                        },
+                                    })
+                                    .forEach(function (e) {
+                                        var t = e.entity;
+                                        o.push(t.getTile());
+                                    });
+                            }
+                        }
+                        return false;
+                    }),
+                    (e.prototype.actionPlaceBase = function () {
+                        this.log("Placing base");
+                        var e = this.root.map.findClosestFreeTileArround(Math.floor(Config.numTilesX / 2), Math.floor(Config.numTilesY / 2)),
+                            t = _slicedToArray(e, 2),
+                            i = t[0],
+                            a = t[1];
+                        if (((this.playerBasePosition = [i, a]), !this.place(PlayerBaseMeta, i, a))) throw new Error("Player base placement failed");
+                    }),
+                    (e.prototype.actionConnectToNet = function (e) {
+                        var t = this;
+                        this.log("Trying to connect", e, "to central hub");
+                        var i = e.getTile(),
+                            a = _slicedToArray(i, 2),
+                            o = a[0],
+                            n = a[1],
+                            r = this.root.map.findClosestEntityOfClass({
+                                tileX: o,
+                                tileY: n,
+                                radius: MAX_INCREMENTAL_SEARCH_RADIUS,
+                                classType: TransporterBuilding,
+                                condition: function (e) {
+                                    var i;
+                                    return t.isConnectedToCentralHub(e) && (i = t.root.map).checkTileIsReachable.apply(i, _toConsumableArray(e.getTile()));
+                                },
+                            });
+                        if (!r) throw new Error("No close transporter found!");
+                        this.log("Found closest viable transporter:", r);
+                        var s = r.getTile(),
+                            l = _slicedToArray(s, 2),
+                            u = l[0],
+                            c = l[1],
+                            d = this.root.map.findPath({ x: o, y: n }, { x: u, y: c });
+                        if (!d) return console.error("FAILED to find path on two ways"), true;
+                        for (var h = [o, n], p = null, g = 0; g < d.length; ++g) {
+                            var m,
+                                _ = d[g];
+                            if (distanceEuclidian(_, h) > Config.radius.transporter) {
+                                if (null === p) return console.error("unable to find way to hub!"), false;
+                                var f;
+                                if (this.place.apply(this, [TransporterMeta].concat(_toConsumableArray(p)))) if (((h = p), this.isConnectedToCentralHub((f = this.root.map).getTileContent.apply(f, _toConsumableArray(p))))) return true;
+                            }
+                            (m = this.root.map).isTileUsed.apply(m, _toConsumableArray(_)) || (p = _);
+                        }
+                        return this.isConnectedToCentralHub(e) || (p && this.place(TransporterMeta, p)), true;
+                    }),
+                    (e.prototype.actionPlaceCentralHub = function () {
+                        var e;
+                        this.log("Trying to place central hub");
+                        var t = (e = this.root.map).findClosestFreeTileArround.apply(e, _toConsumableArray(this.playerBasePosition)),
+                            i = _slicedToArray(t, 2),
+                            a = i[0],
+                            o = i[1];
+                        this.place(TransporterMeta, a, o) && ((this.centralHubPosition = [a, o]), this.log("Placed central hub at", this.centralHubPosition));
+                    }),
+                    (e.prototype.actionConnectEverything = function () {
+                        for (var e = this.root.entityMgr.entities, t = 0; t < e.length; ++t) {
+                            var i = e[t];
+                            if ((i.hasComponent(ConsumerComponent) || i.hasComponent(EmitterComponent)) && !(i instanceof Resource || this.isConnectedToCentralHub(i))) return this.actionConnectToNet(i);
+                        }
+                        return false;
+                    }),
+                    (e.prototype.actionPerformUpgrades = function (e) {
+                        for (var t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : 999, i = this.root.entityMgr.entities, a = 0; a < i.length; ++a) {
+                            var o = i[a];
+                            if (o instanceof e && o.getLevel() < t && this.root.logic.upgradeBuilding(o, true, t > 100)) return this.log("Upgraded", o), true;
+                        }
+                        return false;
+                    }),
+                    (e.prototype.getBuildingInstanceCount = function (e) {
+                        for (var t = this.root.entityMgr.getAllEntitiesWithComponent(BuildingComponent), i = 0, a = 0; a < t.length; ++a) t[a] instanceof e && i++;
+                        return i;
+                    }),
+                    (e.prototype.prepareSupplyChain = function (e) {
+                        for (var t = 0; t < e.length; ++t) {
+                            var i = e[t];
+                            if (this.haveBuildingsLeft(i)) return this.placeResourceProcessor(i), true;
+                        }
+                        return false;
+                    }),
+                    (e.prototype.actionPrepareDefense = function () {
+                        return (
+                            !(!this.haveBuildingsLeft(IronMineMeta) || !this.placeResourceMiner(IronMineMeta, IronOre)) ||
+                            !!this.prepareSupplyChain([CannonballProducerMeta]) ||
+                            !(!this.haveBuildingsLeft(CannonMeta) || !this.placeDefensiveTower(CannonMeta)) ||
+                            !(!this.haveBuildingsLeft(HarvesterMeta) || !this.placeResourceMiner(HarvesterMeta, Tree)) ||
+                            !!this.prepareSupplyChain([WoodProcessorMeta, SteelFactoryMeta, ArrowFactoryMeta]) ||
+                            !(!this.haveBuildingsLeft(ArrowTowerMeta) || !this.placeDefensiveTower(ArrowTowerMeta)) ||
+                            !(!this.haveBuildingsLeft(UraniumMineMeta) || !this.placeResourceMiner(UraniumMineMeta, UraniumOre)) ||
+                            !!this.prepareSupplyChain([NuclearStationMeta]) ||
+                            !(!this.haveBuildingsLeft(LightningTowerMeta) || !this.placeDefensiveTower(LightningTowerMeta))
+                        );
+                    }),
+                    (e.prototype.actionPlaceWalls = function () {
+                        if (!this.haveBuildingsLeft(WallMeta)) return false;
+                        for (var e = BASE_RADIUS_TILES + 1; e <= BASE_RADIUS_TILES + 2;) {
+                            for (var t = 0; t < 360; ++t) {
+                                var i = (t / 180) * Math.PI,
+                                    a = this.playerBasePosition[0] + Math.round(Math.sin(i) * e),
+                                    o = this.playerBasePosition[1] + Math.round(Math.cos(i) * e);
+                                if (!this.root.map.isTileUsed(a, o)) return !!this.place(WallMeta, a, o);
+                            }
+                            e++;
+                        }
+                        return false;
+                    }),
+                    (e.prototype.actionUpgradeDefenses = function () {
+                        return (
+                            !!this.actionPerformUpgrades(NuclearStationBuilding) ||
+                            !!this.actionPerformUpgrades(UraniumMineBuilding) ||
+                            !!this.actionPerformUpgrades(HarvesterBuilding) ||
+                            !!this.actionPerformUpgrades(WoodProcessorBuilding) ||
+                            !!this.actionPerformUpgrades(ArrowFactoryBuilding) ||
+                            !!this.actionPerformUpgrades(SteelFactoryBuilding) ||
+                            !!this.actionPerformUpgrades(IronMineBuilding) ||
+                            !!this.actionPerformUpgrades(CannonballProducerBuilding) ||
+                            !!this.actionPerformUpgrades(LightningTowerBuilding) ||
+                            !!this.actionPerformUpgrades(ArrowTowerBuilding) ||
+                            !!this.actionPerformUpgrades(CannonBuilding)
+                        );
+                    }),
+                    (e.prototype.performAction = function () {
+                        var e;
+                        return this.root.logic.playerHasPlacedBase()
+                            ? this.centralHubPosition && (e = this.root.map).isTileUsed.apply(e, _toConsumableArray(this.centralHubPosition))
+                                ? !(!this.haveBuildingsLeft(GoldMineMeta) || (this.log("Place gold mines ..."), !this.placeResourceMiner(GoldMineMeta, GoldOre))) ||
+                                !!this.actionConnectEverything() ||
+                                !!this.actionPerformUpgrades(PlayerBaseBuilding, 11) ||
+                                !!this.actionPerformUpgrades(GoldMineBuilding) ||
+                                !!this.actionPrepareDefense() ||
+                                !!this.actionPlaceWalls() ||
+                                !!this.actionUpgradeDefenses() ||
+                                !!this.actionPerformUpgrades(WallBuilding) ||
+                                (console.warn("BOT IDLING"), false)
+                                : (this.actionPlaceCentralHub(), true)
+                            : (this.actionPlaceBase(), true);
+                    }),
+                    (e.prototype.update = function () {
+                        for (; this.actionInterval.takeTick(this.root.time.now);) Config.autoPlay && (this.root.time.now > 1e3 * INITIAL_SLEEP ? this.performAction() : this.log("sleeping, waiting for wake up"));
                     }),
                     e
                 );
@@ -28558,127 +28811,210 @@
                     }),
                     t
                 );
-            })(EntitySpriteObj);
-
-        class BaseSkill {
-            constructor(key, position, gains, dependsOn = null) {
-                this.key = key;
-                this.position = position;
-                this.gains = gains;
-                this.dependsOn = dependsOn || [];
-            }
-
-            static get name() {
-                return "BaseSkill";
-            }
-
-            getScale() {
-                return 1;
-            }
-
-            getCircleStyle() {
-                return "regular";
-            }
-
-            getSpriteColor() {
-                return 16777215;
-            }
-
-            getActiveColor() {
-                return Config.colors.skillUnlocked;
-            }
-
-            getBackgroundColor() {
-                for (let e in this.gains) {
-                    return GAIN_MAPPINGS[e].color;
+            })(EntitySpriteObj),
+            BaseSkill = (function () {
+                function e(t, i, a) {
+                    var o = arguments.length > 3 && void 0 !== arguments[3] ? arguments[3] : null;
+                    _classCallCheck(this, e), (this.key = t), (this.gains = a), (this.position = i), (this.dependsOn = o || []);
                 }
-                return 8947848;
-            }
-
-            get cost() {
-                return 1;
-            }
-        }
-
-        class BigSkill extends BaseSkill {
-            static get name() {
-                return "BigSkill";
-            }
-
-            getScale() {
-                return 1.2;
-            }
-
-            getCircleStyle() {
-                return "polygon";
-            }
-
-            getPolygonEdges() {
-                return 6;
-            }
-
-            get cost() {
-                return 5;
-            }
-        }
-
-        class FeatureSkill extends BaseSkill {
-            constructor(key, position, description, dependsOn = null, skillCost = 15) {
-                super(key, position, {}, dependsOn);
-                this.description = description;
-                this.skillCost = skillCost;
-            }
-
-            static get name() {
-                return "FeatureSkill";
-            }
-
-            getScale() {
-                return 1.5;
-            }
-
-            getCircleStyle() {
-                return "polygon";
-            }
-
-            getPolygonEdges() {
-                return 6;
-            }
-
-            getBackgroundColor() {
-                return SKILL_TREE[this.dependsOn[0]].getBackgroundColor();
-            }
-
-            get cost() {
-                return this.skillCost;
-            }
-        }
-
-        class InitialSkill extends BigSkill {
-            static get name() {
-                return "InitialSkill";
-            }
-        }
-
-        class Skill2Points extends BaseSkill {
-            static get name() {
-                return "Skill2Points";
-            }
-
-            get cost() {
-                return 2;
-            }
-        }
-
-        class Skill3Points extends BaseSkill {
-            static get name() {
-                return "Skill3Points";
-            }
-
-            get cost() {
-                return 3;
-            }
-        } 
+                return (
+                    _createClass(e, null, [
+                        {
+                            key: "name",
+                            get: function () {
+                                return "BaseSkill";
+                            },
+                        },
+                    ]),
+                    (e.prototype.getScale = function () {
+                        return 1;
+                    }),
+                    (e.prototype.getCircleStyle = function () {
+                        return "regular";
+                    }),
+                    (e.prototype.getSpriteColor = function () {
+                        return 16777215;
+                    }),
+                    (e.prototype.getActiveColor = function () {
+                        return Config.colors.skillUnlocked;
+                    }),
+                    (e.prototype.getBackgroundColor = function () {
+                        for (var e in this.gains) return GAIN_MAPPINGS[e].color;
+                        return 8947848;
+                    }),
+                    _createClass(e, [
+                        {
+                            key: "cost",
+                            get: function () {
+                                return 1;
+                            },
+                        },
+                    ]),
+                    e
+                );
+            })(),
+            BigSkill = (function (e) {
+                function t() {
+                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.apply(this, arguments));
+                }
+                return (
+                    _inherits(t, e),
+                    (t.prototype.getScale = function () {
+                        return 1.2;
+                    }),
+                    (t.prototype.getCircleStyle = function () {
+                        return "polygon";
+                    }),
+                    (t.prototype.getPolygonEdges = function () {
+                        return 6;
+                    }),
+                    _createClass(
+                        t,
+                        [
+                            {
+                                key: "cost",
+                                get: function () {
+                                    return 5;
+                                },
+                            },
+                        ],
+                        [
+                            {
+                                key: "name",
+                                get: function () {
+                                    return "BigSkill";
+                                },
+                            },
+                        ]
+                    ),
+                    t
+                );
+            })(BaseSkill),
+            FeatureSkill = (function (e) {
+                function t(i, a, o) {
+                    var n = arguments.length > 3 && void 0 !== arguments[3] ? arguments[3] : null,
+                        r = arguments.length > 4 && void 0 !== arguments[4] ? arguments[4] : 15;
+                    _classCallCheck(this, t);
+                    var s = _possibleConstructorReturn(this, e.call(this, i, a, {}, n));
+                    return (s.description = o), (s.skillCost = r), s;
+                }
+                return (
+                    _inherits(t, e),
+                    _createClass(t, null, [
+                        {
+                            key: "name",
+                            get: function () {
+                                return "FeatureSkill";
+                            },
+                        },
+                    ]),
+                    (t.prototype.getScale = function () {
+                        return 1.5;
+                    }),
+                    (t.prototype.getCircleStyle = function () {
+                        return "polygon";
+                    }),
+                    (t.prototype.getPolygonEdges = function () {
+                        return 6;
+                    }),
+                    (t.prototype.getBackgroundColor = function () {
+                        return SKILL_TREE[this.dependsOn[0]].getBackgroundColor();
+                    }),
+                    _createClass(t, [
+                        {
+                            key: "cost",
+                            get: function () {
+                                return this.skillCost;
+                            },
+                        },
+                    ]),
+                    t
+                );
+            })(BaseSkill),
+            InitialSkill = (function (e) {
+                function t() {
+                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.apply(this, arguments));
+                }
+                return (
+                    _inherits(t, e),
+                    _createClass(
+                        t,
+                        [
+                            {
+                                key: "cost",
+                                get: function () {
+                                    return 1;
+                                },
+                            },
+                        ],
+                        [
+                            {
+                                key: "name",
+                                get: function () {
+                                    return "InitialSkill";
+                                },
+                            },
+                        ]
+                    ),
+                    t
+                );
+            })(BigSkill),
+            Skill2Points = (function (e) {
+                function t() {
+                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.apply(this, arguments));
+                }
+                return (
+                    _inherits(t, e),
+                    _createClass(
+                        t,
+                        [
+                            {
+                                key: "cost",
+                                get: function () {
+                                    return 2;
+                                },
+                            },
+                        ],
+                        [
+                            {
+                                key: "name",
+                                get: function () {
+                                    return "Skill2Points";
+                                },
+                            },
+                        ]
+                    ),
+                    t
+                );
+            })(BaseSkill),
+            Skill3Points = (function (e) {
+                function t() {
+                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.apply(this, arguments));
+                }
+                return (
+                    _inherits(t, e),
+                    _createClass(
+                        t,
+                        [
+                            {
+                                key: "cost",
+                                get: function () {
+                                    return 3;
+                                },
+                            },
+                        ],
+                        [
+                            {
+                                key: "name",
+                                get: function () {
+                                    return "Skill3Points";
+                                },
+                            },
+                        ]
+                    ),
+                    t
+                );
+            })(BaseSkill)  
         
         class GameLogic {
             constructor(t) {
@@ -29102,7 +29438,6 @@
                 }
 
                 if (this.root.gamemode.isSandbox()) {
-
                     window.spawnSandboxWave = () => this.spawnSandboxWave();
                     window.sandboxHeal = () => this.sandboxHeal();
                     window.sandboxFill = () => this.sandboxFill();
@@ -29147,7 +29482,7 @@
                         this.root.gui.uiNotifications.showError(tr("place_base_before_wave"));
                     }
                 }
-            }            
+            }
 
             refreshBuildingInstances() {
                 for (var e = this, t = this.root.entityMgr.getAllEntitiesWithComponent(BuildingComponent), i = 0; i < t.length; ++i) {
@@ -31220,11 +31555,7 @@
             })(GameSystem);
 
             class ExplodesOnHitComponent extends Component {
-                constructor({
-                    radiusTiles = 1.5,
-                    damage = 10000,
-                    minimumDistance = 0.9
-                } = {}) {
+                constructor({ radiusTiles = 1.5, damage = 10000, minimumDistance = 0.9 } = {}) {
                     super();
                     this.radiusTiles = radiusTiles;
                     this.damage = damage;
@@ -31233,10 +31564,6 @@
             
                 static get name() {
                     return "ExplodesOnHitComponent";
-                }
-            
-                debugStr() {
-                    return `Explodes on contact (d < ${this.minimumDistance}), does ${this.damage} damage in a radius of ${this.radiusTiles} tiles`;
                 }
             }
             
@@ -31278,13 +31605,15 @@
                     const particle = this.root.particles.spawnNew(center[0], center[1], MetaEnemyExplosionParticle);
                     particle.width = 2 * size;
                     particle.height = 2 * size;
-                    particle.alpha = 0.6;
+                    particle.alpha = 0.1;
+
                     this.root.animations
                         .animate(particle)
                         .to({ alpha: 0, width: 10, height: 10 }, 500)
                         .onDone(() => {
                             this.root.particles.kill(particle);
                         });
+
                     this.root.sound.playCreeperExplosion(...center);
                 }
             
@@ -36140,6 +36469,121 @@
                     t
                 );
             })(BaseUnlockTip),
+            TipVoteForUs = (function (e) {
+                function t() {
+                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.call(this, "unlock_vote_for_us_title", ["unlock_vote_for_us_text_1"], __webpack_require__(434)));
+                }
+                return (
+                    _inherits(t, e),
+                    _createClass(t, null, [
+                        {
+                            key: "name",
+                            get: function () {
+                                return "TipVoteForUs";
+                            },
+                        },
+                    ]),
+                    (t.prototype.shouldShow = function (e) {
+                        return false;
+                    }),
+                    (t.prototype.getLinkAction = function () {
+                        return window.inThirdpartyIframe ? null : { text: tr("unlock_vote_visit_iogames_space"), url: "http://iogames.space/yorg-io" };
+                    }),
+                    t
+                );
+            })(BaseUnlockTip),
+            TipSteamVersion = (function (e) {
+                function t() {
+                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.call(this, "unlock_standalone_title", ["unlock_standalone_text_1"], __webpack_require__(100)));
+                }
+                return (
+                    _inherits(t, e),
+                    _createClass(t, null, [
+                        {
+                            key: "name",
+                            get: function () {
+                                return "TipSteamVersion";
+                            },
+                        },
+                    ]),
+                    (t.prototype.shouldShow = function (e) {
+                        return false;
+                    }),
+                    (t.prototype.getLinkAction = function () {
+                        return { text: tr("unlock_standalone_btn"), url: "http://steam.yorg.io" };
+                    }),
+                    t
+                );
+            })(BaseUnlockTip),
+            TipSteamVersion2 = (function (e) {
+                function t() {
+                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.call(this, "unlock_standalone_title", ["unlock_standalone_text_1"], __webpack_require__(100)));
+                }
+                return (
+                    _inherits(t, e),
+                    _createClass(t, null, [
+                        {
+                            key: "name",
+                            get: function () {
+                                return "TipSteamVersion2";
+                            },
+                        },
+                    ]),
+                    (t.prototype.shouldShow = function (e) {
+                        return false;
+                    }),
+                    (t.prototype.getLinkAction = function () {
+                        return { text: tr("unlock_standalone_btn"), url: "http://steam.yorg.io" };
+                    }),
+                    t
+                );
+            })(BaseUnlockTip),
+            TipSteamVersion3 = (function (e) {
+                function t() {
+                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.call(this, "unlock_standalone_title", ["unlock_standalone_text_1"], __webpack_require__(100)));
+                }
+                return (
+                    _inherits(t, e),
+                    _createClass(t, null, [
+                        {
+                            key: "name",
+                            get: function () {
+                                return "TipSteamVersion3";
+                            },
+                        },
+                    ]),
+                    (t.prototype.shouldShow = function (e) {
+                        return false;
+                    }),
+                    (t.prototype.getLinkAction = function () {
+                        return { text: tr("unlock_standalone_btn"), url: "http://steam.yorg.io" };
+                    }),
+                    t
+                );
+            })(BaseUnlockTip),
+            TipFollowTwitter = (function (e) {
+                function t() {
+                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.call(this, "unlock_follow_twitter_title", ["unlock_follow_twitter_text_1"], __webpack_require__(435)));
+                }
+                return (
+                    _inherits(t, e),
+                    _createClass(t, null, [
+                        {
+                            key: "name",
+                            get: function () {
+                                return "TipFollowTwitter";
+                            },
+                        },
+                    ]),
+                    (t.prototype.shouldShow = function (e) {
+                        return false;
+                    }),
+                    (t.prototype.getLinkAction = function () {
+                        return { text: tr("unlock_follow_twitter_visit_twitter"), url: "https://twitter.com/yorg_io" };
+                    }),
+                    t
+                );
+            })(BaseUnlockTip),
             UnlockTipsManager = (function () {
                 function e(t) {
                     _classCallCheck(this, e),
@@ -36684,25 +37128,6 @@
                     e
                 );
             })(),
-            KongregateWrapper = (function () {
-                function e() {
-                    _classCallCheck(this, e);
-                }
-                return (
-                    (e.push = function (e, t) {
-                        window.kongregateApiHandle && (console.log("[Kongregate] Pushing stat", e, "with value", t), window.kongregateApiHandle.stats.submit(e, t));
-                    }),
-                    _createClass(e, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "KongregateWrapper";
-                            },
-                        },
-                    ]),
-                    e
-                );
-            })(),
             ccFixBaseBootState = Phaser.State,
             BootState = (function (e) {
                 function t() {
@@ -36717,7 +37142,7 @@
                         var e = this;
                         this.load.atlas("atlas", __webpack_require__(436), null, ATLAS, Phaser.Loader.TEXTURE_ATLAS_JSON_ARRAY),
                             this.load.onLoadComplete.add(function () {
-                                console.log("Atlas loaded at", Math.floor(performance.now())),
+                                console.log("Atlas loaded at", Math.floor(performance && performance.now())),
                                     setTimeout(function () {
                                         e.state.start("Game", true, false);
                                     }, 100);
@@ -37067,12 +37492,6 @@
                 constructor(root) {
                     this.root = root;
                     this.root.signals.nightEntered.add(this.onNightStarted, this);
-            
-                    if (Config.displayWaves) {
-                        for (let i = 1; i <= 150; i += 5) {
-                            this.getWaveEnemies(i);
-                        }
-                    }
                 }
             
                 static get name() {
@@ -37142,26 +37561,27 @@
             
                     if (Config.displayWaves) {
                         let waveInfo = `|-\n`;
-                        waveInfo += `|${day}\n`;
-                        waveInfo += `|${Math.round(undeadCount)}\n`;
-                        waveInfo += `|${Math.round(creeperCount)}\n`;
-                        waveInfo += `|${isBossWave ? "1" : "0"}\n`;
+                        waveInfo += `| Day: ${day}\n`;
+                        waveInfo += `| Zombies: ${Math.round(undeadCount)}\n`;
+                        waveInfo += `| Creepers: ${Math.round(creeperCount)}\n`;
+                        waveInfo += `| isBossWave: ${isBossWave ? "1" : "0"}\n`;
                         console.log(waveInfo);
                     }
             
+                    console.log(enemies);
                     return enemies;
                 }
             
                 async spawnWave(day) {
                     const enemies = this.getWaveEnemies(day);
-                    const groupSize = 100;
-                    const delayBetweenGroups = 500;
+                    const groupSize = Math.floor((day / 6) + 20); // Number of enemies per group
+                    const delayBetweenGroups = 200; // Delay in ms between spawning groups
                     const totalGroups = Math.ceil(enemies.length / groupSize);
-                
+
                     for (let i = 0; i < totalGroups; i++) {
                         const groupStartIndex = i * groupSize;
                         const groupEnemies = enemies.slice(groupStartIndex, groupStartIndex + groupSize);
-                
+
                         for (const enemy of groupEnemies) {
                             const {
                                 enemyClass,
@@ -37169,7 +37589,7 @@
                             } = enemy;
                             await this.root.logic.spawnNewEnemy(enemyClass, level);
                         }
-                
+
                         if (i < totalGroups - 1) {
                             await this.delay(delayBetweenGroups);
                         }
@@ -37896,57 +38316,6 @@
                     (e.prototype.makeCacheSuffix = function () {
                         return "?" + new Date().getTime();
                     }),
-                    (e.prototype.testAPI = function () {
-                        var e = this,
-                            t = ["", "", "", "", "http://kongregate.com", "http://iogames.space"];
-                        this.gameids = this.gameids || [];
-                        for (
-                            var i = GAME_MODES.map(function (e) {
-                                return e.getId();
-                            }),
-                            a = 0;
-                            a < 200;
-                            ++a
-                        ) {
-                            var o = {
-                                PlayerId: "testing-playerid-bot-" + a,
-                                PlayerName: "bot" + a,
-                                GamesSite: randomArrayEntry(t),
-                                Tutorial: Math.random() > 0.5,
-                                Adblock: Math.random() > 0.5,
-                                Mapseed: randomInt(1e10, 1e11 - 1).toString(),
-                                Version: "v2.0.0",
-                                GameMode: randomArrayEntry(i),
-                            };
-                            this.registerGame(
-                                o,
-                                function (t) {
-                                    var i = t.GameId;
-                                    e.gameids.push(i);
-                                },
-                                function () {
-                                    return true;
-                                }
-                            );
-                        }
-                    }),
-                    (e.prototype.testAPIUpdate = function () {
-                        var e = this,
-                            t = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : 1;
-                        console.log("Updating", this.gameids.length, "games"),
-                            this.gameids.forEach(function (i) {
-                                e.updateGame(
-                                    i,
-                                    { Paused: Math.random() > 0.5, FPS: randomInt(0, 500), Day: t + randomInt(0, 5), Gems: randomInt(1, 1e5) },
-                                    function () {
-                                        return true;
-                                    },
-                                    function () {
-                                        return true;
-                                    }
-                                );
-                            });
-                    }),
                     e
                 );
             })(),
@@ -38068,12 +38437,14 @@
                     event.preventDefault();
                 };
             }
+
             getMetadataById(e) {
                 for (let t = 0; t < this.savegames.length; ++t)
                     if (this.savegames[t].id === e)
                         return this.savegames[t];
                 return null;
             }
+
             showDialog() {
                 const e = this;
                 let t = "";
@@ -38083,6 +38454,7 @@
                     i.id !== e.activeSavegameId && (t += e.generateSavegameHTML(i));
                 }), 0 === this.savegames.length && (t += tr("no_savegames_yet")), document.getElementById("savegames_list").innerHTML = t, window.showDialog("savegame_bg");
             }
+
             generateSavegameHTML({
                 id,
                 time,
@@ -38118,11 +38490,13 @@
                 const t = this.root.persistent.getString("savegame_preview_" + e, "");
                 return t.length > 0 ? t : this.rebuildImageData(e);
             }
+
             rebuildImageData(e) {
                 console.log("[SAVEGAMES] Generating preview for", e);
                 const t = this.root.serializer.generatePreview(this.getBlob(e));
                 return t ? (this.root.persistent.setString("savegame_preview_" + e, t), t) : (console.warn("Preview was null. Unable to set preview"), i(449));
             }
+
             saveGame() {
                 const e = this.root.serializer.getLastSavegame();
                 if (this.activeSavegameId) {
@@ -38142,19 +38516,24 @@
                 }
                 this.storeBlob(this.activeSavegameId, e), this.updateMetadata(), this.rebuildImageData(this.activeSavegameId);
             }
+
             generateSavegameId() {
                 return _jsBase.Base64.encode((new Date).getTime() + "-" + randomInt(1e5, 1e6 - 1)).replace("=", "A").replace("=", "B");
             }
+
             storeBlob(e, t) {
                 this.root.persistent.setString("savegame_blob_" + e, t);
             }
+
             getBlob(e) {
                 return this.root.persistent.getString("savegame_blob_" + e, "");
             }
+
             updateMetadata() {
                 const e = JSON.stringify(this.savegames);
                 this.root.persistent.setString("savegame_metadata", e);
             }
+
             loadSavegames() {
                 const e = this.root.persistent.getString("savegame_metadata", "");
                 if (e.length < 1)
@@ -38168,8 +38547,8 @@
                 console.log("[SAVEGAMES] Found", t.length, "stored savegames"), this.savegames = t;
             }
         }
-        const ccFixBaseGameState = Phaser.State
-        class GameState extends ccFixBaseGameState {
+
+        class GameState extends Phaser.State {
             constructor() {
                 super();
             }
@@ -38307,7 +38686,7 @@
             }
 
             create() {
-                console.log("Game loaded at", Math.floor(performance.now()));
+                console.log("Game loaded at", Math.floor(performance && performance.now()));
                 this.initGameEngine();
                 this.initMessageHandling();
 
@@ -38478,10 +38857,10 @@
                             setTimeout(() => this.onGameOver(), 7000);
                         }
                     } else {
-                        alert(`Failed to create GameMode: ${selectedGameModeId}. Please report this!`);
+                        alert(`Failed to create gamemode: ${selectedGameModeId}. Please report this!`);
                     }
                 } else {
-                    alert("Unable to determine the game mode. Please report this!");
+                    alert("Unable to determine the game mode. Please report this.");
                 }
             }
 
@@ -38604,6 +38983,7 @@
                 return _lzString2.default.compressToEncodedURIComponent(result);
             }
 
+        
             init() {
                 const e = this.phaser;
                 this.overlay = makePanelBackground(e, 1, 1, 2228241, 0.77);
@@ -38731,7 +39111,6 @@
                 this.overlay.scale.setTo(e, t);
             }
         }
-
         class GameOverState extends Phaser.State {
             constructor() {
                 super();
@@ -38762,211 +39141,201 @@
                 return "GameOverState";
             }
         }
-
-        const MouseTracker = (function () {
-            function e(t) {
-                var i = this;
-                _classCallCheck(this, e), (this.leftButtonDown = false), (this.rightButtonDown = false), (this.enabled = false);
-                var a = t.canvas;
-                Config.mobileDevice ||
-                    (a.addEventListener(
-                        "mousedown",
-                        function (e) {
-                            return i.handleMouseChange(e, true);
-                        },
-                        true
-                    ),
-                        window.addEventListener(
-                            "mousemove",
+            const MouseTracker = (function () {
+                function e(t) {
+                    var i = this;
+                    _classCallCheck(this, e), (this.leftButtonDown = false), (this.rightButtonDown = false), (this.enabled = false);
+                    var a = t.canvas;
+                    Config.mobileDevice ||
+                        (a.addEventListener(
+                            "mousedown",
                             function (e) {
-                                return i.handleMouseMove(e);
+                                return i.handleMouseChange(e, true);
+                            },
+                            true
+                        ),
+                            window.addEventListener(
+                                "mousemove",
+                                function (e) {
+                                    return i.handleMouseMove(e);
+                                },
+                                true
+                            ),
+                            window.addEventListener(
+                                "mouseup",
+                                function (e) {
+                                    return i.handleMouseChange(e, false);
+                                },
+                                true
+                            )),
+                        window.addEventListener(
+                            "touchmove",
+                            function (e) {
+                                return i.handleTouchMove(e);
+                            },
+                            true
+                        ),
+                        a.addEventListener(
+                            "touchstart",
+                            function (e) {
+                                return i.handleTouchClick(e, true);
                             },
                             true
                         ),
                         window.addEventListener(
-                            "mouseup",
+                            "touchend",
                             function (e) {
-                                return i.handleMouseChange(e, false);
+                                return i.handleTouchClick(e, false);
                             },
                             true
-                        )),
-                    window.addEventListener(
-                        "touchmove",
-                        function (e) {
-                            return i.handleTouchMove(e);
+                        ),
+                        t.input.mouse.stop(),
+                        t.input.touch.stop(),
+                        t.input.mspointer.stop(),
+                        (this.onMouseMove = new Phaser.Signal()),
+                        (this.onMouseDown = new Phaser.Signal()),
+                        (this.onMouseUp = new Phaser.Signal());
+                }
+                return (
+                    _createClass(e, null, [
+                        {
+                            key: "name",
+                            get: function () {
+                                return "MouseTracker";
+                            },
                         },
-                        true
-                    ),
-                    a.addEventListener(
-                        "touchstart",
-                        function (e) {
-                            return i.handleTouchClick(e, true);
-                        },
-                        true
-                    ),
-                    window.addEventListener(
-                        "touchend",
-                        function (e) {
-                            return i.handleTouchClick(e, false);
-                        },
-                        true
-                    ),
-                    t.input.mouse.stop(),
-                    t.input.touch.stop(),
-                    t.input.mspointer.stop(),
-                    (this.onMouseMove = new _phaserCe.Phaser.Signal()),
-                    (this.onMouseDown = new _phaserCe.Phaser.Signal()),
-                    (this.onMouseUp = new _phaserCe.Phaser.Signal());
-            }
-            return (
-                _createClass(e, null, [
-                    {
-                        key: "name",
-                        get: function () {
-                            return "MouseTracker";
-                        },
-                    },
-                ]),
-                (e.prototype.onFocusLost = function () {
-                    console.log("[MOUSE] Lost focus"), (this.leftButtonDown = false), (this.rightButtonDown = false);
-                }),
-                (e.prototype.handleMouseChange = function (e, t) {
-                    this.handleMouseMove(e),
-                        (3 !== e.which && 2 !== e.button) || (this.rightButtonDown = t),
-                        (1 !== e.which && 0 !== e.button) || (this.leftButtonDown = t),
-                        this.enabled && (t ? this.onMouseDown.dispatch() : this.onMouseUp.dispatch());
-                }),
-                (e.prototype.handleTouchClick = function (e, t) {
-                    this.enabled && (this.handleTouchMove(e), t ? this.onMouseDown.dispatch() : this.onMouseUp.dispatch());
-                }),
-                (e.prototype.handleMouseMove = function (e) {
-                    (this.mouseX = e.clientX), (this.mouseY = e.clientY), this.enabled && this.onMouseMove.dispatch();
-                }),
-                (e.prototype.handleTouchMove = function (e) {
-                    if (!(e.touches.length < 1)) {
-                        for (var t = 0, i = 0, a = 0; a < e.touches.length; ++a) {
-                            var o = e.touches[a];
-                            (t += o.clientX), (i += o.clientY);
+                    ]),
+                    (e.prototype.onFocusLost = function () {
+                        console.log("[MOUSE] Lost focus"), (this.leftButtonDown = false), (this.rightButtonDown = false);
+                    }),
+                    (e.prototype.handleMouseChange = function (e, t) {
+                        this.handleMouseMove(e),
+                            (3 !== e.which && 2 !== e.button) || (this.rightButtonDown = t),
+                            (1 !== e.which && 0 !== e.button) || (this.leftButtonDown = t),
+                            this.enabled && (t ? this.onMouseDown.dispatch() : this.onMouseUp.dispatch());
+                    }),
+                    (e.prototype.handleTouchClick = function (e, t) {
+                        this.enabled && (this.handleTouchMove(e), t ? this.onMouseDown.dispatch() : this.onMouseUp.dispatch());
+                    }),
+                    (e.prototype.handleMouseMove = function (e) {
+                        (this.mouseX = e.clientX), (this.mouseY = e.clientY), this.enabled && this.onMouseMove.dispatch();
+                    }),
+                    (e.prototype.handleTouchMove = function (e) {
+                        if (!(e.touches.length < 1)) {
+                            for (var t = 0, i = 0, a = 0; a < e.touches.length; ++a) {
+                                var o = e.touches[a];
+                                (t += o.clientX), (i += o.clientY);
+                            }
+                            var n = e.touches.length;
+                            (this.mouseX = t / n), (this.mouseY = i / n), this.enabled && this.onMouseMove.dispatch();
                         }
-                        var n = e.touches.length;
-                        (this.mouseX = t / n), (this.mouseY = i / n), this.enabled && this.onMouseMove.dispatch();
-                    }
-                }),
-                (e.prototype.getPosition = function () {
-                    return { x: this.mouseX, y: this.mouseY };
-                }),
-                (e.register = function (t) {
-                    window.mouseTracker = new e(t);
-                }),
-                e
-            );
-        })()
-        
-        class App {
-            constructor() {
-                console.log("App booted at", Math.floor(performance.now()));
-                s();
-                Config.mobileDevice ? document.body.classList.add("mobileDevice") : this.addBetaHint();
-
-                const gameConfig = {
-                    width: "100%",
-                    height: "100%",
-                    renderer: Phaser.CANVAS,
-                    antialias: false,
-                    multiTexture: false,
-                    transparent: false,
-                    parent: "renderer",
-                    legacy: true,
-                    resolution: (Config.mobileDevice && window.devicePixelRatio) || 1,
-                    roundPixels: Config.roundPixels,
-                    state: { Boot: BootState, Game: GameState, GameOver: GameOverState },
-                };
-
-                const game = new Phaser.Game(gameConfig);
-                setTimeout(() => MouseTracker.register(game), 1);
-
-                game.state.add("Boot", BootState, false);
-                game.state.add("Game", GameState, false);
-                game.state.add("GameOver", GameOverState, false);
-                game.state.start("Boot");
-            }
-
-            static get name() {
-                return "App";
-            }
-
-            addBetaHint() { }
-        }
-
-
-        class StorageFullIndicatorSystem extends GameSystem {
-            constructor(i) {
-                super(i, { necessaryComponents: [StorageComponent] });
-            }
-
-            static get name() {
-                return "StorageFullIndicatorSystem";
-            }
-
-            processEntity(entity, components) {
-                if (components.StorageComponent.isAnyFull(true)) {
-                    createOrGetEntityAttachment(entity, "storageFullText", () => {
-                        const text = this.root.phaser.make.text(0, 0, "FULL", {
-                            font: "11px Roboto",
-                            fill: "#AA1100",
-                            boundsAlignH: "center",
-                            fontWeight: 700
-                        });
-                        text.setTextBounds(0, Config.tileSize - 3, Config.tileSize, 15);
-                        return text;
-                    });
-                } else {
-                    hideEntityAttachment(entity, "storageFullText");
+                    }),
+                    (e.prototype.getPosition = function () {
+                        return { x: this.mouseX, y: this.mouseY };
+                    }),
+                    (e.register = function (t) {
+                        window.mouseTracker = new e(t);
+                    }),
+                    e
+                );
+            })(),
+            App = (function () {
+                function e() {
+                    _classCallCheck(this, e), console.log("App booted at", Math.floor(performance && performance.now())), s(), Config.mobileDevice ? document.body.classList.add("mobileDevice") : this.addBetaHint();
+                    var t = {
+                        width: "100%",
+                        height: "100%",
+                        renderer: Phaser.CANVAS,
+                        antialias: false,
+                        multiTexture: false,
+                        transparent: false,
+                        parent: "renderer",
+                        legacy: true,
+                        resolution: (Config.mobileDevice && window.devicePixelRatio) || 1,
+                        roundPixels: Config.roundPixels,
+                        state: { Boot: BootState, Game: GameState, GameOver: GameOverState },
+                    },
+                        i = new Phaser.Game(t);
+                    setTimeout(function () {
+                        MouseTracker.register(i);
+                    }, 1),
+                        i.state.add("Boot", BootState, false),
+                        i.state.add("Game", GameState, false),
+                        i.state.add("GameOver", GameOverState, false),
+                        i.state.start("Boot");
                 }
-            }
-        }
-
-        class BasementHealthVisualizerUI extends Visualizer {
-            constructor(i, o, r) {
-                super(i, o, r, { height: 32, label: "BASE HEALTH", updateInterval: 350 });
-            }
-
-            static get name() {
-                return "BasementHealthVisualizerUI";
-            }
-
-            init() {
-                super.init();
-                const t = this.root.phaser;
-                const i = Config.ui.visualizerWidth;
-                const a = Math.floor(i / 3) + 10;
-                const o = makeRoundedPanelBackground(t, i - 10 - a, 12, 15658734, 0.1, 2);
-                o.position.setTo(a, 11);
-                this.group.add(o);
-                this.bar = makeRoundedPanelBackground(t, i - 10 - a, 12, 16742263, 1, 2);
-                this.bar.position.setTo(a, o.y);
-                this.group.add(this.bar);
-            }
-
-            doUpdate() {
-                const playerBase = this.root.logic.getPlayerBase();
-                if (playerBase) {
-                    const healthComponent = playerBase.getComponent(HealthComponent);
-                    const healthRatio = healthComponent.health / healthComponent.maxHealth;
-                    this.bar.scale.x = healthRatio;
-                    this.bar.visible = true;
-                } else {
-                    this.bar.visible = false;
+                return (
+                    _createClass(e, null, [
+                        {
+                            key: "name",
+                            get: function () {
+                                return "App";
+                            },
+                        },
+                    ]),
+                    (e.prototype.addBetaHint = function () { }),
+                    e
+                );
+            })(),
+            StorageFullIndicatorSystem = (function (e) {
+                function t(i) {
+                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.call(this, i, { necessaryComponents: [StorageComponent] }));
                 }
-            }
-        }
-
-
-        const trackingSeverity = { 
-            info: "info", 
-            error: "error", 
-            warn: "warn" 
-        };
+                return (
+                    _inherits(t, e),
+                    _createClass(t, null, [
+                        {
+                            key: "name",
+                            get: function () {
+                                return "StorageFullIndicatorSystem";
+                            },
+                        },
+                    ]),
+                    (t.prototype.processEntity = function (e, t) {
+                        var i = this;
+                        t.StorageComponent.isAnyFull(true)
+                            ? createOrGetEntityAttachment(e, "storageFullText", function () {
+                                var e = i.root.phaser.make.text(0, 0, "FULL", { font: "11px Roboto", fill: "#AA1100", boundsAlignH: "center", fontWeight: 700 });
+                                return e.setTextBounds(0, Config.tileSize - 3, Config.tileSize, 15), e;
+                            })
+                            : hideEntityAttachment(e, "storageFullText");
+                    }),
+                    t
+                );
+            })(GameSystem),
+            BasementHealthVisualizerUI = (function (e) {
+                function t(i, a, o) {
+                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.call(this, i, a, o, { height: 32, label: "BASE HEALTH", updateInterval: 350 }));
+                }
+                return (
+                    _inherits(t, e),
+                    _createClass(t, null, [
+                        {
+                            key: "name",
+                            get: function () {
+                                return "BasementHealthVisualizerUI";
+                            },
+                        },
+                    ]),
+                    (t.prototype.init = function () {
+                        e.prototype.init.call(this);
+                        var t = this.root.phaser,
+                            i = Config.ui.visualizerWidth,
+                            a = Math.floor(i / 3) + 10,
+                            o = makeRoundedPanelBackground(t, i - 10 - a, 12, 15658734, 0.1, 2);
+                        o.position.setTo(a, 11), this.group.add(o), (this.bar = makeRoundedPanelBackground(t, i - 10 - a, 12, 16742263, 1, 2)), this.bar.position.setTo(a, o.y), this.group.add(this.bar);
+                    }),
+                    (t.prototype.doUpdate = function () {
+                        var e = this.root.logic.getPlayerBase();
+                        if (e) {
+                            var t = e.getComponent(HealthComponent),
+                                i = t.health / t.maxHealth;
+                            (this.bar.scale.x = i), (this.bar.visible = true);
+                        } else this.bar.visible = false;
+                    }),
+                    t
+                );
+            })(Visualizer);
 
         const YORGIO = {
             VERSION: "dev-unknown",
@@ -39008,15 +39377,16 @@
         }
 
         printYorgVersionHeader(); 
+
         var tileDistance = 1.01,
             defaultTransportDistance = 3.5 * tileDistance,
-            cameFromThirdparty = false,
-            isMobile = false,
+            cameFromThirdparty = window.location.search.indexOf("came_from_thirdparty") >= 0,
+            isMobile = (0, _isMobile2.default)(),
             Config = {
                 roundPixels: true,
                 mobileDevice: isMobile,
                 videoAdIntervalMinutes: 11,
-                textResolution: 1,
+                textResolution: isMobile ? 2 : 1,
                 tileSize: 64,
                 numTilesX: 200,
                 numTilesY: 200,
@@ -39054,7 +39424,7 @@
                 testHealthBars: false,
                 visualizeNodeNet: false,
                 displayBalancing: false,
-                displayWaves: false,
+                displayWaves: true,
                 noDamage: false,
                 zombiesEnabled: true,
                 autoPlay: false,
@@ -39122,6 +39492,7 @@
                     arrowTower: 5269147,
                     cannonball: 13745980,
                     cannon: 161725,
+                    bombTower: 161725,
                     uranium: 7001728,
                     minedUranium: 7001728,
                     power: 9630169,
@@ -39214,6 +39585,7 @@
                         ironMine: Phaser.Keyboard.Y,
                         cannonballProducer: Phaser.Keyboard.U,
                         cannon: Phaser.Keyboard.I,
+                        bombTower: Phaser.Keyboard.Z,
                         harvester: Phaser.Keyboard.O,
                         steelFactory: Phaser.Keyboard.P,
                         woodProcessor: Phaser.Keyboard.G,
@@ -39359,344 +39731,280 @@
             }
         };
 
-        const oneTileDistance = 1.01,
+        var oneTileDistance = 1.01,
             meleeAttackDistance = 2,
             oneTileDiagonalDistance = 1.42;
-
-        const tileToWorld = (e, t) => [e * Config.tileSize, t * Config.tileSize];
-
-        const tileCenterToWorld = (e, t) => [
-            Math.floor((e + 0.5) * Config.tileSize),
-            Math.floor((t + 0.5) * Config.tileSize)
-        ];
-
-        const worldToTile = (e, t) => [
-            Math.floor(e / Config.tileSize),
-            Math.floor(t / Config.tileSize)
-        ];
-
-        const isValidWorldCoordinate = (e, t) =>
-            e >= 0 &&
-            t >= 0 &&
-            e < Config.numTilesX * Config.tileSize &&
-            t < Config.numTilesY * Config.tileSize;
-
-        const randomInt = (e, t) => e + Math.floor(Math.random() * (t - e));
-
-        const randomArrayEntry = (e) => e[randomInt(0, e.length)];
-
-        const make2DArray = (e, t, i) => {
-            const array = [];
-            for (let o = 0; o < e; ++o) {
-                const row = [];
-                for (let r = 0; r < t; ++r) {
-                    row.push(i(o, r));
-                }
-                array.push(row);
+        function tileToWorld(e, t) {
+            return [e * Config.tileSize, t * Config.tileSize];
+        }
+        function tileCenterToWorld(e, t) {
+            return [Math.floor((e + 0.5) * Config.tileSize), Math.floor((t + 0.5) * Config.tileSize)];
+        }
+        function worldToTile(e, t) {
+            return [Math.floor(e / Config.tileSize), Math.floor(t / Config.tileSize)];
+        }
+        function isValidWorldCoordinate(e, t) {
+            return e >= 0 && t >= 0 && e < Config.numTilesX * Config.tileSize && t < Config.numTilesY * Config.tileSize;
+        }
+        function randomInt(e, t) {
+            return e + Math.floor(Math.random() * (t - e));
+        }
+        function randomArrayEntry(e) {
+            return e[randomInt(0, e.length)];
+        }
+        function make2DArray(e, t, i) {
+            for (var a = [], o = 0; o < e; ++o) {
+                for (var n = [], r = 0; r < t; ++r) n.push(i(o, r));
+                a.push(n);
             }
-            return array;
-        };
-
-        const make1DArray = (e, t) => {
-            const array = [];
-            for (let a = 0; a < e; ++a) {
-                array.push(t(a));
-            }
-            return array;
-        };
-
-        const distanceManhattan = (e, t) =>
-            Math.max(Math.abs(e[0] - t[0]), Math.abs(e[1] - t[1]));
-
-        const distanceEuclidianSquare = (e, t) => {
-            const i = e[0] - t[0];
-            const a = e[1] - t[1];
+            return a;
+        }
+        function make1DArray(e, t) {
+            for (var i = [], a = 0; a < e; ++a) i.push(t(a));
+            return i;
+        }
+        function distanceManhattan(e, t) {
+            return Math.max(Math.abs(e[0] - t[0]), Math.abs(e[1] - t[1]));
+        }
+        function distanceEuclidianSquare(e, t) {
+            var i = e[0] - t[0],
+                a = e[1] - t[1];
             return i * i + a * a;
-        };
-
-        const distanceEuclidian = (e, t) => Math.sqrt(distanceEuclidianSquare(e, t));
-
-        const vectorLength = (e, t) => Math.sqrt(e * e + t * t);
-
-        const vectorSubstract = (e, t) => [e[0] - t[0], e[1] - t[1]];
-
-        const vectorNormalize = (e) => {
-            const t = Math.max(1e-10, vectorLength(...e));
+        }
+        function distanceEuclidian(e, t) {
+            return Math.sqrt(distanceEuclidianSquare(e, t));
+        }
+        function vectorLength(e, t) {
+            return Math.sqrt(e * e + t * t);
+        }
+        function vectorSubstract(e, t) {
+            return [e[0] - t[0], e[1] - t[1]];
+        }
+        function vectorNormalize(e) {
+            var t = Math.max(1e-10, vectorLength.apply(void 0, _toConsumableArray(e)));
             return [e[0] / t, e[1] / t];
-        };
-
-        const vectorClamp = (e) => {
-            const t = Math.max(1, vectorLength(...e));
+        }
+        function vectorClamp(e) {
+            var t = Math.max(1, vectorLength.apply(void 0, _toConsumableArray(e)));
             return [e[0] / t, e[1] / t];
-        };
-
-        const dotProduct = (e, t) => e[0] * t[0] + e[1] * t[1];
-
-        const vectorScalarMultiply = (e, t) => [e[0] * t, e[1] * t];
-
-        const normalizedDirection = (e, t) => vectorNormalize(vectorSubstract(t, e));
-
-        const findNormalVectorTo = (e) => [-e[1], e[0]];
-
-        const createOrGetEntityAttachment = (e, t, i) => {
-            const a = e[t];
-            if (a) {
-                a.alive || a.revive();
-                return a;
-            }
-            const o = i();
-            if (!o) {
-                throw new Error("creator() returned null");
-            }
-            e.addChild(o);
-            e[t] = o;
-            return o;
-        };
-
-        const hideEntityAttachment = (e, t) => {
-            const i = e[t];
+        }
+        function dotProduct(e, t) {
+            return e[0] * t[0] + e[1] * t[1];
+        }
+        function vectorScalarMultiply(e, t) {
+            return [e[0] * t, e[1] * t];
+        }
+        function normalizedDirection(e, t) {
+            return vectorNormalize(vectorSubstract(t, e));
+        }
+        function findNormalVectorTo(e) {
+            return [-e[1], e[0]];
+        }
+        function createOrGetEntityAttachment(e, t, i) {
+            var a = e[t];
+            if (a) return a.alive || a.revive(), a;
+            var o = i();
+            if (!o) throw new Error("creator() returned null");
+            return e.addChild(o), (e[t] = o), o;
+        }
+        function hideEntityAttachment(e, t) {
+            var i = e[t];
             i && i.alive && i.kill();
-        };
-
-        const destroyEntityAttachment = (e, t) => {
-            const i = e[t];
-            i && i.alive && i.destroy();
-            Reflect.deleteProperty(e, t);
-        };
-
-        const getWorldSpaceMouse = (e) => {
-            const t = e.customZoomLevel;
+        }
+        function destroyEntityAttachment(e, t) {
+            var i = e[t];
+            i && i.alive && i.destroy(), Reflect.deleteProperty(e, t);
+        }
+        function getWorldSpaceMouse(e) {
+            var t = e.customZoomLevel;
             return vectorScalarMultiply(getWorldSpaceMouseNoZoom(e), t);
-        };
-
-        const getWorldSpaceMouseNoZoom = (e) => {
-            const t = window.mouseTracker.getPosition();
+        }
+        function getWorldSpaceMouseNoZoom(e) {
+            var t = window.mouseTracker.getPosition();
             return [t.x + e.camera.x, t.y + e.camera.y];
-        };
-
-        const getTileBelowCursor = (e) => {
-            const t = getWorldSpaceMouse(e);
-            const [x, y] = t;
-            return worldToTile(x, y);
-        };
-
-        const upDownLinearMorph = (e, t) => {
-            let i = (e % t) / t;
+        }
+        function getTileBelowCursor(e) {
+            var t = getWorldSpaceMouse(e),
+                i = _slicedToArray(t, 2);
+            return worldToTile(i[0], i[1]);
+        }
+        function upDownLinearMorph(e, t) {
+            var i = (e % t) / t;
             return (i = 2 * Math.min(i, 1 - i));
-        };
-
-        const connectSignals = (e, t) => e.add(t.dispatch, t);
-
-        const normalizeAngle = (e) => {
-            let t = e;
-            while (t < 0) {
-                t += 2 * Math.PI;
-            }
+        }
+        function connectSignals(e, t) {
+            e.add(t.dispatch, t);
+        }
+        function normalizeAngle(e) {
+            for (var t = e; t < 0;) t += 2 * Math.PI;
             return t % 360;
-        };
-
-        const isinstanceString = (e, t) => {
-            let i = e.constructor;
-            while (i && i.name !== t) {
-                i = i.__proto__;
+        }
+        function isinstanceString(e, t) {
+            var i = e.constructor;
+            if (i.name === t) return true;
+            for (var a = 20; null != i && null != i.name && i.name.length > 0 && a > 0;) {
+                if (i.name === t) return true;
+                (i = i.__proto__), (a -= 1);
             }
-            return !!i;
-        };
-        
-        const arraysAreEqual = (e, t) =>
-            e.length === t.length && e.every((value, index) => value === t[index]);
-        
-        const clearGroup = (e) => {
+            return false;
+        }
+        function arraysAreEqual(e, t) {
+            return (
+                e.length == t.length &&
+                e.every(function (e, i) {
+                    return e === t[i];
+                })
+            );
+        }
+        function clearGroup(e) {
             if (e.destroyAllChildren) e.destroyAllChildren();
             else if (e.removeAll) e.removeAll(true, true);
             else {
-                e.children.forEach((a) => {
-                    a.alive = false;
-                    a.exists = false;
-                    a.renderable = false;
-                    a.game = null;
-                    a.parent = null;
-                    if (a.clear) a.clear();
-                    a.texture = null;
-                });
-                e.children.length = 0;
+                var t = e.children;
+                e.children = [];
+                for (var i = 0; i < t.length; ++i) {
+                    var a = t[i];
+                    (a.alive = false), (a.exists = false), (a.renderable = false), (a.game = null), (a.parent = null), a.clear && a.clear(), (a.texture = null);
+                }
             }
-        };
-        
-        const checkParamSet = (e) => {
-            if (e === null || e === undefined) {
-                throw new Error(`Parameter is null or NaN: '${e}'!`);
-            }
-            if (typeof e === 'number' && isNaN(e)) {
-                throw new Error(`Parameter is NaN: '${e}'!`);
-            }
-        };
-        
-        const checkParamsSet = (...args) => {
-            args.forEach((e) => checkParamSet(e));
-        };
-        
-        const checkIsSetAndArray = (e) => {
-            checkParamSet(e);
-            if (!Array.isArray(e)) {
-                throw new Error('Parameter is not an array');
-            }
-        };
-        
-        const fastArrayDelete = (e, t) => {
-            if (t < 0 || t >= e.length) {
-                throw new Error('Out of bounds');
-            }
-            if (t === e.length - 1) {
-                e.pop();
-            } else {
-                const i = e.pop();
-                e[t] = i;
-            }
-        };
-        
-        const fastArrayDeleteValue = (e, t) => {
-            if (!Array.isArray(e)) {
-                throw new Error('Tried to delete from non-array');
-            }
-            const i = e.indexOf(t);
-            if (i < 0) {
-                console.error(`Value ${t} not contained in array: ${e}!`);
-            } else {
-                fastArrayDelete(e, i);
-            }
-        };
-        
-        const countObjectKeysUnsafe = (e) => {
-            let t = 0;
-            for (const i in e) {
-                t += 1;
-            }
+        }
+        function checkParamSet(e) {
+            if (null === e || void 0 === e) throw new Error("Parameter is null or NaN: '" + e + "'!");
+            if ("number" == typeof e && isNaN(e)) throw new Error("Parameter is NaN: '" + e + "'!");
+        }
+        function checkParamsSet() {
+            for (var e = arguments.length, t = Array(e), i = 0; i < e; i++) t[i] = arguments[i];
+            t.forEach(function (e) {
+                return checkParamSet(e);
+            });
+        }
+        function checkIsSetAndArray(e) {
+            if ((checkParamSet(e), !Array.isArray(e))) throw new Error("Parameter is no array");
+        }
+        function fastArrayDelete(e, t) {
+            if (t < 0 || t >= e.length) throw new Error("Out of bounds");
+            if (t == e.length - 1) return e.pop();
+            var i = e.pop();
+            return (e[t] = i), i;
+        }
+        function fastArrayDeleteValue(e, t) {
+            if (null == e) throw new Error("Tried to delete from non array!");
+            var i = e.indexOf(t);
+            return i < 0 ? (console.error("Value", t, "not contained in array:", e, "!"), t) : fastArrayDelete(e, i);
+        }
+        function countObjectKeysUnsafe(e) {
+            var t = 0;
+            for (var i in e) t += 1;
             return t;
-        };
-        
-        const NUMBER_ENTRIES = [
+        }
+        var NUMBER_ENTRIES = [
             [1e15, tr("quadrillion_suffix"), 1e15],
             [1e12, tr("trillions_suffix"), 1e12],
             [1e9, tr("billions_suffix"), 1e9],
             [1e6, tr("millions_suffix"), 1e6],
-            [1e3, tr("thousands_suffix"), 1e3],
+            [1e3, tr("thousands_suffix"), 1e4],
         ];
-        
-        const formatBigNumber = (e) => {
-            if (e < 0) return `-${formatBigNumber(-e)}`;
-        
-            for (let [value, suffix, divisor] of NUMBER_ENTRIES) {
-                if (e >= divisor) {
-                    let result = e / value;
-                    if (result < 10) return `${result.toFixed(2).replace(",", ".")}${suffix}`;
-                    if (result < 100) return `${result.toFixed(1).replace(",", ".")}${suffix}`;
-                    return `${Math.floor(result)}${suffix}`;
+        function formatBigNumber(e) {
+            var t = arguments.length > 1 && void 0 !== arguments[1] && arguments[1];
+            if (e < 0) return "-" + formatBigNumber(-e, t);
+            for (var i = 0; i < NUMBER_ENTRIES.length; ++i) {
+                var a = _slicedToArray(NUMBER_ENTRIES[i], 3),
+                    o = a[0],
+                    n = a[1];
+                if (e >= a[2]) {
+                    var r = e / o;
+                    return r < 10 ? floorDecimals(r, 2).toFixed(2).replace(",", ".") + n : r < 100 ? floorDecimals(r, 1).toFixed(1).replace(",", ".") + n : Math.floor(r) + n;
                 }
             }
-        
             if (e >= 100) return Math.floor(e).toString();
-            return Math.floor(e).toString();
-        };
-        
-        const keyToString = (e) => {
-            switch (e) {
-                case Phaser.Keyboard.ESC:
-                    return tr("key_esc");
-                case Phaser.Keyboard.F1:
-                case Phaser.Keyboard.F2:
-                case Phaser.Keyboard.F3:
-                case Phaser.Keyboard.F4:
-                case Phaser.Keyboard.F5:
-                case Phaser.Keyboard.F6:
-                case Phaser.Keyboard.F7:
-                case Phaser.Keyboard.F8:
-                case Phaser.Keyboard.F9:
-                case Phaser.Keyboard.F10:
-                case Phaser.Keyboard.F11:
-                case Phaser.Keyboard.F12:
-                case Phaser.Keyboard.F13:
-                case Phaser.Keyboard.F14:
-                case Phaser.Keyboard.F15:
-                    return "F" + (e - Phaser.Keyboard.F1 + 1);
-                case Phaser.Keyboard.SHIFT:
-                    return tr("key_shift");
-                case Phaser.Keyboard.ALT:
-                    return tr("key_alt");
-                case Phaser.Keyboard.UP:
-                    return "&#8593;";
-                case Phaser.Keyboard.DOWN:
-                    return "&#8595;";
-                case Phaser.Keyboard.LEFT:
-                    return "&#8592;";
-                case Phaser.Keyboard.RIGHT:
-                    return "&#8594;";
-                case Phaser.Keyboard.SPACEBAR:
-                    return tr("key_space");
-                case Phaser.Keyboard.ENTER:
-                    return tr("key_enter");
-                default:
-                    return String.fromCharCode(e);
+            if (t) {
+                var s = Math.floor((e % 1) * 10);
+                return 0 === s ? Math.floor(e).toString() : Math.floor(e) + "." + s;
             }
-        };
-        
-        const roundDecimals = (e, t) => {
-            const i = Math.pow(10, t);
+            return Math.floor(e).toString();
+        }
+        function formatBigNumberIfNumber(e) {
+            return Number(e) === e ? formatBigNumber(e) : (console.log("STR:", e), e);
+        }
+        function keyToString(e) {
+            return e === Phaser.Keyboard.ESC
+                ? tr("key_esc")
+                : e >= Phaser.Keyboard.F1 && e <= Phaser.Keyboard.F15
+                    ? "F" + (e - Phaser.Keyboard.F1 + 1)
+                    : e === Phaser.Keyboard.SHIFT
+                        ? tr("key_shift")
+                        : e === Phaser.Keyboard.ALT
+                            ? tr("key_alt")
+                            : e === Phaser.Keyboard.UP
+                                ? "&#8593;"
+                                : e === Phaser.Keyboard.DOWN
+                                    ? "&#8595;"
+                                    : e === Phaser.Keyboard.LEFT
+                                        ? "&#8592;"
+                                        : e === Phaser.Keyboard.RIGHT
+                                            ? "&#8594;"
+                                            : e === Phaser.Keyboard.SPACEBAR
+                                                ? tr("key_space")
+                                                : e === Phaser.Keyboard.ENTER
+                                                    ? tr("key_enter")
+                                                    : String.fromCharCode(e);
+        }
+        function roundDecimals(e, t) {
+            var i = Math.pow(10, t);
             return Math.round(e * i) / i;
-        };
-        
-        const floorDecimals = (e, t) => {
-            const i = Math.pow(10, t);
+        }
+        function floorDecimals(e, t) {
+            var i = Math.pow(10, t);
             return Math.floor(e * i) / i;
-        };
-        
-        const newEmptyMap = () => Object.create(null);
-        
-        const randomPointInCircle = (e = 1) => {
-            const t = Math.random() * e;
-            const i = 2 * Math.random() * Math.PI;
+        }
+        function newEmptyMap() {
+            return Object.create(null);
+        }
+        function randomPointInCircle() {
+            var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : 1,
+                t = Math.random() * e,
+                i = 2 * Math.random() * Math.PI;
             return [Math.sin(i) * t, Math.cos(i) * t];
-        };
-        
-        const drawJaggedLine = (e, t, i, a = 0.1, o = 7) => {
-            const n = i[0] - t[0];
-            const r = i[1] - t[1];
-            const s = -1 * r;
-            const l = n;
-        
+        }
+        function drawJaggedLine(e, t, i) {
+            var a = arguments.length > 3 && void 0 !== arguments[3] ? arguments[3] : 0.1,
+                o = arguments.length > 4 && void 0 !== arguments[4] ? arguments[4] : 7,
+                n = i[0] - t[0],
+                r = i[1] - t[1],
+                s = -1 * r,
+                l = n;
             e.moveTo(t[0], t[1]);
-        
-            for (let u = 0; u < o; ++u) {
-                const c = (u + 1) / o;
-                const d = 2 * Math.random() - 1;
-                const h = n * c + t[0] + s * d * a;
-                const p = r * c + t[1] + l * d * a;
+            for (var u = 0; u < o; ++u) {
+                var c = (u + 1) / o,
+                    d = 2 * Math.random() - 1,
+                    h = n * c + t[0] + s * d * a,
+                    p = r * c + t[1] + l * d * a;
                 e.lineTo(h, p);
             }
-        };        
-
+        }
         function secondsToDuration(e) {
             var t = Math.floor(e),
                 i = Math.floor(t / 60),
                 a = Math.floor(i / 60),
                 o = Math.floor(a / 24);
-        
-            switch (true) {
-                case t <= 60:
-                    return t <= 1 ? tr("second_before") : tr("seconds_before", t);
-        
-                case i <= 60:
-                    return i <= 1 ? tr("minute_before") : tr("minutes_before", i);
-        
-                case a <= 60:
-                    return a <= 1 ? tr("hour_before") : tr("hours_before", a);
-        
-                default:
-                    return o <= 1 ? tr("day_before") : tr("days_before", o);
-            }
-        }        
-
-        const EASING = {
+            return t <= 60
+                ? t <= 1
+                    ? tr("second_before")
+                    : tr("seconds_before", t)
+                : i <= 60
+                    ? i <= 1
+                        ? tr("minute_before")
+                        : tr("minutes_before", i)
+                    : a <= 60
+                        ? a <= 1
+                            ? tr("hour_before")
+                            : tr("hours_before", a)
+                        : o <= 1
+                            ? tr("day_before")
+                            : tr("days_before", o);
+        }
+        window.fn = formatBigNumber;
+        var EASING = {
             linear: function (e) {
                 return e;
             },
@@ -39746,17 +40054,17 @@
 
         let GAME_BALANCING = {};
         const MAXLEVEL_INDEX = 29;
-        
+
         class Balancing {
             constructor({
                 upgradeCostMultiplier = 1,
-                HealthMultiplier = 1,
+                healthMultiplier = 1,
                 damageMultiplier = 1,
                 zombieAmountInBossWave = 0.3,
                 bossInterval = 10
             } = {}) {
                 this.upgradeCostMultiplier = upgradeCostMultiplier;
-                this.HealthMultiplier = HealthMultiplier;
+                this.healthMultiplier = healthMultiplier;
                 this.damageMultiplier = damageMultiplier;
                 this.zombieAmountInBossWave = zombieAmountInBossWave;
                 this.bossInterval = bossInterval;
@@ -39771,29 +40079,29 @@
                         zombieCount: function(wave) {
                             return 1 + Math.floor(1.3 * Math.pow(wave, 1.2));
                         },
-                        creeperAmountPercent: 0.2,
+                        creeperAmountPercent: 1,
                         zombieAmountInBossWave: zombieAmountInBossWave,
                         enemies: {
                             zombie: {
-                                health: (wave) => HealthMultiplier * (270 + 1000 * Math.pow(wave, 3.4)),
+                                health: (wave) => this.healthMultiplier * (270 + 1000 * Math.pow(wave, 3.4)),
                                 grantsGold: (wave) => Math.floor(20 + 12 * Math.pow(wave, 1.1)),
-                                damage: (wave) => damageMultiplier * (40 + 60 * Math.pow(wave, 2.5)),
+                                damage: (wave) => this.damageMultiplier * (40 + 60 * Math.pow(wave, 2.5)),
                                 hitsPerSecond: (wave) => Math.min(1 + 0.1 * wave, 10),
                                 percentageAttackingBase: 0.7,
                                 speed: (wave) => 0.6 + 0.1 * Math.min(wave, 10) + 0.7 * Math.random(),
                             },
                             creeper: {
-                                health: (wave) => HealthMultiplier * (100 + 1200 * Math.pow(wave, 1.6)),
+                                health: (wave) => this.healthMultiplier * (100 + 1200 * Math.pow(wave, 1.6)),
                                 grantsGold: (wave) => 50 + 17 * wave,
-                                damage: (wave) => damageMultiplier * (200 + 200 * Math.pow(wave, 1.3)),
+                                damage: (wave) => this.damageMultiplier * (200 + 200 * Math.pow(wave, 1.3)),
                                 explosionRadius: (wave) => Math.min(1.5 + 0.05 * wave, 100),
                                 speed: (wave) => 2 + 0.2 * Math.min(wave, 10) + Math.random(),
                                 percentageAttackingBase: 0.8,
                             },
                             zombieBoss: {
-                                health: (wave) => HealthMultiplier * (15000 + 40000 * Math.pow(wave, 2.8)),
-                                grantsGold: (wave) => 5000 + Math.floor(20000 * Math.pow(wave, 1.75)),
-                                damage: (wave) => damageMultiplier * (35 + 225 * Math.pow(wave, 1.6)),
+                                health: (wave) => this.healthMultiplier * (15000 + 40000 * Math.pow(wave, 3.2)),
+                                grantsGold: (wave) => 5000 + Math.floor(20000 * Math.pow(wave, 2)),
+                                damage: (wave) => this.damageMultiplier * (35 + 225 * Math.pow(wave, 1.6)),
                                 hitsPerSecond: () => 10,
                                 speed: (wave) => 0.9 + 0.1 * Math.min(wave, 10),
                             },
@@ -39806,6 +40114,7 @@
                             ironMine: [],
                             cannonballProducer: [],
                             cannon: this.exponentialRaiseIntegersStartOffset(2, 1.35),
+                            bombTower: this.exponentialRaiseIntegersStartOffset(2, 1.2, 4),
                             harvester: [],
                             steelFactory: [],
                             woodProcessor: [],
@@ -39873,9 +40182,17 @@
                             consumeAmount: this.linearRaise(2, 1),
                             cost: this.exponentialRaise(250, 1.9)
                         },
+                        bombTower: {
+                            health: this.exponentialRaise(100),
+                            damage: this.exponentialRaise(400),
+                            radius: this.linearRaise(6, 0.3),
+                            shootsPerSecond: this.linearRaise(1, 0.1),
+                            consumeAmount: this.linearRaise(2, 2),
+                            cost: this.exponentialRaise(400, 2.1)
+                        },
                         lightningTower: {
-                            damage: this.exponentialRaise(400, 1.4),
-                            health: this.exponentialRaise(100, 1.7),
+                            damage: this.exponentialRaise(150),
+                            health: this.exponentialRaise(400),
                             radius: this.linearRaise(4, 0.125),
                             spread: this.linearRaise(3, 0.25),
                             shootsPerSecond: this.linearRaise(1, 0.4),
@@ -39917,6 +40234,7 @@
                         const {
                             arrowTower,
                             cannon,
+                            bombTower,
                             lightningTower,
                             ironMine,
                             cannonballProducer,
@@ -39957,7 +40275,7 @@
                             nuclearStation.push(d);
                             uraniumMine.push(h);
         
-                            ["arrowTower", "cannon", "lightningTower"].forEach((t) =>
+                            ["arrowTower", "cannon", "bombTower", "lightningTower"].forEach((t) =>
                                 updateStorage(buildings[t][e], amountLimits[t][e])
                             );
                         };
@@ -40016,9 +40334,7 @@
             }
         }
         const initBalancing = new Balancing({});
-
         var MAX_STALL_TIME = 1e3;
-
         function makePanelBackground(e, t, i, a) {
             var o = arguments.length > 4 && void 0 !== arguments[4] ? arguments[4] : 1,
                 n = arguments.length > 5 && void 0 !== arguments[5] ? arguments[5] : 0,
@@ -40267,6 +40583,7 @@
                 new IronMineMeta(),
                 new CannonballProducerMeta(),
                 new CannonMeta(),
+                new BombTowerMeta(),
                 new HarvesterMeta(),
                 new SteelFactoryMeta(),
                 new WoodProcessorMeta(),
@@ -40343,6 +40660,7 @@
             ADD_BASE = 68234,
             ATTRIBUTE_NAMES = ["\0"],
             CULLING_BORDER_SIZE = 10;
+
         (window.showDialog = function (e) {
             console.log("[UI] Showing dialog", e),
                 document.getElementById(e).classList.add("visible_dialog"),
@@ -40360,7 +40678,7 @@
             }),
             (window.showBugReporter = function () {
                 if (window.showDialog) {
-                    if ((window.gtag && window.gtag("event", "bug_reporter_opened", { event_category: "ingame" }), !window.Stomt)) {
+                    if ((!window.Stomt)) {
                         console.log("Initializing stomt ..."), (window.Stomt = []);
                         var e = document.createElement("script"),
                             t = document.getElementsByTagName("script")[0];
@@ -40369,7 +40687,6 @@
                     window.showDialog("bug_report_bg");
                 }
             });
-            
         var ZOMBIE_ANIMATION_SEED = 0,
             MAP_DISTRIBUTE_X = _randomJs2.default.integer(Config.mapBorder, Config.numTilesX - Config.mapBorder - 1),
             MAP_DISTRIBUTE_Y = _randomJs2.default.integer(Config.mapBorder, Config.numTilesY - Config.mapBorder - 1),
@@ -40377,11 +40694,9 @@
             CENTER_X = Config.numTilesX / 2,
             CENTER_Y = Config.numTilesY / 2,
             TUTORIAL_AREA_SIZE = 3;
-
         function isInTutorialArea(e, t) {
             return e > CENTER_X - TUTORIAL_AREA_SIZE && e < CENTER_X + TUTORIAL_AREA_SIZE && t > CENTER_Y - TUTORIAL_AREA_SIZE && t < CENTER_Y + TUTORIAL_AREA_SIZE;
         }
-
         var randomize1 = 0.2 * Math.random() + 0.8,
             randomize2 = 0.2 * Math.random() + 0.8,
             RIVER_METHOD = function (e) {
@@ -40390,120 +40705,83 @@
             RIVER_HEIGHT_METHOD = function () {
                 return 5;
             };
-
-        function getRandomUnusedTileSeed(e, t, maxAttempts = 50) {
-            while (maxAttempts > 0) {
-                const [a, o] = getRandomCoordinates(t);
-
-                if (!e.isTileUsed(a, o) && !isInTutorialArea(a, o)) {
-                    return [a, o];
-                }
-
-                maxAttempts--;
+        function getRandomUnusedTileSeed(e, t) {
+            for (var i = 50; i > 0;) {
+                var a = MAP_DISTRIBUTE_X(t),
+                    o = MAP_DISTRIBUTE_Y(t);
+                if (!e.isTileUsed(a, o) && !isInTutorialArea(a, o)) return [a, o];
+                i -= 1;
             }
-
-            console.error("Failed to find a free tile on the map!");
-            return [0, 0];
+            return console.error("Failed to find free tile on map!"), [0, 0];
         }
-
-        function getRandomCoordinates(t) {
-            return [MAP_DISTRIBUTE_X(t), MAP_DISTRIBUTE_Y(t)];
-        }
-
         function getRandomUnusedTileSeedMultiple(e, t) {
-            let bestSeed = { pos: null, distanceToClosest: 0 };
-        
-            for (let a = 0; a < 3; ++a) {
-                const [r, s] = getRandomUnusedTileSeed(e, t);
-                const closestEntity = e.findClosestEntity({
-                    tileX: r,
-                    tileY: s,
-                    radius: INIT_RADIUS,
-                    condition: entity => !(entity instanceof RiverEntity),
-                });
-        
-                const distanceToClosest = closestEntity
-                    ? Math.pow(r - closestEntity.getTileX(), 2) + Math.pow(s - closestEntity.getTileY(), 2)
-                    : Math.pow(INIT_RADIUS + 1, 2);
-        
-                if (distanceToClosest > bestSeed.distanceToClosest) {
-                    bestSeed = { pos: [r, s], distanceToClosest };
-                }
+            for (var i = { pos: null, distanceToClosest: 0 }, a = 0; a < 3; ++a) {
+                var o = getRandomUnusedTileSeed(e, t),
+                    n = _slicedToArray(o, 2),
+                    r = n[0],
+                    s = n[1],
+                    l = e.findClosestEntity({
+                        tileX: r,
+                        tileY: s,
+                        radius: INIT_RADIUS,
+                        condition: function (e) {
+                            return !(e instanceof RiverEntity);
+                        },
+                    }),
+                    u = null;
+                if (l) {
+                    var c = r - l.getTileX(),
+                        d = s - l.getTileY();
+                    u = c * c + d * d;
+                } else u = INIT_RADIUS + 1;
+                u > i.distanceToClosest && ((i.pos = [r, s]), (i.distanceToClosest = u));
             }
-        
-            return bestSeed.pos;
+            return i.pos;
         }
-
-        const BINOMES = {
-            river: {
-                id: 0,
-                color: 3381759,
-                resource: MetaRiverEntity,
-                density: 1
-            },
-            forest: {
-                id: 1,
-                color: 7864183,
-                resource: MetaTree,
-                density: 0.3
-            },
-            mines: {
-                id: 2,
-                color: 11184810,
-                resource: MetaIronOre,
-                density: 0.2
-            },
-            uranium: {
-                id: 3,
-                color: 7001728,
-                resource: MetaUraniumOre,
-                density: 0.3
-            },
-            crystals: {
-                id: 4,
-                color: 16742263,
-                resource: MetaGoldOre,
-                density: 0.4
-            },
+        var BINOMES = {
+            river: { id: 0, color: 3381759, resource: MetaRiverEntity, density: 1 },
+            forest: { id: 1, color: 7864183, resource: MetaTree, density: 0.3 },
+            mines: { id: 2, color: 11184810, resource: MetaIronOre, density: 0.2 },
+            uranium: { id: 3, color: 7001728, resource: MetaUraniumOre, density: 0.3 },
+            crystals: { id: 4, color: 16742263, resource: MetaGoldOre, density: 0.4 },
         };
-        
-        function initializeMap(e, seed = 0) {
-            if (Config.emptyMap || Config.spawnDefaultBuildings) {
-                return;
-            }
-        
-            const map = e.map;
-        
-            const spawnEntity = (t, a, resource) => {
-                const [s, l] = tileToWorld(t, a);
-                const u = e.particles.spawnNew(s, l, resource);
-                map.setTileContent(t, a, u);
-                e.entityMgr.registerEntity(u);
-                u.onSpawned(t, a);
-            };
-        
-            const o = _randomJs2.default.engines.mt19937();
-            console.log(`World seed generated: ${seed}`)
-            o.seed(seed);
-        
-            spawnEntity(CENTER_X - 3, CENTER_Y, MetaGoldOre);
-            spawnEntity(CENTER_X + 2, CENTER_Y - 2, MetaIronOre);
-            spawnEntity(CENTER_X - 2, CENTER_Y - 1, MetaTree);
-            spawnEntity(CENTER_X + 1, CENTER_Y + 2, MetaUraniumOre);
-        
-            const spawnResources = (amount, resource) => {
-                for (let n = 0; n < amount; ++n) {
-                    const [x, y] = getRandomUnusedTileSeedMultiple(map, o);
-                    spawnEntity(x, y, resource);
+        function initializeMap(e) {
+            var t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : 0;
+            if (!Config.emptyMap && !Config.spawnDefaultBuildings) {
+                var i = e.map,
+                    a = function (t, a, o) {
+                        var n = tileToWorld(t, a),
+                            r = _slicedToArray(n, 2),
+                            s = r[0],
+                            l = r[1],
+                            u = e.particles.spawnNew(s, l, o);
+                        i.setTileContent(t, a, u), e.entityMgr.registerEntity(u), u.onSpawned(t, a);
+                    },
+                    o = _randomJs2.default.engines.mt19937();
+                o.seed(t);
+                a(CENTER_X - 3, CENTER_Y, MetaGoldOre), a(CENTER_X + 2, CENTER_Y - 2, MetaIronOre), a(CENTER_X - 2, CENTER_Y - 1, MetaTree), a(CENTER_X + 1, CENTER_Y + 2, MetaUraniumOre);
+                for (var n = 0; n < 300; ++n) {
+                    var r = getRandomUnusedTileSeedMultiple(i, o),
+                        s = _slicedToArray(r, 2);
+                    a(s[0], s[1], MetaUraniumOre);
                 }
-            };
-        
-            spawnResources(300, MetaUraniumOre);
-            spawnResources(270, MetaTree);
-            spawnResources(400, MetaIronOre);
-            spawnResources(1000, MetaGoldOre);
+                for (var l = 0; l < 270; ++l) {
+                    var u = getRandomUnusedTileSeedMultiple(i, o),
+                        c = _slicedToArray(u, 2);
+                    a(c[0], c[1], MetaGoldOre);
+                }
+                for (var d = 0; d < 400; ++d) {
+                    var h = getRandomUnusedTileSeedMultiple(i, o),
+                        p = _slicedToArray(h, 2);
+                    a(p[0], p[1], MetaIronOre);
+                }
+                for (var g = 0; g < 1e3; ++g) {
+                    var m = getRandomUnusedTileSeedMultiple(i, o),
+                        _ = _slicedToArray(m, 2);
+                    a(_[0], _[1], MetaTree);
+                }
+            }
         }
-
         var BASE = "base",
             DAMAGE = "damage",
             HEALTH = "health",
@@ -40511,6 +40789,7 @@
             CANNON = "cannon",
             LIGHTNING = "lightningTower",
             ARROW = "arrowTower",
+            BOMB = "bombTower",
             WALL = "wall",
             MINERS = "miners",
             BUILDINGS = "building",
@@ -40540,361 +40819,129 @@
             big = BigSkill,
             feature = FeatureSkill,
             SKILL_TREE = {
-                base: new InitialSkill(BASE, [0, 0], {
-                    damage: 3,
-                    health: 3
-                }),
-                damage_0: new skill(DAMAGE, [1.5, 0], {
-                    damage: 2
-                }, ["base"]),
-                damage_1: new skill(DAMAGE, [1, 1], {
-                    damage: 2
-                }, ["damage_0"]),
-                damage_2: new skill(DAMAGE, [1, 0], {
-                    damage: 2
-                }, ["damage_1"]),
-                damage_3: new skill2(DAMAGE, [1, 0], {
-                    damage: 2
-                }, ["damage_2"]),
-                damage_circle_l: new skill2(DAMAGE, [1, 0], {
-                    damage: 2
-                }, ["damage_3"]),
-                damage_circle_tl: new skill2(DAMAGE, [0.75, 1], {
-                    damage: 2
-                }, ["damage_circle_l"]),
-                damage_circle_bl: new skill2(DAMAGE, [0.75, -1], {
-                    damage: 2
-                }, ["damage_circle_l"]),
-                damage_circle_tr: new skill2(DAMAGE, [0.75, 0], {
-                    damage: 2
-                }, ["damage_circle_tl"]),
-                damage_circle_br: new skill2(DAMAGE, [0.75, 0], {
-                    damage: 2
-                }, ["damage_circle_bl"]),
-                damage_circle_r: new skill2(DAMAGE, [0.75, -1], {
-                    damage: 2
-                }, ["damage_circle_tr", "damage_circle_br"]),
-                damage_circle_center: new big(DAMAGE, [-1.125, 0], {
-                    damage: 10
-                }, ["damage_circle_r"]),
-                damage_4: new skill3(DAMAGE, [1.25, 0], {
-                    damage: 2
-                }, ["damage_circle_r"]),
-                crit_0: new skill(DAMAGE, [1, -1], {
-                    damage: 2
-                }, ["damage_0"]),
-                crit_initial: new big(CRITICAL, [1, 0], {
-                    critical: 5
-                }, ["crit_0"]),
-                crit_1: new skill2(CRITICAL, [1, -1], {
-                    critical: 2
-                }, ["crit_initial"]),
-                crit_2: new skill2(CRITICAL, [1, 0], {
-                    critical: 2
-                }, ["crit_1"]),
-                crit_3_t: new skill2(CRITICAL, [0.75, 0.75], {
-                    critical: 2
-                }, ["crit_2"]),
-                crit_3_b: new skill2(CRITICAL, [0.75, -0.75], {
-                    critical: 2
-                }, ["crit_2"]),
-                crit_3_r: new skill2(CRITICAL, [0.75, -0.75], {
-                    critical: 2
-                }, ["crit_3_t", "crit_3_b"]),
-                crit_n_damage: new big(CRITICAL, [1, 0], {
-                    damage: 2,
-                    critical: 6
-                }, ["crit_3_r"]),
-                crit_4: new skill3(CRITICAL, [1, 0], {
-                    critical: 2
-                }, ["crit_n_damage"]),
-                crit_5: new skill3(CRITICAL, [0, 1], {
-                    critical: 2
-                }, ["crit_4"]),
-                crit_n_damage_1: new skill3(DAMAGE, [1, -1], {
-                    damage: 2,
-                    critical: 2
-                }, ["damage_4", "crit_5"]),
+                base: new InitialSkill(BASE, [0, 0], { damage: 3, health: 3 }),
+                damage_0: new skill(DAMAGE, [1.5, 0], { damage: 2 }, ["base"]),
+                damage_1: new skill(DAMAGE, [1, 1], { damage: 2 }, ["damage_0"]),
+                damage_2: new skill(DAMAGE, [1, 0], { damage: 2 }, ["damage_1"]),
+                damage_3: new skill2(DAMAGE, [1, 0], { damage: 2 }, ["damage_2"]),
+                damage_circle_l: new skill2(DAMAGE, [1, 0], { damage: 2 }, ["damage_3"]),
+                damage_circle_tl: new skill2(DAMAGE, [0.75, 1], { damage: 2 }, ["damage_circle_l"]),
+                damage_circle_bl: new skill2(DAMAGE, [0.75, -1], { damage: 2 }, ["damage_circle_l"]),
+                damage_circle_tr: new skill2(DAMAGE, [0.75, 0], { damage: 2 }, ["damage_circle_tl"]),
+                damage_circle_br: new skill2(DAMAGE, [0.75, 0], { damage: 2 }, ["damage_circle_bl"]),
+                damage_circle_r: new skill2(DAMAGE, [0.75, -1], { damage: 2 }, ["damage_circle_tr", "damage_circle_br"]),
+                damage_circle_center: new big(DAMAGE, [-1.125, 0], { damage: 10 }, ["damage_circle_r"]),
+                damage_4: new skill3(DAMAGE, [1.25, 0], { damage: 2 }, ["damage_circle_r"]),
+                crit_0: new skill(DAMAGE, [1, -1], { damage: 2 }, ["damage_0"]),
+                crit_initial: new big(CRITICAL, [1, 0], { critical: 5 }, ["crit_0"]),
+                crit_1: new skill2(CRITICAL, [1, -1], { critical: 2 }, ["crit_initial"]),
+                crit_2: new skill2(CRITICAL, [1, 0], { critical: 2 }, ["crit_1"]),
+                crit_3_t: new skill2(CRITICAL, [0.75, 0.75], { critical: 2 }, ["crit_2"]),
+                crit_3_b: new skill2(CRITICAL, [0.75, -0.75], { critical: 2 }, ["crit_2"]),
+                crit_3_r: new skill2(CRITICAL, [0.75, -0.75], { critical: 2 }, ["crit_3_t", "crit_3_b"]),
+                crit_n_damage: new big(CRITICAL, [1, 0], { damage: 2, critical: 6 }, ["crit_3_r"]),
+                crit_4: new skill3(CRITICAL, [1, 0], { critical: 2 }, ["crit_n_damage"]),
+                crit_5: new skill3(CRITICAL, [0, 1], { critical: 2 }, ["crit_4"]),
+                crit_n_damage_1: new skill3(DAMAGE, [1, -1], { damage: 2, critical: 2 }, ["damage_4", "crit_5"]),
                 double_crit_feature: new feature(DAMAGE, [1, 0], tr("feature_criticalHitsx3"), ["crit_n_damage_1"]),
-                health_0: new skill(HEALTH, [-1, 1], {
-                    health: 3
-                }, ["base"]),
-                health_1: new skill(HEALTH, [-1, 0], {
-                    health: 3
-                }, ["health_0"]),
-                health_2: new skill(HEALTH, [-1, 1], {
-                    health: 3
-                }, ["health_1"]),
-                health_3: new big(HEALTH, [-1, 0], {
-                    health: 10
-                }, ["health_2"]),
-                health_4: new skill2(HEALTH, [-1, 0], {
-                    health: 3
-                }, ["health_3"]),
-                health_circle_tr: new skill2(HEALTH, [-0.75, 1], {
-                    health: 3
-                }, ["health_4"]),
-                health_circle_br: new skill2(HEALTH, [-0.75, -1], {
-                    health: 3
-                }, ["health_4"]),
-                health_circle_tl: new skill2(HEALTH, [-0.75, 0], {
-                    health: 3
-                }, ["health_circle_tr"]),
-                health_circle_bl: new skill2(HEALTH, [-0.75, 0], {
-                    health: 3
-                }, ["health_circle_br"]),
-                health_circle_l: new skill2(HEALTH, [-0.75, -1], {
-                    health: 3
-                }, ["health_circle_tl", "health_circle_bl"]),
-                health_circle_center: new big(HEALTH, [1.125, 0], {
-                    health: 10
-                }, ["health_circle_l", "health_circle_l"]),
-                health_5: new skill3(HEALTH, [-1, 0], {
-                    health: 3
-                }, ["health_circle_l"]),
-                health_6: new skill3(HEALTH, [-1, -1], {
-                    health: 3
-                }, ["health_5"]),
+                health_0: new skill(HEALTH, [-1, 1], { health: 3 }, ["base"]),
+                health_1: new skill(HEALTH, [-1, 0], { health: 3 }, ["health_0"]),
+                health_2: new skill(HEALTH, [-1, 1], { health: 3 }, ["health_1"]),
+                health_3: new big(HEALTH, [-1, 0], { health: 10 }, ["health_2"]),
+                health_4: new skill2(HEALTH, [-1, 0], { health: 3 }, ["health_3"]),
+                health_circle_tr: new skill2(HEALTH, [-0.75, 1], { health: 3 }, ["health_4"]),
+                health_circle_br: new skill2(HEALTH, [-0.75, -1], { health: 3 }, ["health_4"]),
+                health_circle_tl: new skill2(HEALTH, [-0.75, 0], { health: 3 }, ["health_circle_tr"]),
+                health_circle_bl: new skill2(HEALTH, [-0.75, 0], { health: 3 }, ["health_circle_br"]),
+                health_circle_l: new skill2(HEALTH, [-0.75, -1], { health: 3 }, ["health_circle_tl", "health_circle_bl"]),
+                health_circle_center: new big(HEALTH, [1.125, 0], { health: 10 }, ["health_circle_l", "health_circle_l"]),
+                health_5: new skill3(HEALTH, [-1, 0], { health: 3 }, ["health_circle_l"]),
+                health_6: new skill3(HEALTH, [-1, -1], { health: 3 }, ["health_5"]),
                 health_regen_feature: new feature(HEALTH, [0, -1], tr("feature_buildingHealthReg"), ["health_6"]),
-                cannonDamage_0: new skill(CANNON, [1, -1], {
-                    cannonDamage: 4
-                }, ["base"]),
-                cannonDamage_1: new skill(CANNON, [0, -1], {
-                    cannonProjectileSpeed: 10
-                }, ["cannonDamage_0"]),
-                cannonDamage_2: new skill2(CANNON, [1, -1], {
-                    cannonDamage: 4
-                }, ["cannonDamage_1"]),
-                cannonDamage_3: new skill2(CANNON, [-0.75, -0.75], {
-                    cannonProjectileSpeed: 10
-                }, ["cannonDamage_2"]),
-                cannonDamage_4: new skill2(CANNON, [0.75, -0.75], {
-                    cannonProjectileSpeed: 10
-                }, ["cannonDamage_2"]),
-                cannonDamage_5: new skill2(CANNON, [-0.75, -0.75], {
-                    cannonDamage: 4
-                }, ["cannonDamage_4", "cannonDamage_3"]),
-                cannonDamage_6: new big(CANNON, [0, -1], {
-                    cannonDamage: 15,
-                    cannonProjectileSpeed: 10
-                }, ["cannonDamage_5"]),
-                cannonDamage_7: new skill3(CANNON, [1, -1], {
-                    cannonDamage: 4
-                }, ["cannonDamage_6"]),
-                cannonDamage_8: new skill3(CANNON, [1, 0], {
-                    cannonDamage: 4
-                }, ["cannonDamage_7"]),
+                cannonDamage_0: new skill(CANNON, [1, -1], { cannonDamage: 4 }, ["base"]),
+                cannonDamage_1: new skill(CANNON, [0, -1], { cannonProjectileSpeed: 10 }, ["cannonDamage_0"]),
+                cannonDamage_2: new skill2(CANNON, [1, -1], { cannonDamage: 4 }, ["cannonDamage_1"]),
+                cannonDamage_3: new skill2(CANNON, [-0.75, -0.75], { cannonProjectileSpeed: 10 }, ["cannonDamage_2"]),
+                cannonDamage_4: new skill2(CANNON, [0.75, -0.75], { cannonProjectileSpeed: 10 }, ["cannonDamage_2"]),
+                cannonDamage_5: new skill2(CANNON, [-0.75, -0.75], { cannonDamage: 4 }, ["cannonDamage_4", "cannonDamage_3"]),
+                cannonDamage_6: new big(CANNON, [0, -1], { cannonDamage: 15, cannonProjectileSpeed: 10 }, ["cannonDamage_5"]),
+                cannonDamage_7: new skill3(CANNON, [1, -1], { cannonDamage: 4 }, ["cannonDamage_6"]),
+                cannonDamage_8: new skill3(CANNON, [1, 0], { cannonDamage: 4 }, ["cannonDamage_7"]),
                 cannon_feature_double_dmg: new feature(CANNON, [1, 0], tr("feature_cannonDoubleDmg"), ["cannonDamage_8"]),
-                arrowDamage_0: new skill(ARROW, [0, -1.5], {
-                    arrowDamage: 4
-                }, ["base"]),
-                arrowDamage_1: new skill(ARROW, [0, -1], {
-                    arrowDamage: 4
-                }, ["arrowDamage_0"]),
-                arrowFireRate_0: new skill2(ARROW, [0, -1], {
-                    arrowFireRate: 5
-                }, ["arrowDamage_1"]),
-                arrowFireRate_1: new big(ARROW, [0, -1], {
-                    arrowFireRate: 5,
-                    arrowDamage: 10
-                }, ["arrowFireRate_0"]),
-                arrowDamage_2: new skill2(ARROW, [1, -1], {
-                    arrowDamage: 4
-                }, ["arrowFireRate_1"]),
-                arrowDamage_3: new skill2(ARROW, [0, -1], {
-                    arrowDamage: 4
-                }, ["arrowDamage_2"]),
-                arrowRadius_0: new skill2(ARROW, [-1, -1], {
-                    arrowRadius: 15
-                }, ["arrowFireRate_1"]),
-                arrowRadius_1: new skill2(ARROW, [0, -1], {
-                    arrowRadius: 15
-                }, ["arrowRadius_0"]),
-                arrowRadius_2: new big(ARROW, [1, -1], {
-                    arrowRadius: 35,
-                    arrowDamage: 10
-                }, ["arrowRadius_1", "arrowDamage_3"]),
-                arrowRadius_3: new skill3(ARROW, [0, -1], {
-                    arrowRadius: 15
-                }, ["arrowRadius_2"]),
+                arrowDamage_0: new skill(ARROW, [0, -1.5], { arrowDamage: 4 }, ["base"]),
+                arrowDamage_1: new skill(ARROW, [0, -1], { arrowDamage: 4 }, ["arrowDamage_0"]),
+                arrowFireRate_0: new skill2(ARROW, [0, -1], { arrowFireRate: 5 }, ["arrowDamage_1"]),
+                arrowFireRate_1: new big(ARROW, [0, -1], { arrowFireRate: 5, arrowDamage: 10 }, ["arrowFireRate_0"]),
+                arrowDamage_2: new skill2(ARROW, [1, -1], { arrowDamage: 4 }, ["arrowFireRate_1"]),
+                arrowDamage_3: new skill2(ARROW, [0, -1], { arrowDamage: 4 }, ["arrowDamage_2"]),
+                arrowRadius_0: new skill2(ARROW, [-1, -1], { arrowRadius: 15 }, ["arrowFireRate_1"]),
+                arrowRadius_1: new skill2(ARROW, [0, -1], { arrowRadius: 15 }, ["arrowRadius_0"]),
+                arrowRadius_2: new big(ARROW, [1, -1], { arrowRadius: 35, arrowDamage: 10 }, ["arrowRadius_1", "arrowDamage_3"]),
+                arrowRadius_3: new skill3(ARROW, [0, -1], { arrowRadius: 15 }, ["arrowRadius_2"]),
                 arrowFeatureDoubleDamage: new feature(ARROW, [0, -1], tr("feature_arrowDoubleDmg"), ["arrowRadius_3"]),
-                lightningDamage_0: new skill(LIGHTNING, [-1, -1], {
-                    lightningDamage: 4
-                }, ["base"]),
-                lightningRadius_0: new skill(LIGHTNING, [0, -1], {
-                    lightningRadius: 5
-                }, ["lightningDamage_0"]),
-                lightningDamage_1: new skill2(LIGHTNING, [-1, -1], {
-                    lightningDamage: 4
-                }, ["lightningRadius_0"]),
-                lightningRadius_1: new skill2(LIGHTNING, [0, -1], {
-                    lightningRadius: 5
-                }, ["lightningDamage_1"]),
-                lightningDamage_2: new skill2(LIGHTNING, [-1, -1], {
-                    lightningDamage: 4
-                }, ["lightningRadius_1"]),
-                lightningDamageRadius_0: new big(LIGHTNING, [-1, 0], {
-                    lightningRadius: 5,
-                    lightningDamage: 7
-                }, ["lightningDamage_2"]),
-                lightningDamage_3: new skill3(LIGHTNING, [0, -1], {
-                    lightningDamage: 4
-                }, ["lightningDamageRadius_0"]),
-                lightningRadius_2: new skill3(LIGHTNING, [-1, -1], {
-                    lightningRadius: 5
-                }, ["lightningDamage_3"]),
-                lightningRadius_3: new skill3(LIGHTNING, [0, -1], {
-                    lightningRadius: 5
-                }, ["lightningRadius_2"]),
+                lightningDamage_0: new skill(LIGHTNING, [-1, -1], { lightningDamage: 4 }, ["base"]),
+                lightningRadius_0: new skill(LIGHTNING, [0, -1], { lightningRadius: 5 }, ["lightningDamage_0"]),
+                lightningDamage_1: new skill2(LIGHTNING, [-1, -1], { lightningDamage: 4 }, ["lightningRadius_0"]),
+                lightningRadius_1: new skill2(LIGHTNING, [0, -1], { lightningRadius: 5 }, ["lightningDamage_1"]),
+                lightningDamage_2: new skill2(LIGHTNING, [-1, -1], { lightningDamage: 4 }, ["lightningRadius_1"]),
+                lightningDamageRadius_0: new big(LIGHTNING, [-1, 0], { lightningRadius: 5, lightningDamage: 7 }, ["lightningDamage_2"]),
+                lightningDamage_3: new skill3(LIGHTNING, [0, -1], { lightningDamage: 4 }, ["lightningDamageRadius_0"]),
+                lightningRadius_2: new skill3(LIGHTNING, [-1, -1], { lightningRadius: 5 }, ["lightningDamage_3"]),
+                lightningRadius_3: new skill3(LIGHTNING, [0, -1], { lightningRadius: 5 }, ["lightningRadius_2"]),
                 lightningFeatureCrit: new feature(LIGHTNING, [0, -1], tr("feature_lightningCritV2"), ["lightningRadius_3"]),
-                wallHealth_0: new skill(WALL, [-1.5, 0], {
-                    wallHealth: 4
-                }, ["base"]),
-                wallHealth_1: new skill(WALL, [-1, -1], {
-                    wallHealth: 4
-                }, ["wallHealth_0"]),
-                wallHealth_2: new skill(WALL, [-1, 0], {
-                    wallHealth: 4
-                }, ["wallHealth_1"]),
-                wallHealth_3: new skill2(WALL, [-1, 0], {
-                    wallHealth: 4
-                }, ["wallHealth_2"]),
-                wallHealthSub_1: new skill2(WALL, [0, -1], {
-                    wallHealth: 4
-                }, ["wallHealth_3"]),
-                wallHealthSub_2: new skill2(WALL, [-0.75, -1], {
-                    wallHealth: 4
-                }, ["wallHealthSub_1"]),
-                wallHealth_4: new big(WALL, [-1.5, 0], {
-                    wallHealth: 10
-                }, ["wallHealth_3", "health_circle_bl"]),
-                wallHealth_5: new skill2(WALL, [-1, -1], {
-                    wallHealth: 4
-                }, ["wallHealth_4"]),
-                wallHealth_6: new skill2(WALL, [0, -1], {
-                    wallHealth: 4
-                }, ["wallHealth_5"]),
-                wallHealth_7: new skill3(WALL, [1, -1], {
-                    wallHealth: 4
-                }, ["wallHealth_6", "wallHealthSub_2"]),
+                wallHealth_0: new skill(WALL, [-1.5, 0], { wallHealth: 4 }, ["base"]),
+                wallHealth_1: new skill(WALL, [-1, -1], { wallHealth: 4 }, ["wallHealth_0"]),
+                wallHealth_2: new skill(WALL, [-1, 0], { wallHealth: 4 }, ["wallHealth_1"]),
+                wallHealth_3: new skill2(WALL, [-1, 0], { wallHealth: 4 }, ["wallHealth_2"]),
+                wallHealthSub_1: new skill2(WALL, [0, -1], { wallHealth: 4 }, ["wallHealth_3"]),
+                wallHealthSub_2: new skill2(WALL, [-0.75, -1], { wallHealth: 4 }, ["wallHealthSub_1"]),
+                wallHealth_4: new big(WALL, [-1.5, 0], { wallHealth: 10 }, ["wallHealth_3", "health_circle_bl"]),
+                wallHealth_5: new skill2(WALL, [-1, -1], { wallHealth: 4 }, ["wallHealth_4"]),
+                wallHealth_6: new skill2(WALL, [0, -1], { wallHealth: 4 }, ["wallHealth_5"]),
+                wallHealth_7: new skill3(WALL, [1, -1], { wallHealth: 4 }, ["wallHealth_6", "wallHealthSub_2"]),
                 wallHealthFeatureMiss: new feature(WALL, [0, -1], tr("feature_wallMiss"), ["wallHealth_7"]),
-                minersSpeed_0: new skill(MINERS, [0, 1.5], {
-                    minersSpeed: 4,
-                    transporterSpeed: 5
-                }, ["base"]),
-                minersSpeed_1: new skill(MINERS, [-1, 1], {
-                    minersSpeed: 4
-                }, ["minersSpeed_0"]),
-                minersSpeed_2: new big(MINERS, [-1, 0], {
-                    minersSpeed: 12
-                }, ["minersSpeed_1"]),
-                minersSpeed_3: new skill2(MINERS, [0, 1], {
-                    minersSpeed: 4
-                }, ["minersSpeed_2"]),
-                minersSpeed_4_bl: new skill2(MINERS, [-1, 0.75], {
-                    minersSpeed: 4
-                }, ["minersSpeed_3"]),
-                minersSpeed_4_br: new skill2(MINERS, [1, 0.75], {
-                    minersSpeed: 4
-                }, ["minersSpeed_3"]),
-                minersSpeed_4_tl: new skill2(MINERS, [0, 0.75], {
-                    minersSpeed: 4
-                }, ["minersSpeed_4_bl"]),
-                minersSpeed_4_tr: new skill2(MINERS, [0, 0.75], {
-                    minersSpeed: 4
-                }, ["minersSpeed_4_br"]),
-                minersSpeed_4_top: new skill2(MINERS, [1, 0.75], {
-                    minersSpeed: 4
-                }, ["minersSpeed_4_tl", "minersSpeed_4_tr"]),
-                minersSpeed_4_inner: new big(MINERS, [0, -1.125], {
-                    minersSpeed: 12
-                }, ["minersSpeed_4_top"]),
-                minersSpeed_5: new skill3(MINERS, [0, 1], {
-                    minersSpeed: 4
-                }, ["minersSpeed_4_top"]),
-                minersSpeed_6: new skill3(MINERS, [-1, 1], {
-                    minersSpeed: 4
-                }, ["minersSpeed_5"]),
+                minersSpeed_0: new skill(MINERS, [0, 1.5], { minersSpeed: 4, transporterSpeed: 5 }, ["base"]),
+                minersSpeed_1: new skill(MINERS, [-1, 1], { minersSpeed: 4 }, ["minersSpeed_0"]),
+                minersSpeed_2: new big(MINERS, [-1, 0], { minersSpeed: 12 }, ["minersSpeed_1"]),
+                minersSpeed_3: new skill2(MINERS, [0, 1], { minersSpeed: 4 }, ["minersSpeed_2"]),
+                minersSpeed_4_bl: new skill2(MINERS, [-1, 0.75], { minersSpeed: 4 }, ["minersSpeed_3"]),
+                minersSpeed_4_br: new skill2(MINERS, [1, 0.75], { minersSpeed: 4 }, ["minersSpeed_3"]),
+                minersSpeed_4_tl: new skill2(MINERS, [0, 0.75], { minersSpeed: 4 }, ["minersSpeed_4_bl"]),
+                minersSpeed_4_tr: new skill2(MINERS, [0, 0.75], { minersSpeed: 4 }, ["minersSpeed_4_br"]),
+                minersSpeed_4_top: new skill2(MINERS, [1, 0.75], { minersSpeed: 4 }, ["minersSpeed_4_tl", "minersSpeed_4_tr"]),
+                minersSpeed_4_inner: new big(MINERS, [0, -1.125], { minersSpeed: 12 }, ["minersSpeed_4_top"]),
+                minersSpeed_5: new skill3(MINERS, [0, 1], { minersSpeed: 4 }, ["minersSpeed_4_top"]),
+                minersSpeed_6: new skill3(MINERS, [-1, 1], { minersSpeed: 4 }, ["minersSpeed_5"]),
                 minersRadius_feature1: new feature(MINERS, [-1, 1], tr("feature_minerRadius1"), ["minersSpeed_6"], 25),
-                minersSpeed_7: new skill3(MINERS, [-1, 0], {
-                    minersSpeed: 4
-                }, ["minersRadius_feature1"]),
-                minersSpeed_8: new skill3(MINERS, [-1, 0], {
-                    minersSpeed: 4
-                }, ["minersSpeed_7"]),
+                minersSpeed_7: new skill3(MINERS, [-1, 0], { minersSpeed: 4 }, ["minersRadius_feature1"]),
+                minersSpeed_8: new skill3(MINERS, [-1, 0], { minersSpeed: 4 }, ["minersSpeed_7"]),
                 minersRadius_feature2: new feature(MINERS, [-1, 1], tr("feature_minerRadius2"), ["minersSpeed_8"], 50),
-                buildingStorage_0: new skill2(BUILDINGS, [-1, 1], {
-                    buildingStorage: 15
-                }, ["minersSpeed_4_tl"]),
-                buildingStorage_1: new skill2(BUILDINGS, [-1, 0], {
-                    buildingStorage: 15
-                }, ["buildingStorage_0"]),
-                buildingStorage_2: new big(BUILDINGS, [-1, 0], {
-                    buildingStorage: 40
-                }, ["buildingStorage_1"]),
-                buildingStorage_3: new skill3(BUILDINGS, [-1, 0], {
-                    buildingStorage: 15
-                }, ["buildingStorage_2"]),
-                buildingStorage_4: new skill3(BUILDINGS, [-1, -1], {
-                    buildingStorage: 15
-                }, ["buildingStorage_3"]),
+                buildingStorage_0: new skill2(BUILDINGS, [-1, 1], { buildingStorage: 15 }, ["minersSpeed_4_tl"]),
+                buildingStorage_1: new skill2(BUILDINGS, [-1, 0], { buildingStorage: 15 }, ["buildingStorage_0"]),
+                buildingStorage_2: new big(BUILDINGS, [-1, 0], { buildingStorage: 40 }, ["buildingStorage_1"]),
+                buildingStorage_3: new skill3(BUILDINGS, [-1, 0], { buildingStorage: 15 }, ["buildingStorage_2"]),
+                buildingStorage_4: new skill3(BUILDINGS, [-1, -1], { buildingStorage: 15 }, ["buildingStorage_3"]),
                 buildingStorageDouble: new feature(DAMAGE, [-1, 0], tr("feature_doubleStorage"), ["buildingStorage_4"]),
-                factorySpeed_0: new skill(FACTORIES, [1, 1], {
-                    factorySpeed: 10
-                }, ["base"]),
-                factorySpeed_1: new skill(FACTORIES, [0, 1], {
-                    factorySpeed: 10
-                }, ["factorySpeed_0"]),
-                factorySpeed_2: new skill(FACTORIES, [1, 1], {
-                    factorySpeed: 10
-                }, ["factorySpeed_1"]),
-                factorySpeed_3_b: new skill2(FACTORIES, [1, 0], {
-                    factorySpeed: 10
-                }, ["factorySpeed_2"]),
-                factorySpeed_3_ru: new skill2(FACTORIES, [1, 1], {
-                    factorySpeed: 10
-                }, ["factorySpeed_3_b"]),
-                factorySpeed_3_u: new skill2(FACTORIES, [0, 1], {
-                    factorySpeed: 10
-                }, ["factorySpeed_2"]),
-                factorySpeed_3_rl: new skill2(FACTORIES, [1, 1], {
-                    factorySpeed: 10
-                }, ["factorySpeed_3_u"]),
-                factorySpeed_3_t: new big(FACTORIES, [0, 1], {
-                    factorySpeed: 30
-                }, ["factorySpeed_3_ru", "factorySpeed_3_rl"]),
-                factorySpeed_4: new skill3(FACTORIES, [1, 0], {
-                    factorySpeed: 10
-                }, ["factorySpeed_3_t"]),
+                factorySpeed_0: new skill(FACTORIES, [1, 1], { factorySpeed: 10 }, ["base"]),
+                factorySpeed_1: new skill(FACTORIES, [0, 1], { factorySpeed: 10 }, ["factorySpeed_0"]),
+                factorySpeed_2: new skill(FACTORIES, [1, 1], { factorySpeed: 10 }, ["factorySpeed_1"]),
+                factorySpeed_3_b: new skill2(FACTORIES, [1, 0], { factorySpeed: 10 }, ["factorySpeed_2"]),
+                factorySpeed_3_ru: new skill2(FACTORIES, [1, 1], { factorySpeed: 10 }, ["factorySpeed_3_b"]),
+                factorySpeed_3_u: new skill2(FACTORIES, [0, 1], { factorySpeed: 10 }, ["factorySpeed_2"]),
+                factorySpeed_3_rl: new skill2(FACTORIES, [1, 1], { factorySpeed: 10 }, ["factorySpeed_3_u"]),
+                factorySpeed_3_t: new big(FACTORIES, [0, 1], { factorySpeed: 30 }, ["factorySpeed_3_ru", "factorySpeed_3_rl"]),
+                factorySpeed_4: new skill3(FACTORIES, [1, 0], { factorySpeed: 10 }, ["factorySpeed_3_t"]),
                 factoryFeatureSpeed: new feature(FACTORIES, [1, 1], tr("feature_factoriesSpeed"), ["factorySpeed_4"]),
                 transporterFeatureInvisible: new feature(TRANSPORTERS, [0, 1.5], tr("feature_transporterInvisible"), ["minersSpeed_0"], 5),
-                transporterSpeed_0: new skill2(TRANSPORTERS, [0, 1], {
-                    transporterSpeed: 10
-                }, ["transporterFeatureInvisible"]),
-                transporterSpeed_1: new skill2(TRANSPORTERS, [1, 1], {
-                    transporterSpeed: 10
-                }, ["transporterSpeed_0"]),
-                transporterSpeed_2: new skill2(TRANSPORTERS, [0, 1], {
-                    transporterSpeed: 10
-                }, ["transporterSpeed_1"]),
-                transporterSpeed_3_l: new skill3(TRANSPORTERS, [-1, 0.75], {
-                    transporterSpeed: 10
-                }, ["transporterSpeed_2"]),
-                transporterSpeed_3_lm: new skill3(TRANSPORTERS, [0, 0.75], {
-                    transporterSpeed: 10
-                }, ["transporterSpeed_3_l"]),
-                transporterSpeed_3_r: new skill3(TRANSPORTERS, [1, 0.75], {
-                    transporterSpeed: 10
-                }, ["transporterSpeed_2"]),
-                transporterSpeed_3_rm: new skill3(TRANSPORTERS, [0, 0.75], {
-                    transporterSpeed: 10
-                }, ["transporterSpeed_3_r"]),
-                transporterSpeed_3_t: new skill3(TRANSPORTERS, [1, 0.75], {
-                    transporterSpeed: 10
-                }, ["transporterSpeed_3_lm", "transporterSpeed_3_rm"]),
-                transporterSpeed_3_c: new big(TRANSPORTERS, [0, 1.125], {
-                    transporterSpeed: 40
-                }, ["transporterSpeed_3_t"]),
+                transporterSpeed_0: new skill2(TRANSPORTERS, [0, 1], { transporterSpeed: 10 }, ["transporterFeatureInvisible"]),
+                transporterSpeed_1: new skill2(TRANSPORTERS, [1, 1], { transporterSpeed: 10 }, ["transporterSpeed_0"]),
+                transporterSpeed_2: new skill2(TRANSPORTERS, [0, 1], { transporterSpeed: 10 }, ["transporterSpeed_1"]),
+                transporterSpeed_3_l: new skill3(TRANSPORTERS, [-1, 0.75], { transporterSpeed: 10 }, ["transporterSpeed_2"]),
+                transporterSpeed_3_lm: new skill3(TRANSPORTERS, [0, 0.75], { transporterSpeed: 10 }, ["transporterSpeed_3_l"]),
+                transporterSpeed_3_r: new skill3(TRANSPORTERS, [1, 0.75], { transporterSpeed: 10 }, ["transporterSpeed_2"]),
+                transporterSpeed_3_rm: new skill3(TRANSPORTERS, [0, 0.75], { transporterSpeed: 10 }, ["transporterSpeed_3_r"]),
+                transporterSpeed_3_t: new skill3(TRANSPORTERS, [1, 0.75], { transporterSpeed: 10 }, ["transporterSpeed_3_lm", "transporterSpeed_3_rm"]),
+                transporterSpeed_3_c: new big(TRANSPORTERS, [0, 1.125], { transporterSpeed: 40 }, ["transporterSpeed_3_t"]),
                 transporterFeatureGlobal: new feature(TRANSPORTERS, [0, 1.125], tr("feature_transporterGlobal"), ["transporterSpeed_3_c"], 25),
             };
         if (Config.showTotalSkillPoints) {
@@ -40978,6 +41025,7 @@
                     { frame: { y: 89, x: 396, w: 20, h: 20 }, rotated: false, filename: "building-arrowFactory.png", trimmed: true, sourceSize: { h: 20, w: 20 }, spriteSourceSize: { y: 0, x: 0, w: 20, h: 20 } },
                     { frame: { y: 62, x: 373, w: 20, h: 20 }, rotated: false, filename: "building-arrowTower.png", trimmed: true, sourceSize: { h: 20, w: 20 }, spriteSourceSize: { y: 0, x: 0, w: 20, h: 20 } },
                     { frame: { y: 122, x: 486, w: 20, h: 20 }, rotated: false, filename: "building-cannon.png", trimmed: true, sourceSize: { h: 20, w: 20 }, spriteSourceSize: { y: 0, x: 0, w: 20, h: 20 } },
+                    { frame: { y: 122, x: 486, w: 20, h: 20 }, rotated: false, filename: "building-bombTower.png", trimmed: true, sourceSize: { h: 20, w: 20 }, spriteSourceSize: { y: 0, x: 0, w: 20, h: 20 } },
                     { frame: { y: 43, x: 431, w: 20, h: 20 }, rotated: false, filename: "building-cannonballProducer.png", trimmed: true, sourceSize: { h: 20, w: 20 }, spriteSourceSize: { y: 0, x: 0, w: 20, h: 20 } },
                     { frame: { y: 39, x: 385, w: 20, h: 20 }, rotated: false, filename: "building-goldMine.png", trimmed: true, sourceSize: { h: 20, w: 20 }, spriteSourceSize: { y: 0, x: 0, w: 20, h: 20 } },
                     { frame: { y: 20, x: 408, w: 20, h: 20 }, rotated: false, filename: "building-harvester.png", trimmed: true, sourceSize: { h: 20, w: 20 }, spriteSourceSize: { y: 0, x: 0, w: 20, h: 20 } },
@@ -41257,8 +41305,12 @@
                 new TipUnlockedShieldTower(),
                 new TipBoss(),
                 new TipPerformance(),
+                new TipVoteForUs(),
                 new TipUsefulSettings(),
                 new TipMoreThan10Points(),
+                new TipSteamVersion(),
+                new TipSteamVersion2(),
+                new TipSteamVersion3(),
             ],
             MODE_NONE = 0,
             MODE_UPGRADE = 1,
@@ -41415,7 +41467,7 @@
         }
 
         function initWelcomeScreen(initialPlayerName = null, selectedGameMode = null) {
-            console.log("Initialize welcome screen at", Math.floor(performance.now()));
+            console.log("Initialize welcome screen at", Math.floor(performance && performance.now()));
 
             const playerNameInput = document.getElementById("playerName");
             playerNameInput.disabled = false;
@@ -41518,6 +41570,7 @@
             }
         }
 
+
         var MIN_ZOOM_LEVEL = 1,
             MAX_ZOOM_LEVEL = 3,
             ZOOM_STRENGTH = 0.3,
@@ -41561,9 +41614,9 @@
         var app = null;
         initPolyfills(),
             translateDocument(),
-            console.log("JS parsed at", Math.floor(performance.now())),
+            console.log("JS parsed at", Math.floor(performance && performance.now())),
             setTimeout(function () {
-                console.log("Booting app at", Math.floor(performance.now())), (app = new App());
+                console.log("Booting app at", Math.floor(performance && performance.now())), (app = new App());
             }, 10);
 
         const originalGetElementById = document.getElementById;
@@ -56887,6 +56940,7 @@
             crystals_per_sec: "Crystals per sec",
             cannon: "Cannon",
             arrow: "Arrow",
+            bomb: "Bomb",
             lightning: "Lightning",
             iron: "Iron",
             wood: "Wood",
@@ -57007,6 +57061,8 @@
             building_arrowTower_desc: "Single target tower which shoots arrows at zombies",
             building_cannon: "Cannon",
             building_cannon_desc: "Shoots cannonballs which explode when hitting zombies",
+            building_bombTower: "Bomb Tower",
+            building_bombTower_desc: "Slowls shoots bombs that deal huge damage in a wide range",
             building_cannonballProducer: "Cannon Ball Factory",
             building_cannonballProducer_desc: "Produces cannon balls out of 2 unprocessed iron",
             building_goldMine: "Crystal Mine",
