@@ -22512,7 +22512,10 @@
             _en = __webpack_require__(379),
             _en2 = _interopRequireDefault(_en),
             _zhCN = __webpack_require__(392),
-            _zhCN2 = _interopRequireDefault(_zhCN);
+            _zhCN2 = _interopRequireDefault(_zhCN),
+            _ja = __webpack_require__(380),
+            _ja2 = _interopRequireDefault(_ja);
+
         function _interopRequireDefault(e) {
             return e && e.__esModule ? e : { default: e };
         }
@@ -23278,48 +23281,35 @@
                     ]),
                     t
                 );
-            })(Component),
-            SpawnGraveOnDeathComponent = (function (e) {
-                function t(i) {
-                    var a = i.particleClass,
-                        o = void 0 === a ? null : a,
-                        n = i.fadeDuration,
-                        r = void 0 === n ? 5 : n,
-                        s = i.randomFactor,
-                        l = void 0 === s ? 0 : s,
-                        u = i.startAlpha,
-                        c = void 0 === u ? 0.3 : u,
-                        d = i.destinationAlpha,
-                        h = void 0 === d ? 0 : d,
-                        p = i.sprite,
-                        g = void 0 === p ? null : p,
-                        m = i.showOnMinimap,
-                        _ = void 0 !== m && m;
-                    _classCallCheck(this, t);
-                    var f = _possibleConstructorReturn(this, e.call(this));
-                    return (f.particleClass = o), (f.fadeDuration = r), (f.randomFactor = l), (f.destinationAlpha = h), (f.startAlpha = c), (f.sprite = g), (f.showOnMinimap = _), f;
+            })(Component);
+
+            class SpawnGraveOnDeathComponent extends Component {
+                constructor({
+                    particleClass = null,
+                    fadeDuration = 5,
+                    randomFactor = 0,
+                    startAlpha = 0.3,
+                    destinationAlpha = 0,
+                    sprite = null,
+                    showOnMinimap = false,
+                }) {
+                    super();
+            
+                    this.particleClass = particleClass;
+                    this.fadeDuration = fadeDuration;
+                    this.randomFactor = randomFactor;
+                    this.destinationAlpha = destinationAlpha;
+                    this.startAlpha = startAlpha;
+                    this.sprite = sprite;
+                    this.showOnMinimap = showOnMinimap;
                 }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "SpawnGraveOnDeathComponent";
-                            },
-                        },
-                    ]),
-                    (t.prototype.debugStr = function () {
-                        var e = "sprite " + this.sprite;
-                        return (
-                            this.particleClass && (e = "particle " + this.particleClass.name),
-                            "Spawns (" + e + ") on death for " + this.fadeDuration + " ms, from alpha " + this.startAlpha + " to " + this.destinationAlpha + ", random " + this.randomFactor + " showOnMinimap " + this.showOnMinimap
-                        );
-                    }),
-                    t
-                );
-            })(Component),
-            StorageComponent = (function (e) {
+            
+                static get name() {
+                    return "SpawnGraveOnDeathComponent";
+                }
+            }
+            
+            const StorageComponent = (function (e) {
                 function t(i) {
                     var a = i.limits,
                         o = i.initialResources;
@@ -24769,251 +24759,173 @@
                     }),
                     t
                 );
-            })(BuildingRequirement),
-            EnemyAIComponent = (function (e) {
-                function t(i) {
-                    var a = i.speedTilesPerSecond,
-                        o = void 0 === a ? 1 : a,
-                        n = i.farSpeedBoost,
-                        r = void 0 === n ? 15 : n,
-                        s = i.nearDistanceTiles,
-                        l = void 0 === s ? 6 : s,
-                        u = i.farDistanceTiles,
-                        c = void 0 === u ? 20 : u;
-                    _classCallCheck(this, t);
-                    var d = _possibleConstructorReturn(this, e.call(this));
-                    return checkParamsSet(o, r, l, c), (d.speedTilesPerSecond = o), (d.farSpeedBoost = r), (d.farDistanceTiles = c), (d.nearDistanceTiles = l), (d.targetsBaseOnly = false), (d.currentAttackTargetTile = null), d;
+            })(BuildingRequirement);
+
+            class EnemyAIComponent extends Component {
+                constructor({
+                    speedTilesPerSecond = 1,
+                    farSpeedBoost = 10,
+                    nearDistanceTiles = 6,
+                    farDistanceTiles = 20,
+                }) {
+                    super();
+            
+                    this.speedTilesPerSecond = speedTilesPerSecond;
+                    this.farSpeedBoost = farSpeedBoost;
+                    this.nearDistanceTiles = nearDistanceTiles;
+                    this.farDistanceTiles = farDistanceTiles;
+                    this.targetsBaseOnly = false;
+                    this.currentAttackTargetTile = null;
                 }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "EnemyAIComponent";
-                            },
-                        },
-                    ]),
-                    (t.prototype.debugStr = function () {
-                        return "speed: " + this.speedTilesPerSecond + " tiles/s (boost x" + this.farSpeedBoost + "), ";
-                    }),
-                    t
-                );
-            })(Component),
-            DamageOnHitComponent = (function (e) {
-                function t(i) {
-                    var a = i.targetClass,
-                        o = i.damage,
-                        n = i.hitsPerSecond,
-                        r = i.maxRadiusTiles,
-                        s = void 0 === r ? meleeAttackDistance : r,
-                        l = i.attackParticle,
-                        u = void 0 === l ? null : l,
-                        c = i.attackStyle,
-                        d = void 0 === c ? ATTACK_REGULAR : c;
-                    _classCallCheck(this, t);
-                    var h = _possibleConstructorReturn(this, e.call(this));
-                    return checkParamsSet(a, o, n, s), (h.targetClass = a), (h.damage = o), (h.maxRadiusTiles = s), (h.hitTimer = h.makeTimerFromTicksPerSecond(n)), (h.attackParticle = u), (h.attackStyle = d), (h.penetratesShields = false), h;
+            
+                static get name() {
+                    return "EnemyAIComponent";
                 }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "DamageOnHitComponent";
-                            },
-                        },
-                    ]),
-                    (t.prototype.debugStr = function () {
-                        return "Do " + this.damage + " to " + this.targetClass.name + ", " + this.hitTimer.getTicksPerSecond() + " /s";
-                    }),
-                    t
-                );
-            })(Component),
-            GrantOnKillComponent = (function (e) {
-                function t(i) {
-                    var a = i.resources;
-                    _classCallCheck(this, t);
-                    var o = _possibleConstructorReturn(this, e.call(this));
-                    for (var n in (checkParamsSet(a), (o.resources = a), o.resources)) {
-                        var r = o.resources[n];
-                        if (null == r || r < 0) throw new Error("Invalid amount: " + r);
+            }
+            
+            class DamageOnHitComponent extends Component {
+                constructor({ targetClass, damage, hitsPerSecond, maxRadiusTiles = meleeAttackDistance, attackParticle = null, attackStyle = ATTACK_REGULAR }) {
+                    super();
+                    this.targetClass = targetClass;
+                    this.damage = damage;
+                    this.maxRadiusTiles = maxRadiusTiles;
+                    this.hitTimer = this.makeTimerFromTicksPerSecond(hitsPerSecond);
+                    this.attackParticle = attackParticle;
+                    this.attackStyle = attackStyle;
+                    this.penetratesShields = false;
+                }
+            
+                static get name() {
+                    return "DamageOnHitComponent";
+                }
+            }
+            
+            class GrantOnKillComponent extends Component {
+                constructor({ resources }) {
+                    super();
+                    this.resources = resources;
+                    for (let resource in this.resources) {
+                        let amount = this.resources[resource];
+                        if (amount == null || amount < 0) {
+                            throw new Error(`Invalid amount: ${amount}`);
+                        }
                     }
-                    return (o.hitByProjectile = false), o;
+                    this.hitByProjectile = false;
                 }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "GrantOnKillComponent";
-                            },
-                        },
-                    ]),
-                    (t.prototype.onExternalDamage = function () {
-                        this.hitByProjectile = true;
-                    }),
-                    (t.prototype.debugStr = function () {
-                        var e = "grant ";
-                        for (var t in this.resources) e += this.resources[t] + " x " + t + " ";
-                        return (e += " on kill, hitByProjectile: " + this.hitByProjectile);
-                    }),
-                    t
-                );
-            })(Component),
-            FlashOnDamageComponent = (function (e) {
-                function t() {
-                    _classCallCheck(this, t);
-                    var i = _possibleConstructorReturn(this, e.call(this));
-                    return (i.lastFlashTime = 0), (i.lastHealthRecorded = 0), i;
+            
+                static get name() {
+                    return "GrantOnKillComponent";
                 }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "FlashOnDamageComponent";
-                            },
-                        },
-                    ]),
-                    (t.prototype.debugStr = function () {
-                        return "flashes red on damage";
-                    }),
-                    t
-                );
-            })(Component),
-            BurnsOnDayComponent = (function (e) {
-                function t(i) {
-                    var a = i.looseHealthPercent,
-                        o = void 0 === a ? 2 : a,
-                        n = i.ticksPerSecond,
-                        r = void 0 === n ? 1 : n;
-                    _classCallCheck(this, t);
-                    var s = _possibleConstructorReturn(this, e.call(this));
-                    checkParamsSet(o, r), (s.looseHealthPercent = o);
-                    var l = Math.random();
-                    return (s.looseHealthTimer = s.makeTimerFromTicksPerSecond(r + l)), s;
+            
+                onExternalDamage() {
+                    this.hitByProjectile = true;
                 }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "BurnsOnDayComponent";
-                            },
-                        },
-                    ]),
-                    (t.prototype.debugStr = function () {
-                        return "Loose " + this.looseHealthPercent + " % of health on day, " + this.looseHealthTimer.getTicksPerSecond() + " times per second";
-                    }),
-                    t
-                );
-            })(Component),
-            FlipToMovementDirectionComponent = (function (e) {
-                function t() {
-                    _classCallCheck(this, t);
-                    var i = _possibleConstructorReturn(this, e.call(this));
-                    return (i.lastX = 0), i;
+            }
+            
+            class FlashOnDamageComponent extends Component {
+                constructor() {
+                    super();
+                    this.lastFlashTime = 0;
+                    this.lastHealthRecorded = 0;
                 }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "FlipToMovementDirectionComponent";
-                            },
-                        },
-                    ]),
-                    (t.prototype.debugStr = function () {
-                        return "Flips sprite based on movement direction (left/right)";
-                    }),
-                    t
-                );
-            })(Component),
-            PhysicsComponent = (function (e) {
-                function t() {
-                    _classCallCheck(this, t);
-                    var i = _possibleConstructorReturn(this, e.call(this));
-                    return (i.velocityX = 0), (i.velocityY = 0), (i.desiredVelocityX = 0), (i.desiredVelocityY = 0), (i.velocityChangeSmoothness = 2), (i.bodySize = 10), i;
+            
+                static get name() {
+                    return "FlashOnDamageComponent";
                 }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "PhysicsComponent";
-                            },
-                        },
-                    ]),
-                    (t.prototype.debugStr = function () {
-                        return (
-                            "\n            vel: (" +
-                            this.velocityX.toFixed(3) +
-                            " " +
-                            this.velocityY.toFixed(3) +
-                            ")\n            desired: (" +
-                            this.desiredVelocityX.toFixed(3) +
-                            " " +
-                            this.desiredVelocityY.toFixed(3) +
-                            ")\n            body size: " +
-                            this.bodySize
-                        );
-                    }),
-                    t
-                );
-            })(Component),
-            Enemy = (function (e) {
-                function t(i, a, o, n, r) {
-                    _classCallCheck(this, t), checkParamsSet(i, a, o, n, r);
-                    var s = _possibleConstructorReturn(this, e.call(this, i, a, o));
-                    return (
-                        (s.level = n),
-                        (s.balancing = r),
-                        (s.uniqueId = idPool),
-                        (idPool += 1),
-                        s.addComponent(new EnemyAIComponent({ speedTilesPerSecond: r.speed(n) })),
-                        s.addComponent(new SpawnGraveOnDeathComponent({ particleClass: MetaGravestoneParticle, randomFactor: 1 })),
-                        s.addComponent(new FlipToMovementDirectionComponent({})),
-                        s.addComponent(new HealthComponent({ maxHealth: r.health(n) })),
-                        s.addComponent(new HealthBarComponent({ style: "bar" })),
-                        s.addComponent(new BurnsOnDayComponent({})),
-                        s.addComponent(new GrantOnKillComponent({ resources: { gems: r.grantsGold(n) } })),
-                        r.damage && r.hitsPerSecond && s.addComponent(new DamageOnHitComponent({ targetClass: BuildingInstance, damage: r.damage(n), hitsPerSecond: r.hitsPerSecond(n) })),
-                        s.addComponent(new FlashOnDamageComponent()),
-                        s.addComponent(new PhysicsComponent()),
-                        s.makeSprite(s.level),
-                        s
-                    );
+            
+                debugStr() {
+                    return "flashes red on damage";
                 }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "Enemy";
-                            },
-                        },
-                    ]),
-                    (t.prototype.getUniqueId = function () {
-                        return this.uniqueId;
-                    }),
-                    (t.prototype.isDynamic = function () {
-                        return true;
-                    }),
-                    (t.prototype.useInPathfinding = function () {
-                        return false;
-                    }),
-                    t
-                );
-            })(EntityRenderObject),
-            ProjectileShooterComponent = (function (e) {
+            }
+            
+            class BurnsOnDayComponent extends Component {
+                constructor({ loseHealthPercent = 2, ticksPerSecond = 1 }) {
+                    super();
+                    this.loseHealthPercent = loseHealthPercent;
+                    let randomFactor = Math.random();
+                    this.loseHealthTimer = this.makeTimerFromTicksPerSecond(ticksPerSecond + randomFactor);
+                }
+            
+                static get name() {
+                    return "BurnsOnDayComponent";
+                }
+            }
+            
+            class FlipToMovementDirectionComponent extends Component {
+                constructor() {
+                    super();
+                    this.lastX = 0;
+                }
+            
+                static get name() {
+                    return "FlipToMovementDirectionComponent";
+                }
+            }
+            
+            class PhysicsComponent extends Component {
+                constructor() {
+                    super();
+                    this.velocityX = 0;
+                    this.velocityY = 0;
+                    this.desiredVelocityX = 0;
+                    this.desiredVelocityY = 0;
+                    this.velocityChangeSmoothness = 2;
+                    this.bodySize = 10;
+                }
+            
+                static get name() {
+                    return "PhysicsComponent";
+                }
+            }   
+
+            class Enemy extends EntityRenderObject {
+                constructor(i, a, o, n, r) {
+                    super(i, a, o);
+            
+                    this.level = n;
+                    this.balancing = r;
+                    this.uniqueId = idPool;
+                    idPool += 1;
+            
+                    this.addComponent(new EnemyAIComponent({ speedTilesPerSecond: r.speed(n) }));
+                    this.addComponent(new SpawnGraveOnDeathComponent({ particleClass: MetaGravestoneParticle, randomFactor: 1 }));
+                    this.addComponent(new FlipToMovementDirectionComponent({}));
+                    this.addComponent(new HealthComponent({ maxHealth: r.health(n) }));
+                    this.addComponent(new HealthBarComponent({ style: "bar" }));
+                    this.addComponent(new BurnsOnDayComponent({}));
+                    this.addComponent(new GrantOnKillComponent({ resources: { gems: r.grantsGold(n) } }));
+            
+                    if (r.damage && r.hitsPerSecond) {
+                        this.addComponent(new DamageOnHitComponent({
+                            targetClass: BuildingInstance,
+                            damage: r.damage(n),
+                            hitsPerSecond: r.hitsPerSecond(n),
+                        }));
+                    }
+            
+                    this.addComponent(new FlashOnDamageComponent());
+                    this.addComponent(new PhysicsComponent());
+                    this.makeSprite(this.level);
+                }
+            
+                static get name() {
+                    return "Enemy";
+                }
+            
+                getUniqueId() {
+                    return this.uniqueId;
+                }
+            
+                isDynamic() {
+                    return true;
+                }
+            
+                useInPathfinding() {
+                    return false;
+                }
+            }
+            
+            const ProjectileShooterComponent = (function (e) {
                 function t(i) {
                     var a = i.projectileClass,
                         o = i.projectileParams,
@@ -26776,74 +26688,93 @@
                     t
                 );
             })(Component);
-            const BasicDefensiveTower = (function (e) {
-                function t(i, a, o, n, r) {
-                    _classCallCheck(this, t);
-                    var s = _possibleConstructorReturn(this, e.call(this, i, a, o, n));
-                    return s.init(r), s;
+            
+            class BasicDefensiveTower extends BuildingInstance {
+                constructor(i, a, o, n, r) {
+                    super(i, a, o, n);
+                    this.init(r);
                 }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "BasicDefensiveTower";
-                            },
-                        },
-                    ]),
-                    (t.prototype.init = function (e) {
-                        var t = e.producerMetaClass,
-                            i = e.projectileResource,
-                            a = e.projectileClass,
-                            o = e.additionalProjectileParams,
-                            n = void 0 === o ? null : o,
-                            r = e.radiusMultiplierKey,
-                            s = void 0 === r ? null : r,
-                            l = e.damageMultiplierKey,
-                            u = void 0 === l ? null : l,
-                            c = e.shootsPerSecondMultiplierKey,
-                            d = void 0 === c ? null : c,
-                            h = e.canCriticalStrike,
-                            p = void 0 !== h && h;
-                        checkParamsSet(t, i, a),
-                            this.addVisualizeConnections([t]),
-                            this.addComponent(new StorageVisualizerComponent(i)),
-                            this.addComponent(new VisualizeMissingResourcesComponent({})),
-                            this.addComponent(new StorageComponent({})),
-                            this.addComponent(new ConsumerComponent([i])),
-                            this.addComponent(new ProjectileShooterComponent({ projectileClass: a, consumeResource: i, projectileParams: n || {}, canCriticalStrike: p })),
-                            (this.projectileResourceId = i.name),
-                            (this.radiusMultiplierKey = s),
-                            (this.damageMultiplierKey = u),
-                            (this.shootsPerSecondMultiplierKey = d);
-                    }),
-                    (t.prototype.updateComponentsToStats = function (t) {
-                        if ((e.prototype.updateComponentsToStats.call(this, t), !t.consumeAmount)) throw new Error("Missing key 'consumeAmount' for defensive tower");
-                        if (!t.radius) throw new Error("Missing key 'radius' for defensive tower");
-                        if (!t.shootsPerSecond) throw new Error("Missing key 'shootsPerSecond' for defensive tower");
-                        if (!t.damage) throw new Error("Missing key 'damage' for defensive tower");
-                        var i = this.phaser.rootRecursiveRef,
-                            a = t.consumeAmount,
-                            o = t.radius,
-                            n = t.damage,
-                            r = t.shootsPerSecond;
-                        this.radiusMultiplierKey && (o *= i.stats.getSkillGainMultiplier(this.radiusMultiplierKey)),
-                            this.damageMultiplierKey && (n *= i.stats.getSkillGainMultiplier(this.damageMultiplierKey)),
-                            (n *= i.stats.getSkillGainMultiplier("damage")),
-                            this.shootsPerSecondMultiplierKey && (r *= i.stats.getSkillGainMultiplier(this.shootsPerSecondMultiplierKey));
-                        var s = t.storage;
-                        (s *= i.stats.getSkillGainMultiplier("buildingStorage")), i.stats.isSkillUnlocked("buildingStorageDouble") && (s *= 2);
-                        var l = {};
-                        (l[this.projectileResourceId] = Math.round(s)), (this.getComponent(StorageComponent).limits = l), (this.getComponent(StorageVisualizerComponent).divisor = a);
-                        var u = this.getComponent(ProjectileShooterComponent);
-                        (u.projectileParams.damage = n), (u.consumeAmount = a), (u.radius = o), u.setShootsPerSecond(r);
-                        var c = {};
-                        (c[this.projectileResourceId] = a), (this.getComponent(VisualizeMissingResourcesComponent).resourceIdsAndAmount = c);
-                    }),
-                    t
-                );
-            })(BuildingInstance);
+            
+                static get name() {
+                    return "BasicDefensiveTower";
+                }
+            
+                init({
+                    producerMetaClass,
+                    projectileResource,
+                    projectileClass,
+                    additionalProjectileParams = null,
+                    radiusMultiplierKey = null,
+                    damageMultiplierKey = null,
+                    shootsPerSecondMultiplierKey = null,
+                    canCriticalStrike = false,
+                }) {
+            
+                    checkParamsSet(producerMetaClass, projectileResource, projectileClass);
+                    this.addVisualizeConnections([producerMetaClass]);
+                    this.addComponent(new StorageVisualizerComponent(projectileResource));
+                    this.addComponent(new VisualizeMissingResourcesComponent({}));
+                    this.addComponent(new StorageComponent({}));
+                    this.addComponent(new ConsumerComponent([projectileResource]));
+                    this.addComponent(new ProjectileShooterComponent({
+                        projectileClass: projectileClass,
+                        consumeResource: projectileResource,
+                        projectileParams: additionalProjectileParams || {},
+                        canCriticalStrike,
+                    }));
+                    
+                    this.projectileResourceId = projectileResource.name;
+                    this.radiusMultiplierKey = radiusMultiplierKey;
+                    this.damageMultiplierKey = damageMultiplierKey;
+                    this.shootsPerSecondMultiplierKey = shootsPerSecondMultiplierKey;
+                }
+            
+                updateComponentsToStats(t) {
+                    super.updateComponentsToStats(t);
+                    if (!t.consumeAmount) throw new Error("Missing key 'consumeAmount' for defensive tower");
+                    if (!t.radius) throw new Error("Missing key 'radius' for defensive tower");
+                    if (!t.shootsPerSecond) throw new Error("Missing key 'shootsPerSecond' for defensive tower");
+                    if (!t.damage) throw new Error("Missing key 'damage' for defensive tower");
+                    
+                    const i = this.phaser.rootRecursiveRef;
+                    let a = t.consumeAmount;
+                    let o = t.radius;
+                    let n = t.damage;
+                    let r = t.shootsPerSecond;
+            
+                    if (this.radiusMultiplierKey) {
+                        o *= i.stats.getSkillGainMultiplier(this.radiusMultiplierKey);
+                    }
+                    if (this.damageMultiplierKey) {
+                        n *= i.stats.getSkillGainMultiplier(this.damageMultiplierKey);
+                        n *= i.stats.getSkillGainMultiplier("damage");
+                    }
+                    if (this.shootsPerSecondMultiplierKey) {
+                        r *= i.stats.getSkillGainMultiplier(this.shootsPerSecondMultiplierKey);
+                    }
+            
+                    let s = t.storage;
+                    s *= i.stats.getSkillGainMultiplier("buildingStorage");
+                    if (i.stats.isSkillUnlocked("buildingStorageDouble")) {
+                        s *= 2;
+                    }
+            
+                    let l = {};
+                    l[this.projectileResourceId] = Math.round(s);
+                    this.getComponent(StorageComponent).limits = l;
+                    this.getComponent(StorageVisualizerComponent).divisor = a;
+            
+                    let u = this.getComponent(ProjectileShooterComponent);
+                    u.projectileParams.damage = n;
+                    u.consumeAmount = a;
+                    u.radius = o;
+                    u.setShootsPerSecond(r);
+            
+                    let c = {};
+                    c[this.projectileResourceId] = a;
+                    this.getComponent(VisualizeMissingResourcesComponent).resourceIdsAndAmount = c;
+                }
+            }       
 
             class ArrowTowerMeta extends MetaBuilding {
                 constructor() {
@@ -27364,11 +27295,10 @@
                         projectileResource: Cannonball,
                         additionalProjectileParams: {
                             speedTilesPerSecond: 2,
-                            aoeRadiusTiles: 10,
+                            aoeRadiusTiles: 8,
                             explosionClass: MetaCannonExplosionParticle
                         },
-                        //damageMultiplierKey: "bombDamage",
-                        canCriticalStrike: true
+                        //damageMultiplierKey: "bombDamage"
                     });
                     this.addComponent(new BombTowerComponent());
                 }
@@ -27515,726 +27445,498 @@
                     ]),
                     e
                 );
-            })(),
-            Map = (function () {
-                function e(t) {
-                    _classCallCheck(this, e), (this.root = t), (this.changed = new _phaserCe.Signal()), this.reset();
+            })();
+
+            class Map {
+                constructor(root) {
+                    this.root = root;
+                    this.changed = new Phaser.Signal();
+                    this.reset();
                 }
-                return (
-                    _createClass(e, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "Map";
+            
+                static get name() {
+                    return "Map"
+                }
+            
+                reset() {
+                    var e = [Config.numTilesX, Config.numTilesY];
+                    (this.tiles = make2DArray.apply(
+                        void 0,
+                        e.concat([
+                            function () {
+                                return null;
                             },
-                        },
-                    ]),
-                    (e.prototype.reset = function () {
-                        var e = [Config.numTilesX, Config.numTilesY];
-                        (this.tiles = make2DArray.apply(
+                        ])
+                    )),
+                        (this.pathfindingGrid = make2DArray.apply(
                             void 0,
                             e.concat([
                                 function () {
-                                    return null;
+                                    return 0;
                                 },
                             ])
                         )),
-                            (this.pathfindingGrid = make2DArray.apply(
-                                void 0,
-                                e.concat([
-                                    function () {
-                                        return 0;
-                                    },
-                                ])
-                            )),
-                            (this.flowGrid = make2DArray.apply(
-                                void 0,
-                                e.concat([
-                                    function () {
-                                        return { weight: 1e20, visited: true, walkable: true };
-                                    },
-                                ])
-                            )),
-                            (this.dynamicEntitiesMapping = make1DArray(Config.numTilesX * Config.numTilesY, function () {
-                                return [];
-                            })),
-                            (this.flowGridDirty = true);
-                    }),
-                    (e.prototype.checkCoordinates = function (e, t) {
-                        null == e && console.error("Invalid coordinates (#1):", e, t),
-                            null == t && console.error("Invalid coordinates (#2):", e, t),
-                            isNaN(e) && console.error("Invalid coordinates (#3):", e, t),
-                            isNaN(t) && console.error("Invalid coordinates (#4):", e, t),
-                            (e < 0 || e >= Config.numTilesX) && console.error("Invalid coordinates (#5):", e, t),
-                            (t < 0 || t >= Config.numTilesY) && console.error("Invalid coordinates (#6):", e, t);
-                    }),
-                    (e.prototype.isValidCoordinate = function (e, t) {
-                        var i = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : 0;
-                        return !(null == e || null == t || isNaN(e) || isNaN(t) || e < 0 || t < 0) && e >= i && t >= i && e < Config.numTilesX - i && t < Config.numTilesY - i;
-                    }),
-                    (e.prototype.isInBounds = function (e, t) {
-                        return e >= 0 && t >= 0 && e < Config.numTilesX && t < Config.numTilesY;
-                    }),
-                    (e.prototype.isTileUsed = function (e, t) {
-                        var i = !(arguments.length > 2 && void 0 !== arguments[2]) || arguments[2];
-                        this.checkCoordinates(e, t);
-                        var a = this.tiles[e][t];
-                        return i ? null !== a : null !== a && !a.hasComponent(InvisibleComponent);
-                    }),
-                    (e.prototype.getTileContent = function (e, t) {
-                        return this.checkCoordinates(e, t), this.tiles[e][t];
-                    }),
-                    (e.prototype.clearTile = function (e, t) {
-                        this.checkCoordinates(e, t);
-                        var i = this.tiles[e][t];
-                        (this.tiles[e][t] = null), (this.pathfindingGrid[e][t] = 0), (this.flowGrid[e][t].walkable = true), (this.flowGridDirty = true), this.changed.dispatch(e, t, i, TILE_CLEARED);
-                    }),
-                    (e.prototype.recomputeFlowGrid = function () {
-                        var e = this;
-                        (this.flowGridDirty = false), console.log("[MAP] Updating flow grid");
-                        for (var t = 0; t < Config.numTilesX; ++t)
-                            for (var i = 0; i < Config.numTilesY; ++i) {
-                                var a = this.flowGrid[t][i];
-                                (a.weight = 1e20), (a.visited = false);
-                            }
-                        var o = this.root.logic.getPlayerBase();
-                        if (o) {
-                            var n = o.getTileX(),
-                                r = o.getTileY(),
-                                s = this.flowGrid[n][r];
-                            (s.visited = true), (s.weight = 0), (s.walkable = true);
-                            var l = [];
-                            DIRECT_TILE_NEIGHBORS.forEach(function (t) {
-                                var i = _slicedToArray(t, 2),
-                                    a = i[0],
-                                    o = i[1],
-                                    s = [n + a, r + o],
-                                    u = e.flowGrid[n][s[1]],
-                                    c = e.flowGrid[s[0]][r];
-                                u.walkable && c.walkable && l.push(s);
-                            });
-                            for (var u = 0; u < l.length;) {
-                                var c = _slicedToArray(l[u], 2),
-                                    d = c[0],
-                                    h = c[1];
-                                u += 1;
-                                var p = this.flowGrid[d][h];
-                                if (!p.visited && p.walkable) {
-                                    for (var g = 1e20, m = 0; m < DIRECT_TILE_NEIGHBORS.length; ++m) {
-                                        var _ = _slicedToArray(DIRECT_TILE_NEIGHBORS[m], 3),
-                                            f = _[0],
-                                            b = _[1],
-                                            A = _[2],
-                                            y = d + f,
-                                            v = h + b;
-                                        if (!(y < 0 || v < 0 || y >= Config.numTilesX || v >= Config.numTilesY)) {
-                                            var k = this.flowGrid[y][v];
-                                            if (0 !== f && 0 !== b) {
-                                                var w = this.flowGrid[d][v],
-                                                    V = this.flowGrid[y][h];
-                                                if (!w.walkable || !V.walkable) continue;
-                                            }
-                                            if (k.walkable)
-                                                if (k.visited) {
-                                                    var C = k.weight + A;
-                                                    g = Math.min(C, g);
-                                                } else l.push([y, v]);
-                                        }
-                                    }
-                                    (p.visited = true), (p.weight = g);
-                                }
-                            }
-                            if (Config.showFlowGrid) {
-                                this.cachedFlowGridGraphics || ((this.cachedFlowGridGraphics = this.root.phaser.make.graphics()), this.root.groups.zombieHeatmapGroup.add(this.cachedFlowGridGraphics)), this.cachedFlowGridGraphics.clear();
-                                for (var S = 0; S < Config.numTilesX; ++S)
-                                    for (var q = 0; q < Config.numTilesY; ++q) {
-                                        var T = this.flowGrid[S][q];
-                                        if (T.weight < 1e15) {
-                                            var x = Math.max(0, Math.min(1, T.weight / 30)),
-                                                B = (Math.floor(255 * x) << 16) | (Math.floor(255 - 255 * x) << 8) | 127;
-                                            this.cachedFlowGridGraphics.beginFill(B, 0.7), this.cachedFlowGridGraphics.drawRect(S * Config.tileSize, q * Config.tileSize, Config.tileSize, Config.tileSize);
-                                        }
-                                    }
-                            }
-                        }
-                    }),
-                    (e.prototype.updateMap = function () {
-                        for (var e = Config.numTilesX * Config.numTilesY, t = this.dynamicEntitiesMapping, i = 0; i < e; ++i) t[i] = null;
-                        for (var a = this.root.entityMgr.dynamicEntities, o = 0; o < a.length; ++o) {
-                            var n = a[o];
-                            if (n.alive && n.exists) {
-                                var r = n.getTile(),
-                                    s = _slicedToArray(r, 2),
-                                    l = s[0],
-                                    u = s[1],
-                                    c = l * Config.numTilesX + u,
-                                    d = t[c];
-                                null === d ? (t[c] = [n]) : d.push(n);
-                            }
-                        }
-                        this.flowGridDirty && a.length > 0 && (Config.spawnDefaultBuildings || this.recomputeFlowGrid());
-                    }),
-                    (e.prototype.setTileContent = function (e, t, i) {
-                        if ((this.checkCoordinates(e, t), !(i instanceof Entity))) throw new Error("entity is no Entity: " + i);
-                        this.tiles[e][t] = i;
-                        var a = !i.useInPathfinding();
-                        this.flowGrid[e][t].walkable !== a && ((this.flowGrid[e][t].walkable = a), (this.flowGridDirty = true)),
-                            (this.pathfindingGrid[e][t] = a ? 0 : 1),
-                            (i.mapX = e),
-                            (i.mapY = t),
-                            this.changed.dispatch(e, t, i, TILE_FILLED);
-                    }),
-                    (e.prototype.removeEntityFromMap = function (e) {
-                        if (e.mapX) {
-                            if (e.mapX !== e.getTileX()) throw new Error("Immovable entity moved x from " + e.mapX + " to " + e.getTileX());
-                            if (e.mapY !== e.getTileY()) throw new Error("Immovable entity moved y from " + e.mapY + " to " + e.getTileY());
-                            this.clearTile(e.mapX, e.mapY);
-                        }
-                    }),
-                    (e.prototype.getRandomTile = function () {
-                        var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : 0;
-                        return { x: randomInt(e, Config.numTilesX - e), y: randomInt(e, Config.numTilesY - e) };
-                    }),
-                    (e.prototype.getRandomUnusedTile = function () {
-                        for (var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : 0, t = 999; t > 0;) {
-                            var i = this.getRandomTile(e),
-                                a = i.x,
-                                o = i.y;
-                            if (!this.isTileUsed(a, o)) return { x: a, y: o };
-                            t -= 1;
-                        }
-                        return { x: 0, y: 0 };
-                    }),
-                    (e.prototype.getRandomUnusedReachableTile = function () {
-                        for (var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : 0, t = 999; t > 0;) {
-                            var i = this.getRandomTile(e),
-                                a = i.x,
-                                o = i.y;
-                            if (!this.isTileUsed(a, o) && this.checkTileIsReachable(a, o)) return { x: a, y: o };
-                            t -= 1;
-                        }
-                        return { x: 0, y: 0 };
-                    }),
-                    (e.prototype.getRandomBorderTile = function (e) {
-                        var t = Config.numTilesX - 2 * e - 1,
-                            i = Config.numTilesY - 2 * e - 1,
-                            a = randomInt(0, 2 * t + 2 * i);
-                        return a <= t ? { x: e + a, y: e } : (a -= t) <= i ? { x: Config.numTilesX - e - 1, y: e + a } : (a -= i) <= t ? { x: e + a, y: Config.numTilesY - e - 1 } : (a -= t) <= i ? { x: e, y: e + a } : { x: e, y: e };
-                    }),
-                    (e.prototype.getIncrementalSearchParams = function (e) {
-                        if (!e || isNaN(e) || e < 0) throw new Error("Invalid radius");
-                        var t = Math.ceil(e - 0.1);
-                        if (t >= INCREMENTAL_SEARCH.length) throw new Error("radius too big: " + e);
-                        var i = INCREMENTAL_SEARCH[t];
-                        return { offsets: i, numOffsets: i.length / 2 };
-                    }),
-                    (e.prototype.incrementalSearch = function (e) {
-                        var t = e.tileX,
-                            i = e.tileY,
-                            a = e.radiusTileSpace,
-                            o = e.handlerAndAbortCondition;
-                        this.checkCoordinates(t, i);
-                        for (var n = this.getIncrementalSearchParams(a), r = n.offsets, s = n.numOffsets, l = a * a, u = 0; u < s; ++u) {
-                            var c = r[2 * u],
-                                d = r[2 * u + 1],
-                                h = t + c,
-                                p = i + d;
-                            if (this.isInBounds(h, p)) {
-                                var g = c * c + d * d;
-                                if (g <= l && o(h, p, g)) return;
-                            }
-                        }
-                    }),
-                    (e.prototype.getUsedTilesArround = function (e) {
-                        var t = this,
-                            i = e.tileX,
-                            a = e.tileY,
-                            o = e.radius,
-                            n = e.condition,
-                            r = [];
-                        return (
-                            this.incrementalSearch({
-                                tileX: i,
-                                tileY: a,
-                                radiusTileSpace: o,
-                                handlerAndAbortCondition: function (e, i, a) {
-                                    var o = t.tiles[e][i];
-                                    return !o || (n && !n(o)) || r.push({ entity: o, distanceSquare: a }), false;
+                        (this.flowGrid = make2DArray.apply(
+                            void 0,
+                            e.concat([
+                                function () {
+                                    return { weight: 1e20, visited: true, walkable: true };
                                 },
-                            }),
-                            r
-                        );
-                    }),
-                    (e.prototype.findClosestEntity = function (e) {
-                        var t = this,
-                            i = e.tileX,
-                            a = e.tileY,
-                            o = e.radius,
-                            n = e.condition,
-                            r = null;
-                        return (
-                            this.incrementalSearch({
-                                tileX: i,
-                                tileY: a,
-                                radiusTileSpace: o,
-                                handlerAndAbortCondition: function (e, i) {
-                                    var a = t.tiles[e][i];
-                                    return !(!a || (n && !n(a))) && ((r = a), true);
-                                },
-                            }),
-                            r
-                        );
-                    }),
-                    (e.prototype.findDynamicEntitiesInRadiusWorldSpace = function (e) {
-                        var t = this,
-                            i = e.x,
-                            a = e.y,
-                            o = e.radius,
-                            n = e.condition,
-                            r = e.maxAmount,
-                            s = void 0 === r ? 1e4 : r;
-                        if (0 === this.root.entityMgr.dynamicEntities.length) return [];
-                        var l = worldToTile(i, a),
-                            u = _slicedToArray(l, 2),
-                            c = u[0],
-                            d = u[1];
-                        if (!this.isValidCoordinate(c, d)) return console.error("Invalid world coordinates for dynamic entities:", i, a, "->", c, d), [];
-                        var h = Math.floor(o / Config.tileSize + 1),
-                            p = o * o,
-                            g = [i, a],
-                            m = [];
-                        return (
-                            this.incrementalSearch({
-                                tileX: c,
-                                tileY: d,
-                                radiusTileSpace: h,
-                                handlerAndAbortCondition: function (e, i) {
-                                    var a = t.dynamicEntitiesMapping[e * Config.numTilesX + i];
-                                    if (!a) return false;
-                                    for (var o = 0; o < a.length; ++o) {
-                                        var r = a[o];
-                                        if (!n || n(r)) if (distanceEuclidianSquare(r.worldSpaceTileCenter(), g) <= p && (m.push(r), m.length >= s)) return true;
-                                    }
-                                    return false;
-                                },
-                            }),
-                            m
-                        );
-                    }),
-                    (e.prototype.findClosestDynamicEntityWorldSpace = function (e) {
-                        var t = e.x,
-                            i = e.y,
-                            a = e.radius,
-                            o = e.condition,
-                            n = this.findDynamicEntitiesInRadiusWorldSpace({ x: t, y: i, radius: a, condition: o, maxAmount: 1 });
-                        return 0 === n.length ? null : n[0];
-                    }),
-                    (e.prototype.findClosestEntityOfClass = function (e) {
-                        var t = e.tileX,
-                            i = e.tileY,
-                            a = e.radius,
-                            o = e.classType,
-                            n = e.condition;
-                        if ((this.checkCoordinates(t, i), null == o)) throw new Error("Class " + o + " is not a valid class");
-                        return this.findClosestEntity({
-                            tileX: t,
-                            tileY: i,
-                            radius: a,
-                            condition: function (e) {
-                                return e instanceof o && (!n || n(e));
-                            },
-                        });
-                    }),
-                    (e.prototype.findPath = function (e, t) {
-                        if ((this.checkCoordinates(e.x, e.y), this.checkCoordinates(t.x, t.y), e.x === t.x && e.y === t.y)) return [[e.x, e.y]];
-                        var i = new _pathfinding2.default.Grid(this.pathfindingGrid);
-                        i.setWalkableAt(e.y, e.x, true), i.setWalkableAt(t.y, t.x, true);
-                        var a = new _pathfinding2.default.AStarFinder({ allowDiagonal: true, dontCrossCorners: true }).findPath(e.y, e.x, t.y, t.x, i);
-                        return null === a || a.length < 1
-                            ? null
-                            : a.map(function (e) {
-                                var t = _slicedToArray(e, 2),
-                                    i = t[0];
-                                return [t[1], i];
-                            });
-                    }),
-                    (e.prototype.checkAllDirectNeighborsAreBlocked = function (e, t) {
-                        for (
-                            var i = [
-                                [-1, 0],
-                                [1, 0],
-                                [0, -1],
-                                [0, 1],
-                            ],
-                            a = true,
-                            o = 0;
-                            o < i.length;
-                            ++o
-                        ) {
-                            var n = _slicedToArray(i[o], 2),
-                                r = n[0],
-                                s = n[1];
-                            this.isTileUsed(e + r, t + s) || (a = false);
-                        }
-                        return a;
-                    }),
-                    (e.prototype.checkTileIsReachable = function (e, t) {
-                        return this.checkCoordinates(e, t), !this.checkAllDirectNeighborsAreBlocked(e, t) && !!this.findPath({ x: e, y: t }, { x: 0, y: 0 });
-                    }),
-                    (e.prototype.findClosestFreeTileArround = function (e, t) {
-                        var i = this,
-                            a = arguments.length > 2 && void 0 !== arguments[2] && arguments[2],
-                            o = null;
-                        return (
-                            this.incrementalSearch({
-                                tileX: e,
-                                tileY: t,
-                                radiusTileSpace: MAX_INCREMENTAL_SEARCH_RADIUS,
-                                handlerAndAbortCondition: function (e, t) {
-                                    return i.tiles[e][t] ? !(!a || !i.tiles[e][t].hasComponent(InvisibleComponent)) && ((o = [e, t]), true) : ((o = [e, t]), true);
-                                },
-                            }),
-                            o
-                        );
-                    }),
-                    (e.prototype.checkIsTileFreeArround = function (e, t) {
-                        var i = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : 1.01,
-                            a = this.findClosestFreeTileArround(e, t);
-                        return !!a && distanceEuclidianSquare([e, t], a) <= i * i;
-                    }),
-                    (e.prototype.singleTileMovementIsPossible = function (e, t) {
-                        var i = arguments.length > 2 && void 0 !== arguments[2] && arguments[2];
-                        return (
-                            this.checkCoordinates(e[0], e[1]),
-                            this.checkCoordinates(t[0], t[1]),
-                            e[0] === t[0] && e[1] === t[1]
-                                ? (console.warn("Checking for same point movement"), true)
-                                : !(!i && (this.isTileUsed.apply(this, _toConsumableArray(e)) || this.isTileUsed.apply(this, _toConsumableArray(t)))) &&
-                                (e[0] === t[0] || e[1] === t[1] || !this.isTileUsed(e[0], t[1]) || !this.isTileUsed(t[0], e[1]))
-                        );
-                    }),
-                    (e.prototype.tileIsOccupiedByDynamicEntities = function (e, t) {
-                        if ((this.checkCoordinates(e, t), this.dynamicEntitiesMapping)) {
-                            var i = this.dynamicEntitiesMapping[e * Config.numTilesX + t];
-                            return null !== i && 0 !== i.length;
-                        }
-                        return false;
-                    }),
-                    (e.prototype.findNextTileOnPathToBaseWorldSpace = function (e, t) {
-                        for (var i = worldToTile(e, t), a = _slicedToArray(i, 2), o = a[0], n = a[1], r = null, s = 1e20, l = 0, u = DIRECT_TILE_NEIGHBORS.length; l < u; ++l) {
-                            var c = _slicedToArray(DIRECT_TILE_NEIGHBORS[l], 3),
-                                d = c[0],
-                                h = c[1],
-                                p = c[2],
-                                g = o + d,
-                                m = n + h;
-                            if (this.isInBounds(g, m)) {
-                                var _ = this.flowGrid[g][m];
-                                if (this.singleTileMovementIsPossible([o, n], [g, m], true)) {
-                                    var f = _.weight + p;
-                                    f < s && ((s = f), (r = [g, m]));
-                                }
-                            }
-                        }
-                        return r;
-                    }),
-                    (e.prototype.getPathLengthToBase = function (e, t) {
-                        return this.flowGrid[e][t].weight;
-                    }),
-                    e
-                );
-            })(),
-            Bot = (function () {
-                function e(t) {
-                    _classCallCheck(this, e),
-                        (this.root = t),
-                        (this.actionInterval = Timer.makeFromIntervalMs(1e3 * THINKING_TIME)),
-                        (this.playerBasePosition = null),
-                        (this.centralHubPosition = null),
-                        (this.lastActionTime = null),
-                        this.root.signals.buildingUpgraded.add(this.onActionPerformed, this),
-                        this.root.signals.buildingPlaced.add(this.onActionPerformed, this);
+                            ])
+                        )),
+                        (this.dynamicEntitiesMapping = make1DArray(Config.numTilesX * Config.numTilesY, function () {
+                            return [];
+                        })),
+                        (this.flowGridDirty = true);
                 }
-                return (
-                    _createClass(e, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "Bot";
-                            },
-                        },
-                    ]),
-                    (e.prototype.onActionPerformed = function () {
-                        if (null !== this.lastActionTime) {
-                            var e = (this.root.time.now - this.lastActionTime) / 1e3;
-                            e > 10 && console.warn("Bot idled for", e, "seconds");
+            
+                checkCoordinates(e, t) {
+                    null == e && console.error("Invalid coordinates (#1):", e, t),
+                        null == t && console.error("Invalid coordinates (#2):", e, t),
+                        isNaN(e) && console.error("Invalid coordinates (#3):", e, t),
+                        isNaN(t) && console.error("Invalid coordinates (#4):", e, t),
+                        (e < 0 || e >= Config.numTilesX) && console.error("Invalid coordinates (#5):", e, t),
+                        (t < 0 || t >= Config.numTilesY) && console.error("Invalid coordinates (#6):", e, t);
+                }
+            
+                isValidCoordinate(e, t) {
+                    var i = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : 0;
+                    return !(null == e || null == t || isNaN(e) || isNaN(t) || e < 0 || t < 0) && e >= i && t >= i && e < Config.numTilesX - i && t < Config.numTilesY - i;
+                }
+            
+                isInBounds(e, t) {
+                    return e >= 0 && t >= 0 && e < Config.numTilesX && t < Config.numTilesY;
+                }
+            
+                isTileUsed(e, t) {
+                    var i = !(arguments.length > 2 && void 0 !== arguments[2]) || arguments[2];
+                    this.checkCoordinates(e, t);
+                    var a = this.tiles[e][t];
+                    return i ? null !== a : null !== a && !a.hasComponent(InvisibleComponent);
+                }
+            
+                getTileContent(e, t) {
+                    return this.checkCoordinates(e, t), this.tiles[e][t];
+                }
+            
+                clearTile(e, t) {
+                    this.checkCoordinates(e, t);
+                    var i = this.tiles[e][t];
+                    (this.tiles[e][t] = null), (this.pathfindingGrid[e][t] = 0), (this.flowGrid[e][t].walkable = true), (this.flowGridDirty = true), this.changed.dispatch(e, t, i, TILE_CLEARED);
+                }
+            
+                recomputeFlowGrid() {
+                    this.flowGridDirty = false;
+                    console.log("[MAP] Updating flow grid");
+                
+                    const { numTilesX, numTilesY } = Config;
+                    const { flowGrid } = this;
+                
+                    // Initialize flow grid
+                    for (let t = 0; t < numTilesX; t++) {
+                        for (let i = 0; i < numTilesY; i++) {
+                            const a = flowGrid[t][i];
+                            a.weight = 1e20;
+                            a.visited = false;
                         }
-                        this.lastActionTime = this.root.time.now;
-                    }),
-                    (e.prototype.log = function () {
-                        for (var e, t = arguments.length, i = Array(t), a = 0; a < t; a++) i[a] = arguments[a];
-                        (e = console).log.apply(
-                            e,
-                            ["[BOT]"].concat(
-                                _toConsumableArray(
-                                    i.map(function (e) {
-                                        return e instanceof Entity ? entity2str(e) : "function" == typeof e ? "[fnc] " + e.name : e;
-                                    })
-                                )
-                            )
-                        );
-                    }),
-                    (e.prototype.place = function (e, t, i) {
-                        return this.log("Trying to place", e.name, "at", t, i), this.root.logic.tryPlaceBuilding({ building: BuildingRegistry.getMetaclassByClassHandle(e), position: { tileX: t, tileY: i } });
-                    }),
-                    (e.prototype.findFreeResourceSpot = function (e) {
-                        var t = this,
-                            i = this.root.map.findClosestEntity({
-                                tileX: this.playerBasePosition[0],
-                                tileY: this.playerBasePosition[1],
-                                radius: MAX_INCREMENTAL_SEARCH_RADIUS,
-                                condition: function (i) {
-                                    if (i instanceof e) {
-                                        var a = i.getTile(),
-                                            o = _slicedToArray(a, 2),
-                                            n = o[0],
-                                            r = o[1];
-                                        if (!(t.root.map.isTileUsed(n + 1, r) && t.root.map.isTileUsed(n - 1, r) && t.root.map.isTileUsed(n, r + 1) && t.root.map.isTileUsed(n, r - 1))) return true;
-                                    }
-                                    return false;
-                                },
-                            });
-                        if (!i) return console.warn("Failed to find free resource spot!"), [-1, -1];
-                        var a = i.getTile(),
-                            o = _slicedToArray(a, 2),
-                            n = o[0],
-                            r = o[1];
-                        return this.root.map.findClosestFreeTileArround(n, r);
-                    }),
-                    (e.prototype.findFreeProcessorSpot = function () {
-                        var e;
-                        return (e = this.root.map).findClosestFreeTileArround.apply(e, _toConsumableArray(this.playerBasePosition));
-                    }),
-                    (e.prototype.findFreeDefensiveSpot = function () {
-                        for (var e = BASE_RADIUS_TILES - 1; e > 0;) {
-                            for (var t = 0; t < 100; ++t) {
-                                var i = 2 * Math.random() * Math.PI,
-                                    a = this.playerBasePosition[0] + Math.round(Math.sin(i) * e),
-                                    o = this.playerBasePosition[1] + Math.round(Math.cos(i) * e);
-                                if (!this.root.map.isTileUsed(a, o)) return [a, o];
+                    }
+                
+                    const o = this.root.logic.getPlayerBase();
+                
+                    if (o) {
+                        const n = o.getTileX();
+                        const r = o.getTileY();
+                        const s = flowGrid[n][r];
+                        s.visited = true;
+                        s.weight = 0;
+                        s.walkable = true;
+            
+                        const l = [];
+                
+                        DIRECT_TILE_NEIGHBORS.forEach(([a, o]) => {
+                            const x = n + a;
+                            const y = r + o;
+                
+                            if (x >= 0 && x < numTilesX && y >= 0 && y < numTilesY) {
+                                const u = flowGrid[x][r];
+                                const c = flowGrid[n][y];
+                
+                                if (u.walkable && c.walkable) {
+                                    l.push([x, y]);
+                                }
                             }
-                            e -= 1;
-                        }
-                        throw new Error("base is full");
-                    }),
-                    (e.prototype.haveBuildingsLeft = function (e) {
-                        var t = BuildingRegistry.getMetaclassByClassHandle(e).requirements.filter(function (e) {
-                            return e instanceof PlayerLevelDependentMaxCountRequirement;
                         });
-                        return t.length < 0 || t[0].check(this.root);
-                    }),
-                    (e.prototype.placeResourceMiner = function (e, t) {
-                        this.log("Placing miner", e);
-                        var i = this.findFreeResourceSpot(t),
-                            a = _slicedToArray(i, 2),
-                            o = a[0],
-                            n = a[1];
-                        return !(o < 0 || n < 0) && this.place(e, o, n);
-                    }),
-                    (e.prototype.placeResourceProcessor = function (e) {
-                        this.log("Placing processor", e);
-                        var t = this.findFreeProcessorSpot(),
-                            i = _slicedToArray(t, 2),
-                            a = i[0],
-                            o = i[1];
-                        return !(a < 0 || o < 0) && this.place(e, a, o);
-                    }),
-                    (e.prototype.placeDefensiveTower = function (e) {
-                        this.log("Placing defensive tower", e);
-                        var t = this.findFreeDefensiveSpot(),
-                            i = _slicedToArray(t, 2),
-                            a = i[0],
-                            o = i[1];
-                        return !(a < 0 || o < 0) && this.place(e, a, o);
-                    }),
-                    (e.prototype.isConnectedToCentralHub = function (e) {
-                        if (!this.centralHubPosition) return false;
-                        for (
-                            var t = function (e, t) {
-                                return 1e4 * e + t;
+                
+                        for (let u = 0; u < l.length; u++) {
+                            const [d, h] = l[u];
+                            const p = flowGrid[d][h];
+                
+                            if (!p.visited && p.walkable) {
+                                let g = 1e20;
+                
+                                for (let m = 0; m < DIRECT_TILE_NEIGHBORS.length; m++) {
+                                    const [f, b, A] = DIRECT_TILE_NEIGHBORS[m];
+                                    const y = d + f;
+                                    const v = h + b;
+                
+                                    if (y >= 0 && v >= 0 && y < numTilesX && v < numTilesY) {
+                                        const k = flowGrid[y][v];
+                
+                                        if (f !== 0 && b !== 0) {
+                                            const w = flowGrid[d][v];
+                                            const V = flowGrid[y][h];
+                
+                                            if (!w.walkable || !V.walkable) {
+                                                continue;
+                                            }
+                                        }
+                
+                                        if (k.walkable && k.visited) {
+                                            const C = k.weight + A;
+                                            g = Math.min(C, g);
+                                        } else {
+                                            l.push([y, v]);
+                                        }
+                                    }
+                                }
+                
+                                p.visited = true;
+                                p.weight = g;
+                            }
+                        }
+                
+                        if (Config.showFlowGrid) {
+                            if (!this.cachedFlowGridGraphics) {
+                                this.cachedFlowGridGraphics = this.root.phaser.make.graphics();
+                                this.root.groups.zombieHeatmapGroup.add(this.cachedFlowGridGraphics);
+                            }
+                
+                            this.cachedFlowGridGraphics.clear();
+                
+                            for (let S = 0; S < numTilesX; S++) {
+                                for (let q = 0; q < numTilesY; q++) {
+                                    const T = flowGrid[S][q];
+                
+                                    if (T.weight < 1e15) {
+                                        const x = Math.max(0, Math.min(1, T.weight / 30));
+                                        const B = (Math.floor(255 * x) << 16) | (Math.floor(255 - 255 * x) << 8) | 127;
+                                        this.cachedFlowGridGraphics.beginFill(B, 0.7);
+                                        this.cachedFlowGridGraphics.drawRect(S * Config.tileSize, q * Config.tileSize, Config.tileSize, Config.tileSize);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }    
+            
+                updateMap() {
+                    for (var e = Config.numTilesX * Config.numTilesY, t = this.dynamicEntitiesMapping, i = 0; i < e; ++i) t[i] = null;
+                    for (var a = this.root.entityMgr.dynamicEntities, o = 0; o < a.length; ++o) {
+                        var n = a[o];
+                        if (n.alive && n.exists) {
+                            var r = n.getTile(),
+                                s = _slicedToArray(r, 2),
+                                l = s[0],
+                                u = s[1],
+                                c = l * Config.numTilesX + u,
+                                d = t[c];
+                            null === d ? (t[c] = [n]) : d.push(n);
+                        }
+                    }
+                    this.flowGridDirty && a.length > 0 && (Config.spawnDefaultBuildings || this.recomputeFlowGrid());
+                }
+            
+                setTileContent(e, t, i) {
+                    if ((this.checkCoordinates(e, t), !(i instanceof Entity))) throw new Error("entity is no Entity: " + i);
+                    this.tiles[e][t] = i;
+                    var a = !i.useInPathfinding();
+                    this.flowGrid[e][t].walkable !== a && ((this.flowGrid[e][t].walkable = a), (this.flowGridDirty = true)),
+                        (this.pathfindingGrid[e][t] = a ? 0 : 1),
+                        (i.mapX = e),
+                        (i.mapY = t),
+                        this.changed.dispatch(e, t, i, TILE_FILLED);
+                }
+            
+                removeEntityFromMap(e) {
+                    if (e.mapX) {
+                        if (e.mapX !== e.getTileX()) throw new Error("Immovable entity moved x from " + e.mapX + " to " + e.getTileX());
+                        if (e.mapY !== e.getTileY()) throw new Error("Immovable entity moved y from " + e.mapY + " to " + e.getTileY());
+                        this.clearTile(e.mapX, e.mapY);
+                    }
+                }
+            
+                getRandomTile() {
+                    var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : 0;
+                    return { x: randomInt(e, Config.numTilesX - e), y: randomInt(e, Config.numTilesY - e) };
+                }
+            
+                getRandomUnusedTile() {
+                    for (var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : 0, t = 999; t > 0;) {
+                        var i = this.getRandomTile(e),
+                            a = i.x,
+                            o = i.y;
+                        if (!this.isTileUsed(a, o)) return { x: a, y: o };
+                        t -= 1;
+                    }
+                    return { x: 0, y: 0 };
+                }
+            
+                getRandomUnusedReachableTile() {
+                    for (var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : 0, t = 999; t > 0;) {
+                        var i = this.getRandomTile(e),
+                            a = i.x,
+                            o = i.y;
+                        if (!this.isTileUsed(a, o) && this.checkTileIsReachable(a, o)) return { x: a, y: o };
+                        t -= 1;
+                    }
+                    return { x: 0, y: 0 };
+                }
+            
+                getRandomBorderTile(e) {
+                    var t = Config.numTilesX - 2 * e - 1,
+                        i = Config.numTilesY - 2 * e - 1,
+                        a = randomInt(0, 2 * t + 2 * i);
+                    return a <= t ? { x: e + a, y: e } : (a -= t) <= i ? { x: Config.numTilesX - e - 1, y: e + a } : (a -= i) <= t ? { x: e + a, y: Config.numTilesY - e - 1 } : (a -= t) <= i ? { x: e, y: e + a } : { x: e, y: e };
+                }
+            
+                getIncrementalSearchParams(e) {
+                    if (!e || isNaN(e) || e < 0) throw new Error("Invalid radius");
+                    var t = Math.ceil(e - 0.1);
+                    if (t >= INCREMENTAL_SEARCH.length) throw new Error("radius too big: " + e);
+                    var i = INCREMENTAL_SEARCH[t];
+                    return { offsets: i, numOffsets: i.length / 2 };
+                }
+            
+                incrementalSearch(e) {
+                    var t = e.tileX,
+                        i = e.tileY,
+                        a = e.radiusTileSpace,
+                        o = e.handlerAndAbortCondition;
+                    this.checkCoordinates(t, i);
+                    for (var n = this.getIncrementalSearchParams(a), r = n.offsets, s = n.numOffsets, l = a * a, u = 0; u < s; ++u) {
+                        var c = r[2 * u],
+                            d = r[2 * u + 1],
+                            h = t + c,
+                            p = i + d;
+                        if (this.isInBounds(h, p)) {
+                            var g = c * c + d * d;
+                            if (g <= l && o(h, p, g)) return;
+                        }
+                    }
+                }
+            
+                getUsedTilesArround(e) {
+                    var t = this,
+                        i = e.tileX,
+                        a = e.tileY,
+                        o = e.radius,
+                        n = e.condition,
+                        r = [];
+                    return (
+                        this.incrementalSearch({
+                            tileX: i,
+                            tileY: a,
+                            radiusTileSpace: o,
+                            handlerAndAbortCondition: function (e, i, a) {
+                                var o = t.tiles[e][i];
+                                return !o || (n && !n(o)) || r.push({ entity: o, distanceSquare: a }), false;
                             },
-                            i = e.getTile(),
-                            a = _slicedToArray(i, 2),
-                            o = [[a[0], a[1]]],
-                            n = {};
-                            o.length > 0;
+                        }),
+                        r
+                    );
+                }
+            
+                findClosestEntity(e) {
+                    var t = this,
+                        i = e.tileX,
+                        a = e.tileY,
+                        o = e.radius,
+                        n = e.condition,
+                        r = null;
+                    return (
+                        this.incrementalSearch({
+                            tileX: i,
+                            tileY: a,
+                            radiusTileSpace: o,
+                            handlerAndAbortCondition: function (e, i) {
+                                var a = t.tiles[e][i];
+                                return !(!a || (n && !n(a))) && ((r = a), true);
+                            },
+                        }),
+                        r
+                    );
+                }
+            
+                findDynamicEntitiesInRadiusWorldSpace(e) {
+                    var t = this,
+                        i = e.x,
+                        a = e.y,
+                        o = e.radius,
+                        n = e.condition,
+                        r = e.maxAmount,
+                        s = void 0 === r ? 1e4 : r;
+                    if (0 === this.root.entityMgr.dynamicEntities.length) return [];
+                    var l = worldToTile(i, a),
+                        u = _slicedToArray(l, 2),
+                        c = u[0],
+                        d = u[1];
+                    if (!this.isValidCoordinate(c, d)) return console.error("Invalid world coordinates for dynamic entities:", i, a, "->", c, d), [];
+                    var h = Math.floor(o / Config.tileSize + 1),
+                        p = o * o,
+                        g = [i, a],
+                        m = [];
+                    return (
+                        this.incrementalSearch({
+                            tileX: c,
+                            tileY: d,
+                            radiusTileSpace: h,
+                            handlerAndAbortCondition: function (e, i) {
+                                var a = t.dynamicEntitiesMapping[e * Config.numTilesX + i];
+                                if (!a) return false;
+                                for (var o = 0; o < a.length; ++o) {
+                                    var r = a[o];
+                                    if (!n || n(r)) if (distanceEuclidianSquare(r.worldSpaceTileCenter(), g) <= p && (m.push(r), m.length >= s)) return true;
+                                }
+                                return false;
+                            },
+                        }),
+                        m
+                    );
+                }
+            
+                findClosestDynamicEntityWorldSpace(e) {
+                    var t = e.x,
+                        i = e.y,
+                        a = e.radius,
+                        o = e.condition,
+                        n = this.findDynamicEntitiesInRadiusWorldSpace({ x: t, y: i, radius: a, condition: o, maxAmount: 1 });
+                    return 0 === n.length ? null : n[0];
+                }
+            
+                findClosestEntityOfClass(e) {
+                    var t = e.tileX,
+                        i = e.tileY,
+                        a = e.radius,
+                        o = e.classType,
+                        n = e.condition;
+                    if ((this.checkCoordinates(t, i), null == o)) throw new Error("Class " + o + " is not a valid class");
+                    return this.findClosestEntity({
+                        tileX: t,
+                        tileY: i,
+                        radius: a,
+                        condition: function (e) {
+                            return e instanceof o && (!n || n(e));
+                        },
+                    });
+                }
+            
+                findPath(e, t) {
+                    if ((this.checkCoordinates(e.x, e.y), this.checkCoordinates(t.x, t.y), e.x === t.x && e.y === t.y)) return [[e.x, e.y]];
+                    var i = new _pathfinding2.default.Grid(this.pathfindingGrid);
+                    i.setWalkableAt(e.y, e.x, true), i.setWalkableAt(t.y, t.x, true);
+                    var a = new _pathfinding2.default.AStarFinder({ allowDiagonal: true, dontCrossCorners: true }).findPath(e.y, e.x, t.y, t.x, i);
+                    return null === a || a.length < 1
+                        ? null
+                        : a.map(function (e) {
+                            var t = _slicedToArray(e, 2),
+                                i = t[0];
+                            return [t[1], i];
+                        });
+                }
+            
+                checkAllDirectNeighborsAreBlocked(e, t) {
+                    for (
+                        var i = [
+                            [-1, 0],
+                            [1, 0],
+                            [0, -1],
+                            [0, 1],
+                        ],
+                        a = true,
+                        o = 0;
+                        o < i.length;
+                        ++o
+                    ) {
+                        var n = _slicedToArray(i[o], 2),
+                            r = n[0],
+                            s = n[1];
+                        this.isTileUsed(e + r, t + s) || (a = false);
+                    }
+                    return a;
+                }
+            
+                checkTileIsReachable(e, t) {
+                    return this.checkCoordinates(e, t), !this.checkAllDirectNeighborsAreBlocked(e, t) && !!this.findPath({ x: e, y: t }, { x: 0, y: 0 });
+                }
+            
+                findClosestFreeTileArround(e, t) {
+                    var i = this,
+                        a = arguments.length > 2 && void 0 !== arguments[2] && arguments[2],
+                        o = null;
+                    return (
+                        this.incrementalSearch({
+                            tileX: e,
+                            tileY: t,
+                            radiusTileSpace: MAX_INCREMENTAL_SEARCH_RADIUS,
+                            handlerAndAbortCondition: function (e, t) {
+                                return i.tiles[e][t] ? !(!a || !i.tiles[e][t].hasComponent(InvisibleComponent)) && ((o = [e, t]), true) : ((o = [e, t]), true);
+                            },
+                        }),
+                        o
+                    );
+                }
+            
+                checkIsTileFreeArround(e, t) {
+                    var i = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : 1.01,
+                        a = this.findClosestFreeTileArround(e, t);
+                    return !!a && distanceEuclidianSquare([e, t], a) <= i * i;
+                }
+            
+                singleTileMovementIsPossible(e, t) {
+                    var i = arguments.length > 2 && void 0 !== arguments[2] && arguments[2];
+                    return (
+                        this.checkCoordinates(e[0], e[1]),
+                        this.checkCoordinates(t[0], t[1]),
+                        e[0] === t[0] && e[1] === t[1]
+                            ? (console.warn("Checking for same point movement"), true)
+                            : !(!i && (this.isTileUsed.apply(this, _toConsumableArray(e)) || this.isTileUsed.apply(this, _toConsumableArray(t)))) &&
+                            (e[0] === t[0] || e[1] === t[1] || !this.isTileUsed(e[0], t[1]) || !this.isTileUsed(t[0], e[1]))
+                    );
+                }
+            
+                tileIsOccupiedByDynamicEntities(e, t) {
+                    if ((this.checkCoordinates(e, t), this.dynamicEntitiesMapping)) {
+                        var i = this.dynamicEntitiesMapping[e * Config.numTilesX + t];
+                        return null !== i && 0 !== i.length;
+                    }
+                    return false;
+                }
+            
+                findNextTileOnPathToBaseWorldSpace(e, t) {
+                    for (var i = worldToTile(e, t), a = _slicedToArray(i, 2), o = a[0], n = a[1], r = null, s = 1e20, l = 0, u = DIRECT_TILE_NEIGHBORS.length; l < u; ++l) {
+                        var c = _slicedToArray(DIRECT_TILE_NEIGHBORS[l], 3),
+                            d = c[0],
+                            h = c[1],
+                            p = c[2],
+                            g = o + d,
+                            m = n + h;
+                        if (this.isInBounds(g, m)) {
+                            var _ = this.flowGrid[g][m];
+                            if (this.singleTileMovementIsPossible([o, n], [g, m], true)) {
+                                var f = _.weight + p;
+                                f < s && ((s = f), (r = [g, m]));
+                            }
+                        }
+                    }
+                    return r;
+                }
+            
+                getPathLengthToBase(e, t) {
+                    return this.flowGrid[e][t].weight;
+                }
+            }
 
-                        ) {
-                            var r = o.pop(),
-                                s = t.apply(void 0, _toConsumableArray(r));
-                            if (!n[s]) {
-                                if (((n[s] = 1), r[0] === this.centralHubPosition[0] && r[1] === this.centralHubPosition[1])) return true;
-                                this.root.map
-                                    .getUsedTilesArround({
-                                        tileX: r[0],
-                                        tileY: r[1],
-                                        radius: Config.radius.transporter,
-                                        condition: function (e) {
-                                            return e instanceof TransporterBuilding;
-                                        },
-                                    })
-                                    .forEach(function (e) {
-                                        var t = e.entity;
-                                        o.push(t.getTile());
-                                    });
-                            }
-                        }
-                        return false;
-                    }),
-                    (e.prototype.actionPlaceBase = function () {
-                        this.log("Placing base");
-                        var e = this.root.map.findClosestFreeTileArround(Math.floor(Config.numTilesX / 2), Math.floor(Config.numTilesY / 2)),
-                            t = _slicedToArray(e, 2),
-                            i = t[0],
-                            a = t[1];
-                        if (((this.playerBasePosition = [i, a]), !this.place(PlayerBaseMeta, i, a))) throw new Error("Player base placement failed");
-                    }),
-                    (e.prototype.actionConnectToNet = function (e) {
-                        var t = this;
-                        this.log("Trying to connect", e, "to central hub");
-                        var i = e.getTile(),
-                            a = _slicedToArray(i, 2),
-                            o = a[0],
-                            n = a[1],
-                            r = this.root.map.findClosestEntityOfClass({
-                                tileX: o,
-                                tileY: n,
-                                radius: MAX_INCREMENTAL_SEARCH_RADIUS,
-                                classType: TransporterBuilding,
-                                condition: function (e) {
-                                    var i;
-                                    return t.isConnectedToCentralHub(e) && (i = t.root.map).checkTileIsReachable.apply(i, _toConsumableArray(e.getTile()));
-                                },
-                            });
-                        if (!r) throw new Error("No close transporter found!");
-                        this.log("Found closest viable transporter:", r);
-                        var s = r.getTile(),
-                            l = _slicedToArray(s, 2),
-                            u = l[0],
-                            c = l[1],
-                            d = this.root.map.findPath({ x: o, y: n }, { x: u, y: c });
-                        if (!d) return console.error("FAILED to find path on two ways"), true;
-                        for (var h = [o, n], p = null, g = 0; g < d.length; ++g) {
-                            var m,
-                                _ = d[g];
-                            if (distanceEuclidian(_, h) > Config.radius.transporter) {
-                                if (null === p) return console.error("unable to find way to hub!"), false;
-                                var f;
-                                if (this.place.apply(this, [TransporterMeta].concat(_toConsumableArray(p)))) if (((h = p), this.isConnectedToCentralHub((f = this.root.map).getTileContent.apply(f, _toConsumableArray(p))))) return true;
-                            }
-                            (m = this.root.map).isTileUsed.apply(m, _toConsumableArray(_)) || (p = _);
-                        }
-                        return this.isConnectedToCentralHub(e) || (p && this.place(TransporterMeta, p)), true;
-                    }),
-                    (e.prototype.actionPlaceCentralHub = function () {
-                        var e;
-                        this.log("Trying to place central hub");
-                        var t = (e = this.root.map).findClosestFreeTileArround.apply(e, _toConsumableArray(this.playerBasePosition)),
-                            i = _slicedToArray(t, 2),
-                            a = i[0],
-                            o = i[1];
-                        this.place(TransporterMeta, a, o) && ((this.centralHubPosition = [a, o]), this.log("Placed central hub at", this.centralHubPosition));
-                    }),
-                    (e.prototype.actionConnectEverything = function () {
-                        for (var e = this.root.entityMgr.entities, t = 0; t < e.length; ++t) {
-                            var i = e[t];
-                            if ((i.hasComponent(ConsumerComponent) || i.hasComponent(EmitterComponent)) && !(i instanceof Resource || this.isConnectedToCentralHub(i))) return this.actionConnectToNet(i);
-                        }
-                        return false;
-                    }),
-                    (e.prototype.actionPerformUpgrades = function (e) {
-                        for (var t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : 999, i = this.root.entityMgr.entities, a = 0; a < i.length; ++a) {
-                            var o = i[a];
-                            if (o instanceof e && o.getLevel() < t && this.root.logic.upgradeBuilding(o, true, t > 100)) return this.log("Upgraded", o), true;
-                        }
-                        return false;
-                    }),
-                    (e.prototype.getBuildingInstanceCount = function (e) {
-                        for (var t = this.root.entityMgr.getAllEntitiesWithComponent(BuildingComponent), i = 0, a = 0; a < t.length; ++a) t[a] instanceof e && i++;
-                        return i;
-                    }),
-                    (e.prototype.prepareSupplyChain = function (e) {
-                        for (var t = 0; t < e.length; ++t) {
-                            var i = e[t];
-                            if (this.haveBuildingsLeft(i)) return this.placeResourceProcessor(i), true;
-                        }
-                        return false;
-                    }),
-                    (e.prototype.actionPrepareDefense = function () {
-                        return (
-                            !(!this.haveBuildingsLeft(IronMineMeta) || !this.placeResourceMiner(IronMineMeta, IronOre)) ||
-                            !!this.prepareSupplyChain([CannonballProducerMeta]) ||
-                            !(!this.haveBuildingsLeft(CannonMeta) || !this.placeDefensiveTower(CannonMeta)) ||
-                            !(!this.haveBuildingsLeft(HarvesterMeta) || !this.placeResourceMiner(HarvesterMeta, Tree)) ||
-                            !!this.prepareSupplyChain([WoodProcessorMeta, SteelFactoryMeta, ArrowFactoryMeta]) ||
-                            !(!this.haveBuildingsLeft(ArrowTowerMeta) || !this.placeDefensiveTower(ArrowTowerMeta)) ||
-                            !(!this.haveBuildingsLeft(UraniumMineMeta) || !this.placeResourceMiner(UraniumMineMeta, UraniumOre)) ||
-                            !!this.prepareSupplyChain([NuclearStationMeta]) ||
-                            !(!this.haveBuildingsLeft(LightningTowerMeta) || !this.placeDefensiveTower(LightningTowerMeta))
-                        );
-                    }),
-                    (e.prototype.actionPlaceWalls = function () {
-                        if (!this.haveBuildingsLeft(WallMeta)) return false;
-                        for (var e = BASE_RADIUS_TILES + 1; e <= BASE_RADIUS_TILES + 2;) {
-                            for (var t = 0; t < 360; ++t) {
-                                var i = (t / 180) * Math.PI,
-                                    a = this.playerBasePosition[0] + Math.round(Math.sin(i) * e),
-                                    o = this.playerBasePosition[1] + Math.round(Math.cos(i) * e);
-                                if (!this.root.map.isTileUsed(a, o)) return !!this.place(WallMeta, a, o);
-                            }
-                            e++;
-                        }
-                        return false;
-                    }),
-                    (e.prototype.actionUpgradeDefenses = function () {
-                        return (
-                            !!this.actionPerformUpgrades(NuclearStationBuilding) ||
-                            !!this.actionPerformUpgrades(UraniumMineBuilding) ||
-                            !!this.actionPerformUpgrades(HarvesterBuilding) ||
-                            !!this.actionPerformUpgrades(WoodProcessorBuilding) ||
-                            !!this.actionPerformUpgrades(ArrowFactoryBuilding) ||
-                            !!this.actionPerformUpgrades(SteelFactoryBuilding) ||
-                            !!this.actionPerformUpgrades(IronMineBuilding) ||
-                            !!this.actionPerformUpgrades(CannonballProducerBuilding) ||
-                            !!this.actionPerformUpgrades(LightningTowerBuilding) ||
-                            !!this.actionPerformUpgrades(ArrowTowerBuilding) ||
-                            !!this.actionPerformUpgrades(CannonBuilding)
-                        );
-                    }),
-                    (e.prototype.performAction = function () {
-                        var e;
-                        return this.root.logic.playerHasPlacedBase()
-                            ? this.centralHubPosition && (e = this.root.map).isTileUsed.apply(e, _toConsumableArray(this.centralHubPosition))
-                                ? !(!this.haveBuildingsLeft(GoldMineMeta) || (this.log("Place gold mines ..."), !this.placeResourceMiner(GoldMineMeta, GoldOre))) ||
-                                !!this.actionConnectEverything() ||
-                                !!this.actionPerformUpgrades(PlayerBaseBuilding, 11) ||
-                                !!this.actionPerformUpgrades(GoldMineBuilding) ||
-                                !!this.actionPrepareDefense() ||
-                                !!this.actionPlaceWalls() ||
-                                !!this.actionUpgradeDefenses() ||
-                                !!this.actionPerformUpgrades(WallBuilding) ||
-                                (console.warn("BOT IDLING"), false)
-                                : (this.actionPlaceCentralHub(), true)
-                            : (this.actionPlaceBase(), true);
-                    }),
-                    (e.prototype.update = function () {
-                        for (; this.actionInterval.takeTick(this.root.time.now);) Config.autoPlay && (this.root.time.now > 1e3 * INITIAL_SLEEP ? this.performAction() : this.log("sleeping, waiting for wake up"));
-                    }),
-                    e
-                );
-            })()
-
-        const NUM_LEVELS = 30; // Update the number of levels to 30
+        const NUM_LEVELS = 30;
         const LEVEL_TO_PARTICLE = [];
 
         for (let level = 0; level <= NUM_LEVELS; level++) {
@@ -28250,7 +27952,7 @@
                 }
             };
 
-            LEVEL_TO_PARTICLE.push(animClass); // Push the class to LEVEL_TO_PARTICLE array
+            LEVEL_TO_PARTICLE.push(animClass);
         }
 
         const CameraManager = (function () {
@@ -28811,210 +28513,131 @@
                     }),
                     t
                 );
-            })(EntitySpriteObj),
-            BaseSkill = (function () {
-                function e(t, i, a) {
-                    var o = arguments.length > 3 && void 0 !== arguments[3] ? arguments[3] : null;
-                    _classCallCheck(this, e), (this.key = t), (this.gains = a), (this.position = i), (this.dependsOn = o || []);
+            })(EntitySpriteObj);
+
+        class BaseSkill {
+            constructor(key, position, gains, dependsOn = null) {
+                this.key = key;
+                this.gains = gains;
+                this.position = position;
+                this.dependsOn = dependsOn || [];
+            }
+
+            get cost() {
+                return 1;
+            }
+
+            getScale() {
+                return 1;
+            }
+
+            getCircleStyle() {
+                return "regular";
+            }
+
+            getSpriteColor() {
+                return 16777215;
+            }
+
+            getActiveColor() {
+                return Config.colors.skillUnlocked;
+            }
+
+            getBackgroundColor() {
+                for (const e in this.gains) {
+                    return GAIN_MAPPINGS[e].color;
                 }
-                return (
-                    _createClass(e, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "BaseSkill";
-                            },
-                        },
-                    ]),
-                    (e.prototype.getScale = function () {
-                        return 1;
-                    }),
-                    (e.prototype.getCircleStyle = function () {
-                        return "regular";
-                    }),
-                    (e.prototype.getSpriteColor = function () {
-                        return 16777215;
-                    }),
-                    (e.prototype.getActiveColor = function () {
-                        return Config.colors.skillUnlocked;
-                    }),
-                    (e.prototype.getBackgroundColor = function () {
-                        for (var e in this.gains) return GAIN_MAPPINGS[e].color;
-                        return 8947848;
-                    }),
-                    _createClass(e, [
-                        {
-                            key: "cost",
-                            get: function () {
-                                return 1;
-                            },
-                        },
-                    ]),
-                    e
-                );
-            })(),
-            BigSkill = (function (e) {
-                function t() {
-                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.apply(this, arguments));
-                }
-                return (
-                    _inherits(t, e),
-                    (t.prototype.getScale = function () {
-                        return 1.2;
-                    }),
-                    (t.prototype.getCircleStyle = function () {
-                        return "polygon";
-                    }),
-                    (t.prototype.getPolygonEdges = function () {
-                        return 6;
-                    }),
-                    _createClass(
-                        t,
-                        [
-                            {
-                                key: "cost",
-                                get: function () {
-                                    return 5;
-                                },
-                            },
-                        ],
-                        [
-                            {
-                                key: "name",
-                                get: function () {
-                                    return "BigSkill";
-                                },
-                            },
-                        ]
-                    ),
-                    t
-                );
-            })(BaseSkill),
-            FeatureSkill = (function (e) {
-                function t(i, a, o) {
-                    var n = arguments.length > 3 && void 0 !== arguments[3] ? arguments[3] : null,
-                        r = arguments.length > 4 && void 0 !== arguments[4] ? arguments[4] : 15;
-                    _classCallCheck(this, t);
-                    var s = _possibleConstructorReturn(this, e.call(this, i, a, {}, n));
-                    return (s.description = o), (s.skillCost = r), s;
-                }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "FeatureSkill";
-                            },
-                        },
-                    ]),
-                    (t.prototype.getScale = function () {
-                        return 1.5;
-                    }),
-                    (t.prototype.getCircleStyle = function () {
-                        return "polygon";
-                    }),
-                    (t.prototype.getPolygonEdges = function () {
-                        return 6;
-                    }),
-                    (t.prototype.getBackgroundColor = function () {
-                        return SKILL_TREE[this.dependsOn[0]].getBackgroundColor();
-                    }),
-                    _createClass(t, [
-                        {
-                            key: "cost",
-                            get: function () {
-                                return this.skillCost;
-                            },
-                        },
-                    ]),
-                    t
-                );
-            })(BaseSkill),
-            InitialSkill = (function (e) {
-                function t() {
-                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.apply(this, arguments));
-                }
-                return (
-                    _inherits(t, e),
-                    _createClass(
-                        t,
-                        [
-                            {
-                                key: "cost",
-                                get: function () {
-                                    return 1;
-                                },
-                            },
-                        ],
-                        [
-                            {
-                                key: "name",
-                                get: function () {
-                                    return "InitialSkill";
-                                },
-                            },
-                        ]
-                    ),
-                    t
-                );
-            })(BigSkill),
-            Skill2Points = (function (e) {
-                function t() {
-                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.apply(this, arguments));
-                }
-                return (
-                    _inherits(t, e),
-                    _createClass(
-                        t,
-                        [
-                            {
-                                key: "cost",
-                                get: function () {
-                                    return 2;
-                                },
-                            },
-                        ],
-                        [
-                            {
-                                key: "name",
-                                get: function () {
-                                    return "Skill2Points";
-                                },
-                            },
-                        ]
-                    ),
-                    t
-                );
-            })(BaseSkill),
-            Skill3Points = (function (e) {
-                function t() {
-                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.apply(this, arguments));
-                }
-                return (
-                    _inherits(t, e),
-                    _createClass(
-                        t,
-                        [
-                            {
-                                key: "cost",
-                                get: function () {
-                                    return 3;
-                                },
-                            },
-                        ],
-                        [
-                            {
-                                key: "name",
-                                get: function () {
-                                    return "Skill3Points";
-                                },
-                            },
-                        ]
-                    ),
-                    t
-                );
-            })(BaseSkill)  
+                return 8947848;
+            }
+
+            static get name() {
+                return "BaseSkill";
+            }
+        }
+
+        class BigSkill extends BaseSkill {
+            getScale() {
+                return 1.2;
+            }
+
+            getCircleStyle() {
+                return "polygon";
+            }
+
+            getPolygonEdges() {
+                return 6;
+            }
+
+            get cost() {
+                return 5;
+            }
+
+            static get name() {
+                return "BigSkill";
+            }
+        }
+
+        class FeatureSkill extends BaseSkill {
+            constructor(key, position, description, dependsOn = null, skillCost = 15) {
+                super(key, position, {}, dependsOn);
+                this.description = description;
+                this.skillCost = skillCost;
+            }
+
+            getScale() {
+                return 1.5;
+            }
+
+            getCircleStyle() {
+                return "polygon";
+            }
+
+            getPolygonEdges() {
+                return 6;
+            }
+
+            getBackgroundColor() {
+                return SKILL_TREE[this.dependsOn[0]].getBackgroundColor();
+            }
+
+            get cost() {
+                return this.skillCost;
+            }
+
+            static get name() {
+                return "FeatureSkill";
+            }
+        }
+
+        class InitialSkill extends BigSkill {
+            get cost() {
+                return 1;
+            }
+
+            static get name() {
+                return "InitialSkill";
+            }
+        }
+
+        class Skill2Points extends BaseSkill {
+            get cost() {
+                return 2;
+            }
+
+            static get name() {
+                return "Skill2Points";
+            }
+        }
+
+        class Skill3Points extends BaseSkill {
+            get cost() {
+                return 3;
+            }
+
+            static get name() {
+                return "Skill3Points";
+            }
+        }
         
         class GameLogic {
             constructor(t) {
@@ -29535,15 +29158,19 @@
             getId() {
                 return "easy";
             }
+
             getTitle() {
                 return tr("gamemode_easy");
             }
+
             getColor() {
                 return 2544453;
             }
+
             getUniqueIndex() {
                 return 1;
             }
+
             initialize() {
                 super.initialize();
                 const initBalancing = new Balancing({
@@ -29823,58 +29450,85 @@
                 if (data.version < SAVEGAME_VERSION && forceCompatibility) {
                     this.root.gui.uiNotifications.showLongHint(tr("savegame_old_version"));
                 }
-        
+            
                 const isBeta = YORGIO.IS_BETA;
                 if (data.beta && !isBeta) {
                     if (forceCompatibility) this.root.gui.uiNotifications.showLongError(tr("savegame_from_beta"));
                     return false;
                 }
-        
+            
                 const gamemodeId = data.gamemode || "impossible";
                 const gameMode = createGameModeFromId(gamemodeId);
                 if (!gameMode) {
                     if (forceCompatibility) this.root.gui.uiNotifications.showLongError(tr("gamemode_no_longer_exists", gamemodeId));
                     return false;
                 }
-        
+            
                 this.root.gamemode = gameMode;
                 this.root.gamemode.initialize();
                 this.root.logic.clearGame();
                 this.root.stats.load(data.stats);
                 this.root.logic.mapSeed = data.mapSeed;
                 this.root.logic.spawnResources();
-        
-                data.buildings.forEach((e) => {
-                    const className = e.className;
-                    const level = e.level;
-                    const tileX = e.tileX;
-                    const tileY = e.tileY;
-                    const storage = e.storage;
-                    const buildingClass = BuildingRegistry.getMetaclassByName(className);
-                    if (buildingClass && !this.root.map.isTileUsed(tileX, tileY)) {
-                        const buildingInstance = this.root.logic.doPlaceBuilding(buildingClass, tileX, tileY);
-                        for (let i = 0; i < level; ++i) {
-                            buildingClass.upgradeInstance(this.root.phaser, buildingInstance);
-                        }
-                        const storageComponent = buildingInstance.getComponent(StorageComponent);
-                        if (storageComponent) {
-                            storageComponent.resources = storage;
-                        }
-                    }
-                });
-        
-                this.root.logic.onSavegameLoaded();
-                const daySeconds = data.daySeconds || 0;
-                this.root.daytime.loadDay(data.day, daySeconds);
-                this.root.phaser.camera.view.setTo(data.view.x, data.view.y);
-                this.root.zoom.setZoomLevel(data.view.zoom, true);
-                this.root.syncer.load(data.sync);
-                this.root.gui.uiGameTimeButtons.requestPause();
-                this.root.gui.uiNotifications.showLongSuccess(tr("game_successfully_loaded"));
-                this.lastSavegame = e;
+            
+                // Call the async function to process the buildings
+                this.processBuildingsAsync(data)
+                    .then(() => {
+                        console.log("Buildings processed successfully.");
+
+                        this.root.logic.onSavegameLoaded();
+                        const daySeconds = data.daySeconds || 0;
+                        this.root.daytime.loadDay(data.day, daySeconds);
+                        this.root.phaser.camera.view.setTo(data.view.x, data.view.y);
+                        this.root.zoom.setZoomLevel(data.view.zoom, true);
+                        this.root.syncer.load(data.sync);
+                        this.root.gui.uiGameTimeButtons.requestPause();
+                        this.root.gui.uiNotifications.showLongSuccess(tr("game_successfully_loaded"));
+                        this.lastSavegame = e;
+                    })
+                    .catch((error) => {
+                        console.error("An error occurred while processing buildings:", error);
+                    });
+            
                 return true;
             }
-        
+            
+            async processBuildingsAsync(data) {
+                const batchSize = 40; // Number of buildings loaded at once
+                const delayBetweenBatches = 200; // Adjust the delay in milliseconds
+                const totalBuildings = data.buildings.length;
+            
+                for (let startIndex = 0; startIndex < totalBuildings; startIndex += batchSize) {
+                    const endIndex = Math.min(startIndex + batchSize, totalBuildings);
+                    const batch = data.buildings.slice(startIndex, endIndex);
+            
+                    await Promise.all(batch.map(async (e) => {
+                        const className = e.className;
+                        const level = e.level;
+                        const tileX = e.tileX;
+                        const tileY = e.tileY;
+                        const storage = e.storage;
+                        const buildingClass = BuildingRegistry.getMetaclassByName(className);
+            
+                        if (buildingClass && !this.root.map.isTileUsed(tileX, tileY)) {
+                            const buildingInstance = this.root.logic.doPlaceBuilding(buildingClass, tileX, tileY);
+            
+                            for (let i = 0; i < level; ++i) {
+                                buildingClass.upgradeInstance(this.root.phaser, buildingInstance);
+                            }
+            
+                            const storageComponent = buildingInstance.getComponent(StorageComponent);
+                            if (storageComponent) {
+                                storageComponent.resources = storage;
+                            }
+                        }
+                    }));
+            
+                    // Introduce a delay before processing the next batch
+                    await new Promise(resolve => setTimeout(resolve, delayBetweenBatches));
+                }
+            }
+     
             dataToString(e) {
                 const str = JSON.stringify(e, null, 2);
                 return _lzString2.default.compressToEncodedURIComponent(str);
@@ -34186,1118 +33840,1018 @@
                     }),
                     t
                 );
-            })(BaseViewUI),
-            BaseTutorialStep = (function () {
-                function e() {
-                    _classCallCheck(this, e);
-                    for (var t = arguments.length, i = Array(t), a = 0; a < t; a++) i[a] = arguments[a];
-                    this.text = i
-                        .map(function (e) {
-                            return tr(e);
-                        })
-                        .join("<br /><br />");
+            })(BaseViewUI);
+            
+            class BaseTutorialStep {
+                constructor(...text) {
+                    this.text = text.map(e => tr(e)).join("<br /><br />");
                 }
-                return (
-                    _createClass(e, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "BaseTutorialStep";
-                            },
-                        },
-                    ]),
-                    (e.prototype.getLinkedElement = function () {
-                        return null;
-                    }),
-                    (e.prototype.isEnabled = function (e) {
-                        var t = this.getLinkedElement(e);
-                        return !t || (t.tutorialGetPosition && null != t.tutorialGetPosition());
-                    }),
-                    (e.prototype.requiresArrowAction = function () {
-                        return false;
-                    }),
-                    (e.prototype.getArrowSize = function () {
-                        return 100;
-                    }),
-                    (e.prototype.hasNextButton = function () {
-                        return !this.requiresArrowAction();
-                    }),
-                    (e.prototype.getCameraYOffset = function () {
-                        return 0;
-                    }),
-                    (e.prototype.getCameraXOffset = function () {
-                        return 0;
-                    }),
-                    (e.prototype.hasAbortButton = function () {
-                        return true;
-                    }),
-                    (e.prototype.prepareStep = function () { }),
-                    (e.prototype.updateStep = function () {
-                        return true;
-                    }),
-                    (e.prototype.onStepFinished = function () { }),
-                    (e.prototype.getArrowPosition = function (e) {
-                        var t = this.getLinkedElement(e);
-                        return t ? t.tutorialGetPosition() : null;
-                    }),
-                    e
-                );
-            })(),
-            BaseTutorialStepSelectInBuildingBar = (function (e) {
-                function t() {
-                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.apply(this, arguments));
+            
+                getLinkedElement() {
+                    return null;
                 }
-                return (
-                    _inherits(t, e),
-                    (t.prototype.getBuildingClass = function () {
-                        throw new Error("abstract");
-                    }),
-                    (t.prototype.getArrowPosition = function (e) {
-                        return e.gui.uiBuildingsDisplay.tutorialGetPositionOf(this.getBuildingClass());
-                    }),
-                    (t.prototype.requiresArrowAction = function () {
-                        return true;
-                    }),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "BaseTutorialStepSelectInBuildingBar";
-                            },
-                        },
-                    ]),
-                    t
-                );
-            })(BaseTutorialStep),
-            BaseTutorialStepClickOnTile = (function (e) {
-                function t() {
-                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.apply(this, arguments));
+            
+                isEnabled(e) {
+                    const linkedElement = this.getLinkedElement(e);
+                    return !linkedElement || (linkedElement.tutorialGetPosition && linkedElement.tutorialGetPosition() !== null);
                 }
-                return (
-                    _inherits(t, e),
-                    (t.prototype.getTile = function () {
-                        throw new Error("abstract");
-                    }),
-                    (t.prototype.requiresArrowAction = function () {
-                        return true;
-                    }),
-                    (t.prototype.getArrowPosition = function (e) {
-                        var t = this.getTile(e),
-                            i = tileToWorld.apply(void 0, _toConsumableArray(t)),
-                            a = e.phaser.camera.view,
-                            o = e.zoom.currentZoomLevel;
-                        return [(i[0] + Config.tileSize / 2) / o - a.x, (i[1] + Config.tileSize / 2) / o - a.y];
-                    }),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "BaseTutorialStepClickOnTile";
-                            },
-                        },
-                    ]),
-                    t
-                );
-            })(BaseTutorialStep),
-            BaseTutorialStepPlaceBuilding = (function (e) {
-                function t() {
-                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.apply(this, arguments));
+            
+                requiresArrowAction() {
+                    return false;
                 }
-                return (
-                    _inherits(t, e),
-                    (t.prototype.getBuildingClass = function () {
-                        throw new Error("abstract");
-                    }),
-                    (t.prototype.onStepFinished = function (e) {
-                        var t = this.getTile(e),
-                            i = e.stats.gems;
-                        (e.stats.gems = 1e4), e.logic.tryPlaceBuilding({ building: BuildingRegistry.getMetaclassByClassHandle(this.getBuildingClass()), position: { tileX: t[0], tileY: t[1] } }), (e.stats.gems = i), e.gameSystems.update();
-                    }),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "BaseTutorialStepPlaceBuilding";
-                            },
-                        },
-                    ]),
-                    t
-                );
-            })(BaseTutorialStepClickOnTile),
-            BaseTutorialStepWaitLiveSeconds = (function (e) {
-                function t() {
-                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.apply(this, arguments));
+            
+                getArrowSize() {
+                    return 100;
                 }
-                return (
-                    _inherits(t, e),
-                    (t.prototype.getSecondsToWait = function () {
-                        throw new Error("abstract");
-                    }),
-                    (t.prototype.hasNextButton = function () {
-                        return false;
-                    }),
-                    (t.prototype.requiresArrowAction = function () {
-                        return false;
-                    }),
-                    (t.prototype.prepareStep = function (e) {
-                        (Config.gameTimeSpeedUpFactor = 1.5), (this.startTime = e.time.now), (document.getElementById("tutorial_time_bar").style.display = "block"), (document.getElementById("tutorial_time_bar_value").style.width = "0%");
-                    }),
-                    (t.prototype.updateStep = function (e) {
-                        var t = 1e3 * this.getSecondsToWait(),
-                            i = (e.time.now - this.startTime) / t;
-                        return (document.getElementById("tutorial_time_bar_value").style.width = roundDecimals(100 * i, 3) + "%"), !(i >= 1) || (console.log("[TUTORIAL] Finishing timed step"), false);
-                    }),
-                    (t.prototype.onStepFinished = function () {
-                        (document.getElementById("tutorial_time_bar").style.display = "none"), (Config.gameTimeSpeedUpFactor = 1e-11), console.log("[TUTORIAL] Reset speed");
-                    }),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "BaseTutorialStepWaitLiveSeconds";
-                            },
-                        },
-                    ]),
-                    t
-                );
-            })(BaseTutorialStep),
-            BaseTutorialStepWaitCondition = (function (e) {
-                function t() {
-                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.apply(this, arguments));
+            
+                hasNextButton() {
+                    return !this.requiresArrowAction();
                 }
-                return (
-                    _inherits(t, e),
-                    (t.prototype.conditionIsFullfilled = function () {
-                        throw new Error("abstract");
-                    }),
-                    (t.prototype.hasNextButton = function () {
-                        return false;
-                    }),
-                    (t.prototype.requiresArrowAction = function () {
-                        return false;
-                    }),
-                    (t.prototype.prepareStep = function () {
-                        Config.gameTimeSpeedUpFactor = 1.5;
-                    }),
-                    (t.prototype.updateStep = function (e) {
-                        return !this.conditionIsFullfilled(e);
-                    }),
-                    (t.prototype.onStepFinished = function () {
-                        (Config.gameTimeSpeedUpFactor = 1e-11), console.log("[TUTORIAL] Reset speed");
-                    }),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "BaseTutorialStepWaitCondition";
-                            },
-                        },
-                    ]),
-                    t
-                );
-            })(BaseTutorialStep),
-            TutorialStepInitial = (function (e) {
-                function t() {
-                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.call(this, "tutorial_step_initial"));
+            
+                getCameraYOffset() {
+                    return 0;
                 }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "TutorialStepInitial";
-                            },
-                        },
-                    ]),
-                    t
-                );
-            })(BaseTutorialStep),
-            TutorialStepGameExplanation = (function (e) {
-                function t() {
-                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.call(this, "tutorial_step_game_explanation_1", "tutorial_step_game_explanation_2"));
+            
+                getCameraXOffset() {
+                    return 0;
                 }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "TutorialStepGameExplanation";
-                            },
-                        },
-                    ]),
-                    t
-                );
-            })(BaseTutorialStep),
-            TutorialStepShowGems = (function (e) {
-                function t() {
-                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.call(this, "tutorial_step_show_gems"));
+            
+                hasAbortButton() {
+                    return true;
                 }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "TutorialStepShowGems";
-                            },
-                        },
-                    ]),
-                    (t.prototype.getLinkedElement = function (e) {
-                        return e.gui.uiStatDisplay;
-                    }),
-                    (t.prototype.getArrowSize = function () {
-                        return 150;
-                    }),
-                    t
-                );
-            })(BaseTutorialStep),
-            TutorialStepMinimap = (function (e) {
-                function t() {
-                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.call(this, "tutorial_step_minimap_1", "tutorial_step_minimap_2"));
+            
+                prepareStep() {}
+            
+                updateStep() {
+                    return true;
                 }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "TutorialStepMinimap";
-                            },
-                        },
-                    ]),
-                    (t.prototype.getLinkedElement = function (e) {
-                        return e.gui.uiMinimap;
-                    }),
-                    (t.prototype.getArrowSize = function () {
-                        return 200;
-                    }),
-                    t
-                );
-            })(BaseTutorialStep),
-            TutorialStepDayNight = (function (e) {
-                function t() {
-                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.call(this, "tutorial_step_day_night"));
+            
+                onStepFinished() {}
+            
+                getArrowPosition(e) {
+                    const linkedElement = this.getLinkedElement(e);
+                    return linkedElement ? linkedElement.tutorialGetPosition() : null;
                 }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "TutorialStepDayNight";
-                            },
-                        },
-                    ]),
-                    (t.prototype.getLinkedElement = function (e) {
-                        return e.gui.uiDayNight;
-                    }),
-                    t
-                );
-            })(BaseTutorialStep),
-            TutorialStepGameSpeed = (function (e) {
-                function t() {
-                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.call(this, "tutorial_step_game_speed_1", "tutorial_step_game_speed_2"));
+            }
+            
+            class BaseTutorialStepSelectInBuildingBar extends BaseTutorialStep {
+                getBuildingClass() {
+                    throw new Error("abstract");
                 }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "TutorialStepGameSpeed";
-                            },
-                        },
-                    ]),
-                    (t.prototype.getLinkedElement = function (e) {
-                        return e.gui.uiGameTimeButtons;
-                    }),
-                    t
-                );
-            })(BaseTutorialStep),
-            TutorialStepSelectBase = (function (e) {
-                function t() {
-                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.call(this, "tutorial_step_select_base_1", "tutorial_step_select_base_2"));
+            
+                getArrowPosition(e) {
+                    return e.gui.uiBuildingsDisplay.tutorialGetPositionOf(this.getBuildingClass());
                 }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "TutorialStepSelectBase";
-                            },
-                        },
-                    ]),
-                    (t.prototype.getBuildingClass = function () {
-                        return PlayerBaseMeta;
-                    }),
-                    t
-                );
-            })(BaseTutorialStepSelectInBuildingBar),
-            TutorialStepPlaceBase = (function (e) {
-                function t() {
-                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.call(this, "tutorial_step_place_base"));
+            
+                requiresArrowAction() {
+                    return true;
                 }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "TutorialStepPlaceBase";
-                            },
-                        },
-                    ]),
-                    (t.prototype.getTile = function () {
-                        return [Math.round(Config.numTilesX / 2), Math.round(Config.numTilesY / 2)];
-                    }),
-                    (t.prototype.getBuildingClass = function () {
-                        return PlayerBaseMeta;
-                    }),
-                    t
-                );
-            })(BaseTutorialStepPlaceBuilding),
-            TutorialStepExplainZombieStart = (function (e) {
-                function t() {
-                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.call(this, "tutorial_step_explain_zombie_start"));
+            
+                static get name() {
+                    return "BaseTutorialStepSelectInBuildingBar";
                 }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "TutorialStepExplainZombieStart";
-                            },
-                        },
-                    ]),
-                    (t.prototype.getLinkedElement = function (e) {
-                        return Config.mobileDevice ? null : e.gui.uiTimeUntilZombies;
-                    }),
-                    (t.prototype.getArrowSize = function () {
-                        return 150;
-                    }),
-                    t
-                );
-            })(BaseTutorialStep),
-            TutorialStepSelectGoldMine = (function (e) {
-                function t() {
-                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.call(this, "tutorial_step_select_gold_mine_1", "tutorial_step_select_gold_mine_2"));
+            }
+            
+            class BaseTutorialStepClickOnTile extends BaseTutorialStep {
+                getTile() {
+                    throw new Error("abstract");
                 }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "TutorialStepSelectGoldMine";
-                            },
-                        },
-                    ]),
-                    (t.prototype.getBuildingClass = function () {
-                        return GoldMineMeta;
-                    }),
-                    t
-                );
-            })(BaseTutorialStepSelectInBuildingBar),
-            TutorialStepPlaceGoldMine = (function (e) {
-                function t() {
-                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.call(this, "tutorial_step_place_gold_mine_1", "tutorial_step_place_gold_mine_2"));
+            
+                requiresArrowAction() {
+                    return true;
                 }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "TutorialStepPlaceGoldMine";
-                            },
-                        },
-                    ]),
-                    (t.prototype.getTile = function () {
-                        return [Math.round(Config.numTilesX / 2) - 2, Math.round(Config.numTilesY / 2)];
-                    }),
-                    (t.prototype.getBuildingClass = function () {
-                        return GoldMineMeta;
-                    }),
-                    t
-                );
-            })(BaseTutorialStepPlaceBuilding),
-            TutorialStepSelectGoldMine2 = (function (e) {
-                function t() {
-                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.call(this, "tutorial_step_select_second_gold_mine_1", "tutorial_step_select_second_gold_mine_2"));
+            
+                getArrowPosition(e) {
+                    const tile = this.getTile(e);
+                    const worldPosition = tileToWorld(...tile);
+                    const cameraView = e.phaser.camera.view;
+                    const zoomLevel = e.zoom.currentZoomLevel;
+                    return [
+                        (worldPosition[0] + Config.tileSize / 2) / zoomLevel - cameraView.x,
+                        (worldPosition[1] + Config.tileSize / 2) / zoomLevel - cameraView.y,
+                    ];
                 }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "TutorialStepSelectGoldMine2";
-                            },
-                        },
-                    ]),
-                    (t.prototype.getBuildingClass = function () {
-                        return GoldMineMeta;
-                    }),
-                    t
-                );
-            })(BaseTutorialStepSelectInBuildingBar),
-            TutorialStepPlaceGoldMine2 = (function (e) {
-                function t() {
-                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.call(this, "tutorial_step_place_second_gold_mine"));
+            
+                static get name() {
+                    return "BaseTutorialStepClickOnTile";
                 }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "TutorialStepPlaceGoldMine2";
-                            },
-                        },
-                    ]),
-                    (t.prototype.getTile = function () {
-                        return [Math.round(Config.numTilesX / 2) - 3, Math.round(Config.numTilesY / 2) + 1];
-                    }),
-                    (t.prototype.getBuildingClass = function () {
-                        return GoldMineMeta;
-                    }),
-                    t
-                );
-            })(BaseTutorialStepPlaceBuilding),
-            TutorialStepSelectIronMine = (function (e) {
-                function t() {
-                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.call(this, "tutorial_step_select_iron_mine_1", "tutorial_step_select_iron_mine_2"));
+            }
+            
+
+            class BaseTutorialStepPlaceBuilding extends BaseTutorialStepClickOnTile {
+                getBuildingClass() {
+                    throw new Error("abstract");
                 }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "TutorialStepSelectIronMine";
-                            },
-                        },
-                    ]),
-                    (t.prototype.getBuildingClass = function () {
-                        return IronMineMeta;
-                    }),
-                    t
-                );
-            })(BaseTutorialStepSelectInBuildingBar),
-            TutorialStepPlaceIronMine = (function (e) {
-                function t() {
-                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.call(this, "tutorial_step_place_iron_mine"));
+            
+                onStepFinished(root) {
+                    const tile = this.getTile(root);
+                    root.logic.tryPlaceBuilding({
+                        building: BuildingRegistry.getMetaclassByClassHandle(this.getBuildingClass()),
+                        position: { tileX: tile[0], tileY: tile[1] },
+                    });
+                    root.gameSystems.update();
                 }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "TutorialStepPlaceIronMine";
-                            },
-                        },
-                    ]),
-                    (t.prototype.getTile = function () {
-                        return [Math.round(Config.numTilesX / 2) + 2, Math.round(Config.numTilesY / 2) - 1];
-                    }),
-                    (t.prototype.getBuildingClass = function () {
-                        return IronMineMeta;
-                    }),
-                    t
-                );
-            })(BaseTutorialStepPlaceBuilding),
-            TutorialStepSelectCannonballProducer = (function (e) {
-                function t() {
-                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.call(this, "tutorial_step_select_cannonball_producer_1", "tutorial_step_select_cannonball_producer_2"));
+            
+                static get name() {
+                    return "BaseTutorialStepPlaceBuilding";
                 }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "TutorialStepSelectCannonballProducer";
-                            },
-                        },
-                    ]),
-                    (t.prototype.getBuildingClass = function () {
-                        return CannonballProducerMeta;
-                    }),
-                    t
-                );
-            })(BaseTutorialStepSelectInBuildingBar),
-            TutorialStepPlaceCannonballProducer = (function (e) {
-                function t() {
-                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.call(this, "tutorial_step_place_cannonball_producer_1", "tutorial_step_place_cannonball_producer_2"));
+            }
+            
+            class BaseTutorialStepWaitLiveSeconds extends BaseTutorialStep {
+                getSecondsToWait() {
+                    throw new Error("abstract");
                 }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "TutorialStepPlaceCannonballProducer";
-                            },
-                        },
-                    ]),
-                    (t.prototype.getTile = function () {
-                        return [Math.round(Config.numTilesX / 2), Math.round(Config.numTilesY / 2) + 2];
-                    }),
-                    (t.prototype.getBuildingClass = function () {
-                        return CannonballProducerMeta;
-                    }),
-                    t
-                );
-            })(BaseTutorialStepPlaceBuilding),
-            TutorialStepSelectFirstTransporter = (function (e) {
-                function t() {
-                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.call(this, "tutorial_step_select_first_transporter_1", "tutorial_step_select_first_transporter_2"));
+            
+                hasNextButton() {
+                    return false;
                 }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "TutorialStepSelectFirstTransporter";
-                            },
-                        },
-                    ]),
-                    (t.prototype.getBuildingClass = function () {
-                        return TransporterMeta;
-                    }),
-                    t
-                );
-            })(BaseTutorialStepSelectInBuildingBar),
-            TutorialStepPlaceFirstTransporter = (function (e) {
-                function t() {
-                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.call(this, "tutorial_step_place_first_transporter_1", "tutorial_step_place_first_transporter_2"));
+            
+                requiresArrowAction() {
+                    return false;
                 }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "TutorialStepPlaceFirstTransporter";
-                            },
-                        },
-                    ]),
-                    (t.prototype.getTile = function () {
-                        return [Math.round(Config.numTilesX / 2) + 2, Math.round(Config.numTilesY / 2) + 1];
-                    }),
-                    (t.prototype.getBuildingClass = function () {
-                        return TransporterMeta;
-                    }),
-                    t
-                );
-            })(BaseTutorialStepPlaceBuilding),
-            TutorialStepSelectCannon = (function (e) {
-                function t() {
-                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.call(this, "tutorial_step_select_cannon"));
+            
+                prepareStep(e) {
+                    Config.gameTimeSpeedUpFactor = 1.5;
+                    this.startTime = e.time.now;
+                    document.getElementById("tutorial_time_bar").style.display = "block";
+                    document.getElementById("tutorial_time_bar_value").style.width = "0%";
                 }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "TutorialStepSelectCannon";
-                            },
-                        },
-                    ]),
-                    (t.prototype.getBuildingClass = function () {
-                        return CannonMeta;
-                    }),
-                    t
-                );
-            })(BaseTutorialStepSelectInBuildingBar),
-            TutorialStepPlaceCannon = (function (e) {
-                function t() {
-                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.call(this, "tutorial_step_place_cannon_1", "tutorial_step_place_cannon_2", "tutorial_step_place_cannon_3"));
+            
+                updateStep(e) {
+                    const t = 1000 * this.getSecondsToWait();
+                    const i = (e.time.now - this.startTime) / t;
+                    document.getElementById("tutorial_time_bar_value").style.width = roundDecimals(100 * i, 3) + "%";
+                    return !(i >= 1) || (console.log("[TUTORIAL] Finishing timed step"), false);
                 }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "TutorialStepPlaceCannon";
-                            },
-                        },
-                    ]),
-                    (t.prototype.getTile = function () {
-                        return [Math.round(Config.numTilesX / 2) - 1, Math.round(Config.numTilesY / 2) + 1];
-                    }),
-                    (t.prototype.getBuildingClass = function () {
-                        return CannonMeta;
-                    }),
-                    t
-                );
-            })(BaseTutorialStepPlaceBuilding),
-            TutorialStepWaitForProduction = (function (e) {
-                function t() {
-                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.call(this, "tutorial_step_wait_for_production_1"));
+            
+                onStepFinished() {
+                    document.getElementById("tutorial_time_bar").style.display = "none";
+                    Config.gameTimeSpeedUpFactor = 1e-11;
+                    console.log("[TUTORIAL] Reset speed");
                 }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "TutorialStepWaitForProduction";
-                            },
-                        },
-                    ]),
-                    (t.prototype.getSecondsToWait = function () {
-                        return 20;
-                    }),
-                    t
-                );
-            })(BaseTutorialStepWaitLiveSeconds),
-            TutorialStepSpawnZombies = (function (e) {
-                function t() {
-                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.call(this, "tutorial_step_spawn_zombies"));
+            
+                static get name() {
+                    return "BaseTutorialStepWaitLiveSeconds";
                 }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "TutorialStepSpawnZombies";
-                            },
-                        },
-                    ]),
-                    (t.prototype.prepareStep = function (e) {
-                        (e.time.placedBaseAtTime = 0), e.time.reset(), e.daytime.update(), e.gui.update();
-                    }),
-                    t
-                );
-            })(BaseTutorialStep),
-            TutorialStepWatchZombiesDie = (function (e) {
-                function t() {
-                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.call(this, "tutorial_step_watch_zombies_die"));
+            }
+            
+            class BaseTutorialStepWaitCondition extends BaseTutorialStep {
+                conditionIsFullfilled() {
+                    throw new Error("abstract");
                 }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "TutorialStepWatchZombiesDie";
-                            },
-                        },
-                    ]),
-                    (t.prototype.conditionIsFullfilled = function (e) {
-                        return this.zombiesDiedAt
-                            ? e.time.now - this.zombiesDiedAt > 2e3
-                            : (this.anyZombiesSeen
-                                ? 0 === e.entityMgr.getAllEntitiesWithComponent(EnemyAIComponent).length && (this.zombiesDiedAt = e.time.now)
-                                : e.entityMgr.getAllEntitiesWithComponent(EnemyAIComponent).length > 0 && (this.anyZombiesSeen = true),
-                                false);
-                    }),
-                    t
-                );
-            })(BaseTutorialStepWaitCondition),
-            TutorialStepZombiesDied = (function (e) {
-                function t() {
-                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.call(this, "tutorial_step_zombies_died_1", "tutorial_step_zombies_died_2"));
+            
+                hasNextButton() {
+                    return false;
                 }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "TutorialStepZombiesDied";
-                            },
-                        },
-                    ]),
-                    t
-                );
-            })(BaseTutorialStep),
-            TutorialStepShowBaseTooltip = (function (e) {
-                function t() {
-                    if ((_classCallCheck(this, t), Config.mobile)) var i = _possibleConstructorReturn(this, e.call(this, "tutorial_step_show_base_tooltip_2", "tutorial_step_show_base_tooltip_3"));
-                    else i = _possibleConstructorReturn(this, e.call(this, "tutorial_step_show_base_tooltip_1", "tutorial_step_show_base_tooltip_2", "tutorial_step_show_base_tooltip_3"));
-                    return _possibleConstructorReturn(i);
+            
+                requiresArrowAction() {
+                    return false;
                 }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "TutorialStepShowBaseTooltip";
-                            },
-                        },
-                    ]),
-                    (t.prototype.getCameraYOffset = function () {
-                        return buildingTooltipYOffset;
-                    }),
-                    (t.prototype.onStepFinished = function (e) {
-                        var t = e.logic.getPlayerBase();
-                        if (!t) throw new Error("no base");
-                        e.gui.uiBuildingTooltip.showTooltip(t), e.gui.update();
-                    }),
-                    (t.prototype.getTile = function () {
-                        return [Config.numTilesX / 2, Config.numTilesY / 2];
-                    }),
-                    t
-                );
-            })(BaseTutorialStepClickOnTile),
-            TutorialStepExplainTooltipLevel = (function (e) {
-                function t() {
-                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.call(this, "tutorial_step_explain_tooltip_level_1", "tutorial_step_explain_tooltip_level_2"));
+            
+                prepareStep() {
+                    Config.gameTimeSpeedUpFactor = 1.5;
                 }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "TutorialStepExplainTooltipLevel";
-                            },
-                        },
-                    ]),
-                    (t.prototype.isEnabled = function () {
-                        return !Config.mobileDevice;
-                    }),
-                    (t.prototype.getArrowPosition = function (e) {
-                        return e.gui.uiBuildingTooltip.tutorialGetLevelTextPosition();
-                    }),
-                    (t.prototype.getCameraYOffset = function () {
-                        return buildingTooltipYOffset;
-                    }),
-                    t
-                );
-            })(BaseTutorialStep),
-            TutorialStepExplainTooltipStats = (function (e) {
-                function t() {
-                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.call(this, "tutorial_step_explain_tooltip_stats"));
+            
+                updateStep(e) {
+                    return !this.conditionIsFullfilled(e);
                 }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "TutorialStepExplainTooltipStats";
-                            },
-                        },
-                    ]),
-                    (t.prototype.getArrowPosition = function (e) {
-                        return e.gui.uiBuildingTooltip.tutorialGetStatisticsPosition();
-                    }),
-                    (t.prototype.getArrowSize = function () {
-                        return 140;
-                    }),
-                    (t.prototype.getCameraYOffset = function () {
-                        return buildingTooltipYOffset;
-                    }),
-                    t
-                );
-            })(BaseTutorialStep),
-            TutorialStepUgradeBase = (function (e) {
-                function t() {
-                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.call(this, "tutorial_step_upgrade_base"));
+            
+                onStepFinished() {
+                    Config.gameTimeSpeedUpFactor = 1e-11;
+                    console.log("[TUTORIAL] Reset speed");
                 }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "TutorialStepUgradeBase";
-                            },
-                        },
-                    ]),
-                    (t.prototype.hasNextButton = function () {
-                        return false;
-                    }),
-                    (t.prototype.getArrowPosition = function (e) {
-                        return e.gui.uiBuildingTooltip.tutorialGetUpgradeButtonPosition();
-                    }),
-                    (t.prototype.requiresArrowAction = function () {
-                        return true;
-                    }),
-                    (t.prototype.onStepFinished = function (e) {
-                        e.gui.uiBuildingTooltip.tryUpgrade(), e.gui.update(), e.gui.uiStatDisplay.doUpdate();
-                    }),
-                    (t.prototype.getCameraYOffset = function () {
-                        return buildingTooltipYOffset;
-                    }),
-                    t
-                );
-            })(BaseTutorialStep),
-            TutorialStepShowGoldMineTooltip = (function (e) {
-                function t() {
-                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.call(this, "tutorial_step_show_gold_mine_tooltip_1", "tutorial_step_show_gold_mine_tooltip_2"));
+            
+                static get name() {
+                    return "BaseTutorialStepWaitCondition";
                 }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "TutorialStepShowGoldMineTooltip";
-                            },
-                        },
-                    ]),
-                    (t.prototype.getCameraXOffset = function () {
-                        return goldMineXOffset;
-                    }),
-                    (t.prototype.getCameraYOffset = function () {
-                        return buildingTooltipYOffset;
-                    }),
-                    (t.prototype.onStepFinished = function (e) {
-                        var t,
-                            i = (t = e.map).getTileContent.apply(t, _toConsumableArray(this.getTile()));
-                        if (!i) throw new Error("no mine");
-                        e.gui.uiBuildingTooltip.showTooltip(i), e.gui.update();
-                    }),
-                    (t.prototype.getTile = function () {
-                        return [Config.numTilesX / 2 - 2, Config.numTilesY / 2];
-                    }),
-                    t
-                );
-            })(BaseTutorialStepClickOnTile),
-            TutorialStepUpgradeAllGoldMinesPressShift = (function (e) {
-                function t() {
-                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.call(this, "tutorial_step_upgrade_all_gold_mines_press_shift_1", "tutorial_step_upgrade_all_gold_mines_press_shift_2"));
+            }
+            
+            class TutorialStepInitial extends BaseTutorialStep {
+                constructor() {
+                    super("tutorial_step_initial");
                 }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "TutorialStepUpgradeAllGoldMinesPressShift";
-                            },
-                        },
-                    ]),
-                    (t.prototype.isEnabled = function () {
-                        return !Config.mobileDevice;
-                    }),
-                    (t.prototype.prepareStep = function () {
-                        var e = this,
-                            t = null;
-                        (t = function (i) {
-                            i.shiftKey && ((e.shiftDown = true), window.removeEventListener("keydown", t, false));
-                        }),
-                            window.addEventListener("keydown", t, false);
-                    }),
-                    (t.prototype.conditionIsFullfilled = function (e) {
-                        return this.shiftDown;
-                    }),
-                    (t.prototype.onStepFinished = function (e) {
-                        e.gui.uiBuildingTooltip.forceUpgradeAll = true;
-                    }),
-                    (t.prototype.getCameraXOffset = function () {
-                        return goldMineXOffset;
-                    }),
-                    (t.prototype.getCameraYOffset = function () {
-                        return buildingTooltipYOffset;
-                    }),
-                    t
-                );
-            })(BaseTutorialStepWaitCondition),
-            TutorialStepPerformUpgradeOnAllGoldMines = (function (e) {
-                function t() {
-                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.call(this, "tutorial_step_perform_upgrade_on_all_gold_mines_1", "tutorial_step_perform_upgrade_on_all_gold_mines_2"));
+            
+                static get name() {
+                    return "TutorialStepInitial";
                 }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "TutorialStepPerformUpgradeOnAllGoldMines";
-                            },
-                        },
-                    ]),
-                    (t.prototype.hasNextButton = function () {
-                        return false;
-                    }),
-                    (t.prototype.requiresArrowAction = function () {
-                        return true;
-                    }),
-                    (t.prototype.isEnabled = function () {
-                        return !Config.mobileDevice;
-                    }),
-                    (t.prototype.getArrowPosition = function (e) {
-                        return e.gui.uiBuildingTooltip.tutorialGetUpgradeButtonPosition();
-                    }),
-                    (t.prototype.onStepFinished = function (e) {
-                        e.gui.uiBuildingTooltip.tryUpgrade(), e.gui.uiBuildingTooltip.hideTooltip(), e.gui.update(), (e.gui.uiBuildingTooltip.forceUpgradeAll = false), e.gui.uiStatDisplay.doUpdate();
-                    }),
-                    (t.prototype.getCameraXOffset = function () {
-                        return goldMineXOffset;
-                    }),
-                    (t.prototype.getCameraYOffset = function () {
-                        return buildingTooltipYOffset;
-                    }),
-                    t
-                );
-            })(BaseTutorialStep),
-            TutorialStepFinished = (function (e) {
-                function t() {
-                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.call(this, "tutorial_step_finished"));
+            }
+            
+            class TutorialStepGameExplanation extends BaseTutorialStep {
+                constructor() {
+                    super("tutorial_step_game_explanation_1", "tutorial_step_game_explanation_2");
                 }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "TutorialStepFinished";
-                            },
-                        },
-                    ]),
-                    (t.prototype.hasAbortButton = function () {
-                        return false;
-                    }),
-                    t
-                );
-            })(BaseTutorialStep),
-            TutorialUI = (function () {
-                function e(t, i) {
-                    _classCallCheck(this, e),
-                        (this.root = t),
-                        (this.uiGroup = i),
-                        this.root.signals.gameLoadedAndStarted.add(this.startTutorial, this),
-                        (this.currentStepIndex = 0),
-                        (this.abortRequested = false),
-                        (this.currentCameraXOffs = 0),
-                        (this.currentCameraYOffs = 0);
+            
+                static get name() {
+                    return "TutorialStepGameExplanation";
                 }
-                return (
-                    _createClass(e, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "TutorialUI";
-                            },
-                        },
-                    ]),
-                    (e.prototype.nextStep = function () {
-                        0 !== this.currentStepIndex && this.getCurrentStepInstance().onStepFinished(this.root);
-                        if (((this.currentStepIndex += 1), this.currentStepIndex >= TUTORIAL_STEPS.length)) this.finishTutorial();
-                        else {
-                            var e = this.getCurrentStepInstance();
-                            e.isEnabled(this.root) ? (e.prepareStep(this.root), this.renderStep()) : (console.warn("[TUTORIAL] Skipping step", e.constructor.name, "because its not enabled or visible"), this.nextStep());
+            }
+            
+            class TutorialStepShowGems extends BaseTutorialStep {
+                constructor() {
+                    super("tutorial_step_show_gems");
+                }
+            
+                getLinkedElement(e) {
+                    return e.gui.uiStatDisplay;
+                }
+            
+                getArrowSize() {
+                    return 150;
+                }
+            
+                static get name() {
+                    return "TutorialStepShowGems";
+                }
+            }
+            
+            class TutorialStepMinimap extends BaseTutorialStep {
+                constructor() {
+                    super("tutorial_step_minimap_1", "tutorial_step_minimap_2");
+                }
+            
+                static get name() {
+                    return "TutorialStepMinimap";
+                }
+            
+                getLinkedElement(e) {
+                    return e.gui.uiMinimap;
+                }
+            
+                getArrowSize() {
+                    return 200;
+                }
+            }
+            
+            class TutorialStepDayNight extends BaseTutorialStep {
+                constructor() {
+                    super("tutorial_step_day_night");
+                }
+            
+                static get name() {
+                    return "TutorialStepDayNight";
+                }
+            
+                getLinkedElement(e) {
+                    return e.gui.uiDayNight;
+                }
+            }
+            
+            class TutorialStepGameSpeed extends BaseTutorialStep {
+                constructor() {
+                    super("tutorial_step_game_speed_1", "tutorial_step_game_speed_2");
+                }
+            
+                static get name() {
+                    return "TutorialStepGameSpeed";
+                }
+            
+                getLinkedElement(e) {
+                    return e.gui.uiGameTimeButtons;
+                }
+            }
+            
+            class TutorialStepSelectBase extends BaseTutorialStepSelectInBuildingBar {
+                constructor() {
+                    super();
+                }
+            
+                static get name() {
+                    return "TutorialStepSelectBase";
+                }
+            
+                getBuildingClass() {
+                    return PlayerBaseMeta;
+                }
+            }
+            
+            class TutorialStepPlaceBase extends BaseTutorialStepPlaceBuilding {
+                constructor() {
+                    super("tutorial_step_place_base");
+                }
+            
+                static get name() {
+                    return "TutorialStepPlaceBase";
+                }
+            
+                getTile() {
+                    return [Math.round(Config.numTilesX / 2), Math.round(Config.numTilesY / 2)];
+                }
+            
+                getBuildingClass() {
+                    return PlayerBaseMeta;
+                }
+            }
+            
+            class TutorialStepExplainZombieStart extends BaseTutorialStep {
+                constructor() {
+                    super("tutorial_step_explain_zombie_start");
+                }
+            
+                static get name() {
+                    return "TutorialStepExplainZombieStart";
+                }
+            
+                getLinkedElement(e) {
+                    return Config.mobileDevice ? null : e.gui.uiTimeUntilZombies;
+                }
+            
+                getArrowSize() {
+                    return 150;
+                }
+            }
+            
+            class TutorialStepSelectGoldMine extends BaseTutorialStepSelectInBuildingBar {
+                constructor() {
+                    super();
+                }
+            
+                static get name() {
+                    return "TutorialStepSelectGoldMine";
+                }
+            
+                getBuildingClass() {
+                    return GoldMineMeta;
+                }
+            }
+            
+            class TutorialStepPlaceGoldMine extends BaseTutorialStepPlaceBuilding {
+                constructor() {
+                    super("tutorial_step_place_gold_mine_1", "tutorial_step_place_gold_mine_2");
+                }
+            
+                static get name() {
+                    return "TutorialStepPlaceGoldMine";
+                }
+            
+                getTile() {
+                    return [Math.round(Config.numTilesX / 2) - 2, Math.round(Config.numTilesY / 2)];
+                }
+            
+                getBuildingClass() {
+                    return GoldMineMeta;
+                }
+            }
+            
+            class TutorialStepSelectGoldMine2 extends BaseTutorialStepSelectInBuildingBar {
+                constructor() {
+                    super("tutorial_step_select_second_gold_mine_1", "tutorial_step_select_second_gold_mine_2");
+                }
+            
+                static get name() {
+                    return "TutorialStepSelectGoldMine2";
+                }
+            
+                getBuildingClass() {
+                    return GoldMineMeta;
+                }
+            }
+            
+            class TutorialStepPlaceGoldMine2 extends BaseTutorialStepPlaceBuilding {
+                constructor() {
+                    super("tutorial_step_place_second_gold_mine");
+                }
+            
+                static get name() {
+                    return "TutorialStepPlaceGoldMine2";
+                }
+            
+                getTile() {
+                    return [Math.round(Config.numTilesX / 2) - 3, Math.round(Config.numTilesY / 2) + 1];
+                }
+            
+                getBuildingClass() {
+                    return GoldMineMeta;
+                }
+            }
+            
+            class TutorialStepSelectIronMine extends BaseTutorialStepSelectInBuildingBar {
+                constructor() {
+                    super("tutorial_step_select_iron_mine_1", "tutorial_step_select_iron_mine_2");
+                }
+            
+                static get name() {
+                    return "TutorialStepSelectIronMine";
+                }
+            
+                getBuildingClass() {
+                    return IronMineMeta;
+                }
+            }
+            
+            class TutorialStepPlaceIronMine extends BaseTutorialStepPlaceBuilding {
+                constructor() {
+                    super("tutorial_step_place_iron_mine");
+                }
+            
+                static get name() {
+                    return "TutorialStepPlaceIronMine";
+                }
+            
+                getTile() {
+                    return [Math.round(Config.numTilesX / 2) + 2, Math.round(Config.numTilesY / 2) - 1];
+                }
+            
+                getBuildingClass() {
+                    return IronMineMeta;
+                }
+            }
+            
+            class TutorialStepSelectCannonballProducer extends BaseTutorialStepSelectInBuildingBar {
+                constructor() {
+                    super("tutorial_step_select_cannonball_producer_1", "tutorial_step_select_cannonball_producer_2");
+                }
+            
+                static get name() {
+                    return "TutorialStepSelectCannonballProducer";
+                }
+            
+                getBuildingClass() {
+                    return CannonballProducerMeta;
+                }
+            }
+            
+            class TutorialStepPlaceCannonballProducer extends BaseTutorialStepPlaceBuilding {
+                constructor() {
+                    super("tutorial_step_place_cannonball_producer_1", "tutorial_step_place_cannonball_producer_2");
+                }
+            
+                static get name() {
+                    return "TutorialStepPlaceCannonballProducer";
+                }
+            
+                getTile() {
+                    return [Math.round(Config.numTilesX / 2), Math.round(Config.numTilesY / 2) + 2];
+                }
+            
+                getBuildingClass() {
+                    return CannonballProducerMeta;
+                }
+            }
+            
+            class TutorialStepSelectFirstTransporter extends BaseTutorialStepSelectInBuildingBar {
+                constructor() {
+                    super("tutorial_step_select_first_transporter_1", "tutorial_step_select_first_transporter_2");
+                }
+            
+                static get name() {
+                    return "TutorialStepSelectFirstTransporter";
+                }
+            
+                getBuildingClass() {
+                    return TransporterMeta;
+                }
+            }
+            
+            class TutorialStepPlaceFirstTransporter extends BaseTutorialStepPlaceBuilding {
+                constructor() {
+                    super("tutorial_step_place_first_transporter_1", "tutorial_step_place_first_transporter_2");
+                }
+            
+                static get name() {
+                    return "TutorialStepPlaceFirstTransporter";
+                }
+            
+                getTile() {
+                    return [Math.round(Config.numTilesX / 2) + 2, Math.round(Config.numTilesY / 2) + 1];
+                }
+            
+                getBuildingClass() {
+                    return TransporterMeta;
+                }
+            }
+            
+            class TutorialStepSelectCannon extends BaseTutorialStepSelectInBuildingBar {
+                constructor() {
+                    super("tutorial_step_select_cannon");
+                }
+            
+                static get name() {
+                    return "TutorialStepSelectCannon";
+                }
+            
+                getBuildingClass() {
+                    return CannonMeta;
+                }
+            }
+            
+            class TutorialStepPlaceCannon extends BaseTutorialStepPlaceBuilding {
+                constructor() {
+                    super("tutorial_step_place_cannon_1", "tutorial_step_place_cannon_2", "tutorial_step_place_cannon_3");
+                }
+            
+                static get name() {
+                    return "TutorialStepPlaceCannon";
+                }
+            
+                getTile() {
+                    return [Math.round(Config.numTilesX / 2) - 1, Math.round(Config.numTilesY / 2) + 1];
+                }
+            
+                getBuildingClass() {
+                    return CannonMeta;
+                }
+            }
+            
+            class TutorialStepWaitForProduction extends BaseTutorialStepWaitLiveSeconds {
+                constructor() {
+                    super("tutorial_step_wait_for_production_1");
+                }
+            
+                static get name() {
+                    return "TutorialStepWaitForProduction";
+                }
+            
+                getSecondsToWait() {
+                    return 20;
+                }
+            }
+            
+            class TutorialStepSpawnZombies extends BaseTutorialStep {
+                constructor() {
+                    super("tutorial_step_spawn_zombies");
+                }
+            
+                static get name() {
+                    return "TutorialStepSpawnZombies";
+                }
+            
+                prepareStep(e) {
+                    e.time.placedBaseAtTime = 0;
+                    e.time.reset();
+                    e.daytime.update();
+                    e.gui.update();
+                }
+            }
+            
+            class TutorialStepWatchZombiesDie extends BaseTutorialStepWaitCondition {
+                constructor() {
+                    super("tutorial_step_watch_zombies_die");
+                }
+            
+                static get name() {
+                    return "TutorialStepWatchZombiesDie";
+                }
+            
+                conditionIsFullfilled(e) {
+                    return this.zombiesDiedAt
+                        ? e.time.now - this.zombiesDiedAt > 2000
+                        : this.anyZombiesSeen
+                        ? e.entityMgr.getAllEntitiesWithComponent(EnemyAIComponent).length === 0 && (this.zombiesDiedAt = e.time.now)
+                        : e.entityMgr.getAllEntitiesWithComponent(EnemyAIComponent).length > 0 && (this.anyZombiesSeen = true);
+                }
+            }
+            
+            class TutorialStepZombiesDied extends BaseTutorialStep {
+                constructor() {
+                    super("tutorial_step_zombies_died_1", "tutorial_step_zombies_died_2");
+                }
+            
+                static get name() {
+                    return "TutorialStepZombiesDied";
+                }
+            }
+            
+            class TutorialStepShowBaseTooltip extends BaseTutorialStepClickOnTile {
+                constructor() {
+                    if (Config.mobile) {
+                        super("tutorial_step_show_base_tooltip_2", "tutorial_step_show_base_tooltip_3");
+                    } else {
+                        super("tutorial_step_show_base_tooltip_1", "tutorial_step_show_base_tooltip_2", "tutorial_step_show_base_tooltip_3");
+                    }
+                }
+            
+                static get name() {
+                    return "TutorialStepShowBaseTooltip";
+                }
+            
+                getCameraYOffset() {
+                    return buildingTooltipYOffset;
+                }
+            
+                onStepFinished(e) {
+                    const t = e.logic.getPlayerBase();
+                    if (!t) throw new Error("no base");
+                    e.gui.uiBuildingTooltip.showTooltip(t);
+                    e.gui.update();
+                }
+            
+                getTile() {
+                    return [Config.numTilesX / 2, Config.numTilesY / 2];
+                }
+            }
+            
+            class TutorialStepExplainTooltipLevel extends BaseTutorialStep {
+                constructor() {
+                    super("tutorial_step_explain_tooltip_level_1", "tutorial_step_explain_tooltip_level_2");
+                }
+            
+                static get name() {
+                    return "TutorialStepExplainTooltipLevel";
+                }
+            
+                isEnabled() {
+                    return !Config.mobileDevice;
+                }
+            
+                getArrowPosition(e) {
+                    return e.gui.uiBuildingTooltip.tutorialGetLevelTextPosition();
+                }
+            
+                getCameraYOffset() {
+                    return buildingTooltipYOffset;
+                }
+            }
+            
+            class TutorialStepExplainTooltipStats extends BaseTutorialStep {
+                constructor() {
+                    super("tutorial_step_explain_tooltip_stats");
+                }
+            
+                static get name() {
+                    return "TutorialStepExplainTooltipStats";
+                }
+            
+                getArrowPosition(e) {
+                    return e.gui.uiBuildingTooltip.tutorialGetStatisticsPosition();
+                }
+            
+                getArrowSize() {
+                    return 140;
+                }
+            
+                getCameraYOffset() {
+                    return buildingTooltipYOffset;
+                }
+            }
+            
+            class TutorialStepUgradeBase extends BaseTutorialStep {
+                constructor() {
+                    super("tutorial_step_upgrade_base");
+                }
+            
+                static get name() {
+                    return "TutorialStepUgradeBase";
+                }
+            
+                hasNextButton() {
+                    return false;
+                }
+            
+                getArrowPosition(e) {
+                    return e.gui.uiBuildingTooltip.tutorialGetUpgradeButtonPosition();
+                }
+            
+                requiresArrowAction() {
+                    return true;
+                }
+            
+                onStepFinished(e) {
+                    e.gui.uiBuildingTooltip.tryUpgrade();
+                    e.gui.update();
+                    e.gui.uiStatDisplay.doUpdate();
+                }
+            
+                getCameraYOffset() {
+                    return buildingTooltipYOffset;
+                }
+            }
+            
+            class TutorialStepShowGoldMineTooltip extends BaseTutorialStepClickOnTile {
+                constructor() {
+                    super("tutorial_step_show_gold_mine_tooltip_1", "tutorial_step_show_gold_mine_tooltip_2");
+                }
+            
+                static get name() {
+                    return "TutorialStepShowGoldMineTooltip";
+                }
+            
+                getCameraXOffset() {
+                    return goldMineXOffset;
+                }
+            
+                getCameraYOffset() {
+                    return buildingTooltipYOffset;
+                }
+            
+                onStepFinished(e) {
+                    let i = e.map.getTileContent(...this.getTile());
+                    if (!i) throw new Error("no mine");
+                    e.gui.uiBuildingTooltip.showTooltip(i);
+                    e.gui.update();
+                }
+            
+                getTile() {
+                    return [Config.numTilesX / 2 - 2, Config.numTilesY / 2];
+                }
+            }
+            
+            class TutorialStepUpgradeAllGoldMinesPressShift extends BaseTutorialStepWaitCondition {
+                constructor() {
+                    super("tutorial_step_upgrade_all_gold_mines_press_shift_1", "tutorial_step_upgrade_all_gold_mines_press_shift_2");
+                }
+            
+                static get name() {
+                    return "TutorialStepUpgradeAllGoldMinesPressShift";
+                }
+            
+                isEnabled() {
+                    return !Config.mobileDevice;
+                }
+            
+                prepareStep() {
+                    let e = this;
+                    let t = null;
+                    t = function (i) {
+                        if (i.shiftKey) {
+                            e.shiftDown = true;
+                            window.removeEventListener("keydown", t, false);
                         }
-                    }),
-                    (e.prototype.getCurrentStepInstance = function () {
-                        return this.currentStepIndex < TUTORIAL_STEPS.length ? TUTORIAL_STEPS[this.currentStepIndex] : null;
-                    }),
-                    (e.prototype.finishTutorial = function () {
-                        console.log("[TUTORIAL] Finished"),
-                            document.getElementById("tutorial_bg").remove(),
-                            (Config.gameTimeSpeedUpFactor = 1),
-                            (Config.tutorialActive = false),
-                            this.root.keyboard.start(),
-                            this.root.signals.gameSizeChanged.remove(this.onResolutionChanged, this),
-                            this.root.signals.gameLoadedAndStarted.remove(this.startTutorial, this),
-                            this.root.signals.consistentGameUpdate.remove(this.update, this),
-                            window.removeEventListener("keydown", this.keyboardHandler, true);
-                    }),
-                    (e.prototype.startTutorial = function () {
-                        Config.tutorialActive &&
-                            ((this.root.stats.gems = 1500),
-                                console.log("[TUTORIAL] Starting"),
-                                this.root.signals.gameSizeChanged.add(this.onResolutionChanged, this),
-                                this.root.signals.consistentGameUpdate.add(this.update, this),
-                                (Config.gameTimeSpeedUpFactor = 1e-11),
-                                this.root.keyboard.stop(),
-                                this.init(),
-                                document.getElementById("tutorial_bg").classList.add("visible_dialog"),
-                                (this.keyboardHandler = function (e) {
-                                    0;
-                                }),
-                                window.addEventListener("keydown", this.keyboardHandler, true));
-                    }),
-                    (e.prototype.renderStep = function () {
-                        var e = this.getCurrentStepInstance();
-                        e
-                            ? ((document.getElementById("tutorial_next_text").innerHTML = e.text),
-                                this.currentStepIndex === TUTORIAL_STEPS.length - 1 && (document.getElementById("next_tutorial_btn").innerText = tr("tutorial_finish")),
-                                this.updateArrowPosition(),
-                                e.requiresArrowAction() ? document.getElementById("tutorial_arrow").classList.add("clickable") : document.getElementById("tutorial_arrow").classList.remove("clickable"),
-                                e.hasNextButton() ? (document.getElementById("next_tutorial_btn").style.display = "inline-block") : (document.getElementById("next_tutorial_btn").style.display = "none"),
-                                e.hasAbortButton() ? (document.getElementById("abort_tutorial_btn").style.display = "block") : (document.getElementById("abort_tutorial_btn").style.display = "none"))
-                            : console.error("[TUTORIAL] Invalid instance handle:", this.currentStepIndex);
-                    }),
-                    (e.prototype.updateArrowPosition = function () {
-                        var e = this.getCurrentStepInstance(),
-                            t = e.getArrowPosition(this.root),
-                            i = document.getElementById("tutorial_arrow");
-                        if (t) {
-                            (i.style.display = "block"), (i.style.left = Math.floor(t[0]) + "px"), (i.style.top = Math.floor(t[1]) + "px");
-                            var a = e.getArrowSize();
-                            (i.style.width = a + "px"), (i.style.height = a + "px"), (i.style.marginLeft = Math.round(-a / 2 - 4) + "px"), (i.style.marginTop = Math.round(-a / 2 - 4) + "px");
-                        } else i.style.display = "none";
-                    }),
-                    (e.prototype.resetTutorialButtons = function () {
-                        this.abortRequested = false;
-                        try {
-                            document.getElementById("abort_tutorial_btn").innerText = tr("tutorial_abort");
-                        } catch (e) { }
-                    }),
-                    (e.prototype.init = function () {
-                        var e = this;
-                        this.resetTutorialButtons(),
-                            this.renderStep(),
-                            (window.tutorialNextStep = function () {
-                                e.root.signals.uiActionPerformed.dispatch(), e.resetTutorialButtons(), e.nextStep();
-                            }),
-                            (window.stopTutorial = function () {
-                                e.abortRequested
-                                    ? (e.finishTutorial(), (e.root.stats.gems = 100))
-                                    : ((e.abortRequested = true),
-                                        (document.getElementById("abort_tutorial_btn").innerText = tr("tutorial_confirm_abort")),
-                                        setTimeout(function () {
-                                            return e.resetTutorialButtons();
-                                        }, 2e3)),
-                                    e.root.signals.uiActionPerformed.dispatch();
-                            }),
-                            (window.tutorialArrowClicked = function () {
-                                console.log("[TUTORIAL] Clicked arrow");
-                                var t = e.getCurrentStepInstance();
-                                t && t.requiresArrowAction() && (e.nextStep(), e.root.signals.uiActionPerformed.dispatch());
-                            });
-                    }),
-                    (e.prototype.onResolutionChanged = function () {
-                        var e = this;
-                        this.getCurrentStepInstance()
-                            ? setTimeout(function () {
-                                return e.renderStep();
-                            }, 0)
-                            : console.error("[TUTORIAL] invalid callback #1");
-                    }),
-                    (e.prototype.updateCamera = function () {
-                        var e = this.getCurrentStepInstance();
-                        if (e) {
-                            (this.currentCameraXOffs = 0.96 * this.currentCameraXOffs + e.getCameraXOffset() * (1 - 0.96)), (this.currentCameraYOffs = 0.96 * this.currentCameraYOffs + e.getCameraYOffset() * (1 - 0.96));
-                            var t = this.root.phaser.camera,
-                                i = this.root.zoom.currentZoomLevel;
-                            t.focusOnXY(((Config.numTilesX / 2) * Config.tileSize + this.currentCameraXOffs) / i, ((Config.numTilesX / 2) * Config.tileSize + this.currentCameraYOffs) / i), this.updateArrowPosition();
-                        } else console.error("[TUTORIAL] invalid callback #2");
-                    }),
-                    (e.prototype.update = function () {
-                        var e = this.getCurrentStepInstance();
-                        e && (e.updateStep(this.root) || this.nextStep(), this.updateCamera());
-                    }),
-                    e
-                );
-            })(),
-            ProcessorUsageViewUI = (function (e) {
+                    };
+                    window.addEventListener("keydown", t, false);
+                }
+            
+                conditionIsFullfilled(e) {
+                    return this.shiftDown;
+                }
+            
+                onStepFinished(e) {
+                    e.gui.uiBuildingTooltip.forceUpgradeAll = true;
+                }
+            
+                getCameraXOffset() {
+                    return goldMineXOffset;
+                }
+            
+                getCameraYOffset() {
+                    return buildingTooltipYOffset;
+                }
+            }
+            
+            class TutorialStepPerformUpgradeOnAllGoldMines extends BaseTutorialStep {
+                constructor() {
+                    super("tutorial_step_perform_upgrade_on_all_gold_mines_1", "tutorial_step_perform_upgrade_on_all_gold_mines_2");
+                }
+            
+                static get name() {
+                    return "TutorialStepPerformUpgradeOnAllGoldMines";
+                }
+            
+                hasNextButton() {
+                    return false;
+                }
+            
+                requiresArrowAction() {
+                    return true;
+                }
+            
+                isEnabled() {
+                    return !Config.mobileDevice;
+                }
+            
+                getArrowPosition(e) {
+                    return e.gui.uiBuildingTooltip.tutorialGetUpgradeButtonPosition();
+                }
+            
+                onStepFinished(e) {
+                    e.gui.uiBuildingTooltip.tryUpgrade();
+                    e.gui.uiBuildingTooltip.hideTooltip();
+                    e.gui.update();
+                    e.gui.uiBuildingTooltip.forceUpgradeAll = false;
+                    e.gui.uiStatDisplay.doUpdate();
+                }
+            
+                getCameraXOffset() {
+                    return goldMineXOffset;
+                }
+            
+                getCameraYOffset() {
+                    return buildingTooltipYOffset;
+                }
+            }
+            
+            class TutorialStepFinished extends BaseTutorialStep {
+                constructor() {
+                    super("tutorial_step_finished");
+                }
+            
+                static get name() {
+                    return "TutorialStepFinished";
+                }
+            
+                hasAbortButton() {
+                    return false;
+                }
+            }
+            
+
+            class TutorialUI {
+                constructor(root, uiGroup) {
+                    this.root = root;
+                    this.uiGroup = uiGroup;
+                    this.currentStepIndex = 0;
+                    this.abortRequested = false;
+                    this.currentCameraXOffs = 0;
+                    this.currentCameraYOffs = 0;
+            
+                    this.root.signals.gameLoadedAndStarted.add(this.startTutorial, this);
+                }
+            
+                static get name() {
+                    return "TutorialUI";
+                }
+            
+                nextStep() {
+                    if (this.currentStepIndex !== 0) {
+                        this.getCurrentStepInstance().onStepFinished(this.root);
+                    }
+            
+                    this.currentStepIndex += 1;
+            
+                    if (this.currentStepIndex >= TUTORIAL_STEPS.length) {
+                        this.finishTutorial();
+                    } else {
+                        const currentStep = this.getCurrentStepInstance();
+            
+                        if (currentStep.isEnabled(this.root)) {
+                            currentStep.prepareStep(this.root);
+                            this.renderStep();
+                        } else {
+                            console.warn("[TUTORIAL] Skipping step", currentStep.constructor.name, "because it's not enabled or visible");
+                            this.nextStep();
+                        }
+                    }
+                }
+            
+                getCurrentStepInstance() {
+                    return this.currentStepIndex < TUTORIAL_STEPS.length ? TUTORIAL_STEPS[this.currentStepIndex] : null;
+                }
+            
+                finishTutorial() {
+                    console.log("[TUTORIAL] Finished");
+                    document.getElementById("tutorial_bg").remove();
+                    Config.gameTimeSpeedUpFactor = 1;
+                    Config.tutorialActive = false;
+                    this.root.keyboard.start();
+            
+                    this.root.signals.gameSizeChanged.remove(this.onResolutionChanged, this);
+                    this.root.signals.gameLoadedAndStarted.remove(this.startTutorial, this);
+                    this.root.signals.consistentGameUpdate.remove(this.update, this);
+                    window.removeEventListener("keydown", this.keyboardHandler, true);
+                }
+            
+                startTutorial() {
+                    if (Config.tutorialActive) {
+                        console.log("[TUTORIAL] Starting");
+                        this.root.stats.gems = 1500;
+                        this.root.signals.gameSizeChanged.add(this.onResolutionChanged, this);
+                        this.root.signals.consistentGameUpdate.add(this.update, this);
+                        Config.gameTimeSpeedUpFactor = 1e-11;
+                        this.root.keyboard.stop();
+                        this.init();
+                        document.getElementById("tutorial_bg").classList.add("visible_dialog");
+                        this.keyboardHandler = function (e) {
+                            0;
+                        };
+                        window.addEventListener("keydown", this.keyboardHandler, true);
+                    }
+                }
+            
+                renderStep() {
+                    const currentStep = this.getCurrentStepInstance();
+            
+                    if (currentStep) {
+                        document.getElementById("tutorial_next_text").innerHTML = currentStep.text;
+                        if (this.currentStepIndex === TUTORIAL_STEPS.length - 1) {
+                            document.getElementById("next_tutorial_btn").innerText = tr("tutorial_finish");
+                        }
+            
+                        this.updateArrowPosition();
+            
+                        if (currentStep.requiresArrowAction()) {
+                            document.getElementById("tutorial_arrow").classList.add("clickable");
+                        } else {
+                            document.getElementById("tutorial_arrow").classList.remove("clickable");
+                        }
+            
+                        if (currentStep.hasNextButton()) {
+                            document.getElementById("next_tutorial_btn").style.display = "inline-block";
+                        } else {
+                            document.getElementById("next_tutorial_btn").style.display = "none";
+                        }
+            
+                        if (currentStep.hasAbortButton()) {
+                            document.getElementById("abort_tutorial_btn").style.display = "block";
+                        } else {
+                            document.getElementById("abort_tutorial_btn").style.display = "none";
+                        }
+                    } else {
+                        console.error("[TUTORIAL] Invalid instance handle:", this.currentStepIndex);
+                    }
+                }
+            
+                updateArrowPosition() {
+                    const currentStep = this.getCurrentStepInstance();
+                    const arrowPosition = currentStep.getArrowPosition(this.root);
+                    const arrow = document.getElementById("tutorial_arrow");
+            
+                    if (arrowPosition) {
+                        arrow.style.display = "block";
+                        arrow.style.left = Math.floor(arrowPosition[0]) + "px";
+                        arrow.style.top = Math.floor(arrowPosition[1]) + "px";
+                        const arrowSize = currentStep.getArrowSize();
+                        arrow.style.width = arrowSize + "px";
+                        arrow.style.height = arrowSize + "px";
+                        arrow.style.marginLeft = Math.round(-arrowSize / 2 - 4) + "px";
+                        arrow.style.marginTop = Math.round(-arrowSize / 2 - 4) + "px";
+                    } else {
+                        arrow.style.display = "none";
+                    }
+                }
+            
+                resetTutorialButtons() {
+                    this.abortRequested = false;
+                    try {
+                        document.getElementById("abort_tutorial_btn").innerText = tr("tutorial_abort");
+                    } catch (e) {}
+                }
+            
+                init() {
+                    this.resetTutorialButtons();
+                    this.renderStep();
+                    
+                    window.tutorialNextStep = () => {
+                        this.root.signals.uiActionPerformed.dispatch();
+                        this.resetTutorialButtons();
+                        this.nextStep();
+                    };
+            
+                    window.stopTutorial = () => {
+                        if (this.abortRequested) {
+                            this.finishTutorial();
+                            this.root.stats.gems = 100;
+                        } else {
+                            this.abortRequested = true;
+                            document.getElementById("abort_tutorial_btn").innerText = tr("tutorial_confirm_abort");
+                            setTimeout(() => this.resetTutorialButtons(), 2000);
+                        }
+                        this.root.signals.uiActionPerformed.dispatch();
+                    };
+            
+                    window.tutorialArrowClicked = () => {
+                        console.log("[TUTORIAL] Clicked arrow");
+                        const currentStep = this.getCurrentStepInstance();
+            
+                        if (currentStep && currentStep.requiresArrowAction()) {
+                            this.nextStep();
+                            this.root.signals.uiActionPerformed.dispatch();
+                        }
+                    };
+                }
+            
+                onResolutionChanged() {
+                    const currentStep = this.getCurrentStepInstance();
+            
+                    if (currentStep) {
+                        setTimeout(() => this.renderStep(), 0);
+                    } else {
+                        console.error("[TUTORIAL] Invalid callback #1");
+                    }
+                }
+            
+                updateCamera() {
+                    const currentStep = this.getCurrentStepInstance();
+            
+                    if (currentStep) {
+                        this.currentCameraXOffs = 0.96 * this.currentCameraXOffs + currentStep.getCameraXOffset() * (1 - 0.96);
+                        this.currentCameraYOffs = 0.96 * this.currentCameraYOffs + currentStep.getCameraYOffset() * (1 - 0.96);
+            
+                        const camera = this.root.phaser.camera;
+                        const zoomLevel = this.root.zoom.currentZoomLevel;
+                        camera.focusOnXY(
+                            ((Config.numTilesX / 2) * Config.tileSize + this.currentCameraXOffs) / zoomLevel,
+                            ((Config.numTilesX / 2) * Config.tileSize + this.currentCameraYOffs) / zoomLevel
+                        );
+            
+                        this.updateArrowPosition();
+                    } else {
+                        console.error("[TUTORIAL] Invalid callback #2");
+                    }
+                }
+            
+                update() {
+                    const currentStep = this.getCurrentStepInstance();
+            
+                    if (currentStep) {
+                        if (currentStep.updateStep(this.root)) {
+                            this.nextStep();
+                        }
+            
+                        this.updateCamera();
+                    }
+                }
+            }
+            
+            const ProcessorUsageViewUI = (function (e) {
                 function t(i, a, o) {
                     _classCallCheck(this, t);
                     var n = _possibleConstructorReturn(
@@ -37158,90 +36712,109 @@
                     ]),
                     t
                 );
-            })(ccFixBaseBootState),
-            Stats = (function () {
-                function e() {
-                    _classCallCheck(this, e),
-                        (this[GEM_ATTR_NAME] = new CSVar(Config.startGems)),
-                        (this[POINTS_ATTR_NAME] = new CSVar(Config.startPoints)),
-                        (this.unlockedSkills = []),
-                        (this.cachedSkillData = {}),
-                        Config.allSkillsUnlocked && (this.unlockedSkills = Object.keys(SKILL_TREE)),
-                        (this.gemsOverTime = {}),
-                        this.recomputeCachedSkillData();
+            })(ccFixBaseBootState);
+
+            class Stats {
+                constructor() {
+                    this[GEM_ATTR_NAME] = new CSVar(Config.startGems);
+                    this[POINTS_ATTR_NAME] = new CSVar(Config.startPoints);
+                    this.unlockedSkills = [];
+                    this.cachedSkillData = {};
+                    if (Config.allSkillsUnlocked) {
+                        this.unlockedSkills = Object.keys(SKILL_TREE);
+                    }
+                    this.gemsOverTime = {};
+                    this.recomputeCachedSkillData();
                 }
-                return (
-                    _createClass(e, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "Stats";
-                            },
-                        },
-                    ]),
-                    (e.prototype.storeGemsOverTime = function (e) {
-                        this.gemsOverTime[e] = this.gems;
-                    }),
-                    (e.prototype.isSkillUnlocked = function (e) {
-                        return this.unlockedSkills.indexOf(e) >= 0;
-                    }),
-                    (e.prototype.getSkillGain = function (e) {
-                        if (null == this.cachedSkillData[e]) throw new Error("Invalid gain: '" + e + "'");
-                        return this.cachedSkillData[e];
-                    }),
-                    (e.prototype.recomputeCachedSkillData = function () {
-                        var e = {};
-                        for (var t in GAIN_MAPPINGS) e[t] = GAIN_MAPPINGS[t].default;
-                        this.unlockedSkills.forEach(function (t) {
-                            var i = SKILL_TREE[t];
-                            for (var a in i.gains) e[a] += i.gains[a];
-                        }),
-                            (this.cachedSkillData = e);
-                    }),
-                    (e.prototype.unlockSkill = function (e) {
-                        this.unlockedSkills.push(e), this.recomputeCachedSkillData();
-                    }),
-                    (e.prototype.getSkillGainMultiplier = function (e) {
-                        return this.getSkillGain(e) / 100;
-                    }),
-                    (e.prototype.serialize = function () {
-                        return { gems: this.gems, points: this.points, skills: this.unlockedSkills, gemsOverTime: this.gemsOverTime };
-                    }),
-                    (e.prototype.load = function (e) {
-                        (this.gems = e.gems || 0), (this.points = e.points || 0), (this.unlockedSkills = e.skills || []), (this.gemsOverTime = e.gemsOverTime || []), this.recomputeCachedSkillData();
-                    }),
-                    (e.prototype.canAfford = function (e) {
-                        return !(e.gems && Math.floor(e.gems) > this.gems);
-                    }),
-                    (e.prototype.spend = function (e) {
-                        e.gems && (this.gems -= Math.floor(e.gems));
-                    }),
-                    (e.prototype.grant = function (e) {
-                        e.gems && (this.gems += Math.floor(e.gems));
-                    }),
-                    _createClass(e, [
-                        {
-                            key: "gems",
-                            get: function () {
-                                return this[GEM_ATTR_NAME].getValue();
-                            },
-                            set: function (e) {
-                                this[GEM_ATTR_NAME].setValue(e);
-                            },
-                        },
-                        {
-                            key: "points",
-                            get: function () {
-                                return this[POINTS_ATTR_NAME].getValue();
-                            },
-                            set: function (e) {
-                                this[POINTS_ATTR_NAME].setValue(e);
-                            },
-                        },
-                    ]),
-                    e
-                );
-            })()
+            
+                storeGemsOverTime(time) {
+                    this.gemsOverTime[time] = this.gems;
+                }
+            
+                isSkillUnlocked(skillName) {
+                    return this.unlockedSkills.includes(skillName);
+                }
+            
+                getSkillGain(skillName) {
+                    if (this.cachedSkillData[skillName] === undefined) {
+                        throw new Error(`Invalid gain: '${skillName}'`);
+                    }
+                    return this.cachedSkillData[skillName];
+                }
+            
+                recomputeCachedSkillData() {
+                    const newData = {};
+                    for (const gainName in GAIN_MAPPINGS) {
+                        newData[gainName] = GAIN_MAPPINGS[gainName].default;
+                    }
+                    this.unlockedSkills.forEach((skillName) => {
+                        const skill = SKILL_TREE[skillName];
+                        for (const gainName in skill.gains) {
+                            newData[gainName] += skill.gains[gainName];
+                        }
+                    });
+                    this.cachedSkillData = newData;
+                }
+            
+                unlockSkill(skillName) {
+                    this.unlockedSkills.push(skillName);
+                    this.recomputeCachedSkillData();
+                }
+            
+                getSkillGainMultiplier(skillName) {
+                    return this.getSkillGain(skillName) / 100;
+                }
+            
+                serialize() {
+                    return {
+                        gems: this.gems,
+                        points: this.points,
+                        skills: this.unlockedSkills,
+                        gemsOverTime: this.gemsOverTime,
+                    };
+                }
+            
+                load(data) {
+                    this.gems = data.gems || 0;
+                    this.points = data.points || 0;
+                    this.unlockedSkills = data.skills || [];
+                    this.gemsOverTime = data.gemsOverTime || [];
+                    this.recomputeCachedSkillData();
+                }
+            
+                canAfford(cost) {
+                    return !(cost.gems && Math.floor(cost.gems) > this.gems);
+                }
+            
+                spend(cost) {
+                    if (cost.gems) {
+                        this.gems -= Math.floor(cost.gems);
+                    }
+                }
+            
+                grant(reward) {
+                    if (reward.gems) {
+                        this.gems += Math.floor(reward.gems);
+                    }
+                }
+            
+                get gems() {
+                    return this[GEM_ATTR_NAME].getValue();
+                }
+
+                set gems(value) {
+                    this[GEM_ATTR_NAME].setValue(value)
+                }
+            
+                get points() {
+                    return this[POINTS_ATTR_NAME].getValue();
+                }
+            
+                set points(value) {
+                    this[POINTS_ATTR_NAME].setValue(value);
+                }
+            }
+
             class Root {
                 constructor(phaser) {
                     this.stats = null;
@@ -37380,50 +36953,44 @@
                     }),
                     e
                 );
-            })(),
-            ZombieBoss = (function (e) {
-                function t(i, a, o, n) {
-                    var r = _slicedToArray(n, 1)[0];
-                    _classCallCheck(this, t);
-                    var s = _possibleConstructorReturn(this, e.call(this, i, a, o, r, GAME_BALANCING.enemies.zombieBoss));
-                    return (
-                        (s.getComponent(DamageOnHitComponent).attackParticle = MetaZombieAttackParticle),
-                        (s.getComponent(DamageOnHitComponent).attackStyle = ATTACK_BOSS),
-                        (s.getComponent(DamageOnHitComponent).maxRadiusTiles = 2 * oneTileDistance),
-                        (s.getComponent(DamageOnHitComponent).penetratesShields = true),
-                        (s.getComponent(EnemyAIComponent).targetsBaseOnly = true),
-                        s.addComponent(new BossComponent()),
-                        s
-                    );
+            })();
+
+            class ZombieBoss extends Enemy {
+                constructor(i, a, o, n) {
+                    const r = n[0];
+                    super(i, a, o, r, GAME_BALANCING.enemies.zombieBoss);
+                    this.getComponent(DamageOnHitComponent).attackParticle = MetaZombieAttackParticle;
+                    this.getComponent(DamageOnHitComponent).attackStyle = ATTACK_BOSS;
+                    this.getComponent(DamageOnHitComponent).maxRadiusTiles = 2 * oneTileDistance;
+                    this.getComponent(DamageOnHitComponent).penetratesShields = true;
+                    this.getComponent(EnemyAIComponent).targetsBaseOnly = true;
+                    this.addComponent(new BossComponent());
                 }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "ZombieBoss";
-                            },
-                        },
-                    ]),
-                    (t.prototype.getEyesPosition = function () {
-                        return this.mainSprite.scale.x < 0
-                            ? [
-                                [21, 22],
-                                [42, 22],
-                            ]
-                            : [
-                                [26, 22],
-                                [47, 22],
-                            ];
-                    }),
-                    (t.prototype.makeSprite = function () {
-                        var e = this.phaser.make.image(10, 10, "atlas", "zombie-boss.png");
-                        e.position.setTo(Config.tileSize / 2), e.anchor.setTo(0.5, 0.5), this.addChild(e), (this.mainSprite = e);
-                    }),
-                    t
-                );
-            })(Enemy)
+            
+                getEyesPosition() {
+                    return this.mainSprite.scale.x < 0
+                        ? [
+                              [21, 22],
+                              [42, 22],
+                          ]
+                        : [
+                              [26, 22],
+                              [47, 22],
+                          ];
+                }
+            
+                makeSprite() {
+                    const e = this.phaser.make.image(10, 10, "atlas", "zombie-boss.png");
+                    e.position.setTo(Config.tileSize / 2);
+                    e.anchor.setTo(0.5, 0.5);
+                    this.addChild(e);
+                    this.mainSprite = e;
+                }
+            
+                static get name() {
+                    return "ZombieBoss";
+                }
+            }    
 
             class Zombie extends Enemy {
                 constructor(i, a, o, n) {
@@ -37936,7 +37503,7 @@
                 this.root.signals.consistentGameUpdate.add(this.update, this);
         
                 window.addEventListener("resize", () => this.updateMaximumZoom());
-                window.addEventListener("wheel", (e) => this.handleWheelEvent(e));
+                window.addEventListener("wheel", (e) => this.handleWheelEvent(e), { passive: false });
         
                 setTimeout(() => this.updateMaximumZoom(), 1);
         
@@ -38350,7 +37917,8 @@
                     ]),
                     t
                 );
-            })(EntityRenderObject)
+            })(EntityRenderObject);
+
         class SavegameManager {
             constructor(t) {
                 const i = this;
@@ -38372,6 +37940,7 @@
             static get name() {
                 return "SavegameManager";
             }
+
             initDropFallback() {
                 document.body.ondrop = e => {
                     e.preventDefault();
@@ -38379,6 +37948,7 @@
                     e.preventDefault();
                 };
             }
+
             deleteSavegame(e) {
                 console.log("Deleting:", e);
                 for (var t = null, i = 0; i < this.savegames.length; ++i)
@@ -38387,13 +37957,16 @@
                         break;
                     } null !== t ? (this.savegames.splice(t, 1), this.root.persistent.remove("savegame_blob_" + e), this.root.persistent.remove("savegame_preview_" + e), this.updateMetadata(), document.getElementById("savegame_div_" + e).classList.add("removed"), e === this.activeSavegameId && (this.activeSavegameId = null), this.root.signals.uiActionPerformed.dispatch()) : console.error("[SAVEGAME] Game with id", e, "not found!");
             }
+
             exportSavegame(e) {
                 download("yorgio-savegame.bin", this.getBlob(e));
             }
+
             restoreSavegame(e) {
                 const t = this.getBlob(e);
                 t ? (this.root.serializer.load(t), this.activeSavegameId = e, console.log("[SAVEGAME] Restored", this.activeSavegameId), window.closeDialog("savegame_bg")) : console.error("[SAVEGAME] Blob not found!");
             }
+
             importSavegame(e) {
                 window.closeDialog("savegame_bg");
                 window.showDialog("load_game_dialog_bg");
@@ -38581,7 +38154,6 @@
 
                 makePhaserFast();
 
-                // Ensure canvas elements are opaque for performance.
                 this.game.canvas.mozOpaque = true;
                 this.game.canvas.webkitOpaque = true;
                 this.game.canvas.opaque = true;
@@ -38618,10 +38190,6 @@
                     console.log("[MSG] Received pause message from external frame");
                     this.root.externalAdRunning = true;
                 }
-            }
-
-            revaluateMobileZoom() {
-                // Sorry, getting rid of Mobile Support
             }
 
             makeBackground() {
@@ -38742,13 +38310,7 @@
                 this.root.serializer = new GameSerializer(this.root);
                 this.cameraManager = new CameraManager(this.root);
                 this.cameraManager.moved.add(this.onKeyboardCamMovement, this);
-                this.revaluateMobileZoom();
                 this.onResized();
-
-                // AutoPlay
-                if (Config.autoPlay) {
-                    this.autoPlay = new Bot(this.root);
-                }
 
                 this.root.leaderboard = new LeaderboardUI(this.root);
                 this.root.syncer = new StatSyncer(this.root);
@@ -38835,9 +38397,7 @@
                         this.root.persistent.setString("lastPlayerName", this.root.syncer.playerName);
                         window.startGame = undefined;
 
-                        const randomX = randomInt(20, Config.numTilesX - 40) * Config.tileSize;
-                        const randomY = randomInt(20, Config.numTilesY - 40) * Config.tileSize;
-                        this.root.phaser.camera.focusOnXY(randomX, randomY);
+                        this.root.phaser.camera.focusOnXY(6400, 6400);
 
                         this.performUpdate();
 
@@ -38915,7 +38475,7 @@
                             this.root.leaderboard.update(),
                             this.debugManager && this.debugManager.update();
                     } catch (e) {
-                        console.error(e), EXCEPTION_SHOWN || (EXCEPTION_SHOWN = true);
+                        console.error(e), console.error(e.stack), EXCEPTION_SHOWN || (EXCEPTION_SHOWN = true);
                     }
             }
             static get name() {
@@ -39111,6 +38671,7 @@
                 this.overlay.scale.setTo(e, t);
             }
         }
+
         class GameOverState extends Phaser.State {
             constructor() {
                 super();
@@ -39603,8 +39164,9 @@
             };
 
         const LANGUAGES = {
-            en: _en2.default,
-            "zh-cn": _zhCN2.default,
+            en: _en2.default, // English 
+            "zh-cn": _zhCN2.default, // Simplified Chinese
+            ja: _ja2.default, // Japenese **EXPERIMENTAL**
         };
 
         const browserLocale = () => (
@@ -40079,7 +39641,7 @@
                         zombieCount: function(wave) {
                             return 1 + Math.floor(1.3 * Math.pow(wave, 1.2));
                         },
-                        creeperAmountPercent: 1,
+                        creeperAmountPercent: 0.2,
                         zombieAmountInBossWave: zombieAmountInBossWave,
                         enemies: {
                             zombie: {
@@ -56882,7 +56444,7 @@
             welcome_introduction: "Welcome to yorg.io, a game about supply chains and defending your game against zombies! Your goal is to survive as long as possible. Can you beat your friends?",
             loading_game: "Loading Game",
             play_button: "PLAY",
-            tutorial_button: "Tutorial",
+            tutorial_button: "Auto Play",
             playername_input_placeholder: "Nickname",
             discord: "Discord",
             facebook: "Facebook",
@@ -57062,7 +56624,499 @@
             building_cannon: "Cannon",
             building_cannon_desc: "Shoots cannonballs which explode when hitting zombies",
             building_bombTower: "Bomb Tower",
-            building_bombTower_desc: "Slowls shoots bombs that deal huge damage in a wide range",
+            building_bombTower_desc: "Shoots slow bombs that deal huge aoe damage",
+            building_cannonballProducer: "Cannon Ball Factory",
+            building_cannonballProducer_desc: "Produces cannon balls out of 2 unprocessed iron",
+            building_goldMine: "Crystal Mine",
+            building_goldMine_desc: "Extracts crystals from crystal orbs. Deliver them to your base",
+            error_place_next_to_crystal: "Place next to a crystal",
+            building_harvester: "Harvester",
+            building_harvester_desc: "Harvests forests and produces unprocessed wood",
+            error_place_next_to_tree: "Place next to a tree",
+            building_ironMine: "Iron Mine",
+            building_ironMine_desc: "Extracts unprocessed iron from iron ores",
+            error_place_next_to_iron_ore: "Place next to an iron ore",
+            building_lightningTower: "Lightning Tower",
+            building_lightningTower_desc: "Shoots lightning bolts on enemies which then spread to other enemies",
+            building_nuclearStation: "Nuclear Reactor",
+            building_nuclearStation_desc: "Uses uranium to produce nuclear power",
+            building_playerBase: "Base",
+            building_playerBase_desc: "Your base - Protect it, once destroyed the game is lost",
+            error_only_one_base: "You may only place one Base",
+            error_base_unreachable: "Base is unreachable",
+            building_steelFactory: "Steel Factory",
+            building_steelFactory_desc: "Produces steel out of 2 unprocessed wood and 1 iron",
+            building_transporter: "Transporter",
+            building_transporter_desc: "Transports resources within its range of influence. Chainable.",
+            building_uraniumMine: "Uranium Mine",
+            building_uraniumMine_desc: "Extracts uranium from uranium ores",
+            error_place_next_to_uranium_ore: "Place next to a uranium ore",
+            building_woodProcessor: "Sawmill",
+            building_woodProcessor_desc: "Produces tree trunks out of 2 unprocessed wood",
+            building_healingTower: "Shield Tower",
+            building_healingTower_desc: "Produces shields out of uranium. Each shield blocks one attack.",
+            place_dependent_building_first: "Place a %1 first!",
+            upgrade_base_to_level_first: "Upgrade your base to level %1 to unlock!",
+            upgrade_base_first: "Upgrade your base first!",
+            can_not_afford_upgrade: "Can not afford upgrade",
+            already_at_max_level: "Already at maximum level",
+            not_in_map_bounds: "Not in map bounds",
+            can_not_afford: "Can't afford",
+            space_already_occupied: "Space is already occupied",
+            tile_occupied_by_enemies: "Tile is occupied by enemies!",
+            reached_maximum_limit: "You have reached the maximum Limit. Upgrade your base.",
+            placement_not_possible_during_night_paused: "Not possible while enemies are alive and paused",
+            first_zombie_wave_in: "First zombie wave in",
+            zombie_boss_in: "Zombie Boss in",
+            minute_suffix: "m",
+            seconds_suffix: "s",
+            thousands_suffix: "k",
+            millions_suffix: "m",
+            billions_suffix: "b",
+            trillions_suffix: "t",
+            quadrillion_suffix: "q",
+            leaderboard_rank: "#",
+            leaderboard_name: "Name",
+            leaderboard_crystals: "Crystals",
+            leaderboard_day: "Day",
+            top_scores_permanent: "Leaderboard",
+            loading_leaderboard: "Loading Leaderboard ...",
+            failed_to_fetch_leaderboard: "Failed to fetch leaderboard!",
+            past_games: "Continue Playing",
+            loading_savegames: "Loading Savegames ...",
+            no_past_games: "No games found",
+            score_category_today: "Today",
+            score_category_all_time: "All Time",
+            score_category_hour: "Last Hour",
+            score_category_week: "This Week",
+            score_no_entries: "Nothing. Be the first!",
+            welcome_updates: "Updates",
+            base_arrow_hint: "BASE",
+            kb_section_building: "Building",
+            kb_section_upgrading: "Upgrading",
+            kb_section_movement: "Movement",
+            kb_section_misc: "Misc",
+            kb_place_multiple: "Place Multiple",
+            kb_place_maxlevel: "Place & Upgrade max",
+            kb_cancel_placement: "Cancel Placement",
+            kb_sell_building: "Sell Building",
+            kb_sell_all_building: "Sell All",
+            kb_move: "Move",
+            kb_move_alternate: "Move #2",
+            kb_mouse_hint: "Hint: You can also move by dragging the map with your mouse",
+            zoom: "Zoom",
+            mouse_wheel: "Mouse Wheel",
+            key_shift: "Shift",
+            key_enter: "Enter",
+            key_esc: "Esc",
+            key_alt: "Alt",
+            key_space: "Space",
+            gameover_score_0: "Did you even play?",
+            gameover_score_5: "How did you die so early?",
+            gameover_score_10: "Next time!",
+            gameover_score_20: "You're getting better!",
+            gameover_score_30: "Seems you start to understand the game!",
+            gameover_score_50: "That's pretty good!",
+            gameover_score_100: "Insane!",
+            gameover_score_150: "Wooha!",
+            gameover_score_200: "Always those cheaters ..",
+            gameover_surived_text: "You survived until day %1",
+            gameover_stats_text: "You had %1 crystals, we think this is worth %2 points",
+            gameover_gems_over_time: "Crystals over Time",
+            gameover_try_again: "Try again",
+            validation_token_desc2: "Copy and post this in the #role-validation discord channel to get the appropriate rank assigned!",
+            game_over: "Game Over",
+            tutorial_continue: "Continue",
+            tutorial_finish: "Finish",
+            tutorial_abort: "Abort",
+            tutorial_confirm_abort: "Click again to confirm",
+            tutorial_step_initial: "Welcome to the interactive [YORG.io] tutorial!",
+            tutorial_step_game_explanation_1: "[YORG.io] is a game about defending your base against zombies.",
+            tutorial_step_game_explanation_2: "You need to protect your buildings with defensive Towers. Those cost resources, which you need to mine. But no worries, let me take some time to explain it ...",
+            tutorial_step_show_gems: "Everything in [YORG.io] is about crystals. You can use them to buy new buildings or upgrade your existing ones.",
+            tutorial_step_minimap_1: "This is the [minimap]. You can use it to orientate yourself over the map.",
+            tutorial_step_minimap_2: "During the night, zombies will also be shown there.",
+            tutorial_step_day_night: "This indicator shows the current [Time of Day]. The blue part of the circle indicates the night, zombies will spawn in that period.",
+            tutorial_step_game_speed_1: "Here you can change the game speed. There is pause, regular speed and fast forward.",
+            tutorial_step_game_speed_2: "You can [pause] the game, but only during the day. This will allow you to build, sell and upgrade, but no resources will be harvested in that time.",
+            tutorial_step_select_base_1: "Lets start by placing your [Base]. This is your most important building, and zombies will try to destroy it - so protect it!",
+            tutorial_step_select_base_2: "Select the base from the buildings panel to place it",
+            tutorial_step_place_base: "Make sure to place your base near some [Resources] - in this case I have selected a good position for you.",
+            tutorial_step_explain_zombie_start: "As soon as you place your base, the day-night circle will start. [Zombies] will attack you soon, but luckily this is a tutorial, so I have paused the time for you!",
+            tutorial_step_select_gold_mine_1: "Okay, first we will need some regular income, so lets also place a [Crystal Mine].",
+            tutorial_step_select_gold_mine_2: "Select the crystal mine from the buildings panel.",
+            tutorial_step_place_gold_mine_1: "Place the crystal mine next to a [Crystal Ore]",
+            tutorial_step_place_gold_mine_2: "The crystal mine will collect crystals and deliver them to your base, once the base receives them they are granted to you.",
+            tutorial_step_select_second_gold_mine_1: "We have up to two crystal mines in the beginning. We will get more, [once we upgrade our base].",
+            tutorial_step_select_second_gold_mine_2: "Select another crystal mine from the buildings panel.",
+            tutorial_step_place_second_gold_mine: "Again, place the crystal mine next to the crystal. Each resource in this game can supply [up to 4 mines], and has [unlimited capacity].",
+            tutorial_step_select_iron_mine_1: "Now that we have ensured our income, we need to defend our base.",
+            tutorial_step_select_iron_mine_2: "To be able to place and supply defensive towers, we need to [mine some resources] first. Lets start with an [Iron Mine].",
+            tutorial_step_place_iron_mine: "Place the Iron Mine next to an [Iron Ore].",
+            tutorial_step_select_cannonball_producer_1: "Okay, now that we have some iron, we should make use of it.",
+            tutorial_step_select_cannonball_producer_2: "Lets place a [Cannon Ball Factory] to produce cannonballs out of iron, this is useful for our defense.",
+            tutorial_step_place_cannonball_producer_1: "We need to place the Cannon Ball Factory in the [range] of our Iron Mine.",
+            tutorial_step_place_cannonball_producer_2: "Resources are only transported if there is a [connection] between the producer and consumer",
+            tutorial_step_select_first_transporter_1:
+                "Okay, we have a problem! As you can see, there is no connection drawn between our Iron Mine and our Cannon Ball Factory. This is because they are too far apart - We will need to build a way for the resources.",
+            tutorial_step_select_first_transporter_2: "This is where the [Transporter] comes in handy",
+            tutorial_step_place_first_transporter_1: "Transporters are like roads. They make it possible for resources to travel further, and can also be [chained].",
+            tutorial_step_place_first_transporter_2: "One of the main aspects of YORG.io is to manage your resource transport network.",
+            tutorial_step_select_cannon: "Now that our Factory is connected, we are finally ready to place our first defensive tower - A [Cannon]!",
+            tutorial_step_place_cannon_1: "Cannons are [slow firing, area of effect towers] with a medium range.",
+            tutorial_step_place_cannon_2: "Each shot of a defensive towers costs resources, for the Cannon this is 2 iron. This will increase when you upgrade it. The tower itself has storage for those resources.",
+            tutorial_step_place_cannon_3: "Place the cannon next to your base, so that it can [protect all of our buildings].",
+            tutorial_step_wait_for_production_1: "Okay, now let's wait a bit until our cannon has received some resources!",
+            tutorial_step_wait_for_production_2: "You can monitor your defensive towers storages in the defense panel - watch how it increases!",
+            tutorial_step_spawn_zombies: "Things are getting serious, the Zombies will [attack] us soon! Are you ready?",
+            tutorial_step_watch_zombies_die: "Let's see if we will survive the zombie attack...",
+            tutorial_step_zombies_died_1: "Pretty easy, hm? I can already warn you, there will come a lot more zombies!",
+            tutorial_step_zombies_died_2: "Also, in case your buildings get damaged - no worries, they will regenerate during the day.",
+            tutorial_step_show_base_tooltip_1: "Okay, we gained some crystals from the zombies - now let's upgrade our base!",
+            tutorial_step_show_base_tooltip_2: "Each building in YORG.io can be [upgraded], up to the level of your base. So if you have a level 4 base, you can upgrade all of your buildings to level 4.",
+            tutorial_step_show_base_tooltip_3: "Open the building information by clicking on your base.",
+            tutorial_step_explain_tooltip_level_1: "The tooltip shows you all important information about the building.",
+            tutorial_step_explain_tooltip_level_2: "On the top right, you can see the [current level] of the selected building. With higher level, the building statistics improve.",
+            tutorial_step_explain_tooltip_stats: "Here you can see the current [statistics] of your building. To the right, you can see how these will improve when you upgrade the building.",
+            tutorial_step_upgrade_base: "Okay, let's  upgrade the base. Click the [upgrade button] to spend the given amount of crystals to improve the building.",
+            tutorial_step_show_gold_mine_tooltip_1: "We just upgraded our base. This means, we can now upgrade our Crystal Mines.",
+            tutorial_step_show_gold_mine_tooltip_2: "Make sure to upgrade your Crystal Mines [as soon as possible], to get the maximum income.",
+            tutorial_step_upgrade_all_gold_mines_press_shift_1: "Since we have multiple Crystal Mines, we can upgrade all of them by holding [Shift].",
+            tutorial_step_upgrade_all_gold_mines_press_shift_2: "Press and hold the [Shift] key to use the [Upgrade All] functionality.",
+            tutorial_step_perform_upgrade_on_all_gold_mines_1: "As you can see, the [total price] for upgrading all of your Crystal Mines is displayed.",
+            tutorial_step_perform_upgrade_on_all_gold_mines_2: "If you do not have enough Crystals to upgrade them all, don't worry, it will upgrade as many as you can currently afford.",
+            tutorial_step_finished: "This is it, you have finished the tutorial! You are now ready to start playing, enjoy the game!",
+            global_upgrades: "Skill Tree",
+            global_upgrades_desc: "Manage skills which improve your base and make defending against zombies easier",
+            chat: "Ingame Chat",
+            chat_desc: "Chat with other players!",
+            global_upgrades_explain: "Here you can level up skills which improve your base. You gain one skill point per night, and two for every boss you defeat. Points are not refundable.",
+            can_not_unlock_skill: "You can not unlock this skill right now",
+            gain_damage: "Global Tower Damage",
+            gain_health: "Global Building Health",
+            gain_critical: "Critical Chance",
+            gain_cannonDamage: "Cannon Damage",
+            gain_cannonProjectileSpeed: "Cannonball Speed",
+            gain_arrowDamage: "Arrow Tower Damage",
+            gain_arrowFireRate: "Arrow Fire Rate",
+            gain_arrowRadius: "Arrow Tower Radius",
+            gain_lightningDamage: "Lightning Damage",
+            gain_lightningRadius: "Lightning Radius",
+            gain_wallHealth: "Wall Health",
+            gain_minersSpeed: "Mining Speed",
+            gain_buildingStorage: "Defensive Tower Storage",
+            gain_factorySpeed: "Factory Speed",
+            gain_transporterSpeed: "Transporter Speed",
+            feature_criticalHitsx3: "Critical Hits do x3 damage instead of x2",
+            feature_buildingHealthReg: "Buildings regenerate 2% of health per second during night",
+            feature_cannonDoubleDmg: "Cannons do double damage, but need triple resources",
+            feature_arrowDoubleDmg: "Arrows do double damage, but need triple resources",
+            feature_lightningCritV2: "Lightnings can also critical strike",
+            feature_wallMiss: "20% chance for zombies to miss attacks on walls",
+            feature_doubleStorage: "Defensive Towers have double storage",
+            feature_factoriesSpeed: "Factories produce 50% faster and produce 75% more resources",
+            feature_transporterInvisible: "Zombies ignore transporters and can walk over them",
+            feature_minerRadius1: "You can place up to 8 crystal mines per resource",
+            feature_minerRadius2: "You can place another 4 crystal mines per resource",
+            feature_transporterGlobal: "By researching advanced warping technologies, all resources can be transported instantly. This also fixes lag.",
+            transporter_no_use: "Not required anymore",
+            skill_group_cannon: "Cannon",
+            skill_group_arrowTower: "Arrow Tower",
+            skill_group_lightningTower: "Lightning Tower",
+            skill_group_walls: "Walls",
+            skill_group_health: "Health",
+            skill_group_storage: "Storage",
+            skill_group_factories: "Factories",
+            skill_group_damageCrit: "Damage & Critical",
+            skill_group_transport: "Transport",
+            skill_group_miners: "Mining",
+            toggle_skill_summary: "Toggle Summary",
+            points_cost: "%1 Points",
+            points_cost_single: "%1 Point",
+            no_points: "No skill points available",
+            unlock_base_title: "Getting started",
+            unlock_base_text_1: "Welcome to YORG.io! To get you started:",
+            unlock_base_text_2: "- Place your base and protect it. When it gets destroyed, you lose!",
+            unlock_base_text_3: "- Zombies spawn at night and try to destroy it",
+            unlock_base_text_4: "- Harvest resources and produce new ones to supply your towers.",
+            unlock_base_text_5: "- Survive as many days as possible!",
+            unlock_skills_title: "You just gained your first Skill Point!",
+            unlock_skills_text_1: "You gain one skill point for every night you survive, and two for every boss you kill.",
+            unlock_skills_text_2: "With skill points you can unlock upgrades which make defending against zombies easier!",
+            unlock_lightning_title: "You just unlocked the Lightning Tower!",
+            unlock_lightning_text_1: "The lightning tower is a powerful tower to fight against many zombies at once. The tower shoots arcs at zombies which then spread over to other zombies.",
+            unlock_lightning_text_2: "It requires power, which is produced in nuclear reactors, which themselves require uranium.",
+            unlock_boss_title: "It's getting dangerous!",
+            unlock_boss_text_1: "The next wave will contain a boss zombie. Those are really powerful, and can melt your base within seconds!",
+            unlock_boss_text_2: "Bosses will spawn every 10 waves, and get much harder the longer you survive!",
+            unlock_performance_title: "Is it already lagging?",
+            unlock_performance_text_1: "At higher levels, you might have noticed the game starts lagging. This might be because of too many resources being thrown away, or simply your computer struggling.",
+            unlock_performance_text_2: "To work around this, there are multiple options in the settings dialog which you can try out to improve performance. If you experience lag, you should really give it a try!",
+            unlock_vote_for_us_title: "Do you enjoy YORG.io?",
+            unlock_vote_for_us_text_1: "Make sure to vote for us so more people can find out about YORG.io! ",
+            unlock_vote_visit_iogames_space: "Visit iogames.space",
+            unlock_vote_visit_miniclip: "Visit miniclip.com",
+            unlock_follow_twitter_title: "Do you enjoy YORG.io?",
+            unlock_follow_twitter_text_1: "Make sure to follow me on twitter to get exclusive news about upcoming releases!",
+            unlock_follow_twitter_visit_twitter: "Visit YORG.io on Twitter",
+            unlock_shield_title: "You just unlocked the Shield Tower!",
+            unlock_shield_text_1: "The shield tower uses uranium to produce shield resources. Walls store these to build a shield which absorbs zombie attacks",
+            unlock_shield_text_2: "For every absorbed zombie attack, one shield is consumed. While the wall has shields left, it can also regenerate health!",
+            unlock_more_than_10_points_title: "Forgot to skill?",
+            unlock_more_than_10_points_text_1: "Reminder: You have 10 skill points left. Are just saving up your points, or did you forget to skill?",
+            unlock_more_than_10_points_text_2: "You can spend the skill points by opening the skill tree to the left.",
+            unlock_keybindings_title: "Check the keybindings!",
+            unlock_keybindings_text_1: "There are a lot of useful keybindings, like pressing [SHIFT] to upgrade multiple buildings!",
+            unlock_keybindings_text_2: "Make sure to check out the keybindings dialog on the left!",
+            unlock_standalone_title: "Try the standalone version!",
+            unlock_standalone_text_1: "You should try the standalone version on steam with no ads, better performance, synchronized savegames and much more!",
+            unlock_standalone_btn: "View on steam",
+            welcome_gamemode: "Game Mode",
+            welcome_player_name: "Player Name",
+            gamemode_easy: "Easy",
+            gamemode_regular: "Regular",
+            gamemode_hard: "Hard",
+            gamemode_impossible: "Impossible",
+            gamemode_challenge_boss_only: "Boss every Day",
+            gamemode_sandbox: "Sandbox",
+            challenge: "Challenge",
+            gamemode_no_longer_exists: "The gamemode '%1' no longer exists!",
+            play_other_modes_to_unlock_higher_base: "Reach a higher level on normal gamemodes!",
+            sandbox_desc: "This is the sandbox mode. Try out new base layouts here, you can upgrade your base up to the maximum achieved level in other gamemodes.",
+            place_base_before_wave: "You need to place your base before spawning a wave!",
+            sandbox_spawn: "Spawn",
+            sandbox_wave_n: "Wave %1",
+            sandbox_heal: "Heal all",
+            sandbox_fill: "Fill all",
+            twitter_follow_dialog_header: "Follow us on twitter!",
+            twitter_follow_dialog_content: "The sandbox mode is exclusive for twitter followers. Follow us to unlock it!",
+            twitter_follow_button_txt: "Follow @yorg_io on twitter",
+            discord_follow_dialog_header: "Join the discord!",
+            discord_follow_dialog_content: "The sandbox mode is exclusive for YORG.io discord members. Join now to unlock it!",
+            discord_follow_button_txt: "Join the YORG.io discord",
+            seconds_before: "%1 seconds ago",
+            second_before: "1 second ago",
+            minutes_before: "%1 minutes ago",
+            minute_before: "1 minute ago",
+            hours_before: "%1 hours ago",
+            hour_before: "1 hour ago",
+            days_before: "%1 days ago",
+            day_before: "1 day ago",
+            new_savegame_created: "A new savegame has been created!",
+            existing_savegame_updated: "Your savegame has been updated!",
+            saved_games: "Saved Games",
+            import_savegame: "Import",
+            delete_savegame_warning: "Delete? This can not be undone!",
+            delete_savegame: "Delete",
+            keep_savegame: "Keep",
+            no_savegames_yet: "You don't have any saved games yet!",
+            faq: "FAQ",
+            frontpage_build: "Build",
+            frontpage_upgrade: "Upgrade",
+            frontpage_defend: "Defend",
+            frontpage_build_desc: "Create your own base online!",
+            frontpage_upgrade_desc: "Improve your towers and defenses!",
+            frontpage_defend_desc: "Zombies try to defeat you!",
+            frontpage_footer_1: "YORG.io is a [fun .io game] which combines tower defense with zombies.",
+            frontpage_footer_2: "Build your own base and upgrade your towers to defend against the enemies at night!",
+            frontpage_footer_3: "It features many aspects from [building games] and has its own playstyle.",
+            frontpage_footer_4: "While it differs from popular io games like agar.io and diep.io you can compete and chat with your friends.",
+            std_choose_name_title: "Choose your player name",
+            std_choose_name_desc: "Your name will be shown in the leaderboard. It must not contain abusive words. Choose wisely, you can not change it later!",
+            std_choose_name_btn: "Start Playing",
+            fp_standalone_title: "Steam Standalone",
+            fp_standalone_no_ads: "No ads",
+            fp_standalone_text: "Better performance, synchronized savegames and much more - Get it now!",
+            fp_standalone_btn: "View on steam",
+        };
+    },
+    function (e, t) {
+        e.exports = {
+            welcome_introduction_header: "Introduction",
+            welcome_introduction: "Welcome to yorg.io, a game about supply chains and defending your game against zombies! Your goal is to survive as long as possible. Can you beat your friends?",
+            loading_game: "ゲームを読み込んでいます・・・",
+            play_button: "PLAY",
+            tutorial_button: "Auto Play",
+            playername_input_placeholder: "Nickname",
+            discord: "Discord",
+            facebook: "Facebook",
+            reddit: "Reddit",
+            twitter: "Twitter",
+            wiki: "Wiki",
+            featured_youtuber: "Featured YT",
+            thirdparty_hint_header: "Play on YORG.io to see the leaderboard",
+            thirdparty_hint: "You are playing on an external site. Consider playing on YORG.io directly for an improved experience! [Click here] to visit YORG.io",
+            adblock_hint_header: "Adblock may cause issues with the game",
+            adblock_hint: "[Click here] to find out how to to disable it.",
+            changelog: "変更履歴",
+            view_full_changelog: "完全な変更履歴を表示",
+            view_changelog: "変更履歴",
+            footer_licenses_partners: "Licenses & Partners",
+            footer_more_io_games: "More .io Games",
+            footer_press_kit: "Press Kit",
+            footer_imprint: "Imprint",
+            cookie_hint_text: "This website uses cookies to ensure you get the best experience on our website.",
+            cookie_hint_learn_more: "Learn more",
+            disable_adblock_title: "How to: Disabling adblock",
+            adblock_1_visual_guide: "You can find a visual guide",
+            adblock_1_click_here: "here",
+            adblock_adblockplus_title: "AdBlock Plus / ABP",
+            adblock_adblockplus_instr_1: "Click on the AdBlock Plus extension icon.",
+            adblock_adblockplus_instr_2: "Click 'Enabled on this site' to disable AdBlock for the current site.",
+            adblock_ublock_title: "uBlock Origin",
+            adblock_ublock_instr_1: "Click on the uBlock extension icon.",
+            adblock_ublock_instr_2: "Click the blue 'power' button to disable AdBlock for the current site",
+            adblock_adblock_title: "AdBlock",
+            adblock_adblock_instr_1: "Click on the AdBlock extension icon.",
+            adblock_adblock_instr_2: "Click 'Don‘t run on this domain' to disable AdBlock for the current site.",
+            adblock_thanks_support: "Thank you for supporting us!",
+            report_bug_button: "Report Bug or Suggestion",
+            report_bug_title: "Found a Bug or Suggestion?",
+            report_bug_text1: "If you think you found a bug, or you have ideas for improvements, there are several possibilities:",
+            report_bug_join_discord: "Join the official",
+            report_bug_join_reddit: "Visit the",
+            report_bug_subreddit: "YORG.io subreddit",
+            report_bug_write_email: "Write an email to",
+            report_bug_console_instructions: "When a reporting a bug, please [include the console output]. You can get it by pressing F12 and selecting the [[Console]] tab.",
+            close_dialog: "Close",
+            cancel: "Cancel",
+            back_to_menu_confirm: "Make sure you have saved all your progress, otherwise its lost!",
+            back_to_menu_title: "Back to main menu",
+            restart_game_button: "Restart",
+            back_to_menu_btn: "Leave Game",
+            restart_continue_playing: "Continue Playing",
+            first_time_title: "So, you want to skip the tutorial?",
+            first_time_desc: "It seems this is the first time you are playing [YORG.io]. Are you sure you want to start playing without using the tutorial? This is not recommended!",
+            start_game_anyways: "Play anyways",
+            start_with_tutorial: "Start Tutorial",
+            out_of_focus: "Out of focus",
+            click_to_resume: "Click to resume",
+            crystals_per_sec: "Crystals per sec",
+            cannon: "Cannon",
+            arrow: "Arrow",
+            bomb: "Bomb",
+            lightning: "Lightning",
+            iron: "Iron",
+            wood: "Wood",
+            uranium: "Uranium",
+            steel: "Steel",
+            trunks: "Trunks",
+            power: "Power",
+            pause_not_possible_during_night: "Pause is not possible during night!",
+            pause_not_possible_before_base: "Pause is not available before your base was placed!",
+            fastforward_disabled_while_boss: "Fast forward is disabled while the boss is alive!",
+            fastforward_not_possible_before_base: "Fast forward is not available before your base was placed!",
+            pause_game: "Pause Game",
+            pause_game_desc: "This pauses the game",
+            regular_speed: "Regular Speed",
+            regular_speed_desc: "This plays the game at regular speed",
+            fast_forward: "Fast Forward",
+            fast_forward_desc: "This fast forwards the game",
+            keyboard_shortcuts: "Keyboard Shortcuts",
+            keyboard_shortcuts_desc: "Show the keyboard shortcut dialog",
+            restart_game: "Restart Game",
+            restart_game_desc: "Allows you to restart the game",
+            back_to_menu: "Menu",
+            back_to_menu_desc: "Go back to the main menu",
+            toggle_fullscreen: "Toggle Fullscreen",
+            toggle_fullscreen_desc: "Allows to toggle fullscreen, does not work on all pages!",
+            toggle_gui: "Toggle GUI",
+            toggle_minimap: "Show Detailed Map",
+            toggle_sound: "Toggle Sound",
+            toggle_sound_desc: "This toggles the sound effects",
+            toggle_music: "Toggle Music",
+            toggle_music_desc: "This toggles the background music",
+            settings: "Settings",
+            settings_desc: "Here you can configure game and performance settings",
+            save_game: "Save Game",
+            save_game_desc: "This allows to save the game",
+            save_game_dialog_title: "Save Game",
+            save_game_dialog_desc: "This is your savegame. Copy and store it somewhere",
+            load_game_dialog_title: "Load Game",
+            load_game_dialog_desc_dragdrop: "Drag and drop your savegame file here to load it. This will make you lose your current progress.",
+            load_savegame: "Load Game",
+            drag_file_here: "Drag your savegame here",
+            load_game: "Load Game",
+            load_game_desc: "This allows to restore a saved game",
+            error_save_not_possible_before_base: "Saving is not possible before your base was placed!",
+            invalid_or_corrupt_savegame: "Invalid or corrupt savegame",
+            game_successfully_loaded: "Your Game has been restored successfully",
+            savegame_too_new: "This savegame is from a future version! You can't load it.",
+            savegame_old_version: "This savegame is from an old version! We tried to load it anyways.",
+            savegame_from_beta: "This savegame is from an experimental version and can not be loaded on the live version!",
+            savegame_too_old: "This savegame is from an old version, and is no longer supported. Sorry!",
+            updating_routes: "Recomputing Network",
+            routes_remaining: "%1 Routes remaining ...",
+            defense_view: "Tower Range View",
+            defense_view_desc: "Showing the range of all defensive towers",
+            transport_view: "Transport Network",
+            transport_view_desc: "Showing resource transport ways. Mouseover a building to see its transport ways.",
+            processor_usage_view: "Utilization View",
+            processor_usage_view_desc: "Showing the current utilization of all your factories. Green indicates that the production is at full capacity, yellow or red means that the production is not running at full speed.",
+            zoom_in: "Zoom In",
+            zoom_in_desc: "This zooms in, showing a smaller view of the map",
+            zoom_out: "Zoom Out",
+            zoom_out_desc: "This zooms out, showing a bigger view of the map",
+            performance_settings: "Performance Settings",
+            setting_enableParticles: "Enable Particles",
+            setting_enableParticles_desc: "Disabling this setting will disable all particles - this includes resources, projectiles, and decorative particles. This reduces lag by a lot.",
+            setting_enableFancyZombies: "Display Zombie Health and Effects",
+            setting_enableFancyZombies_desc:
+                "Disabling this will no longer show health bars below zombies, and will also no longer make them flash red upon receiving damage. This helps a bit with performance, especially on later levels with many zombies.",
+            setting_enableResourceThrowaway: "Throw away excess resources",
+            setting_enableResourceThrowaway_desc: "By default, resources which are produced in excess are thrown away and visualized. This can cause lag, so disabling this feature can improve performance.",
+            misc_settings: "Other Settings",
+            setting_disableFastForwardAtNight: "Disable Fast Forward when Night starts",
+            setting_disableFastForwardAtNight_desc: "When this setting is activated, fast forward will be automatically disabled when the night begins.",
+            setting_disableFastForwardDuringBoss: "Disable Fast Forward while a Boss is alive",
+            setting_disableFastForwardDuringBoss_desc: "When this setting is activated, it is not possible to fast forward while a boss is alive.",
+            setting_autosave: "Automatic Save",
+            setting_autosave_desc: "When this setting is activated, your savegame will automatically get updated at the end of every 5 days",
+            ui_settings: "User Interface",
+            setting_showFps: "Show FPS",
+            setting_showFps_desc: "This enables a small display showing the current frame per second. This can be used to measure lag",
+            setting_enableAdvancedUi: "Advanced UI",
+            setting_enableAdvancedUi_desc: "This shows statistics about your resource usage, and enables advanced views like the defense or transport view.",
+            prefix_hotkey: "Hotkey: ",
+            no_cost: "no cost",
+            no_limit: "a lot",
+            level: "Level",
+            stat_health: "Health",
+            stat_damage: "Damage",
+            stat_throughput: "Produce /s",
+            stat_radius: "Radius",
+            stat_outcome: "Amount",
+            stat_transportSpeed: "Speed",
+            stat_spread: "Spread",
+            stat_shootsPerSecond: "Fire rate",
+            stat_storage: "Storage",
+            stat_consumeAmount: "Consumes",
+            stat_shieldStorage: "Max Shields",
+            can_not_sell_building: "You can not sell this building",
+            sell_for: "Sell",
+            sell_all_for: "Sell all",
+            upgrade: "Upgrade",
+            upgrade_all: "Upgrade all",
+            max_out: "Max out",
+            max_out_all: "Max out all",
+            upgrade_base_to_upgrade_building: "Upgrade your Base to upgrade this building!",
+            no_further_upgrades: "No further upgrade possible!",
+            sell_confirmation: "Confirm sell",
+            sell_confirmation_text: "Are you sure you want to sell all %1 buildings? This can not be undone!",
+            sell_mode_active: "Click to sell building",
+            upgrade_mode_active: "Click to upgrade building",
+            place_maxed_out_active: "Placing upgraded building",
+            max_out_mode_active: "Click to max out building",
+            building_wall: "Wall",
+            building_wall_desc: "Protects your base from zombies by blocking their movement",
+            building_arrowFactory: "Arrow Factory",
+            building_arrowFactory_desc: "Produces arrows out of steel and tree trunks",
+            building_arrowTower: "Arrow Tower",
+            building_arrowTower_desc: "Single target tower which shoots arrows at zombies",
+            building_cannon: "Cannon",
+            building_cannon_desc: "Shoots cannonballs which explode when hitting zombies",
+            building_bombTower: "Bomb Tower",
+            building_bombTower_desc: "Shoots slow bombs that deal huge aoe damage",
             building_cannonballProducer: "Cannon Ball Factory",
             building_cannonballProducer_desc: "Produces cannon balls out of 2 unprocessed iron",
             building_goldMine: "Crystal Mine",
@@ -57392,493 +57446,6 @@
     },
     function (e, t) {
         e.exports = {
-            unlock_standalone_title: "Try the standalone version!",
-            unlock_standalone_text_1: "You should try the standalone version on steam with no ads, better performance, synchronized savegames and much more!",
-            unlock_standalone_btn: "View on steam",
-            fp_standalone_title: "Steam Standalone",
-            fp_standalone_no_ads: "No ads",
-            fp_standalone_text: "Better Performance, Synchronized Savegames, Quality of Life Improvements - Get it now!",
-            fp_standalone_btn: "View on steam",
-            welcome_introduction_header: "遊戲簡介",
-            welcome_introduction: "歡迎來到Yorg.io, 一個關於物資供應以及抵禦殭屍的遊戲! 你的目標是要存活得越久越好. 你能打敗你的朋友嗎?",
-            loading_game: "遊戲加載中...",
-            play_button: "遊玩",
-            tutorial_button: "遊戲教學",
-            playername_input_placeholder: "暱稱",
-            discord: "Discord",
-            facebook: "臉書",
-            reddit: "Reddit",
-            twitter: "推特",
-            wiki: "維基",
-            featured_youtuber: "實況主",
-            thirdparty_hint_header: "考慮直接在官網上遊玩",
-            thirdparty_hint: "你現在正在第三方的網站上. 考慮直接在Yorg.io上玩，以獲得更好的體驗！[點擊此處] 連結至官網.",
-            adblock_hint_header: "請關閉你的廣告阻擋器",
-            adblock_hint: "Yorg.io是免費的，但請考慮禁用您的廣告阻擋器來支持我們！ [點擊此處]了解如何禁用它。",
-            changelog: "更新日誌",
-            view_full_changelog: "查看完整的更新日誌",
-            view_changelog: "查看更新日誌",
-            footer_licenses_partners: "許可證&合作夥伴",
-            footer_more_io_games: "更多.io遊戲",
-            footer_press_kit: "資料庫",
-            footer_imprint: "版本說明",
-            cookie_hint_text: "本網站使用cookies來確保您在我們網站上獲得最佳體驗.",
-            cookie_hint_learn_more: "瞭解更多",
-            disable_adblock_title: "如何: 關閉廣告阻擋器",
-            adblock_1_visual_guide: "你可以找到圖解說明",
-            adblock_1_click_here: "這裡",
-            adblock_adblockplus_title: "AdBlock Plus / ABP",
-            adblock_adblockplus_instr_1: "點擊擴充功能圖像.",
-            adblock_adblockplus_instr_2: '點擊 "在此網頁關閉AdBlock"',
-            adblock_ublock_title: "uBlock Origin",
-            adblock_ublock_instr_1: "點擊擴充功能圖像.",
-            adblock_ublock_instr_2: "點擊藍色的“電源”按鈕以在此網站禁用AdBlock",
-            adblock_adblock_title: "AdBlock",
-            adblock_adblock_instr_1: "點擊擴充功能圖像.",
-            adblock_adblock_instr_2: "點擊“不要在此網域上運行”為當前網站禁用AdBlock。",
-            adblock_thanks_support: "感謝你的支持!",
-            report_bug_button: "報告錯誤或提供建議",
-            report_bug_title: "發現錯誤或有新的建議?",
-            report_bug_text1: "如果你認為你發現了一個錯誤，或者你有改進的想法，有幾種可能性：",
-            report_bug_join_discord: "加入官方",
-            report_bug_join_reddit: "造訪:",
-            report_bug_subreddit: "Yorg.io subreddit",
-            report_bug_write_email: "寫信給",
-            report_bug_console_instructions: "當報告錯誤時，請[包含控制台輸出]。您可以通過按F12並選擇[[Console]]選項卡來獲取它。",
-            close_dialog: "關閉",
-            cancel: "取消",
-            back_to_menu_confirm: "Make sure you have saved all your progress, otherwise its lost!",
-            back_to_menu_title: "Back to main menu",
-            restart_game_button: "重新開始",
-            back_to_menu_btn: "Leave Game",
-            restart_continue_playing: "繼續遊玩",
-            first_time_title: "所以, 你想要跳過遊戲教學?",
-            first_time_desc: "看起來這是你第一次玩[Yorg.io], 我們十分建議你使用遊戲教學.",
-            start_game_anyways: "遊玩",
-            start_with_tutorial: "開始遊戲教學",
-            out_of_focus: "失去遊戲專注",
-            click_to_resume: "點擊螢幕繼續",
-            crystals_per_sec: "每秒水晶數量",
-            cannon: "加農砲",
-            arrow: "弓箭",
-            lightning: "閃電",
-            iron: "鐵",
-            wood: "木材",
-            uranium: "鈾",
-            steel: "鋼",
-            trunks: "樹幹",
-            power: "能量",
-            pause_not_possible_during_night: "在夜晚時無法暫停!",
-            pause_not_possible_before_base: "在放置大本營之前不能使用暫停!",
-            fastforward_disabled_while_boss: "在BOSS出現時無法快轉!",
-            fastforward_not_possible_before_base: "在放置大本營前不能使用快轉!",
-            pause_game: "暫停遊戲",
-            pause_game_desc: "這暫停了遊戲",
-            regular_speed: "正常速度",
-            regular_speed_desc: "這讓遊戲以正常速度進行",
-            fast_forward: "快轉",
-            fast_forward_desc: "這讓遊戲速度加快",
-            keyboard_shortcuts: "鍵盤快速鍵",
-            keyboard_shortcuts_desc: "顯示各種鍵盤快速鍵",
-            restart_game: "重新開始遊戲",
-            restart_game_desc: "使你重新開始遊戲",
-            back_to_menu: "Menu",
-            back_to_menu_desc: "Go back to the main menu",
-            toggle_fullscreen: "全螢幕",
-            toggle_fullscreen_desc: "以全螢幕方式由玩遊戲",
-            toggle_gui: "打開GUI",
-            toggle_minimap: "顯示更詳細的地圖",
-            toggle_sound: "開啟聲音",
-            toggle_sound_desc: "這可以打開聲音效果",
-            toggle_music: "開啟音樂",
-            toggle_music_desc: "這可以打開背景音樂",
-            settings: "設置",
-            settings_desc: "在這裡你可以設定遊戲和性能",
-            save_game: "儲存遊戲",
-            save_game_desc: "這使你能儲存現在的遊戲進度",
-            save_game_dialog_title: "儲存遊戲",
-            save_game_dialog_desc: "這是你儲存的遊戲. 複製它並存放在某個地方",
-            load_game_dialog_title: "載入遊戲",
-            load_game_dialog_desc_dragdrop: "拖動您的存檔文件到此處載入恢復進度，但是會丟失當前進度。",
-            load_savegame: "載入遊戲",
-            drag_file_here: "拖動您的存檔文件到此處",
-            load_game: "載入儲存的遊戲",
-            load_game_desc: "這允許你恢復之前儲存的遊戲進度",
-            error_save_not_possible_before_base: "在放置你的大本營前你不能儲存遊戲!",
-            invalid_or_corrupt_savegame: "無效的遊戲存檔",
-            game_successfully_loaded: "你的遊戲進度已成功被還原",
-            savegame_too_new: "這個遊戲存檔是來自未來的版本!你不能載入它.",
-            savegame_old_version: "這個遊戲存檔是來自過去的版本! 我們曾試圖去載入它.",
-            savegame_from_beta: "這個遊戲存檔來自實驗版本,不能在正式版本中載入!",
-            savegame_too_old: "該遊戲存檔來自舊版本,不再受支持. 抱歉!",
-            updating_routes: "重新計算網路中",
-            routes_remaining: "還剩%1個路線...",
-            defense_view: "防禦塔範圍視角",
-            defense_view_desc: "顯示各式防禦塔的防禦範圍",
-            transport_view: "運輸網絡",
-            transport_view_desc: "顯示資源運輸方式。將鼠標移到建築物上查看其運輸方式.",
-            processor_usage_view: "效率視角",
-            processor_usage_view_desc: "顯示您所有工廠的當前使用情況。綠色表示效率達到最高，黃色或紅色表示生產並沒有全速運行.",
-            zoom_in: "放大",
-            zoom_in_desc: "放大地圖, 縮小視野",
-            zoom_out: "縮小",
-            zoom_out_desc: "縮小地圖, 放大視野",
-            performance_settings: "性能設置",
-            setting_enableParticles: "開啟粒子效果",
-            setting_enableParticles_desc: "禁用此設置將禁用所有粒子, 這包括資源, 投射物和裝飾粒子, 這大大減少了延遲.",
-            setting_enableFancyZombies: "顯示殭屍血量和效果",
-            setting_enableFancyZombies_desc: "禁用此功能將不再在殭屍下方顯示血量狀態欄, 並且在受到傷害時也不再使其閃爍紅光. 這對性能有一定的幫助, 特別是在許多殭屍的後期階段。",
-            setting_enableResourceThrowaway: "扔掉多餘的資源",
-            setting_enableResourceThrowaway_desc: "默認情況下, 過量生產的資源將被丟棄並可視化. 這可能會導致延遲, 因此禁用此功能可以提高性能.",
-            misc_settings: "其他設置",
-            setting_disableFastForwardAtNight: "夜晚開始時禁用快轉模式",
-            setting_disableFastForwardAtNight_desc: "當此設置開啟時, 快轉模式將在晚上開始時自動禁用.",
-            setting_disableFastForwardDuringBoss: "BOSS還存活時禁用快轉模式",
-            setting_disableFastForwardDuringBoss_desc: "當這個設置開啟時, 在BOSS還活著的時候無法快轉.",
-            setting_autosave: "自動儲存",
-            setting_autosave_desc: "開啟此設置後，你的遊戲存檔將在每第5天結束時自動更新",
-            ui_settings: "用戶端",
-            setting_showFps: "顯示幀率(FPS)",
-            setting_showFps_desc: "一個小型顯示屏可以顯示當前每秒的幀數. 這可以用來衡量遊戲延遲",
-            setting_enableAdvancedUi: "進階界面",
-            setting_enableAdvancedUi_desc: "This shows statistics about your resource usage, and enables advanced views like the defense or transport view.",
-            prefix_hotkey: "快速鍵: ",
-            no_cost: "免費",
-            no_limit: "很多",
-            level: "等級",
-            stat_health: "血量",
-            stat_damage: "傷害",
-            stat_throughput: "每秒生產率",
-            stat_radius: "半徑",
-            stat_outcome: "數量",
-            stat_transportSpeed: "速度",
-            stat_spread: "擴散",
-            stat_shootsPerSecond: "開火率",
-            stat_storage: "存量",
-            stat_consumeAmount: "花費",
-            stat_shieldStorage: "最大護甲值",
-            can_not_sell_building: "你不能出售這個建築",
-            sell_for: "出售",
-            sell_all_for: "出售所有",
-            upgrade: "升級",
-            upgrade_all: "升級所有建築",
-            max_out: "升到最高級",
-            max_out_all: "升級所有建築至最高級",
-            upgrade_base_to_upgrade_building: "升級你的大本營來升級這座建築！",
-            no_further_upgrades: "已經達到最高級!",
-            sell_confirmation: "確認出售",
-            sell_confirmation_text: "Are you sure you want to sell all %1 buildings? This can not be undone!",
-            sell_mode_active: "點擊來出售建築",
-            upgrade_mode_active: "點擊來升級建築",
-            place_maxed_out_active: "放置已升級的建築",
-            max_out_mode_active: "點擊來最大化建築等級",
-            building_wall: "城牆",
-            building_wall_desc: "過阻止他們的移動來保護你的基地免受殭屍的侵害",
-            building_arrowFactory: "弓箭工廠",
-            building_arrowFactory_desc: "利用鋼以及樹幹生產弓箭",
-            building_arrowTower: "箭塔",
-            building_arrowTower_desc: "單目標防禦塔",
-            building_cannon: "加農砲",
-            building_cannon_desc: "範圍型防禦塔",
-            building_cannonballProducer: "砲彈工廠",
-            building_cannonballProducer_desc: "利用2個鐵生產加農砲彈",
-            building_goldMine: "水晶開採器",
-            building_goldMine_desc: "從水晶礦中提取水晶, 它將會運送至你的大本營",
-            error_place_next_to_crystal: "請放置於水晶礦旁",
-            building_harvester: "砍樹機",
-            building_harvester_desc: "砍筏森林並生產未加工的木材",
-            error_place_next_to_tree: "請放置於樹木旁",
-            building_ironMine: "鐵礦開採器",
-            building_ironMine_desc: "從鐵礦石提取未加工的鐵",
-            error_place_next_to_iron_ore: "請放置於鐵礦旁",
-            building_lightningTower: "雷電塔",
-            building_lightningTower_desc: "向敵人射擊閃電，閃電會傳播給其他敵人",
-            building_nuclearStation: "核反應機",
-            building_nuclearStation_desc: "利用鈾礦石生產核電能量",
-            building_playerBase: "大本營",
-            building_playerBase_desc: "你的大本營 - 保護它, 當它被摧毀時遊戲將會結束",
-            error_only_one_base: "你只能放置一個大本營",
-            error_base_unreachable: "大本營無法到達",
-            building_steelFactory: "煉鋼工廠",
-            building_steelFactory_desc: "使用2塊未加工的木材和1塊鐵生產鋼鐵",
-            building_transporter: "運輸器",
-            building_transporter_desc: "在其影響範圍內傳輸資源, 可鏈接.",
-            building_uraniumMine: "鈾礦開採器",
-            building_uraniumMine_desc: "從鈾礦石中提取鈾",
-            error_place_next_to_uranium_ore: "請放置於鈾礦石旁",
-            building_woodProcessor: "鋸木廠",
-            building_woodProcessor_desc: "用2塊未經加工的木材生產樹幹",
-            building_healingTower: "盾牌製造塔",
-            building_healingTower_desc: "用鈾製造盾牌, 每個盾牌阻擋一次攻擊.",
-            place_dependent_building_first: "請先放置一個%1!",
-            upgrade_base_to_level_first: "提升你的大本營等級至%1來解鎖!",
-            upgrade_base_first: "請先升級你的大本營!",
-            can_not_afford_upgrade: "無法升級",
-            already_at_max_level: "已經達到最高等級",
-            not_in_map_bounds: "不在地圖內",
-            can_not_afford: "無法給予",
-            space_already_occupied: "空間已被佔據",
-            tile_occupied_by_enemies: "空間被敵人佔據!",
-            reached_maximum_limit: "你的建築已達到最高等級限制.升級你的大本營.",
-            placement_not_possible_during_night_paused: "當敵人活著或暫停時不能放置建築",
-            first_zombie_wave_in: "第一波殭屍於",
-            zombie_boss_in: "殭屍BOSS於",
-            minute_suffix: "分",
-            seconds_suffix: "秒",
-            thousands_suffix: "千",
-            millions_suffix: "百萬",
-            billions_suffix: "十億",
-            trillions_suffix: "兆",
-            quadrillion_suffix: "百兆",
-            leaderboard_rank: "排名",
-            leaderboard_name: "暱稱",
-            leaderboard_crystals: "水晶",
-            leaderboard_day: "天數",
-            top_scores_permanent: "排行榜",
-            loading_leaderboard: "載入排行榜中...",
-            failed_to_fetch_leaderboard: "無法取得排行榜資料!",
-            past_games: "Continue Playing",
-            loading_savegames: "Loading Savegames ...",
-            no_past_games: "No games found",
-            score_category_today: "今天",
-            score_category_all_time: "所有時間",
-            score_category_hour: "前一小時內",
-            score_category_week: "這周",
-            score_no_entries: "甚麼都沒有. 當個第一!",
-            welcome_updates: "更新",
-            base_arrow_hint: "大本營",
-            kb_section_building: "建造",
-            kb_section_upgrading: "升級",
-            kb_section_movement: "移動",
-            kb_section_misc: "雜項",
-            kb_place_multiple: "置放多個",
-            kb_place_maxlevel: "放置&升級至最大",
-            kb_cancel_placement: "取消放置",
-            kb_sell_building: "出售建築",
-            kb_sell_all_building: "出售所有",
-            kb_move: "移動",
-            kb_move_alternate: "移動#2",
-            kb_mouse_hint: "提示：您也可以通過用鼠標拖動地圖來移動視角",
-            zoom: "放大",
-            mouse_wheel: "滑鼠滾輪",
-            key_shift: "Shift",
-            key_enter: "Enter",
-            key_esc: "Esc",
-            key_alt: "Alt",
-            key_space: "空格鍵",
-            gameover_score_0: "你到底有沒有玩過?",
-            gameover_score_5: "你怎麼這麼早就死了?",
-            gameover_score_10: "下次吧!",
-            gameover_score_20: "你變得越來越好了!",
-            gameover_score_30: "看起來你開始瞭解遊戲了!",
-            gameover_score_50: "那很棒!",
-            gameover_score_100: "瘋狂!",
-            gameover_score_150: "哇哈!",
-            gameover_score_200: "總是有那些作弊者..",
-            gameover_surived_text: "你存活了%1天",
-            gameover_stats_text: "你有%1個水晶, 我們認為那大約是%2分",
-            gameover_gems_over_time: "水晶隨著時間的數量",
-            gameover_try_again: "再試一次",
-            validation_token_desc2: "複製這個代碼以及遊戲結束的截圖並發布至Discord的#rank-validation頻道來獲取在DISCORD討論區上的等級!",
-            game_over: "遊戲結束",
-            tutorial_continue: "繼續",
-            tutorial_finish: "結束",
-            tutorial_abort: "退出",
-            tutorial_confirm_abort: "再點擊一次以確認",
-            tutorial_step_initial: "歡迎來到互動式的[Yorg.io]遊戲教學!",
-            tutorial_step_game_explanation_1: "[Yorg.io]是一個關於保護大本營以及擊退殭屍的遊戲.",
-            tutorial_step_game_explanation_2: "你需要用防禦塔來保護你的建築物. 這些需要資源, 代表你需要挖掘. 但不用擔心, 讓我花一些時間來解釋它...",
-            tutorial_step_show_gems: "[Yorg.io]中的所有內容都是關於水晶的. 你可以使用它們購買新建築物或升級現有的建築物.",
-            tutorial_step_minimap_1: "這是[小地圖]. 你可以用它來定位自己在地圖上的位置.",
-            tutorial_step_minimap_2: "在晚上時, 殭屍會出現在這裡.",
-            tutorial_step_day_night: "這個指標顯示當前的[每日時間]. 圓圈的藍色部分表示夜晚，殭屍將在那段時間出現.",
-            tutorial_step_game_speed_1: "在這裡你可以切換遊戲的進行速度. 有暫停, 正常速度以及快轉.",
-            tutorial_step_game_speed_2: "你可以[暫停]比賽, 但只能在白天暫停. 這將允許你建立，出售和升級，但在那段時間內不會收穫資源.",
-            tutorial_step_select_base_1: "讓我們開始放置你的[大本營]. 這是你最重要的建築, 殭屍會試圖摧毀它. 所以保護它!",
-            tutorial_step_select_base_2: "從建築物面板中選擇大本營以放置它.",
-            tutorial_step_place_base: "確保將你的大本營放置在某些[資源]附近. 在這種情況下, 我已經為你選擇了一個好的位置.",
-            tutorial_step_explain_zombie_start: "當你放置你的大本營, 時間圓環就會開始. [殭屍]很快就會攻擊你, 但幸運的是這是一個教學, 所以我幫你暫停了時間!",
-            tutorial_step_select_gold_mine_1: "好, 首先我們需要一些固定的收入, 所以我們可以放置一個[水晶開採器].",
-            tutorial_step_select_gold_mine_2: "在下方的建築物面板選擇水晶開採器.",
-            tutorial_step_place_gold_mine_1: "將水晶礦放置在[水晶礦]旁邊",
-            tutorial_step_place_gold_mine_2: "水晶礦會收集水晶並將它們運輸至你的大本營, 一旦大本營接收到它們, 你將可以利用它們.",
-            tutorial_step_select_second_gold_mine_1: "一開始我們有兩個水晶礦, 我們還會有更多, [一旦我們升級我們的大本營].",
-            tutorial_step_select_second_gold_mine_2: "從建築物面板中選擇另一個水晶開採器.",
-            tutorial_step_place_second_gold_mine: "同樣的, 將水晶開採器放置在水晶礦旁邊. 該遊戲中的每個資源可以提供[最多4個開採器], 並且具有[無限容量].",
-            tutorial_step_select_iron_mine_1: "現在我們已經有了基本的收入, 我們需要捍衛我們的大本營.",
-            tutorial_step_select_iron_mine_2: "為了能夠放置和供應防禦塔, 我們首先需要[挖掘一些資源]. 讓我們從一個[鐵礦開採器]開始吧.",
-            tutorial_step_place_iron_mine: "將鐵礦開採器放置在[鐵礦石]旁邊。",
-            tutorial_step_select_cannonball_producer_1: "好的, 現在我們有了一些鐵, 我們應該利用它.",
-            tutorial_step_select_cannonball_producer_2: "讓一個[砲彈工廠]用鐵製造砲彈, 這對我們的防禦非常有用.",
-            tutorial_step_place_cannonball_producer_1: "我們需要將砲彈工廠放置在我們鐵礦開採器的[範圍]內.",
-            tutorial_step_place_cannonball_producer_2: "資源只有在生產者和消費者之間存在[連接]的情況下才能運輸",
-            tutorial_step_select_first_transporter_1: "噢!我們有麻煩了!正如你所看到的, 我們的鐵礦和我們的砲彈工廠之間沒有任何聯繫. 這是因為它們相距太遠 - 我們需要為資源建立一條道路.",
-            tutorial_step_select_first_transporter_2: "這就是[運輸器]派上用場的地方",
-            tutorial_step_place_first_transporter_1: "運輸器就像道路一樣. 它們可以使資源進一步傳播，也可以[鏈接].",
-            tutorial_step_place_first_transporter_2: "Yorg.io的主要方面之一就是管理您的資源傳輸網絡.",
-            tutorial_step_select_cannon: "現在我們的工廠已經連通, 我們終於準備好放置我們的第一座防禦塔- 一個 [加農炮]!",
-            tutorial_step_place_cannon_1: "大砲是[慢速射擊, 範圍性攻擊], 射程適中的防禦塔.",
-            tutorial_step_place_cannon_2: "防禦塔的每次射擊都花費資源, 對於加農炮來說, 這是2塊鐵, 升級時會增加容量. 防禦塔本身有這些資源的存儲空間.",
-            tutorial_step_place_cannon_3: "將大砲放在你的大本營旁邊, 這樣它可以[保護我們所有的建築物].",
-            tutorial_step_wait_for_production_1: "好的, 現在讓我們等一下, 直到我們的大砲收到一些資源!",
-            tutorial_step_wait_for_production_2: "您可以在防禦面板上監控您的防禦塔儲存量, 並觀察它的增加情況!",
-            tutorial_step_spawn_zombies: "事情越來越緊張了, 殭屍將很快襲擊我們!你, 準備好了嗎?",
-            tutorial_step_watch_zombies_die: "讓我們看看我們是否能夠在殭屍攻擊中倖存下來...",
-            tutorial_step_zombies_died_1: "很容易, 嗯?我已經可以警告你囉, 會有更多的殭屍!",
-            tutorial_step_zombies_died_2: "此外, 如果您的建築物受到損壞, 別擔心, 它們將在白天回血.",
-            tutorial_step_show_base_tooltip_1: "好吧, 我們從殭屍中獲得了一些水晶, 現在讓我們升級我們的大本營吧!",
-            tutorial_step_show_base_tooltip_2: "Yorg.io中的每座建築物都可以[升級], 達到跟大本營同樣的等級. 所以如果你有4級大本營, 你可以將你所有的建築物升級到4級.",
-            tutorial_step_show_base_tooltip_3: "點擊您的大本營打開建築物信息.",
-            tutorial_step_explain_tooltip_level_1: "提示會向您顯示關於建築物的所有重要信息.",
-            tutorial_step_explain_tooltip_level_2: "在右上角, 您可以看到所選建築物的[當前級別]. 隨著等級的提高, 建築物的狀態會有所改善.",
-            tutorial_step_explain_tooltip_stats: "在這裡你可以看到你的建築物的當前[狀態]. 在右側, 您可以看到升級建築時那些情況會改善.",
-            tutorial_step_upgrade_base: "好吧, 我們來升級大本營吧. 點擊[升級]花費一定的水晶來升級建築.",
-            tutorial_step_show_gold_mine_tooltip_1: "我們剛升級了我們的大本營. 這意味著, 我們現在可以升級我們的水晶開採器.",
-            tutorial_step_show_gold_mine_tooltip_2: "確保盡快升級你的水晶開採器, 以獲得最大收入.",
-            tutorial_step_upgrade_all_gold_mines_press_shift_1: "由於我們擁有多個水晶開採器, 我們可以通過按住[Shift]來升級所有的水晶開採器.",
-            tutorial_step_upgrade_all_gold_mines_press_shift_2: "按住[Shift]鍵以使用[全部升級]功能.",
-            tutorial_step_perform_upgrade_on_all_gold_mines_1: "如你所見, 它顯示升級所有水晶開採器的[總價格].",
-            tutorial_step_perform_upgrade_on_all_gold_mines_2: "如果你沒有足夠的水晶來升級它們, 不要擔心, 它會升級到目前能夠承受的數量.",
-            tutorial_step_finished: "就是這樣, 你已經完成了教學! 你現在可以開始遊玩, 享受遊戲了!",
-            global_upgrades: "技能樹",
-            global_upgrades_desc: "管理技能,提高你的基地和讓防禦殭屍更容易",
-            chat: "Ingame Chat",
-            chat_desc: "Chat with other players!",
-            global_upgrades_explain: "在這裡你可以升級你的基地的技能.你每晚獲得一個技能點,打敗BOSS可獲得兩個技能點.技能點不能退還.",
-            can_not_unlock_skill: "你現在還不能解鎖這個技能",
-            gain_damage: "全部塔的傷害",
-            gain_health: "全部建築的血量",
-            gain_critical: "暴擊機率",
-            gain_cannonDamage: "加農砲傷害",
-            gain_cannonProjectileSpeed: "加農砲彈速度",
-            gain_arrowDamage: "箭塔傷害",
-            gain_arrowFireRate: "箭塔開火率",
-            gain_arrowRadius: "箭塔半徑範圍",
-            gain_lightningDamage: "雷電傷害",
-            gain_lightningRadius: "雷電塔半徑範圍",
-            gain_wallHealth: "城牆血量",
-            gain_minersSpeed: "挖礦速度",
-            gain_buildingStorage: "防禦塔儲存空間",
-            gain_factorySpeed: "工廠速度",
-            gain_transporterSpeed: "運輸器運輸速度",
-            feature_criticalHitsx3: "暴擊造成3倍傷害而不是2倍",
-            feature_buildingHealthReg: "建築物在夜間每秒恢復2％的血量",
-            feature_cannonDoubleDmg: "加農砲造成兩倍的傷害,但需要三倍的資源",
-            feature_arrowDoubleDmg: "箭塔造成兩倍的傷害,但需要三倍的資源",
-            feature_lightningCritV2: "雷電塔也造成暴擊",
-            feature_wallMiss: "20％的機率讓殭屍無法對牆壁造成傷害",
-            feature_doubleStorage: "防禦塔擁有兩倍的儲存空間",
-            feature_factoriesSpeed: "工廠生產速度提高50％,多生產75％的資源",
-            feature_transporterInvisible: "殭屍會忽略運輸器並走過它們",
-            feature_minerRadius1: "你可以在資源旁放最多8個開採器",
-            feature_minerRadius2: "你可以在資源旁放最多4個開採器",
-            feature_transporterGlobal: "By researching advanced warping technologies, all resources can be transported instantly. This also fixes lag.",
-            transporter_no_use: "Not required anymore",
-            skill_group_cannon: "加農砲",
-            skill_group_arrowTower: "箭塔",
-            skill_group_lightningTower: "雷電塔",
-            skill_group_walls: "城牆",
-            skill_group_health: "血量",
-            skill_group_storage: "儲存空間",
-            skill_group_factories: "工廠",
-            skill_group_damageCrit: "傷害&暴擊",
-            skill_group_transport: "運輸",
-            skill_group_miners: "開採",
-            toggle_skill_summary: "打開概要",
-            points_cost: "%1點",
-            points_cost_single: "%1點",
-            no_points: "目前沒有技能點",
-            unlock_base_title: "Getting started",
-            unlock_base_text_1: "Welcome to YORG.io! To get you started:",
-            unlock_base_text_2: "- Place your base and protect it. When it gets destroyed, you lose!",
-            unlock_base_text_3: "- Zombies spawn at night and try to destroy it",
-            unlock_base_text_4: "- Harvest resources and produce new ones to supply your towers.",
-            unlock_base_text_5: "- Survive as many days as possible!",
-            unlock_skills_title: "你剛剛拿到了第1個技能點!",
-            unlock_skills_text_1: "你每生存一個夜晚都會獲得一個技能點,每殺死一個BOSS,你都會獲得兩個技能點.",
-            unlock_skills_text_2: "憑藉技能點,您可以解鎖升級,更輕鬆地防禦殭屍!",
-            unlock_lightning_title: "你剛剛解鎖了雷電塔!",
-            unlock_lightning_text_1: "閃電塔是一個強大的防禦塔,可以同時對抗許多殭屍.塔對殭屍射擊然後蔓延到其他殭屍.",
-            unlock_lightning_text_2: "雷電塔需要電力，這是在核反應機中生產的,它們本身需要鈾.",
-            unlock_boss_title: "變得越來越危險了!",
-            unlock_boss_text_1: "下一波將包含一個殭屍BOSS.它非常強大,可以在幾秒鐘內摧毀你的基地!",
-            unlock_boss_text_2: "BOSS每10波出現1次,當你玩得越久,它就變得越強!",
-            unlock_performance_title: "遊戲是不是已經開始卡頓了?",
-            unlock_performance_text_1: "在更高的等級上,你可能已經注意到遊戲開始卡頓.這可能是因為太多的資源被扔掉,或者只是你的電腦在掙扎.",
-            unlock_performance_text_2: "要解決此問題,可以在設置中選擇多個選項,以便提高性能.如果你遇到遊戲卡頓,你應該真的嘗試一下!",
-            unlock_vote_for_us_title: "喜歡YORG.IO嗎?",
-            unlock_vote_for_us_text_1: "請務必為我們投票,讓更多人發現YORG.io! ",
-            unlock_vote_visit_iogames_space: "造訪iogames.space",
-            unlock_vote_visit_miniclip: "造訪miniclip.com",
-            unlock_follow_twitter_title: "你喜歡YORG.io嗎?",
-            unlock_follow_twitter_text_1: "記得要在推特上追蹤我們以及時得到更新的通知!",
-            unlock_follow_twitter_visit_twitter: "造訪YORG.IO在推特上的專頁",
-            unlock_shield_title: "你剛剛解鎖了盾牌製造塔!",
-            unlock_shield_text_1: "盾牌製造塔使用鈾來生產盾牌.牆壁儲存這些盾牌來吸收殭屍的攻擊",
-            unlock_shield_text_2: "每吸收一個殭屍的攻擊,一個盾牌被使用掉.當城牆還有剩餘的盾牌,它可以自行回血!",
-            unlock_more_than_10_points_title: "忘記要點技能了?",
-            unlock_more_than_10_points_text_1: "提醒:你有10個技能點.你只是在保存你的分數,還是你忘了點技能?",
-            unlock_more_than_10_points_text_2: "你可以從左邊的欄位中打開技能樹來消耗技能點.",
-            unlock_keybindings_title: "Check the keybindings!",
-            unlock_keybindings_text_1: "There are a lot of useful keybindings, like pressing [SHIFT] to upgrade multiple buildings!",
-            unlock_keybindings_text_2: "Make sure to check out the keybindings dialog on the left!",
-            welcome_gamemode: "遊戲模式",
-            welcome_player_name: "玩家名稱",
-            gamemode_easy: "簡單",
-            gamemode_regular: "正常",
-            gamemode_hard: "困難",
-            gamemode_impossible: "不可能的任務",
-            gamemode_challenge_boss_only: "天天都有BOSS",
-            gamemode_sandbox: "沙盒",
-            challenge: "挑戰",
-            gamemode_no_longer_exists: "%1模式不再存在!",
-            play_other_modes_to_unlock_higher_base: "必須在普通遊戲模式中達到更高等級!",
-            sandbox_desc: "這是沙盒模式. 在這裡試試一些新的基地設計、佈局, 你在其他模式所達到的最高大本營等級將是你在這裡對大本營所能升級的最高等級.",
-            place_base_before_wave: "你必須放置你的大本營才能召換一波殭屍!",
-            sandbox_spawn: "召喚",
-            sandbox_wave_n: "%1波",
-            sandbox_heal: "治癒全部(的建築)",
-            sandbox_fill: "填滿全部建築的庫存",
-            twitter_follow_dialog_header: "在Twitter上關注我們!",
-            twitter_follow_dialog_content: "沙盒模式僅適用於Twitter粉絲。關注我們來解鎖吧!",
-            twitter_follow_button_txt: "在Twitter上關注@yorg_io",
-            discord_follow_dialog_header: "Join the discord!",
-            discord_follow_dialog_content: "The sandbox mode is exclusive for YORG.io discord members. Join now to unlock it!",
-            discord_follow_button_txt: "Join the YORG.io discord",
-            seconds_before: "%1秒前",
-            second_before: "1秒前",
-            minutes_before: "%1分鐘前",
-            minute_before: "1分鐘前",
-            hours_before: "%1小時前",
-            hour_before: "1小時前",
-            days_before: "%1天前",
-            day_before: "1天前",
-            new_savegame_created: "一個新的遊戲存檔已經創建！",
-            existing_savegame_updated: "你的遊戲存檔已經更新!",
-            saved_games: "遊戲存檔",
-            import_savegame: "輸入",
-            delete_savegame_warning: "確認要刪除嗎?此動作無法被還原!",
-            delete_savegame: "刪除",
-            keep_savegame: "留著",
-            no_savegames_yet: "你目前還沒有任何的遊戲存檔!",
-            faq: "FAQ",
-            frontpage_build: "Build",
-            frontpage_upgrade: "Upgrade",
-            frontpage_defend: "Defend",
-            frontpage_build_desc: "Create your own base online!",
-            frontpage_upgrade_desc: "Improve your towers and defenses!",
-            frontpage_defend_desc: "Zombies try to defeat you!",
-            frontpage_footer_1: "YORG.io is a [fun .io game] which combines tower defense with zombies.",
-            frontpage_footer_2: "Build your own base and upgrade your towers to defend against the enemies at night!",
-            frontpage_footer_3: "It features many aspects from [building games] and has its own playstyle.",
-            frontpage_footer_4: "While it differs from popular io games like agar.io and diep.io you can compete and chat with your friends.",
-            std_choose_name_title: "Choose your player name",
-            std_choose_name_desc: "Your name will be shown in the leaderboard. It must not contain abusive words. Choose wisely, you can not change it later!",
-            std_choose_name_btn: "Start Playing",
-        };
-    },
-    function (e, t) {
-        e.exports = {
             unlock_standalone_title: "来尝试单机版！",
             unlock_standalone_text_1: "快来尝试已在 Steam 上架的单机版，无广告、更好的性能、同步存档，以及更多特性！",
             unlock_standalone_btn: "在 Steam 查看",
@@ -57948,6 +57515,7 @@
             crystals_per_sec: "每秒水晶产量",
             cannon: "炮弹",
             arrow: "弓箭",
+            bomb: "Bomb",
             lightning: "电力",
             iron: "生铁",
             wood: "木材",
@@ -58067,6 +57635,8 @@
             building_arrowTower_desc: "向单个僵尸发射弓箭的单目标防御塔",
             building_cannon: "加农大炮",
             building_cannon_desc: "发射可以在击中僵尸时爆炸的加农炮弹",
+            building_bombTower: "Bomb Tower",
+            building_bombTower_desc: "Shoots slow bombs that deal massive aoe damage",
             building_cannonballProducer: "炮弹工厂",
             building_cannonballProducer_desc: "利用 2 个生铁产出加农炮弹",
             building_goldMine: "水晶采矿机",
