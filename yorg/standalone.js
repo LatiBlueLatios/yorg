@@ -23261,27 +23261,17 @@
                     }),
                     t
                 );
-            })(Component),
-            BuildingComponent = (function (e) {
-                function t() {
-                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.apply(this, arguments));
-                }
-                return (
-                    _inherits(t, e),
-                    (t.prototype.debugStr = function () {
-                        return "This is a building";
-                    }),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "BuildingComponent";
-                            },
-                        },
-                    ]),
-                    t
-                );
             })(Component);
+
+            class BuildingComponent extends Component {
+                constructor() {
+                    super();
+                }
+            
+                static get name() {
+                    return "BuildingComponent";
+                }
+            }
 
             class SpawnGraveOnDeathComponent extends Component {
                 constructor({
@@ -25489,28 +25479,19 @@
                     }),
                     t
                 );
-            })(BuildingRequirement),
-            GainStatsComponent = (function (e) {
-                function t() {
-                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.apply(this, arguments));
+            })(BuildingRequirement);
+
+            class GainStatsComponent extends Component {
+                constructor() {
+                    super();
                 }
-                return (
-                    _inherits(t, e),
-                    (t.prototype.debugStr = function () {
-                        return "grants player stats (gold)";
-                    }),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "GainStatsComponent";
-                            },
-                        },
-                    ]),
-                    t
-                );
-            })(Component),
-            ConsumerComponent = (function (e) {
+            
+                static get name() {
+                    return "GainStatsComponent";
+                }
+            }
+              
+            const ConsumerComponent = (function (e) {
                 function t(i) {
                     _classCallCheck(this, t);
                     var a = _possibleConstructorReturn(this, e.call(this));
@@ -38837,66 +38818,70 @@
                     (e.prototype.addBetaHint = function () { }),
                     e
                 );
-            })(),
-            StorageFullIndicatorSystem = (function (e) {
-                function t(i) {
-                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.call(this, i, { necessaryComponents: [StorageComponent] }));
+            })();
+
+            class StorageFullIndicatorSystem extends GameSystem {
+                constructor(stuff) {
+                    super(stuff, { necessaryComponents: [StorageComponent] });
                 }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "StorageFullIndicatorSystem";
-                            },
-                        },
-                    ]),
-                    (t.prototype.processEntity = function (e, t) {
-                        var i = this;
-                        t.StorageComponent.isAnyFull(true)
-                            ? createOrGetEntityAttachment(e, "storageFullText", function () {
-                                var e = i.root.phaser.make.text(0, 0, "FULL", { font: "11px Roboto", fill: "#AA1100", boundsAlignH: "center", fontWeight: 700 });
-                                return e.setTextBounds(0, Config.tileSize - 3, Config.tileSize, 15), e;
-                            })
-                            : hideEntityAttachment(e, "storageFullText");
-                    }),
-                    t
-                );
-            })(GameSystem),
-            BasementHealthVisualizerUI = (function (e) {
-                function t(i, a, o) {
-                    return _classCallCheck(this, t), _possibleConstructorReturn(this, e.call(this, i, a, o, { height: 32, label: "BASE HEALTH", updateInterval: 350 }));
+            
+                static get name() {
+                    return "StorageFullIndicatorSystem";
                 }
-                return (
-                    _inherits(t, e),
-                    _createClass(t, null, [
-                        {
-                            key: "name",
-                            get: function () {
-                                return "BasementHealthVisualizerUI";
-                            },
-                        },
-                    ]),
-                    (t.prototype.init = function () {
-                        e.prototype.init.call(this);
-                        var t = this.root.phaser,
-                            i = Config.ui.visualizerWidth,
-                            a = Math.floor(i / 3) + 10,
-                            o = makeRoundedPanelBackground(t, i - 10 - a, 12, 15658734, 0.1, 2);
-                        o.position.setTo(a, 11), this.group.add(o), (this.bar = makeRoundedPanelBackground(t, i - 10 - a, 12, 16742263, 1, 2)), this.bar.position.setTo(a, o.y), this.group.add(this.bar);
-                    }),
-                    (t.prototype.doUpdate = function () {
-                        var e = this.root.logic.getPlayerBase();
-                        if (e) {
-                            var t = e.getComponent(HealthComponent),
-                                i = t.health / t.maxHealth;
-                            (this.bar.scale.x = i), (this.bar.visible = true);
-                        } else this.bar.visible = false;
-                    }),
-                    t
-                );
-            })(Visualizer);
+            
+                processEntity(entity, storageComponent) {
+                    if (storageComponent.isAnyFull(true)) {
+                        createOrGetEntityAttachment(entity, "storageFullText", () => {
+                            const text = this.root.phaser.make.text(0, 0, "FULL", {
+                                font: "11px Roboto",
+                                fill: "#AA1100",
+                                boundsAlignH: "center",
+                                fontWeight: 700,
+                            });
+                            text.setTextBounds(0, Config.tileSize - 3, Config.tileSize, 15);
+                            return text;
+                        });
+                    } else {
+                        hideEntityAttachment(entity, "storageFullText");
+                    }
+                }
+            }
+            
+            class BasementHealthVisualizerUI extends Visualizer {
+                constructor(stuff, config, options) {
+                    super(stuff, config, options, { height: 32, label: "BASE HEALTH", updateInterval: 350 });
+                }
+            
+                static get name() {
+                    return "BasementHealthVisualizerUI";
+                }
+            
+                init() {
+                    super.init();
+                    const t = this.root.phaser;
+                    const i = Config.ui.visualizerWidth;
+                    const a = Math.floor(i / 3) + 10;
+                    const o = makeRoundedPanelBackground(t, i - 10 - a, 12, 15658734, 0.1, 2);
+                    o.position.setTo(a, 11);
+                    this.group.add(o);
+            
+                    this.bar = makeRoundedPanelBackground(t, i - 10 - a, 12, 16742263, 1, 2);
+                    this.bar.position.setTo(a, o.y);
+                    this.group.add(this.bar);
+                }
+            
+                doUpdate() {
+                    const e = this.root.logic.getPlayerBase();
+                    if (e) {
+                        const t = e.getComponent(HealthComponent);
+                        const i = t.health / t.maxHealth;
+                        this.bar.scale.x = i;
+                        this.bar.visible = true;
+                    } else {
+                        this.bar.visible = false;
+                    }
+                }
+            }            
 
         const YORGIO = {
             VERSION: "dev-unknown",
@@ -39166,7 +39151,7 @@
         const LANGUAGES = {
             en: _en2.default, // English 
             "zh-cn": _zhCN2.default, // Simplified Chinese
-            ja: _ja2.default, // Japenese **EXPERIMENTAL**
+            ja: _ja2.default, // Japanese **EXPERIMENTAL**
         };
 
         const browserLocale = () => (
@@ -40267,83 +40252,120 @@
             RIVER_HEIGHT_METHOD = function () {
                 return 5;
             };
-        function getRandomUnusedTileSeed(e, t) {
-            for (var i = 50; i > 0;) {
-                var a = MAP_DISTRIBUTE_X(t),
-                    o = MAP_DISTRIBUTE_Y(t);
-                if (!e.isTileUsed(a, o) && !isInTutorialArea(a, o)) return [a, o];
-                i -= 1;
+
+        function getRandomUnusedTileSeed(e, t, maxAttempts = 50) {
+            while (maxAttempts > 0) {
+                const [a, o] = getRandomCoordinates(t);
+
+                if (!e.isTileUsed(a, o) && !isInTutorialArea(a, o)) {
+                    return [a, o];
+                }
+
+                maxAttempts--;
             }
-            return console.error("Failed to find free tile on map!"), [0, 0];
+
+            console.error("Failed to find a free tile on the map!");
+            return [0, 0];
         }
+
+        function getRandomCoordinates(t) {
+            return [MAP_DISTRIBUTE_X(t), MAP_DISTRIBUTE_Y(t)];
+        }
+
         function getRandomUnusedTileSeedMultiple(e, t) {
-            for (var i = { pos: null, distanceToClosest: 0 }, a = 0; a < 3; ++a) {
-                var o = getRandomUnusedTileSeed(e, t),
-                    n = _slicedToArray(o, 2),
-                    r = n[0],
-                    s = n[1],
-                    l = e.findClosestEntity({
-                        tileX: r,
-                        tileY: s,
-                        radius: INIT_RADIUS,
-                        condition: function (e) {
-                            return !(e instanceof RiverEntity);
-                        },
-                    }),
-                    u = null;
-                if (l) {
-                    var c = r - l.getTileX(),
-                        d = s - l.getTileY();
-                    u = c * c + d * d;
-                } else u = INIT_RADIUS + 1;
-                u > i.distanceToClosest && ((i.pos = [r, s]), (i.distanceToClosest = u));
+            let bestSeed = { pos: null, distanceToClosest: 0 };
+        
+            for (let a = 0; a < 3; ++a) {
+                const [r, s] = getRandomUnusedTileSeed(e, t);
+                const closestEntity = e.findClosestEntity({
+                    tileX: r,
+                    tileY: s,
+                    radius: INIT_RADIUS,
+                    condition: entity => !(entity instanceof RiverEntity),
+                });
+        
+                const distanceToClosest = closestEntity
+                    ? Math.pow(r - closestEntity.getTileX(), 2) + Math.pow(s - closestEntity.getTileY(), 2)
+                    : Math.pow(INIT_RADIUS + 1, 2);
+        
+                if (distanceToClosest > bestSeed.distanceToClosest) {
+                    bestSeed = { pos: [r, s], distanceToClosest };
+                }
             }
-            return i.pos;
+        
+            return bestSeed.pos;
         }
-        var BINOMES = {
-            river: { id: 0, color: 3381759, resource: MetaRiverEntity, density: 1 },
-            forest: { id: 1, color: 7864183, resource: MetaTree, density: 0.3 },
-            mines: { id: 2, color: 11184810, resource: MetaIronOre, density: 0.2 },
-            uranium: { id: 3, color: 7001728, resource: MetaUraniumOre, density: 0.3 },
-            crystals: { id: 4, color: 16742263, resource: MetaGoldOre, density: 0.4 },
+
+        const BINOMES = {
+            river: {
+                id: 0,
+                color: 3381759,
+                resource: MetaRiverEntity,
+                density: 1
+            },
+            forest: {
+                id: 1,
+                color: 7864183,
+                resource: MetaTree,
+                density: 0.3
+            },
+            mines: {
+                id: 2,
+                color: 11184810,
+                resource: MetaIronOre,
+                density: 0.2
+            },
+            uranium: {
+                id: 3,
+                color: 7001728,
+                resource: MetaUraniumOre,
+                density: 0.3
+            },
+            crystals: {
+                id: 4,
+                color: 16742263,
+                resource: MetaGoldOre,
+                density: 0.4
+            },
         };
-        function initializeMap(e) {
-            var t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : 0;
-            if (!Config.emptyMap && !Config.spawnDefaultBuildings) {
-                var i = e.map,
-                    a = function (t, a, o) {
-                        var n = tileToWorld(t, a),
-                            r = _slicedToArray(n, 2),
-                            s = r[0],
-                            l = r[1],
-                            u = e.particles.spawnNew(s, l, o);
-                        i.setTileContent(t, a, u), e.entityMgr.registerEntity(u), u.onSpawned(t, a);
-                    },
-                    o = _randomJs2.default.engines.mt19937();
-                o.seed(t);
-                a(CENTER_X - 3, CENTER_Y, MetaGoldOre), a(CENTER_X + 2, CENTER_Y - 2, MetaIronOre), a(CENTER_X - 2, CENTER_Y - 1, MetaTree), a(CENTER_X + 1, CENTER_Y + 2, MetaUraniumOre);
-                for (var n = 0; n < 300; ++n) {
-                    var r = getRandomUnusedTileSeedMultiple(i, o),
-                        s = _slicedToArray(r, 2);
-                    a(s[0], s[1], MetaUraniumOre);
-                }
-                for (var l = 0; l < 270; ++l) {
-                    var u = getRandomUnusedTileSeedMultiple(i, o),
-                        c = _slicedToArray(u, 2);
-                    a(c[0], c[1], MetaGoldOre);
-                }
-                for (var d = 0; d < 400; ++d) {
-                    var h = getRandomUnusedTileSeedMultiple(i, o),
-                        p = _slicedToArray(h, 2);
-                    a(p[0], p[1], MetaIronOre);
-                }
-                for (var g = 0; g < 1e3; ++g) {
-                    var m = getRandomUnusedTileSeedMultiple(i, o),
-                        _ = _slicedToArray(m, 2);
-                    a(_[0], _[1], MetaTree);
-                }
+
+        function initializeMap(e, seed = 0) {
+            if (Config.emptyMap || Config.spawnDefaultBuildings) {
+                return;
             }
+        
+            const map = e.map;
+        
+            const spawnEntity = (t, a, resource) => {
+                const [s, l] = tileToWorld(t, a);
+                const u = e.particles.spawnNew(s, l, resource);
+                map.setTileContent(t, a, u);
+                e.entityMgr.registerEntity(u);
+                u.onSpawned(t, a);
+            };
+        
+            const o = _randomJs2.default.engines.mt19937();
+            console.log(`World seed generated: ${seed}`)
+            o.seed(seed);
+        
+            spawnEntity(CENTER_X - 3, CENTER_Y, MetaGoldOre);
+            spawnEntity(CENTER_X + 2, CENTER_Y - 2, MetaIronOre);
+            spawnEntity(CENTER_X - 2, CENTER_Y - 1, MetaTree);
+            spawnEntity(CENTER_X + 1, CENTER_Y + 2, MetaUraniumOre);
+        
+            const spawnResources = (amount, resource) => {
+                for (let n = 0; n < amount; ++n) {
+                    const [x, y] = getRandomUnusedTileSeedMultiple(map, o);
+                    spawnEntity(x, y, resource);
+                }
+            };
+        
+            spawnResources(300, MetaUraniumOre);
+            spawnResources(270, MetaTree);
+            spawnResources(400, MetaIronOre);
+            spawnResources(1000, MetaGoldOre);
         }
+
         var BASE = "base",
             DAMAGE = "damage",
             HEALTH = "health",
