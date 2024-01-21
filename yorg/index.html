@@ -5,11 +5,10 @@
     <meta charset=UTF-8>
     <title>YORG.io CE Edition | Custom Build by BlueLatios</title>
     <link href=https://yorg.io rel=alternate hreflang=en>
-    <meta content='text/html;charset=UTF-8' http-equiv=content-type>    
-    <link href=favicon.ico rel='shortcut icon' type=image/x-icon>
+    <meta content='text/html;charset=UTF-8' http-equiv=content-type>
     <link rel="stylesheet" href="fonts.css" media="all">
     <link rel="stylesheet" type="text/css" href="asset/css/app.css">
-    <link href=/oembed.json rel=alternate type=application/json+oembed title=YORG.io>
+    <script src="js/phaser.min.js"></script>
 </head>
 
 <body oncontextmenu=return!1>
@@ -68,8 +67,6 @@
                             </a>
                             <select id=languageChooserInner onchange='window.location.href="?lang="+this.options[this.selectedIndex].value'>
                                 <option value=en class=language data-language=en>English
-                                <option value=zh-cn class=language data-language=zh-cn>中文
-                                <option value="ja" class="language" data-language="ja">日本語
                                 </option>
                             </select>
                         </div>
@@ -289,4 +286,4 @@
         </strong>
     </div>
 
-    <script src='standalone.js' async defer></script>
+    <script src='app.js' type="module" defer></script>

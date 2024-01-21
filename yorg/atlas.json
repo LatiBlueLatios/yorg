@@ -1,0 +1,2681 @@
+{
+    "frames": [
+        {
+            "frame": {
+                "y": 165,
+                "x": 671,
+                "w": 16,
+                "h": 16
+            },
+            "rotated": false,
+            "filename": "ai-idling.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 16,
+                "w": 16
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 16,
+                "h": 16
+            }
+        },
+        {
+            "frame": {
+                "y": 169,
+                "x": 938,
+                "w": 7,
+                "h": 12
+            },
+            "rotated": false,
+            "filename": "arrow_upgrade_right.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 12,
+                "w": 7
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 7,
+                "h": 12
+            }
+        },
+        {
+            "frame": {
+                "y": 213,
+                "x": 517,
+                "w": 64,
+                "h": 40
+            },
+            "rotated": false,
+            "filename": "base-direction-indicator.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 40,
+                "w": 64
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 64,
+                "h": 40
+            }
+        },
+        {
+            "frame": {
+                "y": 89,
+                "x": 396,
+                "w": 20,
+                "h": 20
+            },
+            "rotated": false,
+            "filename": "building-arrowFactory.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 20,
+                "w": 20
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 20,
+                "h": 20
+            }
+        },
+        {
+            "frame": {
+                "y": 62,
+                "x": 373,
+                "w": 20,
+                "h": 20
+            },
+            "rotated": false,
+            "filename": "building-arrowTower.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 20,
+                "w": 20
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 20,
+                "h": 20
+            }
+        },
+        {
+            "frame": {
+                "y": 122,
+                "x": 486,
+                "w": 20,
+                "h": 20
+            },
+            "rotated": false,
+            "filename": "building-cannon.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 20,
+                "w": 20
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 20,
+                "h": 20
+            }
+        },
+        {
+            "frame": {
+                "y": 122,
+                "x": 486,
+                "w": 20,
+                "h": 20
+            },
+            "rotated": false,
+            "filename": "building-bombTower.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 20,
+                "w": 20
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 20,
+                "h": 20
+            }
+        },
+        {
+            "frame": {
+                "y": 43,
+                "x": 431,
+                "w": 20,
+                "h": 20
+            },
+            "rotated": false,
+            "filename": "building-cannonballProducer.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 20,
+                "w": 20
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 20,
+                "h": 20
+            }
+        },
+        {
+            "frame": {
+                "y": 39,
+                "x": 385,
+                "w": 20,
+                "h": 20
+            },
+            "rotated": false,
+            "filename": "building-goldMine.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 20,
+                "w": 20
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 20,
+                "h": 20
+            }
+        },
+        {
+            "frame": {
+                "y": 20,
+                "x": 408,
+                "w": 20,
+                "h": 20
+            },
+            "rotated": false,
+            "filename": "building-harvester.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 20,
+                "w": 20
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 20,
+                "h": 20
+            }
+        },
+        {
+            "frame": {
+                "y": 99,
+                "x": 488,
+                "w": 20,
+                "h": 20
+            },
+            "rotated": false,
+            "filename": "building-healingTower.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 20,
+                "w": 20
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 20,
+                "h": 20
+            }
+        },
+        {
+            "frame": {
+                "y": 116,
+                "x": 463,
+                "w": 20,
+                "h": 20
+            },
+            "rotated": false,
+            "filename": "building-ironMine.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 20,
+                "w": 20
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 20,
+                "h": 20
+            }
+        },
+        {
+            "frame": {
+                "y": 93,
+                "x": 465,
+                "w": 20,
+                "h": 20
+            },
+            "rotated": false,
+            "filename": "building-lightningTower.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 20,
+                "w": 20
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 20,
+                "h": 20
+            }
+        },
+        {
+            "frame": {
+                "y": 70,
+                "x": 465,
+                "w": 20,
+                "h": 20
+            },
+            "rotated": false,
+            "filename": "building-nuclearStation.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 20,
+                "w": 20
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 20,
+                "h": 20
+            }
+        },
+        {
+            "frame": {
+                "y": 139,
+                "x": 459,
+                "w": 20,
+                "h": 20
+            },
+            "rotated": false,
+            "filename": "building-playerBase.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 20,
+                "w": 20
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 20,
+                "h": 20
+            }
+        },
+        {
+            "frame": {
+                "y": 85,
+                "x": 373,
+                "w": 20,
+                "h": 20
+            },
+            "rotated": false,
+            "filename": "building-steelFactory.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 20,
+                "w": 20
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 20,
+                "h": 20
+            }
+        },
+        {
+            "frame": {
+                "y": 76,
+                "x": 488,
+                "w": 20,
+                "h": 20
+            },
+            "rotated": false,
+            "filename": "building-transporter.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 20,
+                "w": 20
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 20,
+                "h": 20
+            }
+        },
+        {
+            "frame": {
+                "y": 66,
+                "x": 419,
+                "w": 20,
+                "h": 20
+            },
+            "rotated": false,
+            "filename": "building-uraniumMine.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 20,
+                "w": 20
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 20,
+                "h": 20
+            }
+        },
+        {
+            "frame": {
+                "y": 66,
+                "x": 442,
+                "w": 20,
+                "h": 20
+            },
+            "rotated": false,
+            "filename": "building-wall.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 20,
+                "w": 20
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 20,
+                "h": 20
+            }
+        },
+        {
+            "frame": {
+                "y": 16,
+                "x": 385,
+                "w": 20,
+                "h": 20
+            },
+            "rotated": false,
+            "filename": "building-woodProcessor.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 20,
+                "w": 20
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 20,
+                "h": 20
+            }
+        },
+        {
+            "frame": {
+                "y": 25,
+                "x": 350,
+                "w": 32,
+                "h": 32
+            },
+            "rotated": false,
+            "filename": "building_docking_point.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 32,
+                "w": 32
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 32,
+                "h": 32
+            }
+        },
+        {
+            "frame": {
+                "y": 3,
+                "x": 408,
+                "w": 14,
+                "h": 14
+            },
+            "rotated": false,
+            "filename": "building_docking_point_circle.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 14,
+                "w": 14
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 14,
+                "h": 14
+            }
+        },
+        {
+            "frame": {
+                "y": 167,
+                "x": 709,
+                "w": 14,
+                "h": 14
+            },
+            "rotated": false,
+            "filename": "building_docking_point_miner.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 14,
+                "w": 14
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 14,
+                "h": 14
+            }
+        },
+        {
+            "frame": {
+                "y": 206,
+                "x": 1007,
+                "w": 14,
+                "h": 14
+            },
+            "rotated": false,
+            "filename": "building_docking_point_sharp.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 14,
+                "w": 14
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 14,
+                "h": 14
+            }
+        },
+        {
+            "frame": {
+                "y": 103,
+                "x": 343,
+                "w": 25,
+                "h": 25
+            },
+            "rotated": false,
+            "filename": "burn-indicator.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 25,
+                "w": 25
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 25,
+                "h": 25
+            }
+        },
+        {
+            "frame": {
+                "y": 108,
+                "x": 371,
+                "w": 20,
+                "h": 20
+            },
+            "rotated": false,
+            "filename": "collectableGem.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 20,
+                "w": 20
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 20,
+                "h": 20
+            }
+        },
+        {
+            "frame": {
+                "y": 219,
+                "x": 880,
+                "w": 34,
+                "h": 34
+            },
+            "rotated": false,
+            "filename": "creeper-level-0.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 34,
+                "w": 34
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 34,
+                "h": 34
+            }
+        },
+        {
+            "frame": {
+                "y": 219,
+                "x": 806,
+                "w": 34,
+                "h": 34
+            },
+            "rotated": false,
+            "filename": "creeper-level-1.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 34,
+                "w": 34
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 34,
+                "h": 34
+            }
+        },
+        {
+            "frame": {
+                "y": 219,
+                "x": 917,
+                "w": 34,
+                "h": 34
+            },
+            "rotated": false,
+            "filename": "creeper-level-2.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 34,
+                "w": 34
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 34,
+                "h": 34
+            }
+        },
+        {
+            "frame": {
+                "y": 219,
+                "x": 954,
+                "w": 34,
+                "h": 34
+            },
+            "rotated": false,
+            "filename": "creeper-level-3.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 34,
+                "w": 34
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 34,
+                "h": 34
+            }
+        },
+        {
+            "frame": {
+                "y": 16,
+                "x": 134,
+                "w": 34,
+                "h": 34
+            },
+            "rotated": false,
+            "filename": "creeper-level-4.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 34,
+                "w": 34
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 34,
+                "h": 34
+            }
+        },
+        {
+            "frame": {
+                "y": 16,
+                "x": 171,
+                "w": 34,
+                "h": 34
+            },
+            "rotated": false,
+            "filename": "creeper-level-5.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 34,
+                "w": 34
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 34,
+                "h": 34
+            }
+        },
+        {
+            "frame": {
+                "y": 23,
+                "x": 208,
+                "w": 34,
+                "h": 34
+            },
+            "rotated": false,
+            "filename": "creeper-level-6.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 34,
+                "w": 34
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 34,
+                "h": 34
+            }
+        },
+        {
+            "frame": {
+                "y": 9,
+                "x": 47,
+                "w": 20,
+                "h": 7
+            },
+            "rotated": false,
+            "filename": "creeper-overlay.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 7,
+                "w": 20
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 20,
+                "h": 7
+            }
+        },
+        {
+            "frame": {
+                "y": 5,
+                "x": 26,
+                "w": 18,
+                "h": 11
+            },
+            "rotated": false,
+            "filename": "day-indicator.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 11,
+                "w": 18
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 18,
+                "h": 11
+            }
+        },
+        {
+            "frame": {
+                "y": 223,
+                "x": 991,
+                "w": 30,
+                "h": 30
+            },
+            "rotated": false,
+            "filename": "destroyed-building-indicator.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 30,
+                "w": 30
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 30,
+                "h": 30
+            }
+        },
+        {
+            "frame": {
+                "y": 112,
+                "x": 440,
+                "w": 20,
+                "h": 20
+            },
+            "rotated": false,
+            "filename": "destroyed-wall-indicator.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 20,
+                "w": 20
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 20,
+                "h": 20
+            }
+        },
+        {
+            "frame": {
+                "y": 189,
+                "x": 273,
+                "w": 64,
+                "h": 64
+            },
+            "rotated": false,
+            "filename": "gem.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 64,
+                "w": 64
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 64,
+                "h": 64
+            }
+        },
+        {
+            "frame": {
+                "y": 189,
+                "x": 1007,
+                "w": 14,
+                "h": 14
+            },
+            "rotated": false,
+            "filename": "gem-14.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 14,
+                "w": 14
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 14,
+                "h": 14
+            }
+        },
+        {
+            "frame": {
+                "y": 53,
+                "x": 3,
+                "w": 200,
+                "h": 200
+            },
+            "rotated": false,
+            "filename": "glow.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 200,
+                "w": 200
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 200,
+                "h": 200
+            }
+        },
+        {
+            "frame": {
+                "y": 197,
+                "x": 340,
+                "w": 56,
+                "h": 56
+            },
+            "rotated": false,
+            "filename": "goldOre.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 56,
+                "w": 56
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 56,
+                "h": 56
+            }
+        },
+        {
+            "frame": {
+                "y": 60,
+                "x": 268,
+                "w": 32,
+                "h": 32
+            },
+            "rotated": false,
+            "filename": "grave-stone.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 32,
+                "w": 32
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 32,
+                "h": 32
+            }
+        },
+        {
+            "frame": {
+                "y": 66,
+                "x": 396,
+                "w": 20,
+                "h": 20
+            },
+            "rotated": false,
+            "filename": "icon-close.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 20,
+                "w": 20
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 20,
+                "h": 20
+            }
+        },
+        {
+            "frame": {
+                "y": 182,
+                "x": 501,
+                "w": 12,
+                "h": 12
+            },
+            "rotated": false,
+            "filename": "icon-consumeAmount.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 12,
+                "w": 12
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 12,
+                "h": 12
+            }
+        },
+        {
+            "frame": {
+                "y": 169,
+                "x": 788,
+                "w": 12,
+                "h": 12
+            },
+            "rotated": false,
+            "filename": "icon-damage.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 12,
+                "w": 12
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 12,
+                "h": 12
+            }
+        },
+        {
+            "frame": {
+                "y": 173,
+                "x": 959,
+                "w": 8,
+                "h": 8
+            },
+            "rotated": false,
+            "filename": "icon-equal.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 8,
+                "w": 8
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 8,
+                "h": 8
+            }
+        },
+        {
+            "frame": {
+                "y": 178,
+                "x": 552,
+                "w": 32,
+                "h": 32
+            },
+            "rotated": false,
+            "filename": "icon-fast-forward.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 32,
+                "w": 32
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 32,
+                "h": 32
+            }
+        },
+        {
+            "frame": {
+                "y": 172,
+                "x": 1007,
+                "w": 14,
+                "h": 14
+            },
+            "rotated": false,
+            "filename": "icon-fast-forward-button.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 14,
+                "w": 14
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 14,
+                "h": 14
+            }
+        },
+        {
+            "frame": {
+                "y": 163,
+                "x": 587,
+                "w": 18,
+                "h": 18
+            },
+            "rotated": false,
+            "filename": "icon-global-upgrades.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 18,
+                "w": 18
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 18,
+                "h": 18
+            }
+        },
+        {
+            "frame": {
+                "y": 169,
+                "x": 908,
+                "w": 12,
+                "h": 12
+            },
+            "rotated": false,
+            "filename": "icon-health.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 12,
+                "w": 12
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 12,
+                "h": 12
+            }
+        },
+        {
+            "frame": {
+                "y": 3,
+                "x": 431,
+                "w": 16,
+                "h": 16
+            },
+            "rotated": false,
+            "filename": "icon-level.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 16,
+                "w": 16
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 16,
+                "h": 16
+            }
+        },
+        {
+            "frame": {
+                "y": 169,
+                "x": 803,
+                "w": 12,
+                "h": 12
+            },
+            "rotated": false,
+            "filename": "icon-outcome.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 12,
+                "w": 12
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 12,
+                "h": 12
+            }
+        },
+        {
+            "frame": {
+                "y": 135,
+                "x": 432,
+                "w": 24,
+                "h": 24
+            },
+            "rotated": false,
+            "filename": "icon-pause.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 24,
+                "w": 24
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 24,
+                "h": 24
+            }
+        },
+        {
+            "frame": {
+                "y": 169,
+                "x": 848,
+                "w": 12,
+                "h": 12
+            },
+            "rotated": false,
+            "filename": "icon-pause-button.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 12,
+                "w": 12
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 12,
+                "h": 12
+            }
+        },
+        {
+            "frame": {
+                "y": 169,
+                "x": 758,
+                "w": 12,
+                "h": 12
+            },
+            "rotated": false,
+            "filename": "icon-radius.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 12,
+                "w": 12
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 12,
+                "h": 12
+            }
+        },
+        {
+            "frame": {
+                "y": 169,
+                "x": 878,
+                "w": 12,
+                "h": 12
+            },
+            "rotated": false,
+            "filename": "icon-regular-speed-button.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 12,
+                "w": 12
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 12,
+                "h": 12
+            }
+        },
+        {
+            "frame": {
+                "y": 25,
+                "x": 245,
+                "w": 32,
+                "h": 32
+            },
+            "rotated": false,
+            "filename": "icon-resume.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 32,
+                "w": 32
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 32,
+                "h": 32
+            }
+        },
+        {
+            "frame": {
+                "y": 169,
+                "x": 833,
+                "w": 12,
+                "h": 12
+            },
+            "rotated": false,
+            "filename": "icon-shieldStorage.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 12,
+                "w": 12
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 12,
+                "h": 12
+            }
+        },
+        {
+            "frame": {
+                "y": 169,
+                "x": 863,
+                "w": 12,
+                "h": 12
+            },
+            "rotated": false,
+            "filename": "icon-shootsPerSecond.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 12,
+                "w": 12
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 12,
+                "h": 12
+            }
+        },
+        {
+            "frame": {
+                "y": 169,
+                "x": 893,
+                "w": 12,
+                "h": 12
+            },
+            "rotated": false,
+            "filename": "icon-spread.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 12,
+                "w": 12
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 12,
+                "h": 12
+            }
+        },
+        {
+            "frame": {
+                "y": 169,
+                "x": 743,
+                "w": 12,
+                "h": 12
+            },
+            "rotated": false,
+            "filename": "icon-storage.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 12,
+                "w": 12
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 12,
+                "h": 12
+            }
+        },
+        {
+            "frame": {
+                "y": 169,
+                "x": 923,
+                "w": 12,
+                "h": 12
+            },
+            "rotated": false,
+            "filename": "icon-throughput.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 12,
+                "w": 12
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 12,
+                "h": 12
+            }
+        },
+        {
+            "frame": {
+                "y": 169,
+                "x": 818,
+                "w": 12,
+                "h": 12
+            },
+            "rotated": false,
+            "filename": "icon-transportSpeed.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 12,
+                "w": 12
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 12,
+                "h": 12
+            }
+        },
+        {
+            "frame": {
+                "y": 171,
+                "x": 501,
+                "w": 8,
+                "h": 8
+            },
+            "rotated": false,
+            "filename": "icon-visualizer-goodResources.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 8,
+                "w": 8
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 8,
+                "h": 8
+            }
+        },
+        {
+            "frame": {
+                "y": 173,
+                "x": 948,
+                "w": 8,
+                "h": 8
+            },
+            "rotated": false,
+            "filename": "icon-visualizer-missingResources.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 8,
+                "w": 8
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 8,
+                "h": 8
+            }
+        },
+        {
+            "frame": {
+                "y": 165,
+                "x": 690,
+                "w": 16,
+                "h": 16
+            },
+            "rotated": false,
+            "filename": "icon-zoom-in.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 16,
+                "w": 16
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 16,
+                "h": 16
+            }
+        },
+        {
+            "frame": {
+                "y": 3,
+                "x": 469,
+                "w": 16,
+                "h": 16
+            },
+            "rotated": false,
+            "filename": "icon-zoom-out.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 16,
+                "w": 16
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 16,
+                "h": 16
+            }
+        },
+        {
+            "frame": {
+                "y": 197,
+                "x": 458,
+                "w": 56,
+                "h": 56
+            },
+            "rotated": false,
+            "filename": "ironOre.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 56,
+                "w": 56
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 56,
+                "h": 56
+            }
+        },
+        {
+            "frame": {
+                "y": 131,
+                "x": 355,
+                "w": 20,
+                "h": 20
+            },
+            "rotated": false,
+            "filename": "menu-chat.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 20,
+                "w": 20
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 20,
+                "h": 20
+            }
+        },
+        {
+            "frame": {
+                "y": 49,
+                "x": 475,
+                "w": 18,
+                "h": 18
+            },
+            "rotated": false,
+            "filename": "menu-fullscreen-off.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 18,
+                "w": 18
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 18,
+                "h": 18
+            }
+        },
+        {
+            "frame": {
+                "y": 22,
+                "x": 452,
+                "w": 18,
+                "h": 18
+            },
+            "rotated": false,
+            "filename": "menu-fullscreen-on.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 18,
+                "w": 18
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 18,
+                "h": 18
+            }
+        },
+        {
+            "frame": {
+                "y": 89,
+                "x": 442,
+                "w": 20,
+                "h": 20
+            },
+            "rotated": false,
+            "filename": "menu-keyboard.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 20,
+                "w": 20
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 20,
+                "h": 20
+            }
+        },
+        {
+            "frame": {
+                "y": 55,
+                "x": 496,
+                "w": 18,
+                "h": 18
+            },
+            "rotated": false,
+            "filename": "menu-load.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 18,
+                "w": 18
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 18,
+                "h": 18
+            }
+        },
+        {
+            "frame": {
+                "y": 163,
+                "x": 629,
+                "w": 18,
+                "h": 18
+            },
+            "rotated": false,
+            "filename": "menu-music-off.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 18,
+                "w": 18
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 18,
+                "h": 18
+            }
+        },
+        {
+            "frame": {
+                "y": 22,
+                "x": 431,
+                "w": 18,
+                "h": 18
+            },
+            "rotated": false,
+            "filename": "menu-music-on.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 18,
+                "w": 18
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 18,
+                "h": 18
+            }
+        },
+        {
+            "frame": {
+                "y": 112,
+                "x": 417,
+                "w": 20,
+                "h": 20
+            },
+            "rotated": false,
+            "filename": "menu-restart.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 20,
+                "w": 20
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 20,
+                "h": 20
+            }
+        },
+        {
+            "frame": {
+                "y": 45,
+                "x": 454,
+                "w": 18,
+                "h": 18
+            },
+            "rotated": false,
+            "filename": "menu-save.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 18,
+                "w": 18
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 18,
+                "h": 18
+            }
+        },
+        {
+            "frame": {
+                "y": 43,
+                "x": 408,
+                "w": 20,
+                "h": 20
+            },
+            "rotated": false,
+            "filename": "menu-settings.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 20,
+                "w": 20
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 20,
+                "h": 20
+            }
+        },
+        {
+            "frame": {
+                "y": 163,
+                "x": 608,
+                "w": 18,
+                "h": 18
+            },
+            "rotated": false,
+            "filename": "menu-sound-off.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 18,
+                "w": 18
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 18,
+                "h": 18
+            }
+        },
+        {
+            "frame": {
+                "y": 163,
+                "x": 650,
+                "w": 18,
+                "h": 18
+            },
+            "rotated": false,
+            "filename": "menu-sound-on.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 18,
+                "w": 18
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 18,
+                "h": 18
+            }
+        },
+        {
+            "frame": {
+                "y": 122,
+                "x": 206,
+                "w": 64,
+                "h": 64
+            },
+            "rotated": false,
+            "filename": "minimap-notification.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 64,
+                "w": 64
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 64,
+                "h": 64
+            }
+        },
+        {
+            "frame": {
+                "y": 112,
+                "x": 394,
+                "w": 20,
+                "h": 20
+            },
+            "rotated": false,
+            "filename": "particle-building-anim.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 20,
+                "w": 20
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 20,
+                "h": 20
+            }
+        },
+        {
+            "frame": {
+                "y": 89,
+                "x": 419,
+                "w": 20,
+                "h": 20
+            },
+            "rotated": false,
+            "filename": "particle-gold.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 20,
+                "w": 20
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 20,
+                "h": 20
+            }
+        },
+        {
+            "frame": {
+                "y": 135,
+                "x": 378,
+                "w": 24,
+                "h": 24
+            },
+            "rotated": false,
+            "filename": "projectile-arrow.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 24,
+                "w": 24
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 24,
+                "h": 24
+            }
+        },
+        {
+            "frame": {
+                "y": 169,
+                "x": 773,
+                "w": 12,
+                "h": 12
+            },
+            "rotated": false,
+            "filename": "projectile-cannon.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 12,
+                "w": 12
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 12,
+                "h": 12
+            }
+        },
+        {
+            "frame": {
+                "y": 135,
+                "x": 405,
+                "w": 24,
+                "h": 24
+            },
+            "rotated": false,
+            "filename": "projectile-player_base.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 24,
+                "w": 24
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 24,
+                "h": 24
+            }
+        },
+        {
+            "frame": {
+                "y": 189,
+                "x": 206,
+                "w": 64,
+                "h": 64
+            },
+            "rotated": false,
+            "filename": "river.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 64,
+                "w": 64
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 64,
+                "h": 64
+            }
+        },
+        {
+            "frame": {
+                "y": 162,
+                "x": 437,
+                "w": 32,
+                "h": 32
+            },
+            "rotated": false,
+            "filename": "skill-arrowFactory.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 32,
+                "w": 32
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 32,
+                "h": 32
+            }
+        },
+        {
+            "frame": {
+                "y": 184,
+                "x": 937,
+                "w": 32,
+                "h": 32
+            },
+            "rotated": false,
+            "filename": "skill-arrowTower.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 32,
+                "w": 32
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 32,
+                "h": 32
+            }
+        },
+        {
+            "frame": {
+                "y": 162,
+                "x": 402,
+                "w": 32,
+                "h": 32
+            },
+            "rotated": false,
+            "filename": "skill-base.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 32,
+                "w": 32
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 32,
+                "h": 32
+            }
+        },
+        {
+            "frame": {
+                "y": 60,
+                "x": 303,
+                "w": 32,
+                "h": 32
+            },
+            "rotated": false,
+            "filename": "skill-building.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 32,
+                "w": 32
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 32,
+                "h": 32
+            }
+        },
+        {
+            "frame": {
+                "y": 184,
+                "x": 797,
+                "w": 32,
+                "h": 32
+            },
+            "rotated": false,
+            "filename": "skill-cannon.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 32,
+                "w": 32
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 32,
+                "h": 32
+            }
+        },
+        {
+            "frame": {
+                "y": 184,
+                "x": 587,
+                "w": 32,
+                "h": 32
+            },
+            "rotated": false,
+            "filename": "skill-cannonballProducer.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 32,
+                "w": 32
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 32,
+                "h": 32
+            }
+        },
+        {
+            "frame": {
+                "y": 154,
+                "x": 332,
+                "w": 32,
+                "h": 32
+            },
+            "rotated": false,
+            "filename": "skill-critical.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 32,
+                "w": 32
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 32,
+                "h": 32
+            }
+        },
+        {
+            "frame": {
+                "y": 184,
+                "x": 867,
+                "w": 32,
+                "h": 32
+            },
+            "rotated": false,
+            "filename": "skill-damage.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 32,
+                "w": 32
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 32,
+                "h": 32
+            }
+        },
+        {
+            "frame": {
+                "y": 95,
+                "x": 273,
+                "w": 32,
+                "h": 32
+            },
+            "rotated": false,
+            "filename": "skill-factories.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 32,
+                "w": 32
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 32,
+                "h": 32
+            }
+        },
+        {
+            "frame": {
+                "y": 25,
+                "x": 315,
+                "w": 32,
+                "h": 32
+            },
+            "rotated": false,
+            "filename": "skill-goldMine.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 32,
+                "w": 32
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 32,
+                "h": 32
+            }
+        },
+        {
+            "frame": {
+                "y": 184,
+                "x": 727,
+                "w": 32,
+                "h": 32
+            },
+            "rotated": false,
+            "filename": "skill-harvester.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 32,
+                "w": 32
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 32,
+                "h": 32
+            }
+        },
+        {
+            "frame": {
+                "y": 162,
+                "x": 367,
+                "w": 32,
+                "h": 32
+            },
+            "rotated": false,
+            "filename": "skill-healingTower.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 32,
+                "w": 32
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 32,
+                "h": 32
+            }
+        },
+        {
+            "frame": {
+                "y": 184,
+                "x": 692,
+                "w": 32,
+                "h": 32
+            },
+            "rotated": false,
+            "filename": "skill-health.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 32,
+                "w": 32
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 32,
+                "h": 32
+            }
+        },
+        {
+            "frame": {
+                "y": 184,
+                "x": 622,
+                "w": 32,
+                "h": 32
+            },
+            "rotated": false,
+            "filename": "skill-ironMine.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 32,
+                "w": 32
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 32,
+                "h": 32
+            }
+        },
+        {
+            "frame": {
+                "y": 184,
+                "x": 762,
+                "w": 32,
+                "h": 32
+            },
+            "rotated": false,
+            "filename": "skill-lightningTower.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 32,
+                "w": 32
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 32,
+                "h": 32
+            }
+        },
+        {
+            "frame": {
+                "y": 60,
+                "x": 338,
+                "w": 32,
+                "h": 32
+            },
+            "rotated": false,
+            "filename": "skill-miners.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 32,
+                "w": 32
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 32,
+                "h": 32
+            }
+        },
+        {
+            "frame": {
+                "y": 184,
+                "x": 832,
+                "w": 32,
+                "h": 32
+            },
+            "rotated": false,
+            "filename": "skill-nuclearStation.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 32,
+                "w": 32
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 32,
+                "h": 32
+            }
+        },
+        {
+            "frame": {
+                "y": 184,
+                "x": 657,
+                "w": 32,
+                "h": 32
+            },
+            "rotated": false,
+            "filename": "skill-playerBase.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 32,
+                "w": 32
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 32,
+                "h": 32
+            }
+        },
+        {
+            "frame": {
+                "y": 184,
+                "x": 972,
+                "w": 32,
+                "h": 32
+            },
+            "rotated": false,
+            "filename": "skill-steelFactory.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 32,
+                "w": 32
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 32,
+                "h": 32
+            }
+        },
+        {
+            "frame": {
+                "y": 95,
+                "x": 308,
+                "w": 32,
+                "h": 32
+            },
+            "rotated": false,
+            "filename": "skill-transporter.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 32,
+                "w": 32
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 32,
+                "h": 32
+            }
+        },
+        {
+            "frame": {
+                "y": 184,
+                "x": 902,
+                "w": 32,
+                "h": 32
+            },
+            "rotated": false,
+            "filename": "skill-uraniumMine.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 32,
+                "w": 32
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 32,
+                "h": 32
+            }
+        },
+        {
+            "frame": {
+                "y": 25,
+                "x": 280,
+                "w": 32,
+                "h": 32
+            },
+            "rotated": false,
+            "filename": "skill-wall.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 32,
+                "w": 32
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 32,
+                "h": 32
+            }
+        },
+        {
+            "frame": {
+                "y": 178,
+                "x": 517,
+                "w": 32,
+                "h": 32
+            },
+            "rotated": false,
+            "filename": "skill-woodProcessor.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 32,
+                "w": 32
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 32,
+                "h": 32
+            }
+        },
+        {
+            "frame": {
+                "y": 19,
+                "x": 3,
+                "w": 128,
+                "h": 31
+            },
+            "rotated": false,
+            "filename": "small-logo.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 31,
+                "w": 128
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 128,
+                "h": 31
+            }
+        },
+        {
+            "frame": {
+                "y": 3,
+                "x": 3,
+                "w": 20,
+                "h": 10
+            },
+            "rotated": false,
+            "filename": "tooltip-arrow.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 10,
+                "w": 20
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 20,
+                "h": 10
+            }
+        },
+        {
+            "frame": {
+                "y": 197,
+                "x": 399,
+                "w": 56,
+                "h": 56
+            },
+            "rotated": false,
+            "filename": "tree.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 56,
+                "w": 56
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 56,
+                "h": 56
+            }
+        },
+        {
+            "frame": {
+                "y": 130,
+                "x": 273,
+                "w": 56,
+                "h": 56
+            },
+            "rotated": false,
+            "filename": "uraniumOre.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 56,
+                "w": 56
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 56,
+                "h": 56
+            }
+        },
+        {
+            "frame": {
+                "y": 145,
+                "x": 482,
+                "w": 20,
+                "h": 20
+            },
+            "rotated": false,
+            "filename": "view-defense.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 20,
+                "w": 20
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 20,
+                "h": 20
+            }
+        },
+        {
+            "frame": {
+                "y": 3,
+                "x": 450,
+                "w": 16,
+                "h": 16
+            },
+            "rotated": false,
+            "filename": "view-processor_usage.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 16,
+                "w": 16
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 16,
+                "h": 16
+            }
+        },
+        {
+            "frame": {
+                "y": 131,
+                "x": 332,
+                "w": 20,
+                "h": 20
+            },
+            "rotated": false,
+            "filename": "view-transport.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 20,
+                "w": 20
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 20,
+                "h": 20
+            }
+        },
+        {
+            "frame": {
+                "y": 167,
+                "x": 726,
+                "w": 14,
+                "h": 14
+            },
+            "rotated": false,
+            "filename": "white-gem.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 14,
+                "w": 14
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 14,
+                "h": 14
+            }
+        },
+        {
+            "frame": {
+                "y": 168,
+                "x": 472,
+                "w": 26,
+                "h": 26
+            },
+            "rotated": false,
+            "filename": "zombie-attack.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 26,
+                "w": 26
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 26,
+                "h": 26
+            }
+        },
+        {
+            "frame": {
+                "y": 60,
+                "x": 206,
+                "w": 59,
+                "h": 59
+            },
+            "rotated": false,
+            "filename": "zombie-boss.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 59,
+                "w": 59
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 59,
+                "h": 59
+            }
+        },
+        {
+            "frame": {
+                "y": 219,
+                "x": 584,
+                "w": 34,
+                "h": 34
+            },
+            "rotated": false,
+            "filename": "zombie-level-0.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 34,
+                "w": 34
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 34,
+                "h": 34
+            }
+        },
+        {
+            "frame": {
+                "y": 219,
+                "x": 621,
+                "w": 34,
+                "h": 34
+            },
+            "rotated": false,
+            "filename": "zombie-level-1.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 34,
+                "w": 34
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 34,
+                "h": 34
+            }
+        },
+        {
+            "frame": {
+                "y": 219,
+                "x": 658,
+                "w": 34,
+                "h": 34
+            },
+            "rotated": false,
+            "filename": "zombie-level-2.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 34,
+                "w": 34
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 34,
+                "h": 34
+            }
+        },
+        {
+            "frame": {
+                "y": 219,
+                "x": 843,
+                "w": 34,
+                "h": 34
+            },
+            "rotated": false,
+            "filename": "zombie-level-3.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 34,
+                "w": 34
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 34,
+                "h": 34
+            }
+        },
+        {
+            "frame": {
+                "y": 219,
+                "x": 695,
+                "w": 34,
+                "h": 34
+            },
+            "rotated": false,
+            "filename": "zombie-level-4.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 34,
+                "w": 34
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 34,
+                "h": 34
+            }
+        },
+        {
+            "frame": {
+                "y": 219,
+                "x": 732,
+                "w": 34,
+                "h": 34
+            },
+            "rotated": false,
+            "filename": "zombie-level-5.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 34,
+                "w": 34
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 34,
+                "h": 34
+            }
+        },
+        {
+            "frame": {
+                "y": 219,
+                "x": 769,
+                "w": 34,
+                "h": 34
+            },
+            "rotated": false,
+            "filename": "zombie-level-6.png",
+            "trimmed": true,
+            "sourceSize": {
+                "h": 34,
+                "w": 34
+            },
+            "spriteSourceSize": {
+                "y": 0,
+                "x": 0,
+                "w": 34,
+                "h": 34
+            }
+        }
+    ],
+    "meta": {
+        "size": {
+            "h": 256,
+            "w": 1024
+        },
+        "app": "custom",
+        "version": "1.0",
+        "image": "gdx_atlas.png",
+        "format": "RGBA8888"
+    }
+}
