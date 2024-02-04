@@ -17,6 +17,8 @@ import PerformanceStats from "./PerformanceStats.js";
 import Map from "./Map.js";
 import GameLogic from "./game/GameLogic.js";
 import ParticleFactory from "./particles/ParticleFactory.js";
+import SoundManager from "./manager/SoundManager.js";
+import GUI from "./GUI/GUI.js";
 
 const exports = {
     gameTime: GameTime,
@@ -38,6 +40,8 @@ const exports = {
     map: Map,
     gameLogic: GameLogic,
     particleFactory: ParticleFactory,
+    soundManager: SoundManager,
+    gui: GUI,
 }
 
 export default exports;

@@ -1,4 +1,4 @@
-import exports from "./js/components/exportDir.js";
+import exports from "./js/modules/exportDir.js";
 import { Config } from "./js/global/Config.js";
 
 function makeTiled(game, t, i = 1, a = 3618615, o = 1) {
@@ -278,11 +278,12 @@ class GameState extends Phaser.State {
         });
     }
 
-    onZoomLevelChanged(e) {
-        var t = !(arguments.length > 1 && void 0 !== arguments[1]) || arguments[1],
-            i = 1 / e;
-        this.game.world.setBounds(0, 0, Math.floor(Config.numTilesX * Config.tileSize * i), Math.floor(Config.numTilesY * Config.tileSize * i)), (this.root.groups.gameRootGroup.scale = i), t && this.onResized();
-    }
+    onZoomLevelChanged(newZoomLevel, shouldResize = true) {
+        const scale = 1 / newZoomLevel;
+        this.game.world.setBounds(0, 0, Math.floor(Config.numTilesX * Config.tileSize * scale), Math.floor(Config.numTilesY * Config.tileSize * scale));
+        this.root.groups.gameRootGroup.scale = scale;
+        shouldResize && this.onResized();
+    }       
 
     initResourceParticleGroups() {
         const { registerSpecialGroup } = this.root.particles;
@@ -362,18 +363,12 @@ class GameState extends Phaser.State {
         // TODO: Finish all the meta bullshit
         // this.initResourceParticleGroups();
 
-        this.root.sound = new SoundManager(this.root);
-        this.root.gui = new GUI(this.root);
+        this.root.sound = new exports.soundManager(this.root);
+        this.root.gui = new exports.gui(this.root);
 
         this.root.gameSystems.initializeDefaultSystems();
         this.root.logic.spawnResources();
         this.root.logic.initCameraSpawn();
-
-        // Component Inspector 
-        // Note: IS this needed?
-        if (Config.showComponentInspector) {
-            this.root.componentInspector = new ComponentInspectorUI(this.root);
-        }
 
         this.root.serializer = new GameSerializer(this.root);
         this.cameraManager = new CameraManager(this.root);
@@ -403,9 +398,10 @@ class GameState extends Phaser.State {
         initWelcomeScreen(lastPlayerName, lastGameMode, this.root);
     }
 
-    onKeyboardCamMovement(e, t) {
-        var i = this.root.phaser.camera;
-        (i.x += e), (i.y += t);
+    onKeyboardCamMovement(dx, dy) {
+        const camera = this.root.phaser.camera;
+        camera.x += dx;
+        camera.y += dy;
     }
 
     startTutorial() {
@@ -413,112 +409,139 @@ class GameState extends Phaser.State {
     }
 
     getSelectedGameModeId() {
-        if (Config.tutorialActive) return "easy";
-        if (!Config.showWelcomeScreen) return "easy";
-        var e = document.getElementById("gamemode_select");
-        if (!e) return console.error("Could not extract gamemode, element dismished!"), null;
-        const t = e.selectedIndex;
-        return e.options[t].value;
-    }
+        if (Config.tutorialActive || !Config.showWelcomeScreen) {
+            return "easy";
+        }
+    
+        const gamemodeSelect = document.getElementById("gamemode_select");
+    
+        if (!gamemodeSelect) {
+            console.error("Could not extract gamemode, element dismissed!");
+            return null;
+        }
+    
+        const selectedIndex = gamemodeSelect.selectedIndex;
+        return gamemodeSelect.options[selectedIndex].value;
+    }    
 
     startPlaying() {
         console.log("[GAME] Attempt to start playing");
+
         const selectedGameModeId = this.getSelectedGameModeId();
-        if (selectedGameModeId) {
-            const gameMode = createGameModeFromId(selectedGameModeId);
-            if (gameMode) {
-                console.log("[GAME] Actually start playing");
-                this.root.gamemode = gameMode;
-                this.root.gamemode.initialize();
-                console.log("[GAME] Gamemode =", selectedGameModeId);
-                this.root.persistent.setString("lastGameMode", this.root.gamemode.getId());
-                this.root.keyboard.start();
-                this.root.gameStarted = true;
-                window.mouseTracker.enabled = true;
-                this.root.syncer.sendDump();
-
-                this.dumpInterval = setInterval(() => this.root.syncer.sendDump(), 1000 * Config.dumpInterval);
-                this.root.leaderboard.forceUpdate();
-                this.root.persistent.setString("lastPlayerName", this.root.syncer.playerName);
-                window.startGame = undefined;
-
-                this.root.phaser.camera.focusOnXY(6400, 6400);
-
-                this.performUpdate();
-
-                const welcomeFull = document.getElementById("welcomeFull");
-                if (welcomeFull) {
-                    welcomeFull.remove();
-                }
-
-                this.root.signals.gameLoadedAndStarted.dispatch();
-                this.root.signals.consistentGameUpdate.dispatch();
-
-                if (Config.testGameOver) {
-                    setTimeout(() => this.onGameOver(), 7000);
-                }
-            } else {
-                alert(`Failed to create gamemode: ${selectedGameModeId}. Please report this!`);
-            }
-        } else {
+        if (!selectedGameModeId) {
             alert("Unable to determine the game mode. Please report this.");
+            return;
         }
-    }
+    
+        const gameMode = createGameModeFromId(selectedGameModeId);
+        if (!gameMode) {
+            alert(`Failed to create gamemode: ${selectedGameModeId}. Please report this!`);
+            return;
+        }
+    
+        console.log("[GAME] Actually start playing");
+        this.root.gamemode = gameMode;
+        this.root.gamemode.initialize();
+        console.log("[GAME] Gamemode =", selectedGameModeId);
+        this.root.persistent.setString("lastGameMode", this.root.gamemode.getId());
+        this.root.keyboard.start();
+        this.root.gameStarted = true;
+        window.mouseTracker.enabled = true;
+        this.root.syncer.sendDump();
+    
+        this.dumpInterval = setInterval(() => this.root.syncer.sendDump(), 1000 * Config.dumpInterval);
+        this.root.leaderboard.forceUpdate();
+        this.root.persistent.setString("lastPlayerName", this.root.syncer.playerName);
+        window.startGame = undefined;
+    
+        // Focus on the center of the map
+        this.root.phaser.camera.focusOnXY(6400, 6400);
+    
+        this.performUpdate();
+    
+        const welcomeFull = document.getElementById("welcomeFull");
+        if (welcomeFull) {
+            welcomeFull.remove();
+        }
+    
+        this.root.signals.gameLoadedAndStarted.dispatch();
+        this.root.signals.consistentGameUpdate.dispatch();
+    }    
 
     onGameOver() {
-        for (var e in (console.warn("GAME OVER"),
-            this.dumpInterval && clearInterval(this.dumpInterval),
-            this.root.syncer.sendGameOver(),
-            this.root.keyboard.stop(),
-            this.root.signals)) {
-            this.root.signals[e].dispose();
+        console.warn("GAME OVER");
+    
+        if (this.dumpInterval) {
+            clearInterval(this.dumpInterval);
         }
-        var t = document.createElement("canvas"),
-            i = t.getContext("2d");
-        (t.width = this.root.phaser.width * this.root.phaser.resolution), (t.height = this.root.phaser.height * this.root.phaser.resolution), i.drawImage(this.root.phaser.canvas, 0, 0);
-        var a = PIXI.Texture.fromCanvas(t);
+    
+        this.root.syncer.sendGameOver();
+        this.root.keyboard.stop();
+    
+        for (const signal in this.root.signals) {
+            this.root.signals[signal].dispose();
+        }
+    
+        const canvas = document.createElement("canvas");
+        const context = canvas.getContext("2d");
+    
+        canvas.width = this.root.phaser.width * this.root.phaser.resolution;
+        canvas.height = this.root.phaser.height * this.root.phaser.resolution;
+    
+        context.drawImage(this.root.phaser.canvas, 0, 0);
+    
+        const texture = PIXI.Texture.fromCanvas(canvas);
+    
         this.root.inputManager.clearObjects();
+    
         this.state.start("GameOver", true, false, {
             day: this.root.daytime.getDay(),
             score: Math.floor(1933.52 * this.root.daytime.getDay() + 0.91562 * this.root.stats.gems),
             gems: this.root.stats.gems,
-            background: a,
+            background: texture,
             name: this.root.syncer.playerName,
             gamemode: this.root.gamemode,
             gemsOverTime: this.root.stats.gemsOverTime,
         });
     }
-
+    
     gameIsPaused() {
         return !!this.root.dialogs.modalDialogIsOpen();
     }
-
+    
     update() {
-        this.root.gameStarted && this.performUpdate();
+        if (this.root.gameStarted) {
+            this.performUpdate();
+        }
     }
-
+    
     performUpdate() {
         const time = this.root.phaser.time.elapsed / 1e3;
-        if ((this.root.signals.consistentGameUpdate.dispatch(time), this.gameIsPaused())) this.root.animations.update(true);
-        else
+        this.root.signals.consistentGameUpdate.dispatch(time);
+    
+        if (this.gameIsPaused()) {
+            this.root.animations.update(true);
+        } else {
             try {
-                this.cameraManager.update(this.root.time.physicsElapsedConsistent),
-                    this.root.culling.update(),
-                    this.root.time.update(time),
-                    cart || (this.root.daytime.update(), this.root.gameSystems.update()),
-                    this.root.gui.update(),
-                    Config.showComponentInspector && this.root.componentInspector.update(),
-                    this.root.entityMgr.update(),
-                    this.root.animations.update(),
-                    this.root.perfStats.postFrameCallback(),
-                    this.root.leaderboard.update(),
-                    this.debugManager && this.debugManager.update();
+                this.cameraManager.update(this.root.time.physicsElapsedConsistent);
+                this.root.culling.update();
+                this.root.time.update(time);
+                cart || (this.root.daytime.update(), this.root.gameSystems.update());
+                this.root.gui.update();
+                Config.showComponentInspector && this.root.componentInspector.update();
+                this.root.entityMgr.update();
+                this.root.animations.update();
+                this.root.perfStats.postFrameCallback();
+                this.root.leaderboard.update();
+                this.debugManager && this.debugManager.update();
             } catch (e) {
                 console.error(e);
                 console.error(e.stack);
                 EXCEPTION_SHOWN || (EXCEPTION_SHOWN = true);
             }
+        }
     }
+    
 }
 
 class GameOverState extends Phaser.State {
@@ -558,4 +581,4 @@ class App {
     }
 }
 
-const app = new App();
+new App();

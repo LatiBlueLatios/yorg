@@ -9,9 +9,10 @@
     <link rel="stylesheet" href="fonts.css" media="all">
     <link rel="stylesheet" type="text/css" href="asset/css/app.css">
     <script src="js/phaser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/howler@2.2.4/dist/howler.min.js"></script>
 </head>
 
-<body oncontextmenu=return!1>
+<body>
     <div id=renderer onclick=window.focus()></div>
     <div id=leaderboard class=noselect></div>
     <div id=fps_overlay></div>
@@ -34,8 +35,10 @@
                         <div id=permanentLeaderboardDynamicInner class=welcomeBoxInner>
                             <span data-translate='loading_leaderboard'>Loading Leaderboard ...</span>
                         </div>
-                        <select id=leaderboardGamemodeSelector onchange=window.refreshWelcomeBoard&&window.refreshWelcomeBoard()></select>
-                        <select id=leaderboardRangeSelector onchange=window.refreshWelcomeBoard&&window.refreshWelcomeBoard()>
+                        <select id=leaderboardGamemodeSelector
+                            onchange=window.refreshWelcomeBoard&&window.refreshWelcomeBoard()></select>
+                        <select id=leaderboardRangeSelector
+                            onchange=window.refreshWelcomeBoard&&window.refreshWelcomeBoard()>
                             <option value=week data-translate='score_category_week'>This Week</option>
                             <option value=day selected data-translate='score_category_today'>Today</option>
                             <option value=hour data-translate='score_category_hour'>Last Hour</option>
@@ -43,13 +46,16 @@
                     </div>
                     <div id=gameStarters>
                         <div id=gameStarterButtons>
-                            <form action=# id=gameStartForm name=startGameForm onsubmit='return window.startGame&&window.startGame(),!1'>
+                            <form action=# id=gameStartForm name=startGameForm
+                                onsubmit='return window.startGame&&window.startGame(),!1'>
                                 <div id=gameLoadingIndicator>
                                     <span data-translate='loading_game'>Loading Game</span>
                                     <img alt='loading indicator' src='asset/images/loadingGif.gif' id=loadingGif>
                                 </div>
                                 <div id=gameStarterInputs class=gameStarterCol>
-                                    <input autocapitalize=off autocomplete=off autocorrect=off autofocus disabled id=playerName maxlength=15 name=playerName onkeyup=welcomeSetName(this) placeholder='Nickname' spellcheck=false>
+                                    <input autocapitalize=off autocomplete=off autocorrect=off autofocus disabled
+                                        id=playerName maxlength=15 name=playerName onkeyup=welcomeSetName(this)
+                                        placeholder='Nickname' spellcheck=false>
                                     <br>
                                     <select id=gamemode_select></select>
                                     <br>
@@ -57,7 +63,8 @@
                                 <div class=gameStarterCol>
                                     <button id=playButton type=submit data-translate='play_button'>PLAY</button>
                                     <br>
-                                    <button onclick=window.startTutorial&&window.startTutorial() id=tutorialButton type=button data-translate='tutorial_button'>Tutorial</button>
+                                    <button onclick=window.startTutorial&&window.startTutorial() id=tutorialButton
+                                        type=button data-translate='tutorial_button'>Tutorial</button>
                                 </div>
                             </form>
                         </div>
@@ -65,7 +72,8 @@
                             <a href=https://discord.gg/UdXda9Q target=_blank title='Discord Server'>
                                 <img alt='Discord Server' src='asset/images/discordlogo.png' height=32 width=32>
                             </a>
-                            <select id=languageChooserInner onchange='window.location.href="?lang="+this.options[this.selectedIndex].value'>
+                            <select id=languageChooserInner
+                                onchange='window.location.href="?lang="+this.options[this.selectedIndex].value'>
                                 <option value=en class=language data-language=en>English
                                 </option>
                             </select>
@@ -78,7 +86,8 @@
                         </div>
                         <div id=versionContainer>
                             v2.6.8 -
-                            <button onclick="window.open('changelog.md')" id=showAllChangelogButton data-translate='view_changelog'>Changelog</button>
+                            <button onclick="window.open('changelog.md')" id=showAllChangelogButton
+                                data-translate='view_changelog'>Changelog</button>
                         </div>
                     </div>
                 </div>
@@ -102,10 +111,12 @@
     </div>
     <div id=bug_report_bg class=dialog_overlay_bg>
         <div id=bug_report_inner class='dialog_box buttonless'>
-            <button onclick='window.closeDialog("bug_report_bg"),this.blur()' class=header_button data-translate='close_dialog'>Close</button>
+            <button onclick='window.closeDialog("bug_report_bg"),this.blur()' class=header_button
+                data-translate='close_dialog'>Close</button>
             <h3 data-translate='report_bug_title'>Found a Bug or Suggestion?</h3>
             <div class=dialog_content_section>
-                <span data-translate='report_bug_text1'>If you think you found a bug, or you have ideas for improvements, there are several possibilities:</span>
+                <span data-translate='report_bug_text1'>If you think you found a bug, or you have ideas for
+                    improvements, there are several possibilities:</span>
                 <br>
                 <br>
                 <ul>
@@ -115,7 +126,8 @@
                     </li>
                     <li>
                         <span data-translate='report_bug_join_reddit'>Visit the</span>
-                        <a href=https://www.reddit.com/r/yorgio/ target=_blank data-translate='report_bug_subreddit'>YORG.io subreddit</a>
+                        <a href=https://www.reddit.com/r/yorgio/ target=_blank
+                            data-translate='report_bug_subreddit'>YORG.io subreddit</a>
                     </li>
                     <li>
                         <span data-translate='report_bug_write_email'>Write an email to</span>
@@ -135,14 +147,17 @@
             </div>
             <br>
             <br>
-            <button onclick=window.tutorialNextStep&&window.tutorialNextStep(),this.blur() class=dialog_button id=next_tutorial_btn data-translate='tutorial_continue'>Continue</button>
-            <button onclick=window.stopTutorial&&window.stopTutorial(),this.blur() class='dialog_button cancel' id=abort_tutorial_btn>...</button>
+            <button onclick=window.tutorialNextStep&&window.tutorialNextStep(),this.blur() class=dialog_button
+                id=next_tutorial_btn data-translate='tutorial_continue'>Continue</button>
+            <button onclick=window.stopTutorial&&window.stopTutorial(),this.blur() class='dialog_button cancel'
+                id=abort_tutorial_btn>...</button>
         </div>
         <div id=tutorial_arrow onclick=window.tutorialArrowClicked(),this.blur()></div>
     </div>
     <div id=settings_dialog_bg class='dialog_overlay_bg noselect'>
         <div id=settings_dialog_inner class='dialog_box buttonless'>
-            <button onclick='window.closeDialog("settings_dialog_bg"),this.blur()' class=header_button data-translate='close_dialog'>Close</button>
+            <button onclick='window.closeDialog("settings_dialog_bg"),this.blur()' class=header_button
+                data-translate='close_dialog'>Close</button>
             <h3 data-translate='settings'>Settings</h3>
             <div id=settings_dialog_content class=dialog_content_section>
                 <div id=settings_dialog_dynamic_content></div>
@@ -151,7 +166,8 @@
     </div>
     <div id=keybindings_dialog_bg class='dialog_overlay_bg noselect'>
         <div id=keybindings_dialog_inner class='dialog_box buttonless'>
-            <button onclick='window.closeDialog("keybindings_dialog_bg"),this.blur()' class=header_button data-translate='close_dialog'>Close</button>
+            <button onclick='window.closeDialog("keybindings_dialog_bg"),this.blur()' class=header_button
+                data-translate='close_dialog'>Close</button>
             <h3 data-translate='keyboard_shortcuts'>Keyboard Shortcuts</h3>
             <div id=keybindings_content class=dialog_content_section></div>
         </div>
@@ -160,11 +176,14 @@
         <div id=restart_dialog_inner class=dialog_box>
             <h3 data-translate='back_to_menu_title'>Back to main menu</h3>
             <div id=restart_content class=dialog_content_section>
-                <span data-translate='back_to_menu_confirm'>Make sure you have saved all your progress, otherwise its lost!</span>
+                <span data-translate='back_to_menu_confirm'>Make sure you have saved all your progress, otherwise its
+                    lost!</span>
             </div>
             <br>
-            <button onclick=window.restartGame() class='dialog_button cancel' data-translate='back_to_menu_btn'>Leave Game</button>
-            <button onclick='window.closeDialog("restart_dialog_bg"),this.blur()' class=dialog_button data-translate='restart_continue_playing'>Continue Playing</button>
+            <button onclick=window.restartGame() class='dialog_button cancel' data-translate='back_to_menu_btn'>Leave
+                Game</button>
+            <button onclick='window.closeDialog("restart_dialog_bg"),this.blur()' class=dialog_button
+                data-translate='restart_continue_playing'>Continue Playing</button>
         </div>
     </div>
     <div id=unlock_tips_dialog_bg class=noselect>
@@ -174,12 +193,14 @@
                 <img alt=img id=unlock_tips_image>
                 <span id=unlock_tips_dynamic_content></span>
             </div>
-            <button onclick=window.closeUnlockTips(),this.blur() class=closeBtn data-translate='close_dialog'>Close</button>
+            <button onclick=window.closeUnlockTips(),this.blur() class=closeBtn
+                data-translate='close_dialog'>Close</button>
         </div>
     </div>
     <div id=first_time_dialog_bg class='dialog_overlay_bg noselect'>
         <div id=first_time_dialog_inner class=dialog_box>
-            <button onclick='window.closeDialog("first_time_dialog_bg"),this.blur()' class=header_button data-translate='close_dialog'>Close</button>
+            <button onclick='window.closeDialog("first_time_dialog_bg"),this.blur()' class=header_button
+                data-translate='close_dialog'>Close</button>
             <h3 data-translate='first_time_title'>So, you want to skip the tutorial?</h3>
             <div class=dialog_content_section>
                 <span data-translate='first_time_desc'>
@@ -188,19 +209,27 @@
                 </span>
             </div>
             <br>
-            <button onclick='window.closeDialog("first_time_dialog_bg",!0)&&window.startTutorial&&window.startTutorial()' class='dialog_button dg_tutorial_button' data-translate='start_with_tutorial'>Start Tutorial</button>
-            <button onclick='window.closeDialog("first_time_dialog_bg",!0)&&window.startGame&&window.startGame(!0)' class='dialog_button dg_play_button' data-translate='start_game_anyways'>Play anyways</button>
+            <button
+                onclick='window.closeDialog("first_time_dialog_bg",!0)&&window.startTutorial&&window.startTutorial()'
+                class='dialog_button dg_tutorial_button' data-translate='start_with_tutorial'>Start Tutorial</button>
+            <button onclick='window.closeDialog("first_time_dialog_bg",!0)&&window.startGame&&window.startGame(!0)'
+                class='dialog_button dg_play_button' data-translate='start_game_anyways'>Play anyways</button>
         </div>
     </div>
     <div id=twitter_follow_dialog class=dialog_overlay_bg>
         <div class=dialog_box>
-            <button onclick='window.closeDialog("twitter_follow_dialog"),this.blur()' class=header_button data-translate='close_dialog'>Close</button>
+            <button onclick='window.closeDialog("twitter_follow_dialog"),this.blur()' class=header_button
+                data-translate='close_dialog'>Close</button>
             <h3 data-translate='discord_follow_dialog_header'>Join the discord!</h3>
             <div class=dialog_content_section>
-                <span data-translate='discord_follow_dialog_content'>The sandbox mode is exclusive for YORG.io discord members. Join now to unlock it!</span>
+                <span data-translate='discord_follow_dialog_content'>The sandbox mode is exclusive for YORG.io discord
+                    members. Join now to unlock it!</span>
                 <br>
                 <br>
-                <button onclick='window.open("https://discord.gg/yorg-io","_blank"),setTimeout(function(){window.closeDialog("twitter_follow_dialog"),window.startGame(!0)},4e3),this.onclick=void 0,this.innerText="Validating ..."' class=twitter_follow_button data-translate='discord_follow_button_txt'>Join the YORG.io discord</button>
+                <button
+                    onclick='window.open("https://discord.gg/yorg-io","_blank"),setTimeout(function(){window.closeDialog("twitter_follow_dialog"),window.startGame(!0)},4e3),this.onclick=void 0,this.innerText="Validating ..."'
+                    class=twitter_follow_button data-translate='discord_follow_button_txt'>Join the YORG.io
+                    discord</button>
             </div>
         </div>
     </div>
@@ -210,25 +239,30 @@
             <strong data-translate='click_to_resume'>Click to resume</strong>
         </div>
     </div>
-    <button onclick=window.showBugReporter&&window.showBugReporter()&&this.blur() class=noselect id=report_bug_button data-translate='report_bug_button'>Report Bug or Suggestion</button>
+    <button onclick=window.showBugReporter&&window.showBugReporter()&&this.blur() class=noselect id=report_bug_button
+        data-translate='report_bug_button'>Report Bug or Suggestion</button>
     <div id=save_game_dialog_bg class=dialog_overlay_bg>
         <div id=save_game_dialog_inner class='dialog_box buttonless'>
-            <button onclick='window.closeDialog("save_game_dialog_bg"),this.blur()' class=header_button data-translate='close_dialog'>Close</button>
+            <button onclick='window.closeDialog("save_game_dialog_bg"),this.blur()' class=header_button
+                data-translate='close_dialog'>Close</button>
             <h3 data-translate='save_game_dialog_title'>Save Game</h3>
             <div class=dialog_content_section>
                 <span data-translate='save_game_dialog_desc'>This is your savegame. Copy and store it somewhere</span>
                 <div>
-                    <textarea autocapitalize=off autocomplete=off autocorrect=off id=save_game_textarea onclick=this.select() readonly spellcheck=false>...</textarea>
+                    <textarea autocapitalize=off autocomplete=off autocorrect=off id=save_game_textarea
+                        onclick=this.select() readonly spellcheck=false>...</textarea>
                 </div>
             </div>
         </div>
     </div>
     <div id=load_game_dialog_bg class=dialog_overlay_bg>
         <div id=load_game_dialog_inner class='dialog_box buttonless'>
-            <button onclick='window.closeDialog("load_game_dialog_bg"),this.blur()' class=header_button data-translate='close_dialog'>Close</button>
+            <button onclick='window.closeDialog("load_game_dialog_bg"),this.blur()' class=header_button
+                data-translate='close_dialog'>Close</button>
             <h3 data-translate='load_game_dialog_title'>Load Game</h3>
             <div class=dialog_content_section>
-                <span data-translate='load_game_dialog_desc_dragdrop'>Drag and drop your savegame file here to load it. This will make you lose your current progress.</span>
+                <span data-translate='load_game_dialog_desc_dragdrop'>Drag and drop your savegame file here to load it.
+                    This will make you lose your current progress.</span>
                 <div id=load_game_dragdrop_area class=dragdrop_area>Drag your savegame here
                 </div>
             </div>
@@ -240,26 +274,34 @@
     <div id=day_night_overlay></div>
     <div id=sandbox_overlay>
         <div id=sandbox_controlls>
-            <span data-translate='sandbox_desc'>This is the sandbox mode. Try out new base layouts here, you can upgrade your base up to the maximum achieved level in other gamemodes.</span>
+            <span data-translate='sandbox_desc'>This is the sandbox mode. Try out new base layouts here, you can upgrade
+                your base up to the maximum achieved level in other gamemodes.</span>
             <br>
             <br>
-            <div id="sandbox_waves" style="width: 100px; height: 30px; border: 1px solid #ccc; text-align: center; cursor: pointer; line-height: 30px;">Click Spawn...</div>
-            <button onclick=window.spawnSandboxWave&&window.spawnSandboxWave() data-translate='sandbox_spawn'>Spawn</button>
+            <div id="sandbox_waves"
+                style="width: 100px; height: 30px; border: 1px solid #ccc; text-align: center; cursor: pointer; line-height: 30px;">
+                Click Spawn...</div>
+            <button onclick=window.spawnSandboxWave&&window.spawnSandboxWave()
+                data-translate='sandbox_spawn'>Spawn</button>
             <br>
             <br>
-            <button onclick=window.sandboxHeal&&window.sandboxHeal() class=btn_heal data-translate='sandbox_heal'>Heal all</button>
-            <button onclick=window.sandboxFill&&window.sandboxFill() class=btn_fill data-translate='sandbox_fill'>Fill all</button>
+            <button onclick=window.sandboxHeal&&window.sandboxHeal() class=btn_heal data-translate='sandbox_heal'>Heal
+                all</button>
+            <button onclick=window.sandboxFill&&window.sandboxFill() class=btn_fill data-translate='sandbox_fill'>Fill
+                all</button>
         </div>
     </div>
     <div id=savegame_bg class=dialog_overlay_bg>
         <div id=savegame_dialog_inner class=dialog_box>
-            <button onclick='window.closeDialog("savegame_bg"),this.blur()' class=header_button data-translate='close_dialog'>Close</button>
+            <button onclick='window.closeDialog("savegame_bg"),this.blur()' class=header_button
+                data-translate='close_dialog'>Close</button>
             <h3 data-translate='saved_games'>Saved Games</h3>
             <div class=dialog_content_section>
                 <div id=savegames_list></div>
             </div>
             <br>
-            <button onclick=window.importSavegame() class='dialog_button import_savegame visit_external_button' data-translate='import_savegame'>Import</button>
+            <button onclick=window.importSavegame() class='dialog_button import_savegame visit_external_button'
+                data-translate='import_savegame'>Import</button>
         </div>
     </div>
     <div id=sell_all_confirmation_bg class=dialog_overlay_bg>
@@ -268,8 +310,10 @@
             <div id=sell_all_confirm_content class=dialog_content_section>...
             </div>
             <br>
-            <button onclick=window.onSellAllConfirmed() class='dialog_button cancel' data-translate='sell_all_for'>Sell all</button>
-            <button onclick='window.closeDialog("sell_all_confirmation_bg")' class=dialog_button data-translate='cancel'>Cancel</button>
+            <button onclick=window.onSellAllConfirmed() class='dialog_button cancel' data-translate='sell_all_for'>Sell
+                all</button>
+            <button onclick='window.closeDialog("sell_all_confirmation_bg")' class=dialog_button
+                data-translate='cancel'>Cancel</button>
         </div>
     </div>
     <div id=ingame_chat></div>
@@ -282,7 +326,8 @@
     </div>
     <div id=high_topbar_bg>
         <strong>
-            <span data-translate='unlock_vote_for_us_text_1'>Make sure to vote for us so more people can find out about YORG.io! </span>
+            <span data-translate='unlock_vote_for_us_text_1'>Make sure to vote for us so more people can find out about
+                YORG.io! </span>
         </strong>
     </div>
 
